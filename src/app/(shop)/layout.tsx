@@ -1,12 +1,12 @@
 import React from 'react';
 
-const MyLayout1 = ({children}) => {
+const ShopLayout = ({children}) => {
   return (
     <div>
-      MyLayout1
+      ShopLayout
       {children}
     </div>
   );
 };
 
-export default MyLayout1;
+export default ShopLayout;
