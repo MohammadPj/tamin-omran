@@ -5,14 +5,13 @@ import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import customTheme from "./theme";
-import { setLang, useCommon } from "~/store/common/commonSlice";
-import { useEffectOnce } from "~/core/hooks/useEffectOnce";
-import { useDispatch } from "react-redux";
+import {useCommon} from "@/store/common/commonSlice";
 
 const cacheRtl = createCache({
   key: "rtl",
   stylisPlugins: [prefixer, rtlPlugin],
 });
+
 const cacheLtr = createCache({
   key: "ltr",
 });
@@ -22,13 +21,12 @@ interface AppThemeProps {
 }
 
 const AppTheme: FC<AppThemeProps> = ({ children }) => {
-  const { themeMode } = useCommon();
-  const dispatch = useDispatch();
 
-  const { lang, isRtl } = useCommon();
+  const {themeMode, isRtl} = useCommon()
+
   const theme = React.useMemo(
-    () => customTheme(themeMode, isRtl),
-    [themeMode, isRtl]
+    () => customTheme(themeMode, true),
+    [themeMode]
   );
 
   const cacheValue = useMemo(() => (isRtl ? cacheRtl : cacheLtr), [isRtl]);

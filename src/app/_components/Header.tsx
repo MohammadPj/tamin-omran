@@ -8,8 +8,10 @@ interface Props {
 
 const Header: FC<Props> = () => {
   return (
-    <Box >
-
+    <Box>
+      <Box display={'flex'}>
+        sss
+      </Box>
     </Box>
   );
 };

@@ -1,23 +1,31 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import postsReducer from "@/store/posts/postsSlice"
 import commonReducer from "@/store/common/commonSlice"
+import storage from "./customStorage";
+
 import {
   FLUSH,
   REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER,
+  REGISTER, persistReducer,
 } from "redux-persist";
 
+const commonPersistConfig = {
+  key: "auth",
+  storage: storage,
+};
+
+const rootReducer = combineReducers({
+  posts: postsReducer,
+  common: persistReducer(commonPersistConfig, commonReducer),
+});
 
 export const store = configureStore({
-  reducer: {
-    posts: postsReducer,
-    common: commonReducer
-  },
+  reducer: rootReducer,
   // devTools: process.env.NODE_ENV !== "production",
-  devTools: !import.meta.env.PROD,
+  devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
