@@ -33,8 +33,5 @@ export const MuiRadio: TMuiRadio = {
         fill: '#727CF4'
       }
     }),
-    checked: {
-      fill: 'red'
-    }
   }
 }
