@@ -31,17 +31,17 @@ export const MuiOutlinedInput: TMuiOutlinedInput = {
         paddingTop: 14,
         paddingBottom: 14,
         "&.Mui-disabled": {
-          WebkitTextFillColor: theme.palette.gray.main,
+          WebkitTextFillColor: theme.palette.grey.main,
           "&:hover ~ fieldset": {
             borderColor: "#BDBDBD",
           }
         },
       },
       "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.gray["50"],
+        borderColor: theme.palette.grey.main,
       },
       "&:hover .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.gray["50"],
+        borderColor: theme.palette.grey.main,
       },
       "&.Mui-focused ": {
         boxShadow: "0px 0px 10px rgba(94, 129, 233, 0.2)",

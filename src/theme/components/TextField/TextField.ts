@@ -21,6 +21,10 @@ type TMuiTextField =
 export const MuiTextField: TMuiTextField = {
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
+      '& input': {
+        padding: '10px 6px',
+        fontSize: 14
+      },
       '& .MuiInputBase-input': {
         '&:-webkit-autofill': {
           WebkitBackgroundClip: 'text',
@@ -31,13 +35,13 @@ export const MuiTextField: TMuiTextField = {
       },
       '& textarea': {paddingTop: '0 !important', paddingBottom: '0 !important'},
       '& .MuiOutlinedInput-input': {
-        backgroundColor: theme.palette.background['4'],
+        backgroundColor: theme.palette.grey["100"],
         height: 14,
       },
 
       '& .MuiFilledInput-root': {
-        borderRadius: 10,
-        backgroundColor: 'background.2',
+        borderRadius: 2,
+        backgroundColor: theme.palette.grey["50"],
         WebkitTextFillColor: 'text.primary',
 
         '& .MuiInputAdornment-root': {

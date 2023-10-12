@@ -1,6 +1,6 @@
 import { OverridesStyleRules } from "@mui/material/styles/overrides";
 import { Theme } from "@mui/material/styles";
-import {TabProps, TabClasses} from "@mui/material";
+import { TabProps, TabClasses } from "@mui/material";
 
 type TMuiTab =
   | {
@@ -21,9 +21,8 @@ type TMuiTab =
 export const MuiTab: TMuiTab = {
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
-      // boxShadow: "0px 0px 10px rgba(94, 129, 233, 0.2)",
-      color: theme.palette.gray[100],
-      fontSize: 12
+      color: theme.palette.primary.main,
+      fontSize: 12,
     }),
   },
 };

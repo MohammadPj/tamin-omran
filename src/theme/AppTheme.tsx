@@ -7,16 +7,7 @@ import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import customTheme from "./theme";
-import { useCommon } from "@/store/common/commonSlice";
-
-// const cacheRtl = createCache({
-//   key: "rtl",
-//   stylisPlugins: [prefixer, rtlPlugin],
-// });
-//
-// const cacheLtr = createCache({
-//   key: "ltr",
-// });
+import { useCommon } from "~/store/common/commonSlice";
 
 const AppTheme: FC = ({ children }) => {
   const { themeMode, isRtl } = useCommon();
@@ -90,9 +81,7 @@ const AppTheme: FC = ({ children }) => {
 
   return (
     <CacheProvider value={cache}>
-      <ThemeProvider theme={theme}>
-        {children}
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </CacheProvider>
   );
 };

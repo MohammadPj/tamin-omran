@@ -30,15 +30,7 @@ export const MuiFilledInput: TMuiFilledInput = {
 
       },
       '&.Mui-focused': { background: 'background.2', },
-      "& input": {
-        ...(ownerState.size === "small"
-          ? {
-            padding: 8,
-          }
-          : ownerState.size === "medium"
-            ? { padding: 16 }
-            : { padding: 20 }),
-      },
+
     }),
   },
 };

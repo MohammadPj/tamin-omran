@@ -2,8 +2,6 @@ import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "~/store/store";
 import { PaletteMode } from "@mui/material";
-import { persistReducer } from "redux-persist";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface CommonState {
   themeMode: PaletteMode;
@@ -12,7 +10,7 @@ export interface CommonState {
 }
 
 const initialState: CommonState = {
-  themeMode: "dark",
+  themeMode: "light",
   isRtl: true
 };
 

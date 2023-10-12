@@ -1,6 +1,6 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import postsReducer from "@/store/posts/postsSlice"
-import commonReducer from "@/store/common/commonSlice"
+import postsReducer from "~/store/posts/postsSlice"
+import commonReducer from "~/store/common/commonSlice"
 import storage from "./customStorage";
 
 import {

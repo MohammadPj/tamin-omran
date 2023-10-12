@@ -1,14 +1,12 @@
 export const darkPalette = {
   // palette values for light mode
   primary: {
-    main: "#727CF4",
-    100: "#727CF4",
-    75: "#959DF7",
-    50: "#B8BDF9",
-    25: "#CFDBE3",
-    20: "#0F4C7533",
-    back:"#CFDBE3"
+    main: "#262262",
   },
+  secondary: {
+    main: '#F7941D'
+  },
+
   divider: "#EBEBEB",
 
   background: {

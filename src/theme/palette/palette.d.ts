@@ -1,7 +1,15 @@
 import "@mui/material/styles/createPalette";
-declare module "@mui/material/styles/createPalette" {  
+interface IColor {
+  main?: string;
+  1:string;
+  2:string;
+  3:string;
+  4:string;
+}
+
+declare module "@mui/material/styles/createPalette" {
   interface Palette {
-    gray: PaletteColor
+    gray: PaletteColor;
   }
 
   // allow configuration using `createTheme`
@@ -11,14 +19,19 @@ declare module "@mui/material/styles/createPalette" {
     75?: string;
     50?: string;
     25?: string;
-    20?: string;
-    back?:string;
   }
   interface TypeBackground {
-    1?: string;
-    2?: string;
-    3?: string;
-    4?: string;
+    main: string
+    1: string;
+    2: string;
+    3: string;
+    4: string;
   }
-  
+  interface TypeText extends IColor {}
+}
+
+declare module "@mui/material/styles/index" {
+  interface Color extends IColor{
+
+  }
 }
