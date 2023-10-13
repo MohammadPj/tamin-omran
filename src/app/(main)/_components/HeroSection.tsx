@@ -4,7 +4,7 @@ import SvgArrowLeft from "~/components/icons/ArrowLeft";
 
 import React, { FC } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import HeroSectionImage from "../../../../public/images/hero-image.webp";
+import HeroSectionImage from "../../../../public/images/home/hero-image.webp";
 
 const HeroSection: FC = () => {
   return (

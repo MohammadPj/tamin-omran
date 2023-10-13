@@ -17,7 +17,7 @@ const ProductCard: FC<Props> = ({ subtitle, title, image }) => {
       py={3.5}
       gap={3}
       width={"100%"}
-      sx={{ background: theme.palette.background["1"] }}
+      sx={{ background: theme.palette.background["1"], cursor: 'pointer' }}
       borderRadius={1}
       border={'1px solid'}
       borderColor={theme.palette.grey["3"]}
