@@ -1,14 +1,14 @@
 import React, { FC } from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import {Box, BoxProps, Typography, useTheme} from "@mui/material";
 import SvgGear from "~/components/icons/Gear";
 import SvgArrowCircleLeft from "~/components/icons/ArrowCircleLeft";
 
-interface Props {
+interface Props extends BoxProps{
   title: string;
   onShowMore?: () => void;
 }
 
-const CustomDivider: FC<Props> = ({ title, onShowMore }) => {
+const CustomDivider: FC<Props> = ({ title, onShowMore, ...rest }) => {
   const theme = useTheme();
   return (
     <Box
@@ -17,6 +17,7 @@ const CustomDivider: FC<Props> = ({ title, onShowMore }) => {
       display={"flex"}
       width={"100%"}
       justifyContent={"space-between"}
+      {...rest}
     >
       <Box
         display={"flex"}
