@@ -4,7 +4,7 @@ import { TypographyClasses, TypographyProps } from "@mui/material/Typography";
 
 type TMuiTypography =
   | {
-      defaultProps?: Partial<TypographyProps<"span", {}>> | undefined;
+      defaultProps?: Partial<TypographyProps<"span">> | undefined;
       styleOverrides?:
         | Partial<
             OverridesStyleRules<
@@ -21,6 +21,7 @@ type TMuiTypography =
 export const MuiTypography: TMuiTypography = {
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
+
       ...(theme.palette.mode === "dark" && {
         color: "#F2F2F2",
       }),

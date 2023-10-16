@@ -31,7 +31,7 @@ export const MuiSelect: TMuiSelect = {
     icon: ({ theme }) => ({
       top: "43%",
       right: 13,
-      "&.Mui-disabled path": { stroke: theme.palette.primary.back },
+      // "&.Mui-disabled path": { stroke: theme.palette.primary.back },
       stroke: '#524d4d'
     }),
     outlined: {

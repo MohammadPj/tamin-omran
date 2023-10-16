@@ -20,7 +20,7 @@ const ProductCard: FC<Props> = ({ subtitle, title, image }) => {
       sx={{ background: theme.palette.background["1"], cursor: 'pointer' }}
       borderRadius={1}
       border={'1px solid'}
-      borderColor={theme.palette.grey["3"]}
+      borderColor={'grey.3'}
     >
       <Box position={"relative"} width={"100%"} sx={{ aspectRatio: 1 }}>
         <Image src={image} alt={"product"} fill={true} />

@@ -24,5 +24,5 @@ export const lightPalette: PaletteOptions = {
     primary: '#00002B',
     secondary: '#6E6E6E',
     disabled: '#6E6E6E',
-  }
+  },
 };

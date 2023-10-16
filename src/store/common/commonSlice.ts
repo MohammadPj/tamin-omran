@@ -6,12 +6,12 @@ import { PaletteMode } from "@mui/material";
 export interface CommonState {
   themeMode: PaletteMode;
   serverError?: string | null;
-  isRtl: boolean
+  isRtl: boolean;
 }
 
 const initialState: CommonState = {
   themeMode: "light",
-  isRtl: true
+  isRtl: true,
 };
 
 export const CommonSlice = createSlice<
@@ -27,9 +27,8 @@ export const CommonSlice = createSlice<
   },
 });
 
-export const useCommon = (): CommonState =>
+export const useCommon = () =>
   useSelector((state: RootState) => state.common);
 
 export const { changeThemeMode } = CommonSlice.actions;
-
-export default CommonSlice.reducer
+export default CommonSlice.reducer;
