@@ -1,3 +1,33 @@
 {
-  "extends": "next/core-web-vitals"
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "html",
+    "unused-imports",
+    "react"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    // ts
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+
+    "plugin:react/jsx-runtime",
+    "prettier",
+
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    // React
+    "react/react-in-jsx-scope": "off", // don't show error for jsx without importing react
+
+    /*ts*/
+    "no-console": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+    //"no-unused-expressions": "error",
+    //"no-unused-vars": "error",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
+
+  }
 }
