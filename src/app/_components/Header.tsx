@@ -4,6 +4,7 @@ import { Box, Button, Container, TabProps, TextField } from "@mui/material";
 import Image from "next/image";
 import CustomTab from "~/components/custom-mui/custom-tab/CustomTab";
 import SvgExpandMore from "~/components/icons/ExpandMore";
+import Logo from "~/app/_components/Logo";
 
 interface Props {}
 
@@ -30,12 +31,7 @@ const Header: FC<Props> = () => {
           width={"100%"}
           justifyContent={"space-between"}
         >
-          <Image
-            src={"/images/logo.webp"}
-            alt={"asd"}
-            width={110}
-            height={47}
-          />
+          <Logo />
           <Button onClick={handleClick}>ورود/ثبت نام</Button>
         </Box>
 
