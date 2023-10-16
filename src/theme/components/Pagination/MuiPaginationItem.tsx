@@ -3,7 +3,7 @@ import { PaginationItemProps, PaginationItemClasses } from "@mui/material";
 
 type TMuiPaginationItem =
   | {
-      defaultProps?: Partial<PaginationItemProps<"div", {}>> | undefined;
+      defaultProps?: Partial<PaginationItemProps<"div">> | undefined;
       styleOverrides?:
         | Partial<
             OverridesStyleRules<

@@ -4,7 +4,7 @@ import { CardProps, CardClasses } from "@mui/material";
 
 type TMuiCard =
     | {
-        defaultProps?: Partial<CardProps<"div", {}>> | undefined;
+        defaultProps?: Partial<CardProps<"div">> | undefined;
         styleOverrides?:
         | Partial<
             OverridesStyleRules<

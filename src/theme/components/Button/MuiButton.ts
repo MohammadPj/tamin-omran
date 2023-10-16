@@ -4,7 +4,7 @@ import { ButtonProps, ButtonClasses } from "@mui/material";
 
 type TMuiButton =
   | {
-      defaultProps?: Partial<ButtonProps<"button", {}>> | undefined;
+      defaultProps?: Partial<ButtonProps<"button">> | undefined;
       styleOverrides?:
         | Partial<
             OverridesStyleRules<

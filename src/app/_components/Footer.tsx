@@ -1,4 +1,4 @@
-import React, { FC, JSX } from "react";
+import React, { FC } from "react";
 import {
   Box,
   Container,
@@ -18,7 +18,7 @@ interface Props {}
 
 interface IContact {
   id: string;
-  icon: JSX;
+  icon: React.ReactNode;
   text: string;
 }
 

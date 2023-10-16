@@ -26,7 +26,7 @@ export const MuiInputLabel: TMuiInputLabel = {
       transform: 'translate(0, -50%)',
       left: 14,
       // transform: 'unset',
-      color: theme.palette.gray["25"] ,
+      color: theme.palette.grey["3"] ,
       '&[data-shrink=true]': {
         display: 'none'
       }

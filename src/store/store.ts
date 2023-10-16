@@ -1,6 +1,6 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import postsReducer from "~/store/posts/postsSlice"
-import commonReducer from "~/store/common/commonSlice"
+import { configureStore } from "@reduxjs/toolkit";
+import {PostsSlice} from "./posts/postsSlice";
+import {CommonSlice, CommonState} from "./common/commonSlice";
 import storage from "./customStorage";
 
 import {
@@ -9,7 +9,8 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER, persistReducer,
+  REGISTER,
+  persistReducer,
 } from "redux-persist";
 
 const commonPersistConfig = {
@@ -17,13 +18,16 @@ const commonPersistConfig = {
   storage: storage,
 };
 
-const rootReducer = combineReducers({
-  posts: postsReducer,
-  common: persistReducer(commonPersistConfig, commonReducer),
-});
+// const rootReducer = combineReducers({
+//   posts: postsReducer,
+//   common: persistReducer(commonPersistConfig, commonReducer),
+// });
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    posts: PostsSlice.reducer,
+    common: persistReducer<CommonState>(commonPersistConfig, CommonSlice.reducer),
+  },
   // devTools: process.env.NODE_ENV !== "production",
   devTools: true,
   middleware: (getDefaultMiddleware) =>

@@ -13,7 +13,7 @@ const CustomDivider: FC<Props> = ({ title, onShowMore, ...rest }) => {
   return (
     <Box
       borderBottom={"1px solid"}
-      borderColor={theme.palette.grey["2"]}
+      borderColor={'grey.2'}
       display={"flex"}
       width={"100%"}
       justifyContent={"space-between"}

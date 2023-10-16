@@ -10,8 +10,9 @@ import {persistStore} from "redux-persist";
 import {SnackbarProvider} from "notistack";
 
 interface Props {
-
+  children: React.ReactNode
 }
+
 persistStore(store);
 
 const client = new QueryClient({

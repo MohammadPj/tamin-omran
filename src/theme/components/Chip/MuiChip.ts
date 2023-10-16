@@ -4,7 +4,7 @@ import {ChipProps, ChipClasses} from "@mui/material";
 
 type TMuiChip =
   | {
-      defaultProps?: Partial<ChipProps<"div", {}>> | undefined;
+      defaultProps?: Partial<ChipProps<"div">> | undefined;
       styleOverrides?:
         | Partial<
             OverridesStyleRules<

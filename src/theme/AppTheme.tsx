@@ -9,7 +9,11 @@ import { CacheProvider } from "@emotion/react";
 import customTheme from "./theme";
 import { useCommon } from "~/store/common/commonSlice";
 
-const AppTheme: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode
+}
+
+const AppTheme: FC<Props> = ({ children }) => {
   const { themeMode, isRtl } = useCommon();
 
   // const [{ cache, flush }] = React.useState(() => {

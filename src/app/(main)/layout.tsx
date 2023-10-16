@@ -3,7 +3,11 @@ import {Stack} from "@mui/material";
 import Header from "~/app/_components/Header";
 import Footer from "~/app/_components/Footer";
 
-const MainLayout: FC = ({children}) => {
+interface Props {
+  children: React.ReactNode
+}
+
+const MainLayout: FC<Props> = ({children}) => {
   return (
     <Stack>
       <Header />
