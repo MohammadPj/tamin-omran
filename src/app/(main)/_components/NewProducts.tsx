@@ -8,27 +8,27 @@ const NewProducts: FC = () => {
     {
       title: "این نام محصول است",
       subtitle: "این برند است",
-      image: "/images/products/product (1).jpg",
+      image: "/images/home/products/product (1).jpg",
     },
     {
       title: "این نام محصول است",
       subtitle: "این برند است",
-      image: "/images/products/product (2).jpg",
+      image: "/images/home/products/product (2).jpg",
     },
     {
       title: "این نام محصول است",
       subtitle: "این برند است",
-      image: "/images/products/product (3).jpg",
+      image: "/images/home/products/product (3).jpg",
     },
     {
       title: "این نام محصول است",
       subtitle: "این برند است",
-      image: "/images/products/product (4).jpg",
+      image: "/images/home/products/product (4).jpg",
     },
     {
       title: "این نام محصول است",
       subtitle: "این برند است",
-      image: "/images/products/product (5).jpg",
+      image: "/images/home/products/product (5).jpg",
     },
   ];
 

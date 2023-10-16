@@ -29,6 +29,6 @@ declare module "@mui/material/styles/createPalette" {
   interface TypeText extends IColor {}
 }
 
-declare module "@mui/material/styles/index" {
+declare module "@mui/material/index" {
   interface Color extends IColor {}
 }

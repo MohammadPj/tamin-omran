@@ -1,16 +1,16 @@
 import {createSlice, SliceCaseReducers} from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import {RootState} from "@/store/store";
+import {RootState} from "~/store/store";
 
 interface IInitial {
-  posts: any[]
+  posts: string[]
 }
 
 const initialState: IInitial = {
   posts: ['1']
 }
 
-const postsSlice = createSlice<IInitial, SliceCaseReducers<IInitial>>({
+export const PostsSlice = createSlice<IInitial, SliceCaseReducers<IInitial>>({
   name: "backoffice-orders",
   initialState,
   reducers: {
@@ -21,5 +21,5 @@ const postsSlice = createSlice<IInitial, SliceCaseReducers<IInitial>>({
 })
 
 export const usePosts = (): IInitial => useSelector((state: RootState) => state.posts)
-export const { setPosts } = postsSlice.actions
-export default postsSlice.reducer
+export const { setPosts } = PostsSlice.actions
+export default PostsSlice.reducer

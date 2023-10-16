@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-const LoginLayout = ({children}) => {
+interface Props {
+  children: React.ReactNode
+}
+
+const LoginLayout: FC<Props> = ({children}) => {
   return (
     <div>
       LoginLayout

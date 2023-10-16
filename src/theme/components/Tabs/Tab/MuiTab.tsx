@@ -4,7 +4,7 @@ import { TabProps, TabClasses } from "@mui/material";
 
 type TMuiTab =
   | {
-      defaultProps?: Partial<TabProps<"div", {}>> | undefined;
+      defaultProps?: Partial<TabProps<"div">> | undefined;
       styleOverrides?:
         | Partial<
             OverridesStyleRules<

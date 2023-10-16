@@ -30,7 +30,7 @@ export const MuiAlert: TMuiAlert = {
       "& .MuiAlert-message": {
         fontSize: 12,
         fontWeight: 500,
-        color: theme.palette.gray["100"]
+        color: theme.palette.grey["100"]
       },
     }),
   },
