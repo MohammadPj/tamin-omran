@@ -1,14 +1,20 @@
-import React, { FC } from "react";
-import {Box, BoxProps, Typography, useTheme} from "@mui/material";
+import React, {FC, SVGProps} from "react";
+import { Box, Typography, useTheme, BoxProps } from "@mui/material";
 import SvgGear from "~/components/icons/Gear";
 import SvgArrowCircleLeft from "~/components/icons/ArrowCircleLeft";
+
+interface ISvgProps extends SVGProps<any> {
+  primarycolor?: string
+  secondarycolor?: string
+}
 
 interface Props extends BoxProps{
   title: string;
   onShowMore?: () => void;
+  svgProps: ISvgProps
 }
 
-const CustomDivider: FC<Props> = ({ title, onShowMore, ...rest }) => {
+const CustomDivider: FC<Props> = ({ title, onShowMore, svgProps,  ...rest }) => {
   const theme = useTheme();
   return (
     <Box
@@ -26,7 +32,7 @@ const CustomDivider: FC<Props> = ({ title, onShowMore, ...rest }) => {
         borderColor={theme.palette.primary.main}
         pr={4}
       >
-        <SvgGear style={{ marginBottom: "-4px", marginRight: "-13px" }} />
+        <SvgGear style={{ marginBottom: "-4px", marginRight: "-13px" }} {...svgProps} />
         <Typography fontWeight={500} fontSize={18}>
           {title}
         </Typography>

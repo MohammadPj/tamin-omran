@@ -10,7 +10,8 @@ export const lightPalette: PaletteOptions = {
   },
   background: {
     main: "#F0F0F0",
-    1: '#fff'
+    1: '#fff',
+    2: '#EBE9EB'
   },
   grey: {
     main: '#F1F1F1',

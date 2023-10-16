@@ -46,7 +46,7 @@ const customTheme = (mode: PaletteMode, isRtl: boolean) =>
       },
     },
     components: {
-      MuiContainer: {styleOverrides: {maxWidthLg: {maxWidth: '1440px !important'}}},
+      MuiContainer: {styleOverrides: {maxWidthLg: {maxWidth: '1300px !important'}}},
       MuiCssBaseline,
       MuiTextField,
       MuiOutlinedInput,
