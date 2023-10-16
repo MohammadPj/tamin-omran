@@ -5,14 +5,19 @@ import HeroSection from "~/app/(main)/_components/HeroSection";
 import NewProducts from "~/app/(main)/_components/NewProducts";
 import HomeSection2 from "~/app/(main)/_components/HomeSection2";
 import ArticlesSectionHome from "~/app/(main)/_components/ArticlesSectionHome";
+import InformationSection1 from "~/app/(main)/_components/InformationSection1";
 
 const HomePage = () => {
   return (
     <Box>
       <HeroSection />
       <Container>
-        <Box mb={30}>
+        <Box mb={28}>
           <NewProducts />
+        </Box>
+
+        <Box mb={30}>
+        <InformationSection1 />
         </Box>
 
         <Box mb={40}>
