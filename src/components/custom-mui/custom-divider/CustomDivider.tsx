@@ -11,7 +11,7 @@ interface ISvgProps extends SVGProps<any> {
 interface Props extends BoxProps{
   title: string;
   onShowMore?: () => void;
-  svgProps: ISvgProps
+  svgProps?: ISvgProps
 }
 
 const CustomDivider: FC<Props> = ({ title, onShowMore, svgProps,  ...rest }) => {
