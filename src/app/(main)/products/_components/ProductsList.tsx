@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import ProductCard from "~/components/common/product-card/ProductCard";
-import {Box, Grid} from "@mui/material";
+import {Grid} from "@mui/material";
 
 const ProductsList: FC = () => {
   const products = [

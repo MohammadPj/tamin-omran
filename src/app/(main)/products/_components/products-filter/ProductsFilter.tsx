@@ -1,9 +1,8 @@
 import React, { FC } from "react";
-import {Box, Divider, FormControlLabel, Stack, Switch, TextField, Typography} from "@mui/material";
+import { Divider, FormControlLabel, Stack, Switch, TextField, Typography} from "@mui/material";
 import SvgSearch from "~/components/icons/Search";
 import Categories from "~/app/(main)/products/_components/products-filter/_components/Categories";
 import Brands from "~/app/(main)/products/_components/products-filter/_components/Brands";
-import SvgArrowDown from "~/components/icons/ArrowDown";
 
 interface Props {}
 
