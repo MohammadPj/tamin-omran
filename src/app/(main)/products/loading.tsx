@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Container, Grid, Pagination, Skeleton} from "@mui/material";
+import {Box, Container, Grid, Skeleton} from "@mui/material";
 
 const ProductsLoadingPage = () => {
   return (
