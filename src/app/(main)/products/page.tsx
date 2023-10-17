@@ -1,14 +1,13 @@
 import React from "react";
-import { Box, Container, Pagination } from "@mui/material";
+import {Box, Container, Pagination} from "@mui/material";
 import ProductsFilter from "~/app/(main)/products/_components/products-filter/ProductsFilter";
 import ProductsSort from "~/app/(main)/products/_components/ProductsSort";
 import ProductsList from "~/app/(main)/products/_components/ProductsList";
 
 const ProductsPage = async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/photos')
-  console.log('res', res)
 
   return (
+
     <Container sx={{ mt: 7, mb: 15, display: "flex", gap: 7 }}>
       <Box minWidth={254} height={350}>
         <ProductsFilter />

@@ -23,6 +23,8 @@ import {MuiInputLabel} from "~/theme/components/InputLabel/MuiInputLabel";
 import {MuiTypography} from "~/theme/components/Typography/MuiTypography";
 import {MuiRadio} from "~/theme/components/Radio/MuiRadio";
 import {MuiSwitch} from "~/theme/components/switch/MuiSwitch";
+import {MuiContainer} from "~/theme/components/Container/MuiContainer";
+import {MuiSkeleton} from "~/theme/components/Skeleton/MuiSkeleton";
 
 type PaletteMode = "light" | "dark";
 
@@ -47,7 +49,8 @@ const customTheme = (mode: PaletteMode, isRtl?: boolean) =>
       },
     },
     components: {
-      MuiContainer: {styleOverrides: {maxWidthLg: {maxWidth: '1300px !important'}}},
+      MuiContainer,
+      MuiSkeleton,
       MuiCssBaseline,
       MuiTextField,
       MuiOutlinedInput,
