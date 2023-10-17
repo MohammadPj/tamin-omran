@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{overflowX: 'hidden'}}>
+      <body style={{overflowX: 'hidden'}} suppressHydrationWarning={true}>
         <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>

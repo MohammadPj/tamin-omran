@@ -1,10 +1,12 @@
 import React from "react";
-import {Box, Container, Pagination} from "@mui/material";
+import { Box, Container, Pagination } from "@mui/material";
 import ProductsFilter from "~/app/(main)/products/_components/products-filter/ProductsFilter";
 import ProductsSort from "~/app/(main)/products/_components/ProductsSort";
 import ProductsList from "~/app/(main)/products/_components/ProductsList";
 
-const ProductsPage = () => {
+const ProductsPage = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/photos')
+  console.log('res', res)
 
   return (
     <Container sx={{ mt: 7, mb: 15, display: "flex", gap: 7 }}>
@@ -18,10 +20,10 @@ const ProductsPage = () => {
         </Box>
 
         <Box mb={10}>
-        <ProductsList />
+          <ProductsList />
         </Box>
 
-        <Pagination count={10} shape={'rounded'} variant="outlined" />
+        <Pagination count={10} shape={"rounded"} variant="outlined" />
       </Box>
     </Container>
   );
