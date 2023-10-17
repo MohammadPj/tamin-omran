@@ -21,15 +21,18 @@ type TMuiPagination =
 export const MuiPagination: TMuiPagination = {
   defaultProps: {
     color: "primary",
-    hideNextButton: true,
-    hidePrevButton: true,
     dir: "ltr",
   },
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
       display: "flex",
       justifyContent: "center",
-      "& ul": {gap: 8}
     }),
+    ul: {
+      gap: 8,
+      '& >li': {
+        height: '100%'
+      }
+    }
   },
 };

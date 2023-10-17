@@ -23,7 +23,7 @@ const client = new QueryClient({
     },
   },
 });
-const MainLayout: FC<Props> = ({children}) => {
+const RootLayoutClient: FC<Props> = ({children}) => {
   return (
     <QueryClientProvider client={client}>
       <Provider store={store}>
@@ -46,4 +46,4 @@ const MainLayout: FC<Props> = ({children}) => {
   );
 };
 
-export default MainLayout;
+export default RootLayoutClient;

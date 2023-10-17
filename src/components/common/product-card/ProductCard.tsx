@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
 interface Props {
@@ -9,7 +9,6 @@ interface Props {
 }
 
 const ProductCard: FC<Props> = ({ subtitle, title, image }) => {
-  const theme = useTheme();
 
   return (
     <Stack
@@ -17,7 +16,8 @@ const ProductCard: FC<Props> = ({ subtitle, title, image }) => {
       py={3.5}
       gap={3}
       width={"100%"}
-      sx={{ background: theme.palette.background["1"], cursor: 'pointer' }}
+      sx={{ cursor: 'pointer' }}
+      bgcolor={'background.1'}
       borderRadius={1}
       border={'1px solid'}
       borderColor={'grey.3'}

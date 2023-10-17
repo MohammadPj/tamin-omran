@@ -99,7 +99,7 @@ const Footer: FC<Props> = () => {
   ];
 
   return (
-    <Stack height={200} bgcolor={"white"} mt={30}>
+    <Stack bgcolor={"white"}>
       <Divider color={"#262262"} sx={{ borderWidth: 1.5 }} />
 
       <Container>
