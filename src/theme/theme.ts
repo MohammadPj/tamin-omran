@@ -22,6 +22,7 @@ import { MuiCard } from "~/theme/components/Card/MuiCard";
 import {MuiInputLabel} from "~/theme/components/InputLabel/MuiInputLabel";
 import {MuiTypography} from "~/theme/components/Typography/MuiTypography";
 import {MuiRadio} from "~/theme/components/Radio/MuiRadio";
+import {MuiSwitch} from "~/theme/components/switch/MuiSwitch";
 
 type PaletteMode = "light" | "dark";
 
@@ -30,7 +31,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
   ...(mode === "light" ? lightPalette : darkPalette),
 });
 
-const customTheme = (mode: PaletteMode, isRtl: boolean) =>
+const customTheme = (mode: PaletteMode, isRtl?: boolean) =>
   createTheme({
     direction: isRtl ? "rtl" : "ltr",
     palette: getDesignTokens(mode),
@@ -59,6 +60,7 @@ const customTheme = (mode: PaletteMode, isRtl: boolean) =>
       MuiPaginationItem,
       MuiCheckbox,
       MuiSelect,
+      MuiSwitch,
       MuiIconButton,
       MuiMenu,
       MuiCard,

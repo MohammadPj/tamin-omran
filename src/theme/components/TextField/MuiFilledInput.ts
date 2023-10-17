@@ -24,12 +24,12 @@ type TMuiFilledInput =
 export const MuiFilledInput: TMuiFilledInput = {
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
-      backgroundColor: 'background.2',
+      backgroundColor: 'grey.1',
       '&:hover': {
-        backgroundColor: "background.2"
+        backgroundColor: "grey.1"
 
       },
-      '&.Mui-focused': { background: 'background.2', },
+      '&.Mui-focused': { background: 'grey.1', },
 
     }),
   },

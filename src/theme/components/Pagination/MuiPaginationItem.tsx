@@ -1,5 +1,6 @@
 import { OverridesStyleRules } from "@mui/material/styles/overrides";
 import { PaginationItemProps, PaginationItemClasses } from "@mui/material";
+import {Theme} from "@mui/material/styles";
 
 type TMuiPaginationItem =
   | {
@@ -9,7 +10,7 @@ type TMuiPaginationItem =
             OverridesStyleRules<
               keyof PaginationItemClasses,
               "MuiPaginationItem",
-              Omit<any, any>
+              Omit<Theme, "components">
             >
           >
         | undefined;
@@ -21,14 +22,30 @@ export const MuiPaginationItem: TMuiPaginationItem = {
   defaultProps: {},
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
-      fontSize: "10px",
-      fontWeight: 300,
-      minWidth: 18,
-      height: 18,
-      "&.Mui-selected": {
-        fontSize: "12px",
-        fontWeight: 700
-      },
+      margin: 0,
     }),
+    outlined: ({ ownerState, theme }) => ({
+      background: theme.palette.background["1"],
+      fontWeight: 700,
+      color: theme.palette.primary.main,
+      borderColor: theme.palette.grey["2"],
+      '&.Mui-selected': {
+        background: theme.palette.background["1"],
+        border: '1px solid',
+        borderColor: theme.palette.primary.main,
+      }
+    }),
+    ellipsis: ({theme}) => ({
+      height: '100%',
+      borderRadius: 4,
+      border: '1px solid',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderColor: theme.palette.grey["2"],
+    }),
+    icon: {
+      transform: "scaleX(-1)"
+    }
   },
 };

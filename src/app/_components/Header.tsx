@@ -37,14 +37,14 @@ const Header: FC<Props> = () => {
         <Box mb={4} display={"flex"} justifyContent={"space-between"}>
           <CustomTab tabs={tabs} />
 
-          <Box display={"flex"} gap={2}>
+          <Box display={"flex"} gap={2} alignItems={'center'}>
             <TextField
               variant={"filled"}
               size={"medium"}
               placeholder={"محصول مورد نظر را جستجو کنید"}
               sx={{width: 300}}
             />
-            <Button sx={{height: 40, px: 1}} variant={'text'} >
+            <Button sx={{px: 1}} variant={'text'} >
               <SvgExpandMore />
               IR
             </Button>
