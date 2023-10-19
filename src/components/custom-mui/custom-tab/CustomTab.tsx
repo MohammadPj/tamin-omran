@@ -1,39 +1,37 @@
-"use client";
-import React, { FC } from "react";
+'use client'
+import React, {FC, useState} from 'react'
 
-import Tabs, { TabsProps } from "@mui/material/Tabs";
-import Tab, {TabProps} from "@mui/material/Tab";
+import Tabs, { TabsProps } from '@mui/material/Tabs'
+import Tab, { TabProps } from '@mui/material/Tab'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-interface Props {
-  tabs: TabProps[];
-  onChange?: (value: number) => void;
-  tabsProps?: TabsProps;
+export interface ITab {
+  label: string
+  href?: string
 }
 
-const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps }) => {
+interface Props {
+  tabs: ITab[]
+  onChange?: (value: number) => void
+  tabsProps?: TabsProps
+  tabProps?: TabProps
+}
 
+const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps, tabProps }) => {
+  const pathname = usePathname()
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(
+    tabs.findIndex((tab) => tab?.href === pathname)
+  )
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
 
-  // useEffect(() => {
-  //   if (tabs[0].hasOwnProperty("href")) {
-  //     let index;
-  //     // if (tabs[0].href === "/") {
-  //     // eslint-disable-next-line prefer-const
-  //     index = tabs.findIndex((tab) => location === tab.href);
-  //     // } else {
-  //     //   index = tabs.findIndex((tab) => location.pathname.includes(tab.href));
-  //     // }
-  //
-  //     if (value !== index) {
-  //       setValue(index);
-  //     }
-  //   }
-  // }, [tabs]);
+    if (onChange) {
+      onChange(newValue)
+    }
+  }
 
   return (
     <Tabs
@@ -41,13 +39,23 @@ const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps }) => {
       onChange={handleChange}
       {...tabsProps}
       indicatorColor="secondary"
-      textColor={"primary"}
+      textColor={'primary'}
     >
       {tabs.map((tab, i) => (
-        <Tab sx={{fontWeight: value === i ? 700 : 400}} key={i} value={i} {...tab}/>
+
+          <Tab
+            component={Link}
+            href={tab.href || ''}
+            label={tab.label}
+            sx={{ fontWeight: value === i ? 700 : 400 }}
+            key={i}
+            value={i}
+            {...tabProps}
+          />
+
       ))}
     </Tabs>
-  );
-};
+  )
+}
 
-export default CustomTab;
+export default CustomTab

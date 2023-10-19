@@ -1,20 +1,20 @@
 "use client";
 import React, { FC } from "react";
-import { Box, Button, Container, TabProps, TextField } from "@mui/material";
-import CustomTab from "~/components/custom-mui/custom-tab/CustomTab";
+import { Box, Button, Container, TextField } from "@mui/material";
+import CustomTab, {ITab} from "~/components/custom-mui/custom-tab/CustomTab";
 import SvgExpandMore from "~/components/icons/ExpandMore";
 import Logo from "~/app/_components/Logo";
 
-interface Props {}
+interface HeaderProps {}
 
-const Header: FC<Props> = () => {
-  const tabs: TabProps[] = [
-    { label: "خانه" },
-    { label: "محصولات" },
-    { label: "بروشور ها" },
-    { label: "مقالات" },
-    { label: "تماس با ما" },
-    { label: "درباره ما" },
+const Header: FC<HeaderProps> = () => {
+  const tabs: ITab[] = [
+    { label: "خانه", href: '/' },
+    { label: "محصولات", href: '/products' },
+    { label: "بروشور ها", href: '/brochures' },
+    { label: "مقالات", href: '/articles' },
+    { label: "تماس با ما", href: '/contact-us' },
+    { label: "درباره ما", href: '/about-us' },
   ];
 
   const handleClick = () => {
@@ -37,14 +37,14 @@ const Header: FC<Props> = () => {
         <Box mb={4} display={"flex"} justifyContent={"space-between"}>
           <CustomTab tabs={tabs} />
 
-          <Box display={"flex"} gap={2} alignItems={'center'}>
+          <Box display={"flex"} gap={2} alignItems={"center"}>
             <TextField
               variant={"filled"}
               size={"medium"}
               placeholder={"محصول مورد نظر را جستجو کنید"}
-              sx={{width: 300}}
+              sx={{ width: 300 }}
             />
-            <Button sx={{px: 1}} variant={'text'} >
+            <Button sx={{ px: 1 }} variant={"text"}>
               <SvgExpandMore />
               IR
             </Button>

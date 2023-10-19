@@ -34,7 +34,7 @@ const ArticlesSectionHome: FC = () => {
 
   return (
     <Box>
-      <CustomDivider mb={5} title={"اخبار و مقالات"} onShowMore={() => {}} />
+      <CustomDivider mb={5} title={"اخبار و مقالات"} showMoreHref={'/articles'} />
 
       <Stack gap={4}>
         {articles.map((article, i) => (

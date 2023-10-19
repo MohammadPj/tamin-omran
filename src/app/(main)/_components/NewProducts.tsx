@@ -4,6 +4,7 @@ import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider"
 import ProductCard from "~/components/common/product-card/ProductCard";
 
 const NewProducts: FC = () => {
+
   const products = [
     {
       title: "این نام محصول است",
@@ -32,13 +33,9 @@ const NewProducts: FC = () => {
     },
   ];
 
-  const handleShowMore = () => {
-    console.log("show more");
-  };
-
   return (
     <Box mt={11}>
-      <CustomDivider title={"محصولات جدید"} onShowMore={handleShowMore} />
+      <CustomDivider title={"محصولات جدید"} showMoreHref={"/products"} />
 
       <Box display={"flex"} gap={4} mt={6}>
         {products.map((product, i) => (

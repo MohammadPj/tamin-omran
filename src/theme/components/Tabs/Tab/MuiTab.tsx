@@ -20,9 +20,10 @@ type TMuiTab =
 
 export const MuiTab: TMuiTab = {
   styleOverrides: {
-    root: ({ ownerState, theme }) => ({
+    root: ({  theme }) => ({
       color: theme.palette.primary.main,
       fontSize: 12,
+      opacity: 1
     }),
   },
 };

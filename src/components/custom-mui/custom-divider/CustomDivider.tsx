@@ -1,25 +1,26 @@
-import React, {FC, SVGProps} from "react";
-import { Box, Typography, useTheme, BoxProps } from "@mui/material";
+import React, { FC, SVGProps } from "react";
+import { Box, Typography, BoxProps } from "@mui/material";
 import SvgGear from "~/components/icons/Gear";
 import SvgArrowCircleLeft from "~/components/icons/ArrowCircleLeft";
+import Link from "next/link";
 
 interface ISvgProps extends SVGProps<any> {
-  primarycolor?: string
-  secondarycolor?: string
+  primarycolor?: string;
+  secondarycolor?: string;
 }
 
-interface Props extends BoxProps{
+interface Props extends BoxProps {
   title: string;
-  onShowMore?: () => void;
-  svgProps?: ISvgProps
+  showMoreHref?: string;
+  svgProps?: ISvgProps;
 }
 
-const CustomDivider: FC<Props> = ({ title, onShowMore, svgProps,  ...rest }) => {
-  const theme = useTheme();
+const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) => {
+
   return (
     <Box
       borderBottom={"1px solid"}
-      borderColor={'grey.2'}
+      borderColor={"grey.2"}
       display={"flex"}
       width={"100%"}
       justifyContent={"space-between"}
@@ -29,26 +30,30 @@ const CustomDivider: FC<Props> = ({ title, onShowMore, svgProps,  ...rest }) => 
         display={"flex"}
         alignItems={"end"}
         borderBottom={"4px solid"}
-        borderColor={theme.palette.primary.main}
+        borderColor={'primary'}
         pr={4}
       >
-        <SvgGear style={{ marginBottom: "-4px", marginRight: "-13px" }} {...svgProps} />
+        <SvgGear
+          style={{ marginBottom: "-4px", marginRight: "-13px" }}
+          {...svgProps}
+        />
         <Typography fontWeight={500} fontSize={18}>
           {title}
         </Typography>
       </Box>
 
-      {onShowMore && (
+      {showMoreHref && (
         <Box
           display={"flex"}
           gap={2}
           alignItems={"center"}
           sx={{ cursor: "pointer" }}
-          onClick={onShowMore}
         >
-          <Typography color={"primary"} fontSize={16} fontWeight={700}>
-            مشاهده همه
-          </Typography>
+          <Link href={showMoreHref}>
+            <Typography color={"primary"} fontSize={16} fontWeight={700}>
+              مشاهده همه
+            </Typography>
+          </Link>
           <SvgArrowCircleLeft />
         </Box>
       )}
