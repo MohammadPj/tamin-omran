@@ -8,7 +8,7 @@ import SvgLogo from "~/components/icons/final/Logo";
 const ArticlesPage = () => {
 
   return (
-    <Container sx={{ mt: 7, mb: 20 }}>
+    <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
 
       <LastArticlesList />
 

@@ -36,10 +36,10 @@ const ArticlesList: FC = () => {
   const articles = [...lastArticles, ...lastArticles]
 
   return (
-    <Box>
+    <Stack flexGrow={1}>
       <CustomDivider title={'اخبار و مقالات'} mb={6} />
 
-      <Stack gap={5} mb={12}>
+      <Stack gap={5} mb={12} flexGrow={1}>
         {articles?.map((article, i) => (
           <>
             <ArticleCard key={article.id} article={article} />
@@ -49,7 +49,7 @@ const ArticlesList: FC = () => {
       </Stack>
 
       <Pagination count={10} variant={'outlined'} shape={'rounded'} />
-    </Box>
+    </Stack>
   );
 };
 
