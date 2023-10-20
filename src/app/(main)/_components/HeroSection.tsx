@@ -1,7 +1,4 @@
 import SvgArrowLeft from "~/components/icons/ArrowLeft";
-
-("use-client");
-
 import React, { FC } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import HeroSectionImage from "../../../../public/images/home/hero-image.webp";

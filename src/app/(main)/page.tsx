@@ -24,7 +24,7 @@ const HomePage = () => {
           <HomeSection2 />
         </Box>
 
-        <Box>
+        <Box mb={40}>
           <ArticlesSectionHome />
         </Box>
       </Container>
