@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { persistStore } from "redux-persist";
 import { SnackbarProvider } from "notistack";
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+import {useTheme} from "@mui/material";
 
 interface Props {
   children: React.ReactNode;
@@ -24,6 +26,8 @@ const client = new QueryClient({
   },
 });
 const RootLayoutClient: FC<Props> = ({ children }) => {
+  const theme = useTheme()
+
   return (
     <QueryClientProvider client={client}>
       <Provider store={store}>
@@ -43,6 +47,13 @@ const RootLayoutClient: FC<Props> = ({ children }) => {
             >
               {children}
             </div>
+
+            <ProgressBar
+              height="4px"
+              color={theme.palette.warning.main}
+              options={{ showSpinner: true }}
+              shallowRouting
+            />
 
             <ReactQueryDevtools initialIsOpen={false} />
           </AppTheme>
