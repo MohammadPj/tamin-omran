@@ -4,7 +4,6 @@ import ProductCarousel from '~/app/(main)/products/[product]/_components/Product
 import ProductInfo from '~/app/(main)/products/[product]/_components/ProductInfo'
 import { IProduct } from '~/types/product'
 import ProductAnalysis from '~/app/(main)/products/[product]/_components/ProductAnalysis'
-import ProductsLoadingPage from "~/app/(main)/products/[product]/loading";
 import RelativeProducts from "~/app/(main)/products/[product]/_components/RelativeProducts";
 
 const ProductsPage = () => {

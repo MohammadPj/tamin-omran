@@ -70,7 +70,7 @@ const RelativeProducts: FC<RelativeProductsProps> = () => {
     setIsLoading(false)
   }, [])
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setSwiperProgress(e.progress)
   }
 

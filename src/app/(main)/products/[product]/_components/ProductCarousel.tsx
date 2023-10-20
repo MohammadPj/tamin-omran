@@ -1,6 +1,6 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react'
-import { Box, Skeleton, Stack } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import Image from 'next/image'
 
 // Import Swiper styles
