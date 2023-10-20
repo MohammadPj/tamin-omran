@@ -25,6 +25,7 @@ import {MuiRadio} from "~/theme/components/Radio/MuiRadio";
 import {MuiSwitch} from "~/theme/components/switch/MuiSwitch";
 import {MuiContainer} from "~/theme/components/Container/MuiContainer";
 import {MuiSkeleton} from "~/theme/components/Skeleton/MuiSkeleton";
+import {MuiAccordion} from "~/theme/components/accordion/MuiAccodrion";
 
 type PaletteMode = "light" | "dark";
 
@@ -49,6 +50,7 @@ const customTheme = (mode: PaletteMode, isRtl?: boolean) =>
       },
     },
     components: {
+      MuiAccordion,
       MuiContainer,
       MuiSkeleton,
       MuiCssBaseline,
