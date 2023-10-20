@@ -2,8 +2,8 @@
 import React, { FC } from "react";
 import { Box, Button, Container, TextField } from "@mui/material";
 import CustomTab, {ITab} from "~/components/custom-mui/custom-tab/CustomTab";
-import SvgExpandMore from "~/components/icons/ExpandMore";
-import Logo from "~/app/_components/Logo";
+import SvgExpandMore from "~/components/icons/final/ExpandMore";
+import SvgLogo from "~/components/icons/final/Logo";
 
 interface HeaderProps {}
 
@@ -14,7 +14,7 @@ const Header: FC<HeaderProps> = () => {
     { label: "بروشور ها", href: '/brochures' },
     { label: "مقالات", href: '/articles' },
     { label: "تماس با ما", href: '/contact-us' },
-    { label: "درباره ما", href: '/about-us' },
+    { label: "درباره ما", href: '/contact-us' },
   ];
 
   const handleClick = () => {
@@ -30,7 +30,7 @@ const Header: FC<HeaderProps> = () => {
           width={"100%"}
           justifyContent={"space-between"}
         >
-          <Logo />
+          <SvgLogo />
           <Button onClick={handleClick}>ورود/ثبت نام</Button>
         </Box>
 

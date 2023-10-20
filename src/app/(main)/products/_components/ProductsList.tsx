@@ -9,31 +9,31 @@ const ProductsList: FC = () => {
       id: 1,
       title: 'این نام محصول است',
       subtitle: 'این برند است',
-      image: '/images/home/products/product (1).jpg',
+      image: '/images/products/product (1).jpg',
     },
     {
       id: 2,
       title: 'این نام محصول است',
       subtitle: 'این برند است',
-      image: '/images/home/products/product (2).jpg',
+      image: '/images/products/product (2).jpg',
     },
     {
       id: 3,
       title: 'این نام محصول است',
       subtitle: 'این برند است',
-      image: '/images/home/products/product (3).jpg',
+      image: '/images/products/product (3).jpg',
     },
     {
       id: 4,
       title: 'این نام محصول است',
       subtitle: 'این برند است',
-      image: '/images/home/products/product (4).jpg',
+      image: '/images/products/product (4).jpg',
     },
     {
       id: 5,
       title: 'این نام محصول است',
       subtitle: 'این برند است',
-      image: '/images/home/products/product (5).jpg',
+      image: '/images/products/product (5).jpg',
     },
   ]
 

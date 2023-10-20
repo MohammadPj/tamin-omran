@@ -7,12 +7,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import Logo from "~/app/_components/Logo";
-import SvgEmail from "~/components/icons/Email";
-import SvgPhone from "~/components/icons/Phone";
-import SvgLocation from "~/components/icons/Location";
-import SvgTelegram from "~/components/icons/Telegram";
-import SvgWhatsApp from "~/components/icons/WhatsApp";
+import SvgEmail from "~/components/icons/final/Email";
+import SvgPhone from "~/components/icons/final/Phone";
+import SvgLocation from "~/components/icons/final/Location";
+import SvgTelegram from "~/components/icons/final/Telegram";
+import SvgWhatsApp from "~/components/icons/final/WhatsApp";
+import SvgLogo from "~/components/icons/final/Logo";
 
 interface Props {}
 
@@ -106,7 +106,7 @@ const Footer: FC<Props> = () => {
         <Stack gap={12} py={10}>
           <Grid container columnSpacing={10}>
             <Grid item xs={12} sm={6} lg={4}>
-              <Logo />
+              <SvgLogo />
 
               <Typography fontWeight={400} fontSize={14}>
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با

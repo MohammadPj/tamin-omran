@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import {Box, Typography} from "@mui/material";
-import SvgSort from "~/components/icons/Sort";
+import SvgSort from "~/components/icons/final/Sort";
 
 const ProductsSort: FC = () => {
   return (

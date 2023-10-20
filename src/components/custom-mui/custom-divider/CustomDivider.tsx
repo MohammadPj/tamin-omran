@@ -1,7 +1,7 @@
 import React, { FC, SVGProps } from "react";
 import { Box, Typography, BoxProps } from "@mui/material";
-import SvgGear from "~/components/icons/Gear";
-import SvgArrowCircleLeft from "~/components/icons/ArrowCircleLeft";
+import SvgGear from "~/components/icons/final/Gear";
+import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
 import Link from "next/link";
 
 interface ISvgProps extends SVGProps<any> {

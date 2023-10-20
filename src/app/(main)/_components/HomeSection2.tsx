@@ -5,15 +5,15 @@ import Image from "next/image";
 
 const HomeSection2: FC = () => {
   const customers = [
-    "/images/home/customers/customer (1).png",
-    "/images/home/customers/customer (2).png",
-    "/images/home/customers/customer (3).png",
-    "/images/home/customers/customer (4).png",
-    "/images/home/customers/customer (5).png",
-    "/images/home/customers/customer (1).png",
-    "/images/home/customers/customer (2).png",
-    "/images/home/customers/customer (3).png",
-    "/images/home/customers/customer (4).png",
+    "/images/customers/customer (1).png",
+    "/images/customers/customer (2).png",
+    "/images/customers/customer (3).png",
+    "/images/customers/customer (4).png",
+    "/images/customers/customer (5).png",
+    "/images/customers/customer (1).png",
+    "/images/customers/customer (2).png",
+    "/images/customers/customer (3).png",
+    "/images/customers/customer (4).png",
   ];
 
   return (

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Box, Typography} from "@mui/material";
-import SvgArrowDown from "~/components/icons/ArrowDown";
+import SvgArrowDown from "~/components/icons/final/ArrowDown";
 
 const Categories: FC = () => {
   return (

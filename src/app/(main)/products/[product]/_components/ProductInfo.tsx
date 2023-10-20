@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import {Box, Button, Divider, Stack, Typography} from '@mui/material'
 import { IProduct } from '~/types/product'
-import SvgArrowLeft from "~/components/icons/ArrowLeft";
+import SvgArrowLeft from "~/components/icons/final/ArrowLeft";
 
 interface ProductInfoProps {
   product: IProduct

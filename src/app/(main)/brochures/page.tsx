@@ -10,8 +10,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import SvgArrowDown from '~/components/icons/ArrowDown'
-import SvgDownload from '~/components/icons/Download'
+import SvgArrowDown from '~/components/icons/final/ArrowDown'
+import SvgDownload from '~/components/icons/final/Download'
 
 const BrochuresPage = () => {
   const categories = [
@@ -45,8 +45,8 @@ const BrochuresPage = () => {
   ]
 
   return (
-    <Container sx={{ mt: 7, mb: 20 }}>
-      <Stack gap={5}>
+    <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+      <Stack gap={5} flexGrow={1} mb={10}>
         {categories.map((cat, i) => (
           <Accordion key={i} >
             <AccordionSummary
@@ -90,8 +90,8 @@ const BrochuresPage = () => {
           </Accordion>
         ))}
 
-        <Pagination count={10} variant={'outlined'} shape={'rounded'} />
       </Stack>
+        <Pagination count={10} variant={'outlined'} shape={'rounded'} />
     </Container>
   )
 }

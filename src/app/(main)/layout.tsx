@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box, Stack} from "@mui/material";
+import {Stack} from "@mui/material";
 import Header from "~/app/_components/Header";
 import Footer from "~/app/_components/Footer";
 
@@ -13,9 +13,9 @@ const MainLayout: FC<Props> = ({children}) => {
 
       <Header />
 
-      <Box flexGrow={1}>
+      <Stack flexGrow={1}>
       {children}
-      </Box>
+      </Stack>
 
       <Footer />
     </Stack>
