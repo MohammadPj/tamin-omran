@@ -5,13 +5,14 @@ import { PaletteMode } from "@mui/material";
 
 export interface CommonState {
   themeMode: PaletteMode;
-  serverError?: string | null;
   isRtl: boolean;
+  lang: 'fa' | 'en'
 }
 
 const initialState: CommonState = {
   themeMode: "light",
   isRtl: true,
+  lang: 'fa'
 };
 
 export const CommonSlice = createSlice<
