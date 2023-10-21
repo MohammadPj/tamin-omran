@@ -12,6 +12,11 @@ import {
 } from '@mui/material'
 import SvgArrowDown from '~/components/icons/final/ArrowDown'
 import SvgDownload from '~/components/icons/final/Download'
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: 'بروشور ها',
+}
 
 const BrochuresPage = () => {
   const categories = [

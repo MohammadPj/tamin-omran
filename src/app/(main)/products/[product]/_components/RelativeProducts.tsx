@@ -94,7 +94,7 @@ const RelativeProducts: FC<RelativeProductsProps> = () => {
         <Box position={'relative'}>
           <Swiper
             onSlideChange={handleChange}
-            onBeforeInit={(swipper) => setSwiper(swipper)}
+            onBeforeInit={(swipper: any) => setSwiper(swipper)}
             className="mySwiper"
             slidesPerView={5}
             spaceBetween={8}

@@ -20,8 +20,7 @@ persistStore(store);
 const client = new QueryClient({
   defaultOptions: {
     queries: {
-      keepPreviousData: true,
-      // staleTime: 10000
+
     },
   },
 });

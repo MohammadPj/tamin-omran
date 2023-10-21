@@ -6,6 +6,11 @@ import SvgEmail from '~/components/icons/final/Email'
 import SvgLocation from '~/components/icons/final/Location'
 import SvgTelegram from '~/components/icons/final/Telegram'
 import SvgWhatsApp from '~/components/icons/final/WhatsApp'
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: 'ارتباط با ما',
+}
 
 const ContactUsPage = () => {
   return (

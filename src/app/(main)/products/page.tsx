@@ -3,6 +3,11 @@ import {Box, Container, Pagination, Stack} from "@mui/material";
 import ProductsFilter from "~/app/(main)/products/_components/products-filter/ProductsFilter";
 import ProductsSort from "~/app/(main)/products/_components/ProductsSort";
 import ProductsList from "~/app/(main)/products/_components/ProductsList";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: 'محصولات',
+}
 
 const ProductsPage = async () => {
 

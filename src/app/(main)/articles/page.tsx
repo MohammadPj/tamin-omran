@@ -4,6 +4,11 @@ import TruckImage from '../../../../public/images/trucks/truck-5.webp'
 import LastArticlesList from "~/app/(main)/articles/_components/LastArticlesList";
 import ArticlesList from "~/app/(main)/articles/_components/ArticlesList";
 import SvgLogo from "~/components/icons/final/Logo";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: 'مقالات',
+}
 
 const ArticlesPage = () => {
 

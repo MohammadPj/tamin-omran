@@ -1,7 +1,18 @@
 import React from 'react'
 import { Container } from '@mui/material'
 
-const ArticlePage = () => {
+export async function generateStaticParams() {
+  const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json())
+
+  return posts.map((post: any) => ({
+    slug: post.slug,
+  }))
+}
+
+export const revalidate = 10
+
+const ArticlePage = ({ params }: { params: { article: string } }) => {
+  console.log('articleId', params.article)
 
   return (
     <Container sx={{ mt: 7, mb: 20 }}>

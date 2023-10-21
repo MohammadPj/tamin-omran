@@ -49,7 +49,7 @@ const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) =>
           alignItems={"center"}
           sx={{ cursor: "pointer" }}
         >
-          <Link href={showMoreHref}>
+          <Link href={showMoreHref as any}>
             <Typography color={"primary"} fontSize={16} fontWeight={700}>
               مشاهده همه
             </Typography>
