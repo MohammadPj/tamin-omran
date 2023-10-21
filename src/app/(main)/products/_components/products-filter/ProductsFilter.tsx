@@ -1,3 +1,4 @@
+"use client"
 import React, { FC } from "react";
 import { Divider, FormControlLabel, Stack, Switch, TextField, Typography} from "@mui/material";
 import SvgSearch from "~/components/icons/final/Search";

@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+'use client'
+import React, {FC} from 'react'
 import ProductCard from '~/components/common/product-card/ProductCard'
-import { Grid } from '@mui/material'
+import {Grid} from '@mui/material'
 import Link from 'next/link'
 
 const ProductsList: FC = () => {

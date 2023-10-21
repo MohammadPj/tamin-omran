@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { Box, Container } from "@mui/material";
 import HeroSection from "~/app/(main)/_components/HeroSection";
@@ -11,6 +10,7 @@ import {NextPage} from "next";
 interface HomePageProps {}
 
 const HomePage: NextPage<HomePageProps> = ({}) => {
+
   return (
     <Box>
       <HeroSection />
