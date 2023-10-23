@@ -24,8 +24,10 @@ const client = new QueryClient({
     },
   },
 });
+
 const RootLayoutClient: FC<Props> = ({ children }) => {
   const theme = useTheme()
+
 
   return (
     <QueryClientProvider client={client}>

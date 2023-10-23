@@ -14,6 +14,7 @@ const HomePage: NextPage<HomePageProps> = ({}) => {
   return (
     <Box>
       <HeroSection />
+
       <Container>
         <Box mb={28}>
           <NewProducts />
