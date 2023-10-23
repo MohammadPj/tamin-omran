@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Stack} from "@mui/material";
-import Header from "~/app/_components/Header";
-import Footer from "~/app/_components/Footer";
+import Header from "~/app/[lang]/[country]/_components/Header";
+import Footer from "~/app/[lang]/[country]/_components/Footer";
 
 interface Props {
   children: React.ReactNode

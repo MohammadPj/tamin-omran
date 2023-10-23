@@ -1,7 +1,7 @@
 import React  from "react";
 import "~/styles/fonts.css";
 import "~/styles/globals.css";
-import RootLayoutClient from "~/app/_components/RootLayoutClient";
+import RootLayoutClient from "~/app/[lang]/[country]/_components/RootLayoutClient";
 
 export const metadata = {
   title: "تامین عمران قطعه",
