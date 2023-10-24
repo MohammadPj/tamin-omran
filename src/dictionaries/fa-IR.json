@@ -1,0 +1,6 @@
+{
+  "welcome": {
+    "helloWorld": "سلام دنیا !!!",
+    "happyYear": "فرخنده {{ year }}!"
+  }
+}

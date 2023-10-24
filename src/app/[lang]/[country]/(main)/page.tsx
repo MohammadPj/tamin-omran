@@ -1,24 +1,29 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, Container } from "@mui/material";
 import HeroSection from "~/app/[lang]/[country]/(main)/_components/HeroSection";
 import NewProducts from "~/app/[lang]/[country]/(main)/_components/NewProducts";
 import HomeSection2 from "~/app/[lang]/[country]/(main)/_components/HomeSection2";
 import ArticlesSectionHome from "~/app/[lang]/[country]/(main)/_components/ArticlesSectionHome";
 import InformationSection1 from "~/app/[lang]/[country]/(main)/_components/InformationSection1";
-import { NextPage } from "next";
+import { ValidLocale, getTranslator } from "~/i18n";
 
 interface HomePageProps {
   params: { lang: string; country: string };
 }
 
-const HomePage: NextPage<HomePageProps> = ({
-  params,
-}) => {
+const HomePage = async ({ params }: HomePageProps) => {
+  const translate = await getTranslator(
+    `${params.lang}-${params.country.toUpperCase()}` as ValidLocale
+  );
 
   return (
     <Box>
-      country:{params.country}
-      lang:{params.lang}
+      <h1>{translate("welcome.helloWorld")}</h1>
+      <h2>
+        {translate("welcome.happyYear", {
+          year: new Date().getFullYear(),
+        })}
+      </h2>
       <HeroSection />
 
       <Container>

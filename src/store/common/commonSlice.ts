@@ -15,6 +15,11 @@ const initialState: CommonState = {
   lang: 'fa'
 };
 
+if (typeof window !== "undefined") {
+  // Client-side-only code
+  console.log('window ', window)
+}
+
 export const CommonSlice = createSlice<
   CommonState,
   SliceCaseReducers<CommonState>
@@ -25,11 +30,14 @@ export const CommonSlice = createSlice<
     changeThemeMode: (state) => {
       state.themeMode = state.themeMode === "light" ? "dark" : "light";
     },
+    setLanguage: (state, action) => {
+      state.themeMode = action.payload
+    },
   },
 });
 
 export const useCommon = () =>
   useSelector((state: RootState) => state.common);
 
-export const { changeThemeMode } = CommonSlice.actions;
+export const { changeThemeMode, setLanguage } = CommonSlice.actions;
 export default CommonSlice.reducer;
