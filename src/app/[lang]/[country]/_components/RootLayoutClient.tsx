@@ -8,25 +8,27 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { persistStore } from "redux-persist";
 import { SnackbarProvider } from "notistack";
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
-import {useTheme} from "@mui/material";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import { useTheme } from "@mui/material";
+import {setLocales} from "~/store/common/commonSlice";
 
 interface Props {
   children: React.ReactNode;
+  lang?: string;
+  country?: string
 }
 
 persistStore(store);
 
-const client = new QueryClient({
-  defaultOptions: {
-    queries: {
+const client = new QueryClient();
 
-    },
-  },
-});
+const RootLayoutClient: FC<Props> = ({ children, lang, country }) => {
+  const theme = useTheme();
 
-const RootLayoutClient: FC<Props> = ({ children }) => {
-  const theme = useTheme()
+  store.dispatch(setLocales({
+    lang: lang,
+    country: country?.toUpperCase()
+  }));
 
   return (
     <QueryClientProvider client={client}>

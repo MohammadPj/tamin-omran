@@ -9,9 +9,12 @@ const dictionaries: Record<ValidLocale, any> = {
     import("./dictionaries/fa-IR.json").then((module) => module.default),
 } as const;
 
-export const getTranslator = async (locale: ValidLocale) => {
-  // console.log('store', store.getState())
-  const dictionary = await dictionaries[locale]();
+export const getTranslator = async () => {
+
+  console.log('store', store.getState())
+  const locale = store.getState().common.locales
+
+  const dictionary = await dictionaries[`${locale.lang}-${locale.country}` as ValidLocale]();
   return (key: NestedKeyOf<IDictionaries>, params?: { [key: string]: string | number }) => {
     let translation = key
       .split(".")

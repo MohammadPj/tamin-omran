@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 const ProductsPage = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users/1")
   const data = await response.json()
-  console.log('data', data)
 
   return (
     <Container sx={{ mt: 7, mb: 15, display: "flex", gap: 7, flexGrow: 1 }}>

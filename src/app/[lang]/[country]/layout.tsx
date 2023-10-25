@@ -10,14 +10,18 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  params
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode,
+  params: {lang: string, country: string}
 }) {
+
+
 
   return (
     <html lang="en">
       <body style={{overflowX: 'hidden'}} suppressHydrationWarning={true}>
-        <RootLayoutClient>{children}</RootLayoutClient>
+        <RootLayoutClient lang={params.lang} country={params.country} >{children}</RootLayoutClient>
       </body>
     </html>
   );

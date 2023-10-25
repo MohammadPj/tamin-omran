@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import {defaultLocale, getLocalePartsFrom, locales} from "~/i18n";
-import {store} from "~/store/store";
-import {setLanguage} from "~/store/common/commonSlice";
+import { defaultLocale, getLocalePartsFrom, locales } from "~/i18n";
+import { cookies } from 'next/headers'
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -9,20 +8,31 @@ export function middleware(request: NextRequest) {
   const defaultLocaleParts = getLocalePartsFrom({ locale: defaultLocale });
   const currentPathnameParts = getLocalePartsFrom({ pathname });
 
-  const pathnameIsMissingValidLocale = locales.every((locale) => {
+  const pathnameIsValid = locales.some((locale) => {
     const localeParts = getLocalePartsFrom({ locale });
-    return !pathname.startsWith(`/${localeParts.lang}/${localeParts.country}`);
+    return pathname.startsWith(`/${localeParts.lang}/${localeParts.country}`);
   });
 
+  if (pathnameIsValid) {
+    console.log('set cookie')
+    request.cookies.set('name', "mohammad")
+  } else {
+    // rewrite it so next.js will render `/` as if it was `/fa/ir`
+    if (!pathname.startsWith("/images")) {
+      return NextResponse.rewrite(
+        new URL(
+          `/${defaultLocaleParts.lang}/${defaultLocaleParts.country}${pathname}`,
+          request.url
+        )
+      );
+    }
+  }
 
-  // Check if the default locale is in the pathname
-    console.log('pathname1', pathname)
+  // redirect to / if route was /fa/ir
   if (
     currentPathnameParts.lang === defaultLocaleParts.lang &&
     currentPathnameParts.country === defaultLocaleParts.country
   ) {
-
-
     return NextResponse.redirect(
       new URL(
         pathname.replace(
@@ -33,23 +43,6 @@ export function middleware(request: NextRequest) {
       )
     );
   }
-
-  if (pathnameIsMissingValidLocale) {
-
-    // rewrite it so next.js will render `/` as if it was `/fa/ir`
-    return NextResponse.rewrite(
-      new URL(
-        `/${defaultLocaleParts.lang}/${defaultLocaleParts.country}${pathname}`,
-        request.url
-      )
-    );
-  } else {
-    console.log('currentPathnameParts', currentPathnameParts)
-  }
-
-
-
-
 }
 export const config = {
   // do not localize next.js paths

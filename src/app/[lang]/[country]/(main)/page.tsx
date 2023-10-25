@@ -1,3 +1,4 @@
+"use client";
 import React, { FC } from "react";
 import { Box, Container } from "@mui/material";
 import HeroSection from "~/app/[lang]/[country]/(main)/_components/HeroSection";
@@ -12,9 +13,7 @@ interface HomePageProps {
 }
 
 const HomePage = async ({ params }: HomePageProps) => {
-  const translate = await getTranslator(
-    `${params.lang}-${params.country.toUpperCase()}` as ValidLocale
-  );
+  const translate = await getTranslator();
 
   return (
     <Box>
