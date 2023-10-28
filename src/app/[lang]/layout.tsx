@@ -1,7 +1,7 @@
 import React  from "react";
 import "~/styles/fonts.css";
 import "~/styles/globals.css";
-import RootLayoutClient from "~/app/[lang]/[country]/_components/RootLayoutClient";
+import RootLayoutClient from "~/app/[lang]/_components/RootLayoutClient";
 
 export const metadata = {
   title: "تامین عمران قطعه",
@@ -13,7 +13,7 @@ export default function RootLayout({
   params
 }: {
   children: React.ReactNode,
-  params: {lang: string, country: string}
+  params: {lang: string}
 }) {
 
 
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{overflowX: 'hidden'}} suppressHydrationWarning={true}>
-        <RootLayoutClient lang={params.lang} country={params.country} >{children}</RootLayoutClient>
+        <RootLayoutClient lang={params.lang} >{children}</RootLayoutClient>
       </body>
     </html>
   );

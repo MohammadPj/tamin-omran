@@ -3,8 +3,8 @@ import { Box, Typography } from "@mui/material";
 import CustomDivider2 from "~/components/custom-mui/custom-divider/CustomDivider2";
 import Image from "next/image";
 import TruckImage from "@/public/images/home/image-1.png";
-import Benefits from "~/app/[lang]/[country]/(main)/_components/benefits/Benefits";
-import HomeGallery from "~/app/[lang]/[country]/(main)/_components/HomeGallery";
+import Benefits from "~/app/[lang]/(main)/_components/benefits/Benefits";
+import HomeGallery from "~/app/[lang]/(main)/_components/HomeGallery";
 
 interface Props {}
 

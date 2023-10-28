@@ -1,27 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { defaultLocale, getLocalePartsFrom, locales } from "~/i18n";
-import { cookies } from 'next/headers'
+import {defaultLang, languages} from "~/i18n";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const currentLang = pathname!.toLowerCase().split("/")[1]
 
-  const defaultLocaleParts = getLocalePartsFrom({ locale: defaultLocale });
-  const currentPathnameParts = getLocalePartsFrom({ pathname });
-
-  const pathnameIsValid = locales.some((locale) => {
-    const localeParts = getLocalePartsFrom({ locale });
-    return pathname.startsWith(`/${localeParts.lang}/${localeParts.country}`);
+  const pathnameIsValid = languages.some((lang) => {
+    return pathname.startsWith(`/${lang}`);
   });
 
   if (pathnameIsValid) {
-    console.log('set cookie')
-    request.cookies.set('name', "mohammad")
   } else {
     // rewrite it so next.js will render `/` as if it was `/fa/ir`
     if (!pathname.startsWith("/images")) {
       return NextResponse.rewrite(
         new URL(
-          `/${defaultLocaleParts.lang}/${defaultLocaleParts.country}${pathname}`,
+          `/${defaultLang}${pathname}`,
           request.url
         )
       );
@@ -30,13 +24,12 @@ export function middleware(request: NextRequest) {
 
   // redirect to / if route was /fa/ir
   if (
-    currentPathnameParts.lang === defaultLocaleParts.lang &&
-    currentPathnameParts.country === defaultLocaleParts.country
+    currentLang === defaultLang
   ) {
     return NextResponse.redirect(
       new URL(
         pathname.replace(
-          `/${defaultLocaleParts.lang}/${defaultLocaleParts.country}`,
+          `/${defaultLang}`,
           pathname.startsWith("/") ? "/" : ""
         ),
         request.url

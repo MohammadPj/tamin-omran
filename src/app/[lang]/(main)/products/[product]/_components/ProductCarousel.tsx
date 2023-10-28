@@ -6,7 +6,7 @@ import Image from 'next/image'
 // Import Swiper styles
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import ProductCarouselSkeleton from '~/app/[lang]/[country]/(main)/products/[product]/_components/ProductCarouselSkeleton'
+import ProductCarouselSkeleton from '~/app/[lang]/(main)/products/[product]/_components/ProductCarouselSkeleton'
 
 interface ProductCarouselProps {
   images?: string[] | undefined

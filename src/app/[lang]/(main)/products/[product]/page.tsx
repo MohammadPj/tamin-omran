@@ -1,10 +1,10 @@
 import React from 'react'
 import { Box, Container, Grid } from '@mui/material'
-import ProductCarousel from '~/app/[lang]/[country]/(main)/products/[product]/_components/ProductCarousel'
-import ProductInfo from '~/app/[lang]/[country]/(main)/products/[product]/_components/ProductInfo'
+import ProductCarousel from '~/app/[lang]/(main)/products/[product]/_components/ProductCarousel'
+import ProductInfo from '~/app/[lang]/(main)/products/[product]/_components/ProductInfo'
 import { IProduct } from '~/types/product'
-import ProductAnalysis from '~/app/[lang]/[country]/(main)/products/[product]/_components/ProductAnalysis'
-import RelativeProducts from "~/app/[lang]/[country]/(main)/products/[product]/_components/RelativeProducts";
+import ProductAnalysis from '~/app/[lang]/(main)/products/[product]/_components/ProductAnalysis'
+import RelativeProducts from "~/app/[lang]/(main)/products/[product]/_components/RelativeProducts";
 
 const ProductsPage = () => {
   const product: IProduct = {

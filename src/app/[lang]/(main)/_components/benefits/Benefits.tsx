@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Box } from "@mui/material";
-import BenefitCard from "~/app/[lang]/[country]/(main)/_components/benefits/BenefitCard";
+import BenefitCard from "~/app/[lang]/(main)/_components/benefits/BenefitCard";
 
 const Benefits: FC = () => {
   const benefits = [
