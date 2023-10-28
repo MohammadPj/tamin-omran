@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Stack} from "@mui/material";
-import Header from "~/app/[lang]/_components/Header";
+import Header from "~/app/[lang]/_components/header/Header";
 import Footer from "~/app/[lang]/_components/Footer";
 
 interface Props {
