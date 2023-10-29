@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import {defaultLang, languages} from "~/i18n";
+import { defaultLang, languages } from "~/i18n";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const currentLang = pathname!.toLowerCase().split("/")[1]
+  const currentLang = pathname!.toLowerCase().split("/")[1];
 
   const pathnameIsValid = languages.some((lang) => {
     return pathname.startsWith(`/${lang}`);
@@ -14,26 +14,21 @@ export function middleware(request: NextRequest) {
     // rewrite it so next.js will render `/` as if it was `/fa/ir`
     if (!pathname.startsWith("/images")) {
       return NextResponse.rewrite(
-        new URL(
-          `/${defaultLang}${pathname}`,
-          request.url
-        )
+        new URL(`/${defaultLang}${pathname}`, request.url)
       );
     }
   }
 
+    console.log(
+      pathname.replace(`/${defaultLang}`, pathname.startsWith("/") ? "" : "")
+    );
+
   // redirect to / if route was /fa/ir
-  if (
-    currentLang === defaultLang
-  ) {
+  if (currentLang === defaultLang) {
+  console.log('currentLang', currentLang)
+
     return NextResponse.redirect(
-      new URL(
-        pathname.replace(
-          `/${defaultLang}`,
-          pathname.startsWith("/") ? "/" : ""
-        ),
-        request.url
-      )
+      new URL(pathname.replace(`/${defaultLang}`, "") + "/", request.url)
     );
   }
 }

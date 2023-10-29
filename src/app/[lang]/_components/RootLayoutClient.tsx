@@ -24,8 +24,6 @@ const client = new QueryClient();
 
 const RootLayoutClient: FC<Props> = ({ children, lang }) => {
   const theme = useTheme();
-
-  console.log('sss')
   store.dispatch(setLang(lang))
 
   return (
@@ -38,7 +36,7 @@ const RootLayoutClient: FC<Props> = ({ children, lang }) => {
           <AppTheme>
             <CssBaseline />
             <div
-              dir={"rtl"}
+              dir={lang === 'fa' ? 'rtl' : 'ltr'}
               style={{
                 background: "#F0F0F0",
                 minHeight: "100vh",

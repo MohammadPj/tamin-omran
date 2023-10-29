@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React, { FC } from "react";
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import SvgExpandMore from "~/components/icons/final/ExpandMore";
 import Image from "next/image";
 import { store } from "~/store/store";
-import {usePathname, useRouter} from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import {defaultLang} from "~/i18n";
 
 interface ILanguages {
   title: string;
@@ -15,8 +16,8 @@ interface ILanguages {
 
 const LanguageMenu: FC = () => {
   const lang = store.getState().common.lang;
-  const pathname = usePathname()
-  const router = useRouter()
+  const pathname = usePathname();
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl as any);
@@ -26,18 +27,25 @@ const LanguageMenu: FC = () => {
   };
 
   const handleSelectLanguage = (language: ILanguages) => {
-    if(language.value === lang) return
+    if (language.value === lang) return;
 
-    const pathnameLocale = pathname.split("/")[1]
+    const splittedPathname = pathname.split("/");
 
-    console.log('pathname', pathname.split("/")[1])
+    if (lang === defaultLang) {
+      splittedPathname.splice(1, 0, language.value).join("/");
+    } else {
+      splittedPathname.splice(1, 1, language.value).join("/");
+    }
+
+    console.log('splittedPathname', splittedPathname.join("/"))
+    router.push(splittedPathname.join("/") as any)
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const languages: ILanguages[] = [
+  const menuLanguages: ILanguages[] = [
     {
       title: "ایران",
       icon: "/images/common/iran-flag.png",
@@ -52,7 +60,7 @@ const LanguageMenu: FC = () => {
     },
   ];
 
-  const selectedLang = languages.find((l) => l?.value === lang);
+  const selectedLang = menuLanguages.find((l) => l?.value === lang);
 
   return (
     <Box>
@@ -86,7 +94,7 @@ const LanguageMenu: FC = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        {languages.map((lang) => (
+        {menuLanguages.map((lang) => (
           <MenuItem key={lang.title} onClick={() => handleSelectLanguage(lang)}>
             <Box
               display={"flex"}

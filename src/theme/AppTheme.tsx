@@ -35,17 +35,17 @@ const AppTheme: FC<Props> = ({
   children,
 }) => {
 
+  const { themeMode, lang } = useCommon();
+
   const emotionCacheOptions = {
     key: 'rtl',
     prepend: true,
     stylisPlugins: [prefixer, rtlPlugin],
   };
 
-  const { themeMode, isRtl } = useCommon();
-
   const theme = React.useMemo(
-    () => customTheme(themeMode, isRtl),
-    [themeMode, isRtl]
+    () => customTheme(themeMode, lang ),
+    [themeMode, lang]
   );
 
 

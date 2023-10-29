@@ -5,21 +5,22 @@ import Image from "next/image";
 import TruckImage from "@/public/images/home/image-1.png";
 import Benefits from "~/app/[lang]/(main)/_components/benefits/Benefits";
 import HomeGallery from "~/app/[lang]/(main)/_components/HomeGallery";
+import {getDictionary} from "~/i18n";
 
 interface Props {}
 
 const InformationSection1: FC<Props> = () => {
+  const dictionary = getDictionary();
+
   return (
     <Box position={"relative"}>
       <CustomDivider2
-        title={"این یک متن ساختگی است که تغییر خواهد کرد"}
+        title={dictionary("home.InformationSection1.title") || ""}
         boxProps={{ mb: 4 }}
       />
 
       <Typography color={"text.secondary"} fontSize={16} fontWeight={400}>
-        انواع قطعات ماشین آلات و نوشته هایی که شما مد نظر دارید تا در این بخش
-        نوشته شود نوشته خواهد شد وموضوعات این چنینی که در حال حاضر نوشته
-        میشودمثل یک لورم ایپسوم از پیش تعیین شده میباشد
+        {dictionary("home.InformationSection1.subtitle")}
       </Typography>
 
       <Box position={"relative"} height={400} mt={2}>

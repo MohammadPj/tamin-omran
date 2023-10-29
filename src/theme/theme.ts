@@ -34,9 +34,9 @@ const getDesignTokens = (mode: PaletteMode) => ({
   ...(mode === "light" ? lightPalette : darkPalette),
 });
 
-const customTheme = (mode: PaletteMode, isRtl?: boolean) =>
+const customTheme = (mode: PaletteMode, lang: string) =>
   createTheme({
-    direction: isRtl ? "rtl" : "ltr",
+    direction: lang === 'fa' ? "rtl" : "ltr",
     palette: getDesignTokens(mode),
     spacing: 4,
     typography,

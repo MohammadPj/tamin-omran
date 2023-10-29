@@ -3,6 +3,7 @@ import { Box, Typography, BoxProps } from "@mui/material";
 import SvgGear from "~/components/icons/final/Gear";
 import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
 import Link from "next/link";
+import {getDictionary} from "~/i18n";
 
 interface ISvgProps extends SVGProps<any> {
   primarycolor?: string;
@@ -16,6 +17,8 @@ interface Props extends BoxProps {
 }
 
 const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) => {
+
+  const translate = getDictionary();
 
   return (
     <Box
@@ -51,7 +54,7 @@ const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) =>
         >
           <Link href={showMoreHref as any}>
             <Typography color={"primary"} fontSize={16} fontWeight={700}>
-              مشاهده همه
+              {translate("common.showMore")}
             </Typography>
           </Link>
           <SvgArrowCircleLeft />

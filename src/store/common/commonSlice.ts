@@ -5,14 +5,14 @@ import { PaletteMode } from "@mui/material";
 
 export interface CommonState {
   themeMode: PaletteMode;
-  isRtl: boolean;
   lang: "fa" | "en";
+  isRtl: boolean
 }
 
 const initialState: CommonState = {
   themeMode: "light",
-  isRtl: true,
   lang: "fa",
+  isRtl: true
 };
 
 export const CommonSlice = createSlice<
@@ -26,7 +26,7 @@ export const CommonSlice = createSlice<
       state.themeMode = state.themeMode === "light" ? "dark" : "light";
     },
     setLang: (state, action) => {
-      console.log('change lang', action.payload)
+      state.isRtl = action.payload === 'fa'
       state.lang = action.payload;
     },
   },

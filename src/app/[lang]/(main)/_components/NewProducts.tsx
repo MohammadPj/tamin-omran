@@ -2,8 +2,11 @@ import React, { FC } from "react";
 import { Box } from "@mui/material";
 import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider";
 import ProductCard from "~/components/common/product-card/ProductCard";
+import {getDictionary} from "~/i18n";
 
 const NewProducts: FC = () => {
+
+  const translate = getDictionary();
 
   const products = [
     {
@@ -35,7 +38,7 @@ const NewProducts: FC = () => {
 
   return (
     <Box mt={11}>
-      <CustomDivider title={"محصولات جدید"} showMoreHref={"/products"} />
+      <CustomDivider title={translate("home.newProducts") || ""} showMoreHref={"/products"} />
 
       <Box display={"flex"} gap={4} mt={6}>
         {products.map((product, i) => (

@@ -1,37 +1,38 @@
 import get from "lodash.get";
 import { IDictionaries, NestedKeyOf } from "~/dictionaries";
-import {store} from "~/store/store";
+import { store } from "~/store/store";
+import {en} from "~/dictionaries/en/en";
+import {fa} from "~/dictionaries/fa/fa";
 
 export const defaultLang = "fa";
 export const languages = ["en", "fa"] as const;
-export type ValidLocale = typeof languages[number];
+
 
 const dictionaries = {
-  en: () =>
-    import("./dictionaries/en-US.json").then((module) => module.default),
-  fa: () =>
-    import("./dictionaries/fa-IR.json").then((module) => module.default),
+  en,
+  fa
 };
 
-export const getDictionary = async () => {
-  const lang = store.getState().common.lang
-  const dictionary = await dictionaries[lang]();
+export const getDictionary = () => {
+  const lang = store.getState().common.lang;
+  const dictionary = dictionaries[lang];
 
-  return (path: NestedKeyOf<IDictionaries>, params?: { [key: string]: string | number }) => {
-
+  return (
+    path: NestedKeyOf<IDictionaries>,
+    params?: { [key: string]: string | number }
+  ) => {
     let translation = get(dictionary, path);
-    if(typeof translation !== "string") return
+    if (typeof translation !== "string") return;
 
-    if(params) {
-
+    if (params) {
       Object.entries(params).forEach(([key, value]) => {
         // @ts-ignore
         translation = translation.replace(`{{ ${key} }}`, String(value));
       });
 
-      return  translation
+      return translation;
     } else {
-      return  translation
+      return translation;
     }
-  }
+  };
 };

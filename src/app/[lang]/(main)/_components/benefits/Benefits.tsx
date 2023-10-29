@@ -1,8 +1,14 @@
 import React, { FC } from "react";
 import { Box } from "@mui/material";
 import BenefitCard from "~/app/[lang]/(main)/_components/benefits/BenefitCard";
+import {getDictionary} from "~/i18n";
 
 const Benefits: FC = () => {
+
+  const dictionary = getDictionary();
+
+  console.log('dictionary', dictionary("home.InformationSection1.title"))
+
   const benefits = [
     {
       title: "برخورداری از امکانات و انبار های وسیع",
