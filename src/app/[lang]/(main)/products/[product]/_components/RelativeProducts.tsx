@@ -102,7 +102,7 @@ const RelativeProducts: FC<RelativeProductsProps> = () => {
           >
             {relativeProducts?.map((product, i) => (
               <SwiperSlide key={i} style={{ display: 'flex', cursor: 'pointer' }}>
-                <Link href={`/products/${product.id}`} style={{ width: '100%' }}>
+                <Link href={`/products/${product.id}`as any} style={{ width: '100%' }}>
                   <ProductCard
                     title={product.title}
                     subtitle={product.subtitle}

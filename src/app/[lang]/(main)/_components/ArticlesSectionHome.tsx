@@ -3,8 +3,12 @@ import { Box, Divider, Stack } from "@mui/material";
 import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider";
 import { IArticle } from "~/types/article";
 import ArticleCard from "~/components/common/article-card/ArticleCard";
+import {getDictionary} from "~/i18n";
 
 const ArticlesSectionHome: FC = () => {
+
+  const dictionary = getDictionary()
+
   const articles: IArticle[] = [
     {
       id: "1",
@@ -34,7 +38,7 @@ const ArticlesSectionHome: FC = () => {
 
   return (
     <Box>
-      <CustomDivider mb={5} title={"اخبار و مقالات"} showMoreHref={'/articles'} />
+      <CustomDivider mb={5} title={dictionary("common.articlesAndNews")} showMoreHref={'/articles'} />
 
       <Stack gap={4}>
         {articles.map((article, i) => (

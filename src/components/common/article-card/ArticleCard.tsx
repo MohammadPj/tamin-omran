@@ -10,7 +10,7 @@ interface Props {
 
 const ArticleCard: FC<Props> = ({ article }) => {
   return (
-    <Link href={`/articles/${article.id}`}>
+    <Link href={`/articles/${article.id}` as any}>
       <Box display={"flex"} gap={4} sx={{cursor: 'pointer'}}>
         <Image src={article.image} alt={""} width={250} height={160} />
 

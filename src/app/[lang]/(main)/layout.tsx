@@ -1,25 +1,23 @@
-import React, {FC} from 'react';
-import {Stack} from "@mui/material";
+import React, { FC } from "react";
+import { Stack } from "@mui/material";
 import Header from "~/app/[lang]/_components/header/Header";
 import Footer from "~/app/[lang]/_components/Footer";
+import {TLanguages} from "~/i18n";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
+  params: {lang: TLanguages}
 }
 
-const MainLayout: FC<Props> = ({children}) => {
-
+const MainLayout: FC<Props> = ({ children, params }) => {
 
   return (
-    <Stack minHeight={'100vh'}>
+    <Stack minHeight={"100vh"}>
+      <Header lang={params.lang} />
 
-      <Header />
+      <Stack flexGrow={1}>{children}</Stack>
 
-      <Stack flexGrow={1}>
-      {children}
-      </Stack>
-
-      <Footer />
+      <Footer lang={params.lang} />
     </Stack>
   );
 };

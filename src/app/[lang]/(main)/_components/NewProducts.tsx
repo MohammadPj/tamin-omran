@@ -38,7 +38,7 @@ const NewProducts: FC = () => {
 
   return (
     <Box mt={11}>
-      <CustomDivider title={translate("home.newProducts") || ""} showMoreHref={"/products"} />
+      <CustomDivider title={translate("home.newProducts") as string} showMoreHref={"/products"} />
 
       <Box display={"flex"} gap={4} mt={6}>
         {products.map((product, i) => (

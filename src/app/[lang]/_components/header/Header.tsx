@@ -12,10 +12,13 @@ import {
 import CustomTab, { ITab } from "~/components/custom-mui/custom-tab/CustomTab";
 import SvgLogo from "~/components/icons/final/Logo";
 import LanguageMenu from "~/app/[lang]/_components/header/components/LanguageMenu";
+import {TLanguages} from "~/i18n";
 
-interface HeaderProps {}
+interface HeaderProps {
+  lang: TLanguages
+}
 
-const Header: FC<HeaderProps> = () => {
+const Header: FC<HeaderProps> = ({lang}) => {
   const tabs: ITab[] = [
     { label: "خانه", href: "/" },
     { label: "محصولات", href: "/products" },

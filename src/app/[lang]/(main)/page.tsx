@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React from "react";
 import { Box, Container } from "@mui/material";
 import HeroSection from "~/app/[lang]/(main)/_components/HeroSection";
 import NewProducts from "~/app/[lang]/(main)/_components/NewProducts";
@@ -7,7 +7,7 @@ import HomeSection2 from "~/app/[lang]/(main)/_components/HomeSection2";
 import ArticlesSectionHome from "~/app/[lang]/(main)/_components/ArticlesSectionHome";
 import InformationSection1 from "~/app/[lang]/(main)/_components/InformationSection1";
 
-const HomePage = async () => {
+const HomePage = () => {
   return (
     <Box>
       <HeroSection />

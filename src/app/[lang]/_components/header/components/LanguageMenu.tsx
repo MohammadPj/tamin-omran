@@ -64,7 +64,7 @@ const LanguageMenu: FC = () => {
 
   return (
     <Box>
-      <Button sx={{ px: 2 }} variant={"text"} onClick={handleClickMenu}>
+      <Button sx={{ px: 2, gap: 2 }} variant={"text"} onClick={handleClickMenu}>
         <SvgExpandMore />
         {selectedLang?.abbreviation}
 
@@ -72,7 +72,6 @@ const LanguageMenu: FC = () => {
           src={selectedLang?.icon!}
           width={32}
           height={32}
-          style={{ marginRight: 8 }}
           alt={"iran-flag"}
         />
       </Button>

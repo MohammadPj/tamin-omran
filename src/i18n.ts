@@ -1,30 +1,30 @@
-import get from "lodash.get";
-import { IDictionaries, NestedKeyOf } from "~/dictionaries";
+import {IDictionary, NestedKeyOf} from "~/dictionaries";
 import { store } from "~/store/store";
 import {en} from "~/dictionaries/en/en";
 import {fa} from "~/dictionaries/fa/fa";
+import {get} from "~/utils/methods";
 
+export type TLanguages = "fa" | "en"
 export const defaultLang = "fa";
 export const languages = ["en", "fa"] as const;
-
 
 const dictionaries = {
   en,
   fa
 };
 
-export const getDictionary = () => {
-  const lang = store.getState().common.lang;
-  const dictionary = dictionaries[lang];
+export const getDictionary = (lang?: TLanguages) => {
+  const langStore = store.getState().common.lang;
+  const dictionary = lang ? dictionaries[lang] : dictionaries[langStore];
 
   return (
-    path: NestedKeyOf<IDictionaries>,
+    path: NestedKeyOf<IDictionary>,
     params?: { [key: string]: string | number }
-  ) => {
-    let translation = get(dictionary, path);
-    if (typeof translation !== "string") return;
+  ): any => {
 
-    if (params) {
+    let translation = get(dictionary, path);
+
+    if (params && typeof translation == "string") {
       Object.entries(params).forEach(([key, value]) => {
         // @ts-ignore
         translation = translation.replace(`{{ ${key} }}`, String(value));

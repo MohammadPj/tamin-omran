@@ -35,13 +35,18 @@ const AppTheme: FC<Props> = ({
   children,
 }) => {
 
-  const { themeMode, lang } = useCommon();
+  const { themeMode, lang, isRtl } = useCommon();
 
-  const emotionCacheOptions = {
+  const cacheRtl = {
     key: 'rtl',
     prepend: true,
-    stylisPlugins: [prefixer, rtlPlugin],
+    stylisPlugins: [prefixer, rtlPlugin]
   };
+
+  const  cacheLtr = {
+    key: 'ltr',
+    prepend: true,
+  }
 
   const theme = React.useMemo(
     () => customTheme(themeMode, lang ),
@@ -50,7 +55,8 @@ const AppTheme: FC<Props> = ({
 
 
   const [registry] = React.useState(() => {
-    const cache = createCache(emotionCacheOptions);
+    const cache = createCache(isRtl ? cacheRtl : cacheLtr);
+
     cache.compat = true;
     const prevInsert = cache.insert;
     let inserted: { name: string; isGlobal: boolean }[] = [];

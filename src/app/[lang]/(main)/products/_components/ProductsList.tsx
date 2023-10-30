@@ -44,7 +44,7 @@ const ProductsList: FC = () => {
     <Grid container spacing={4}>
       {productList.map((product, i) => (
         <Grid key={i} item xs={12} sm={6} md={4} lg={3}>
-          <Link href={`/products/${product.id}`}>
+          <Link href={`/products/${product.id}` as any}>
             <ProductCard
               key={i}
               title={product.title}

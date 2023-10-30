@@ -14,9 +14,11 @@ ${variables.interfaces};
 interface Props extends SVGProps<any> {
   primarycolor?: string;
   secondarycolor?: string;
+  isRtl?: boolean
+  style?:  React.CSSProperties
 }
 
-const ${variables.componentName} = ({primarycolor, secondarycolor, ...props}: Props) => (
+const ${variables.componentName} = ({primarycolor, secondarycolor, isRtl, style, ...props}: Props) => (
   ${variables.jsx}
 );
 ${variables.exports};

@@ -13,8 +13,11 @@ import SvgLocation from "~/components/icons/final/Location";
 import SvgTelegram from "~/components/icons/final/Telegram";
 import SvgWhatsApp from "~/components/icons/final/WhatsApp";
 import SvgLogo from "~/components/icons/final/Logo";
+import {getDictionary, TLanguages} from "~/i18n";
 
-interface Props {}
+interface Props {
+  lang: TLanguages
+}
 
 interface IContact {
   id: string;
@@ -33,7 +36,10 @@ interface ILink {
   link: string;
 }
 
-const Footer: FC<Props> = () => {
+const Footer: FC<Props> = ({lang}) => {
+
+  const dictionary = getDictionary(lang)
+
   const contactInfo: IContact[] = [
     {
       id: "phone",
@@ -48,7 +54,7 @@ const Footer: FC<Props> = () => {
     {
       id: "address",
       icon: <SvgLocation width={24} height={24} primarycolor={"#F7941D"} />,
-      text: "تهران، بلوار نلسون ماندلا (جردن)، خیابان شهید سلطانی (سایه)، شماره 8",
+      text: dictionary("common.footer.address"),
     },
   ];
 
@@ -70,17 +76,17 @@ const Footer: FC<Props> = () => {
   const links: ILink[] = [
     {
       id: "1",
-      text: "اخبار و مقالات",
+      text: dictionary("common.articlesAndNews"),
       link: "/article-and-news",
     },
     {
       id: "2",
-      text: "درباره ما",
+      text: dictionary("common.aboutUs"),
       link: "about-us",
     },
     {
       id: "3",
-      text: "تماس با ما",
+      text: dictionary("common.contactUs"),
       link: "contact-us",
     },
   ];
@@ -109,15 +115,13 @@ const Footer: FC<Props> = () => {
               <SvgLogo />
 
               <Typography fontWeight={400} fontSize={14}>
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-                استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است
+                {dictionary("common.footer.description")}
               </Typography>
             </Grid>
 
             <Grid item xs={12} sm={6} lg={4}>
               <Typography fontWeight={500} fontSize={20} mb={4}>
-                اطلاعات تماس
+                {dictionary("common.footer.contactInformation")}
               </Typography>
 
               <Stack gap={2}>
@@ -141,7 +145,7 @@ const Footer: FC<Props> = () => {
 
             <Grid item xs={12} sm={6} lg={2}>
               <Typography fontWeight={500} fontSize={20} mb={4}>
-                محصولات
+                {dictionary("common.footer.products")}
               </Typography>
 
               {categories.map((category) => (
@@ -153,7 +157,7 @@ const Footer: FC<Props> = () => {
 
             <Grid item xs={12} sm={6} lg={2}>
               <Typography fontWeight={500} fontSize={20} mb={4}>
-                لینک های مفید
+                {dictionary("common.footer.usefulLinks")}
               </Typography>
 
               {links.map((link) => (
