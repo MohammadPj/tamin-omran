@@ -6,13 +6,25 @@ import type { SVGProps } from "react";
 interface Props extends SVGProps<any> {
   primarycolor?: string;
   secondarycolor?: string;
+  isRtl?: boolean;
+  style?: React.CSSProperties;
 }
-const SvgGear = ({ primarycolor, secondarycolor, ...props }: Props) => (
+const SvgGear = ({ primarycolor, secondarycolor, isRtl, style, ...props }: Props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={40}
     height={43}
     fill="none"
+    style={
+      isRtl
+        ? {
+          ...style,
+        }
+        : {
+          transform: "scaleX(-1)",
+          ...style,
+        }
+    }
     {...props}
     viewBox={'0 0 35 35'}
   >
