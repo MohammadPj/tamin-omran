@@ -1,5 +1,7 @@
 import {ICommonDictionary} from "~/dictionaries/types/common";
 import {IHomeDictionary} from "~/dictionaries/types/home";
+import {IProductsDictionary} from "~/dictionaries/types/products";
+import {IContactUsDictionary} from "~/dictionaries/types/contactUs";
 
 export type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
@@ -9,5 +11,7 @@ export type NestedKeyOf<ObjectType extends object> = {
 
 interface IDictionary {
   common: ICommonDictionary,
-  home: IHomeDictionary
+  home: IHomeDictionary,
+  products: IProductsDictionary,
+  contactUs: IContactUsDictionary
 }

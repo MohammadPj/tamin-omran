@@ -1,10 +1,16 @@
 import React, {FC} from 'react';
-import {Box, Divider, Pagination, Stack} from "@mui/material";
+import {Divider, Pagination, Stack} from "@mui/material";
 import {IArticle} from "~/types/article";
 import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider";
 import ArticleCard from "~/components/common/article-card/ArticleCard";
+import {getDictionary, TLanguages} from "~/i18n";
 
-const ArticlesList: FC = () => {
+interface Props {
+  lang: TLanguages
+}
+
+const ArticlesList: FC<Props> = ({lang}) => {
+  const dictionary = getDictionary(lang)
 
   const lastArticles: IArticle[] = [
     {
@@ -37,7 +43,7 @@ const ArticlesList: FC = () => {
 
   return (
     <Stack flexGrow={1}>
-      <CustomDivider title={'اخبار و مقالات'} mb={6} />
+      <CustomDivider title={dictionary("common.articlesAndNews")} mb={6} />
 
       <Stack gap={5} mb={12} flexGrow={1}>
         {articles?.map((article, i) => (

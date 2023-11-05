@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: 'مقالات',
 }
 
-const ArticlesPage = () => {
+const ArticlesPage = ({params}: any) => {
 
   return (
     <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
 
-      <LastArticlesList />
+      <LastArticlesList lang={params.lang} />
 
       <Box
         mb={20}
@@ -30,7 +30,7 @@ const ArticlesPage = () => {
         </Box>
       </Box>
 
-      <ArticlesList />
+      <ArticlesList lang={params.lang} />
     </Container>
   )
 }

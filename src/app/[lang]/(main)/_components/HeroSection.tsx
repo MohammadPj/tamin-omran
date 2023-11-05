@@ -3,13 +3,13 @@ import React, { FC } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import HeroSectionImage from "../../../../../public/images/home/hero-image.webp";
 import { getDictionary } from "~/i18n";
-import {useCommon} from "~/store/common/commonSlice";
+import { useCommon } from "~/store/common/commonSlice";
 
 interface HeroSectionProps {}
 
 const HeroSection: FC<HeroSectionProps> = () => {
-  const translate = getDictionary();
-  const {isRtl} = useCommon()
+  const dictionary = getDictionary();
+  const { isRtl } = useCommon();
 
   return (
     <Stack
@@ -24,13 +24,13 @@ const HeroSection: FC<HeroSectionProps> = () => {
       justifyContent={"end"}
     >
       <Container>
-        <Typography fontWeight={700} fontSize={28} color={"white"}>
-          {translate("home.title")}
+        <Typography fontWeight={700} fontSize={{xs: 12, sm: 20, md: 28}} color={"white"}>
+          {dictionary("home.title")}
         </Typography>
 
-        <Box display={"flex"} my={6} gap={30}>
-          <Typography fontSize={16} color={"white"}>
-            {translate("home.subtitle")}
+        <Box display={{ md: 'flex' }} my={6} gap={30}>
+          <Typography fontSize={{xs: 10, sm: 13, md: 16}} color={"white"} mb={{xs: 10, md: 0}}>
+            {dictionary("home.subtitle")}
           </Typography>
 
           <Button
@@ -38,13 +38,13 @@ const HeroSection: FC<HeroSectionProps> = () => {
             color={"secondary"}
             sx={{
               minWidth: 280,
-              fontSize: 20,
+              fontSize: {xs: 10, sm: 13, md: 20},
               fontWeight: 700,
               display: "flex",
               gap: 2,
             }}
           >
-            {translate("home.showProducts")}
+            {dictionary("home.showProducts")}
             <SvgArrowLeft isRtl={isRtl} />
           </Button>
         </Box>

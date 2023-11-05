@@ -3,6 +3,7 @@ import { defaultLang, languages } from "~/i18n";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
   const currentLang = pathname!.toLowerCase().split("/")[1];
 
   const pathnameIsValid = languages.some((lang) => {
@@ -11,7 +12,7 @@ export function middleware(request: NextRequest) {
 
   if (pathnameIsValid) {
   } else {
-    // rewrite it so next.js will render `/` as if it was `/fa/ir`
+    // rewrite it so next.js will render `/` as if it was `/fa`
     if (!pathname.startsWith("/images")) {
       return NextResponse.rewrite(
         new URL(`/${defaultLang}${pathname}`, request.url)

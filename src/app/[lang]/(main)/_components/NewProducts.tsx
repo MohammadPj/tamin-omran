@@ -6,7 +6,7 @@ import {getDictionary} from "~/i18n";
 
 const NewProducts: FC = () => {
 
-  const translate = getDictionary();
+  const dictionary = getDictionary();
 
   const products = [
     {
@@ -38,7 +38,7 @@ const NewProducts: FC = () => {
 
   return (
     <Box mt={11}>
-      <CustomDivider title={translate("home.newProducts") as string} showMoreHref={"/products"} />
+      <CustomDivider title={dictionary("home.newProducts") as string} showMoreHref={"/products"} />
 
       <Box display={"flex"} gap={4} mt={6}>
         {products.map((product, i) => (

@@ -31,6 +31,7 @@ const SvgPhone = ({
             ...style,
           }
     }
+    viewBox={'0 0 32 32'}
     {...props}
   >
     <path

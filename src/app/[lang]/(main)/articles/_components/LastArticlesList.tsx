@@ -1,11 +1,17 @@
-'use client'
 import React, { FC } from 'react'
 import ArticleCard from '~/components/common/article-card/ArticleCard'
 import { Box, Divider, Stack } from '@mui/material'
 import { IArticle } from '~/types/article'
 import CustomDivider from '~/components/custom-mui/custom-divider/CustomDivider'
+import {getDictionary, TLanguages} from "~/i18n";
 
-const LastArticlesList: FC = () => {
+interface Props {
+  lang: TLanguages
+}
+
+const LastArticlesList: FC<Props> = ({lang}) => {
+  const dictionary = getDictionary(lang)
+
   const lastArticles: IArticle[] = [
     {
       title: 'آقایان با هم دست دادند',
@@ -35,7 +41,7 @@ const LastArticlesList: FC = () => {
 
   return (
     <Box>
-      <CustomDivider title={'جدیدترین مقالات'} mb={6} />
+      <CustomDivider title={dictionary("common.newestArticles")} mb={6} />
 
       <Stack gap={5} mb={12}>
         {lastArticles?.map((article, i) => (

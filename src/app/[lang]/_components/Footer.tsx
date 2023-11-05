@@ -61,15 +61,15 @@ const Footer: FC<Props> = ({lang}) => {
   const categories: ICategory[] = [
     {
       id: "1",
-      text: "دسته بندی",
+      text: dictionary("common.category"),
     },
     {
       id: "2",
-      text: "دسته بندی",
+      text: dictionary("common.category"),
     },
     {
       id: "3",
-      text: "دسته بندی",
+      text: dictionary("common.category"),
     },
   ];
 
@@ -145,7 +145,7 @@ const Footer: FC<Props> = ({lang}) => {
 
             <Grid item xs={12} sm={6} lg={2}>
               <Typography fontWeight={500} fontSize={20} mb={4}>
-                {dictionary("common.footer.products")}
+                {dictionary("common.products")}
               </Typography>
 
               {categories.map((category) => (
@@ -172,8 +172,7 @@ const Footer: FC<Props> = ({lang}) => {
 
           <Box display={"flex"} justifyContent={"space-between"}>
             <Typography fontWeight={700} fontSize={20}>
-              برای دریافت آخرین اخبار و مقالات مفید ما را درشبکه های اجتماعی
-              دنبال کنید
+              {dictionary("common.footer.title")}
             </Typography>
 
             <Box display={"flex"} gap={5} sx={{cursor: 'pointer'}}>

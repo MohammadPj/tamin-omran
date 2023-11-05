@@ -5,6 +5,8 @@ import Tabs, { TabsProps } from '@mui/material/Tabs'
 import Tab, { TabProps } from '@mui/material/Tab'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import CustomLink from "~/components/common/custom-link/CustomLink";
+import {getUrlWithoutLang} from "~/utils/methods";
 
 export interface ITab {
   label: string
@@ -22,7 +24,7 @@ const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps, tabProps }) => {
   const pathname = usePathname()
 
   const [value, setValue] = useState(
-    tabs.findIndex((tab) => tab?.href === pathname)
+    tabs.findIndex((tab) => tab?.href === getUrlWithoutLang(pathname))
   )
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -44,7 +46,7 @@ const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps, tabProps }) => {
       {tabs.map((tab, i) => (
 
           <Tab
-            component={Link}
+            component={CustomLink}
             href={tab.href || ''}
             label={tab.label}
             sx={{ fontWeight: value === i ? 700 : 400 }}

@@ -7,12 +7,16 @@ import SvgLocation from '~/components/icons/final/Location'
 import SvgTelegram from '~/components/icons/final/Telegram'
 import SvgWhatsApp from '~/components/icons/final/WhatsApp'
 import {Metadata} from "next";
+import {getDictionary} from "~/i18n";
 
 export const metadata: Metadata = {
   title: 'ارتباط با ما',
 }
 
-const ContactUsPage = () => {
+const ContactUsPage = ({params}: any) => {
+
+  const dictionary = getDictionary(params.lang)
+
   return (
     <Container sx={{ my: 15 }}>
       <Box display={'flex'} gap={4} mb={12}>
@@ -33,7 +37,7 @@ const ContactUsPage = () => {
         >
           <Box>
             <Typography fontWeight={500} fontSize={18} mb={5}>
-              تماس با دفتر فروش
+              {dictionary("contactUs.contactTheSaleOffice")}
             </Typography>
 
             <Box display={'flex'} gap={2} alignItems={'center'}>
@@ -46,7 +50,7 @@ const ContactUsPage = () => {
 
           <Box mb={7}>
             <Typography fontWeight={500} fontSize={18} mb={5}>
-              تماس با انبار
+              {dictionary("contactUs.contactTheWarehouse")}
             </Typography>
 
             <Box display={'flex'} gap={2} alignItems={'center'}>
@@ -59,7 +63,7 @@ const ContactUsPage = () => {
 
           <Box>
             <Typography fontWeight={500} fontSize={18} mb={5}>
-              آدرس و اطلاعات
+              {dictionary("contactUs.addressAndInformation")}
             </Typography>
 
             <Box display={'flex'} gap={2} alignItems={'center'}>
@@ -72,8 +76,7 @@ const ContactUsPage = () => {
             <Box display={'flex'} gap={2} alignItems={'center'}>
               <SvgLocation primarycolor={'#F7941D'} />
               <Typography fontWeight={400} fontSize={16} color={'primary.1'}>
-                تهران، بلوار نلسون ماندلا (جردن)، خیابان شهید سلطانی (سایه)،
-                شماره 8
+                {dictionary("common.footer.address")}
               </Typography>
             </Box>
           </Box>
@@ -91,7 +94,7 @@ const ContactUsPage = () => {
         borderColor={'secondary.main'}
       >
         <Typography fontWeight={700} fontSize={20}>
-          لینک های مرتبط با تامین عمران قطعه در فضای مجازی
+          {dictionary("contactUs.title")}
         </Typography>
 
         <Box display={'flex'} gap={4} mr={5}>

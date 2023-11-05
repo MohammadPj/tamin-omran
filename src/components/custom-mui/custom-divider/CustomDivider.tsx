@@ -1,11 +1,11 @@
+'use client'
 import React, { FC, SVGProps } from "react";
 import { Box, Typography, BoxProps } from "@mui/material";
 import SvgGear from "~/components/icons/final/Gear";
 import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
-import Link from "next/link";
 import {getDictionary} from "~/i18n";
-import {useCommon} from "~/store/common/commonSlice";
 import {store} from "~/store/store";
+import CustomLink from "~/components/common/custom-link/CustomLink";
 
 interface ISvgProps extends SVGProps<any> {
   primarycolor?: string;
@@ -20,7 +20,7 @@ interface Props extends BoxProps {
 
 const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) => {
 
-  const translate = getDictionary();
+  const dictionary = getDictionary();
   const {isRtl} = store.getState().common
 
   return (
@@ -42,7 +42,7 @@ const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) =>
       >
         <SvgGear
           isRtl={isRtl}
-          style={{ marginBottom: "-4px", marginRight: isRtl ? "-13px" : '0' }}
+          style={{ marginBottom: "-4px", marginRight: isRtl ? "-13px" : '0', marginLeft: !isRtl ? "-13px" : '0' }}
           {...svgProps}
         />
         <Typography fontWeight={500} fontSize={18}>
@@ -57,11 +57,11 @@ const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) =>
           alignItems={"center"}
           sx={{ cursor: "pointer" }}
         >
-          <Link href={showMoreHref as any}>
+          <CustomLink href={showMoreHref}>
             <Typography color={"primary"} fontSize={16} fontWeight={700}>
-              {translate("common.showMore")}
+              {dictionary("common.showMore")}
             </Typography>
-          </Link>
+          </CustomLink>
           <SvgArrowCircleLeft isRtl={isRtl} />
         </Box>
       )}

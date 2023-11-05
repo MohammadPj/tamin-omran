@@ -13,12 +13,15 @@ import {
 import SvgArrowDown from '~/components/icons/final/ArrowDown'
 import SvgDownload from '~/components/icons/final/Download'
 import {Metadata} from "next";
+import {getDictionary} from "~/i18n";
 
 export const metadata: Metadata = {
   title: 'بروشور ها',
 }
 
-const BrochuresPage = () => {
+const BrochuresPage = ({params}: any) => {
+  const dictionary = getDictionary(params.lang)
+
   const categories = [
     {
       title: 'Category 1',
@@ -78,7 +81,7 @@ const BrochuresPage = () => {
                       <Typography fontSize={20} color={'text.secondary'}>{brochure.title}</Typography>
 
                       <Button sx={{ display: 'flex', gap: 2 }} size={'small'}>
-                        دانلود
+                        {dictionary('common.download')}
                         <SvgDownload
                           width={18}
                           height={18}
