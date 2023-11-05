@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from 'react'
 import ArticleCard from '~/components/common/article-card/ArticleCard'
 import { Box, Divider, Stack } from '@mui/material'

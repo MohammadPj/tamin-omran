@@ -5,6 +5,7 @@ import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
 import Link from "next/link";
 import {getDictionary} from "~/i18n";
 import {useCommon} from "~/store/common/commonSlice";
+import {store} from "~/store/store";
 
 interface ISvgProps extends SVGProps<any> {
   primarycolor?: string;
@@ -20,7 +21,7 @@ interface Props extends BoxProps {
 const CustomDivider: FC<Props> = ({ title, showMoreHref, svgProps, ...rest }) => {
 
   const translate = getDictionary();
-  const {isRtl} = useCommon()
+  const {isRtl} = store.getState().common
 
   return (
     <Box
