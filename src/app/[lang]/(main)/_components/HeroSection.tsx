@@ -14,9 +14,10 @@ const HeroSection: FC<HeroSectionProps> = () => {
   return (
     <Stack
       width={"100%"}
+      height={{ xs: 348, sm: "auto" }}
       sx={{
         background: `linear-gradient(0deg, #00002B -5.37%, rgba(0, 0, 43, 0.00) 100%), url(${HeroSectionImage.src})`,
-        backgroundSize: "contain",
+        backgroundSize: "auto",
         backgroundRepeat: "round",
         aspectRatio: 2,
         maxHeight: 700,
@@ -24,12 +25,19 @@ const HeroSection: FC<HeroSectionProps> = () => {
       justifyContent={"end"}
     >
       <Container>
-        <Typography fontWeight={700} fontSize={{xs: 12, sm: 20, md: 28}} color={"white"}>
+        <Typography
+          fontWeight={700}
+          fontSize={{ xs: 12, sm: 20, md: 28 }}
+          color={"white"}
+        >
           {dictionary("home.title")}
         </Typography>
 
-        <Box display={{ md: 'flex' }} my={6} gap={30}>
-          <Typography fontSize={{xs: 10, sm: 13, md: 16}} color={"white"} mb={{xs: 10, md: 0}}>
+        <Box display={'flex'} flexDirection={{xs: 'column', sm: 'row'}} my={6} gap={{xs: 4, sm: 30}} alignItems={"end"}>
+          <Typography
+            fontSize={{ xs: 10, sm: 13, md: 16 }}
+            color={"white"}
+          >
             {dictionary("home.subtitle")}
           </Typography>
 
@@ -37,15 +45,17 @@ const HeroSection: FC<HeroSectionProps> = () => {
             size={"large"}
             color={"secondary"}
             sx={{
-              minWidth: 280,
-              fontSize: {xs: 10, sm: 13, md: 20},
+              minWidth: { xs: "auto", sm: 280 },
+              fontSize: { xs: 10, sm: 13, md: 20 },
               fontWeight: 700,
               display: "flex",
               gap: 2,
             }}
           >
             {dictionary("home.showProducts")}
-            <SvgArrowLeft isRtl={isRtl} />
+            <Box width={{ xs: 20, sm: 32 }} height={{ xs: 20, sm: 32 }}>
+              <SvgArrowLeft isRtl={isRtl} width={"auto"} height={"auto"} />
+            </Box>
           </Button>
         </Box>
       </Container>

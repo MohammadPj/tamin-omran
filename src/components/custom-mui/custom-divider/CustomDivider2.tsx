@@ -12,7 +12,7 @@ const CustomDivider2: FC<Props> = ({ title, typoProps, boxProps }) => {
   return (
     <Box display={'flex'} {...boxProps}>
       <Typography
-        fontSize={24}
+        fontSize={{xs: 16, sm: 24}}
         fontWeight={700}
         color={"primary"}
         borderBottom={"3px solid"}

@@ -19,7 +19,7 @@ export const commonDictionary: ICommonDictionary = {
   aboutUs: 'درباره ما',
   articlesAndNews: 'اخبار و مقالات',
   contactUs: 'ارتباط با ما',
-  showMore: 'نمایش بیشتر',
+  showMore: 'مشاهده همه',
   brand: 'برند',
   category: 'دسته بندی',
   download: 'دانلود',

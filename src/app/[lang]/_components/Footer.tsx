@@ -109,8 +109,8 @@ const Footer: FC<Props> = ({lang}) => {
       <Divider color={"#262262"} sx={{ borderWidth: 1.5 }} />
 
       <Container>
-        <Stack gap={12} py={10}>
-          <Grid container columnSpacing={10}>
+        <Stack gap={12} py={10} overflow={'hidden'}>
+          <Grid container columnSpacing={10} rowSpacing={12}>
             <Grid item xs={12} sm={6} lg={4}>
               <SvgLogo />
 
@@ -143,7 +143,7 @@ const Footer: FC<Props> = ({lang}) => {
               </Stack>
             </Grid>
 
-            <Grid item xs={12} sm={6} lg={2}>
+            <Grid item xs={6} sm={6} lg={2}>
               <Typography fontWeight={500} fontSize={20} mb={4}>
                 {dictionary("common.products")}
               </Typography>
@@ -155,7 +155,7 @@ const Footer: FC<Props> = ({lang}) => {
               ))}
             </Grid>
 
-            <Grid item xs={12} sm={6} lg={2}>
+            <Grid item xs={6} sm={6} lg={2}>
               <Typography fontWeight={500} fontSize={20} mb={4}>
                 {dictionary("common.footer.usefulLinks")}
               </Typography>
@@ -170,12 +170,12 @@ const Footer: FC<Props> = ({lang}) => {
 
           <Divider />
 
-          <Box display={"flex"} justifyContent={"space-between"}>
-            <Typography fontWeight={700} fontSize={20}>
+          <Box display={"flex"} flexDirection={{xs: 'column', sm: 'row'}} gap={4} justifyContent={"space-between"}>
+            <Typography fontWeight={700} fontSize={{xs: 14, sm: 20}}>
               {dictionary("common.footer.title")}
             </Typography>
 
-            <Box display={"flex"} gap={5} sx={{cursor: 'pointer'}}>
+            <Box display={"flex"} gap={5} sx={{cursor: 'pointer'}} alignSelf={'end'}>
               {socials.map((s) => (
                 <Box
                   key={s.id}
@@ -203,7 +203,7 @@ const Footer: FC<Props> = ({lang}) => {
               component={"span"}
               color={"secondary"}
               fontWeight={500}
-              fontSize={18}
+              fontSize={{xs: 14, sm: 18}}
             >
               TaminOmranQateh
             </Typography>

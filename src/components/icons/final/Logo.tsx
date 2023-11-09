@@ -14,6 +14,7 @@ const SvgLogo = ({ color1, color2, color3, ...props }: Props) => (
     width={110}
     height={47}
     fill="none"
+    viewBox={"0 0 110 47"}
     {...props}
   >
     <g clipPath="url(#logo_svg__a)">

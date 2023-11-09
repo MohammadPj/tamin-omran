@@ -19,5 +19,5 @@ type TMuiContainer =
   | undefined;
 
 export const MuiContainer: TMuiContainer = {
-  styleOverrides: { maxWidthLg: { maxWidth: "1300px !important" } },
+  styleOverrides: { maxWidthLg: { maxWidth: "1300px !important" }, root: {padding: '0 16px'} },
 };

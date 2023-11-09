@@ -26,6 +26,11 @@ export const MuiButton: TMuiButton = {
   },
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
+      [theme.breakpoints.down('sm')]: {
+        padding: '8px 16px',
+        height: 32,
+      },
+      height: 48,
       borderRadius: 2,
       minWidth: 'unset',
       fontSize:

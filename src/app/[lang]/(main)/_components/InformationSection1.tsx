@@ -5,7 +5,7 @@ import Image from "next/image";
 import TruckImage from "@/public/images/home/image-1.png";
 import Benefits from "~/app/[lang]/(main)/_components/benefits/Benefits";
 import HomeGallery from "~/app/[lang]/(main)/_components/HomeGallery";
-import {getDictionary} from "~/i18n";
+import { getDictionary } from "~/i18n";
 
 interface Props {}
 
@@ -19,15 +19,20 @@ const InformationSection1: FC<Props> = () => {
         boxProps={{ mb: 4 }}
       />
 
-      <Typography color={"text.secondary"} fontSize={16} fontWeight={400}>
+      <Typography
+        color={"text.secondary"}
+        fontSize={{ xs: 14, sm: 16 }}
+        fontWeight={400}
+        textAlign={"justify"}
+      >
         {dictionary("home.InformationSection1.subtitle")}
       </Typography>
 
-      <Box position={"relative"} height={400} mt={2}>
+      <Box position={"relative"} height={{xs: 230, sm: 400}} mt={2}>
         <Image src={TruckImage.src} alt={"truck"} fill={true} />
       </Box>
 
-      <Box mt={6} mb={24}>
+      <Box mt={6} mb={{xs: 20, sm: 24}}>
         <Benefits />
       </Box>
 

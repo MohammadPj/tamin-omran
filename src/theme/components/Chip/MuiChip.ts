@@ -1,6 +1,6 @@
 import { OverridesStyleRules } from "@mui/material/styles/overrides";
 import { Theme } from "@mui/material/styles";
-import {ChipProps, ChipClasses} from "@mui/material";
+import { ChipProps, ChipClasses } from "@mui/material";
 
 type TMuiChip =
   | {
@@ -20,8 +20,13 @@ type TMuiChip =
 
 export const MuiChip: TMuiChip = {
   styleOverrides: {
-    root: {
-      borderRadius: 10
-    }
+    root: ({ theme, ownerState }) => ({
+      [theme.breakpoints.down("sm")]: {
+        fontSize: 12,
+      },
+      height: "auto",
+      fontSize: 14,
+      borderRadius: 2,
+    }),
   },
 };

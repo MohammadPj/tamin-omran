@@ -13,19 +13,19 @@ const HomePage = () => {
       <HeroSection />
 
       <Container>
-        <Box mb={28}>
+        <Box mb={{xs: 10, sm: 28}}>
           <NewProducts />
         </Box>
 
-        <Box mb={30}>
+        <Box mb={{xs: 20, sm: 30}}>
           <InformationSection1 />
         </Box>
 
-        <Box mb={40}>
+        <Box mb={{xs: 16, sm: 40}}>
           <HomeSection2 />
         </Box>
 
-        <Box mb={40}>
+        <Box mb={{xs: 16, sm: 40}}>
           <ArticlesSectionHome />
         </Box>
       </Container>

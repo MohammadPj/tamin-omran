@@ -5,7 +5,7 @@ import SvgExpandMore from "~/components/icons/final/ExpandMore";
 import Image from "next/image";
 import { store } from "~/store/store";
 import { usePathname, useRouter } from "next/navigation";
-import {defaultLang} from "~/i18n";
+import { defaultLang } from "~/i18n";
 
 interface ILanguages {
   title: string;
@@ -37,8 +37,8 @@ const LanguageMenu: FC = () => {
       splittedPathname.splice(1, 1, language.value).join("/");
     }
 
-    console.log('splittedPathname', splittedPathname.join("/"))
-    router.push(splittedPathname.join("/") as any)
+    console.log("splittedPathname", splittedPathname.join("/"));
+    router.push(splittedPathname.join("/") as any);
   };
 
   const handleClose = () => {
@@ -68,12 +68,14 @@ const LanguageMenu: FC = () => {
         <SvgExpandMore />
         {selectedLang?.abbreviation}
 
-        <Image
-          src={selectedLang?.icon!}
-          width={32}
-          height={32}
-          alt={"iran-flag"}
-        />
+        <Box display={{ xs: "none", sm: "flex" }}>
+          <Image
+            src={selectedLang?.icon!}
+            width={32}
+            height={32}
+            alt={"iran-flag"}
+          />
+        </Box>
       </Button>
 
       <Menu
@@ -104,7 +106,10 @@ const LanguageMenu: FC = () => {
             >
               <Typography>{lang.title}</Typography>
 
-              <Image src={lang.icon} alt={"flag"} width={32} height={32} />
+              <Box display={{ xs: "none", sm: "flex" }}>
+                <Image src={lang.icon} alt={"flag"} width={32} height={32} />
+              </Box>
+
             </Box>
           </MenuItem>
         ))}

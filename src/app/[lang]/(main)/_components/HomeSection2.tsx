@@ -2,7 +2,8 @@ import React, { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider";
 import Image from "next/image";
-import {getDictionary} from "~/i18n";
+import { getDictionary } from "~/i18n";
+import CustomDivider2 from "~/components/custom-mui/custom-divider/CustomDivider2";
 
 const HomeSection2: FC = () => {
   const customers = [
@@ -17,20 +18,26 @@ const HomeSection2: FC = () => {
     "/images/customers/customer (4).png",
   ];
 
-  const dictionary = getDictionary()
+  const dictionary = getDictionary();
 
   return (
     <Box>
-      <CustomDivider
+      <CustomDivider2
         title={dictionary("home.homeSection2.title")}
-        mb={6}
+        boxProps={{ mb: 6 }}
       />
 
-      <Typography color={"text.secondary"} mb={4}>
+      <Typography color={"text.secondary"} mb={4} textAlign={"justify"}>
         {dictionary("home.homeSection2.description")}
       </Typography>
 
-      <Box display={"flex"} flexWrap={'wrap'} justifyContent={"center"} gap={8}>
+      <Box
+        display={"flex"}
+        flexDirection={{ xs: "column", sm: "row" }}
+        flexWrap={"wrap"}
+        justifyContent={"center"}
+        gap={8}
+      >
         {customers.map((customer, i) => (
           <Box
             key={i}
@@ -39,15 +46,13 @@ const HomeSection2: FC = () => {
             display={"flex"}
             alignItems={"center"}
             justifyContent={"center"}
-            bgcolor={'white'}
+            bgcolor={"white"}
+            alignSelf={i % 2 === 0 ? "end" : "start"}
+            borderRadius={1}
+            border={'1px solid'}
+            borderColor={'grey.3'}
           >
-            <Image
-              src={customer}
-
-              alt={"customer"}
-              width={100}
-              height={40}
-            />
+            <Image src={customer} alt={"customer"} width={100} height={40} />
           </Box>
         ))}
       </Box>

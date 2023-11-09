@@ -1,11 +1,11 @@
 {
   "typescript": true,
-  "removeViewBox": false,
   "replaceAttrValues": {
     "#black": "{primarycolor || '#262262'}",
     "#000": "{primarycolor || '#262262'}"
   },
   "svgProps": {
-    "style": "{isRtl ? {...style} : {transform: 'scaleX(-1)', ...style}}"
+    "style": "{isRtl ? {...style} : {transform: 'scaleX(-1)', ...style}}",
+    "viewBox":  "0 0 32 32"
   }
 }
