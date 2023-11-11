@@ -10,6 +10,14 @@ export function middleware(request: NextRequest) {
     return pathname.startsWith(`/${lang}`);
   });
 
+
+  // redirect to /dashboard/products in /dashboard
+  if (pathname === "/dashboard") {
+    return NextResponse.redirect(
+      new URL("/dashboard/product", request.url)
+    );
+  }
+
   if (pathnameIsValid) {
   } else {
     // rewrite it so next.js will render `/` as if it was `/fa`
@@ -20,10 +28,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-    console.log(
-      pathname.replace(`/${defaultLang}`, pathname.startsWith("/") ? "" : "")
-    );
-
   // redirect to / if route was /fa/ir
   if (currentLang === defaultLang) {
   console.log('currentLang', currentLang)
@@ -33,6 +37,7 @@ export function middleware(request: NextRequest) {
     );
   }
 }
+
 export const config = {
   // do not localize next.js paths
   matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)"],
