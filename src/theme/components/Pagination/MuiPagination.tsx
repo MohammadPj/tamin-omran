@@ -1,6 +1,7 @@
 import { OverridesStyleRules } from "@mui/material/styles/overrides";
 import { Theme } from "@mui/material/styles";
 import { PaginationProps, PaginationClasses } from "@mui/material";
+import {getDeviceType} from "~/helpers/methods";
 
 type TMuiPagination =
   | {
@@ -18,8 +19,10 @@ type TMuiPagination =
     }
   | undefined;
 
+const device = getDeviceType()
 export const MuiPagination: TMuiPagination = {
   defaultProps: {
+    size: device === "Mobile" ? "small" : "medium",
     color: "primary",
     dir: "ltr",
   },

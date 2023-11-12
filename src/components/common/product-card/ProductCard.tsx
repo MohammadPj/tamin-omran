@@ -15,7 +15,7 @@ const ProductCard: FC<Props> = ({ subtitle, title, image }) => {
       px={4}
       py={3.5}
       gap={3}
-      width={"100%"}
+      width={"auto"}
       flexDirection={{ xs: "row", sm: "column" }}
       sx={{ cursor: "pointer" }}
       bgcolor={"background.1"}

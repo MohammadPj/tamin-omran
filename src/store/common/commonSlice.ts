@@ -7,12 +7,14 @@ export interface CommonState {
   themeMode: PaletteMode;
   lang: "fa" | "en";
   isRtl: boolean
+  deviceType: "Mobile" | "Desktop"
 }
 
 const initialState: CommonState = {
   themeMode: "light",
   lang: "fa",
-  isRtl: true
+  isRtl: true,
+  deviceType: 'Desktop'
 };
 
 export const CommonSlice = createSlice<
@@ -29,10 +31,13 @@ export const CommonSlice = createSlice<
       state.isRtl = action.payload === 'fa'
       state.lang = action.payload;
     },
+    setDeviceType: (state, action) => {
+      state.deviceType = action.payload
+    },
   },
 });
 
 export const useCommon = () => useSelector((state: RootState) => state.common);
 
-export const { changeThemeMode, setLang } = CommonSlice.actions;
+export const { changeThemeMode, setLang, setDeviceType } = CommonSlice.actions;
 export default CommonSlice.reducer;

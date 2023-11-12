@@ -16,6 +16,9 @@ import { getDictionary, TLanguages } from "~/i18n";
 import SvgSearch from "~/components/icons/final/Search";
 import SvgMenu from "~/components/icons/final/Menu";
 import SideBar from "~/app/[lang]/_components/sidebar/SideBar";
+import { useCommon } from "~/store/common/commonSlice";
+import { getDeviceType } from "~/helpers/methods";
+import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   lang: TLanguages;
@@ -32,6 +35,9 @@ const Header: FC<HeaderProps> = ({ lang }) => {
     { label: dictionary("common.contactUs"), href: "/contact-us" },
     { label: dictionary("common.aboutUs"), href: "/contact-us" },
   ];
+
+  const deviceType = getDeviceType();
+  const pathname = usePathname();
 
   return (
     <Box bgcolor={"white"}>
@@ -66,17 +72,23 @@ const Header: FC<HeaderProps> = ({ lang }) => {
           >
             <SideBar />
 
-            <TextField
-              variant={"filled"}
-              size={"medium"}
-              placeholder={dictionary("common.header.search")}
-              sx={{ width: {xs: '100%', sm: 300} }}
-              InputProps={{
-                startAdornment: (
-                  <SvgSearch width={24} height={24} primarycolor={"#6E6E6E"} />
-                ),
-              }}
-            />
+            {pathname === "/" && (
+              <TextField
+                variant={"filled"}
+                size={deviceType === "Mobile" ? "small" : "medium"}
+                placeholder={dictionary("common.header.search")}
+                sx={{ width: { xs: "100%", sm: 300 } }}
+                InputProps={{
+                  startAdornment: (
+                    <SvgSearch
+                      width={24}
+                      height={24}
+                      primarycolor={"#6E6E6E"}
+                    />
+                  ),
+                }}
+              />
+            )}
 
             <LanguageMenu />
           </Box>

@@ -25,7 +25,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
         </Typography>
       </Box>
 
-      <Stack mb={6}>
+      <Stack mb={6} gap={4}>
         {product.specifications?.map((spec, i) => (
           <Box display={'flex'} key={i} gap={2}>
             <Typography fontWeight={500} fontSize={16}>
@@ -56,7 +56,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
       <Box flexGrow={1} />
       <Divider />
 
-      <Box display={'flex'} mt={4} justifyContent={'space-between'}>
+      <Box display={'flex'} mt={4} justifyContent={'space-between'} flexDirection={{xs: 'column', sm: 'row'}} gap={4}>
         <Box>
           <Typography fontWeight={500} fontSize={14}>تلفن تماس:</Typography>
           <Typography fontWeight={400} fontSize={14} color={'text.secondary'}>۸۸۲۴۵۶۷۸-۸۸۳۴۶۷۸</Typography>

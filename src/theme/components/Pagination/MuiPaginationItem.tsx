@@ -37,6 +37,7 @@ export const MuiPaginationItem: TMuiPaginationItem = {
     }),
     ellipsis: ({theme}) => ({
       height: '100%',
+      maxHeight: 32,
       borderRadius: 4,
       border: '1px solid',
       display: 'flex',
