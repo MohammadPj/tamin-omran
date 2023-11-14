@@ -25,10 +25,9 @@ const CustomTableBody: FC<Props> = ({ table, onClickRow, pageSize }) => {
         ?.map((row) => {
           return (
             <CustomTableRow
-              onClickRow={onClickRow}
               key={row.id}
+              onClickRow={onClickRow}
               row={row}
-              table={table}
             />
           );
         })}

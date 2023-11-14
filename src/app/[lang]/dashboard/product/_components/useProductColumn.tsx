@@ -1,84 +1,38 @@
 import React from "react";
-import { Typography } from "@mui/material";
 import { ColumnDef } from "@tanstack/react-table";
+import {IProduct} from "~/types/product";
 
 const useProductColumn = () => {
-  const columns: ColumnDef<any, any>[] = [
+  const columns: ColumnDef<IProduct, any>[] = [
     {
-      header: () => "نام کامل",
+      header: "شماره",
+      id: "number",
+      cell: (cell) => cell.row.index + 1,
+    },
+    {
+      header: "نام محصول",
       accessorKey: "name",
-      cell: ({ row, getValue }) => (
-        <Typography variant="body1">
-          {row.original.type === "Juridical"
-            ? row.original.companyName
-            : row.original.name}
-        </Typography>
-      ),
+      cell: (cell) => cell.getValue(),
     },
     {
-      header: () => "نوع",
-      accessorKey: "type",
-      cell: (cell) => (
-        <Typography variant="body1">
-          {cell.getValue() === "Natural"
-            ? "حقیقی"
-            : cell.getValue() === "Juridical"
-            ? "حقوقی"
-            : "---"}
-        </Typography>
-      ),
+      header: "شماره فنی",
+      accessorKey: "uniqueCode",
+      cell: (cell) => cell.getValue(),
+    },
+    // {
+    //   header: "تاریخ بارگذاری",
+    //   accessorKey: "createDate",
+    //   cell: (cell) => cell.getValue(),
+    // },
+    {
+      header: "ادمین",
+      accessorKey: "admin",
+      cell: (cell) => cell.getValue(),
     },
     {
-      header: () => "حساب اصلی",
-      accessorKey: "parentAccount" || null,
-      cell: (cell) => (
-        // <Typography variant="body1">{cell.getValue() || "---"}</Typography>
-        <Typography variant="body1"></Typography>
-      ),
-    },
-    {
-      header: () => "وبسایت",
-      accessorKey: "website",
-      cell: (cell) => (
-        <Typography variant="body1">{cell.getValue() || "---"}</Typography>
-      ),
-    },
-    {
-      header: () => "شماره تماس",
-      accessorKey: "phoneNumber",
-      cell: (cell) => (
-        <Typography variant="body1">{cell.getValue() || "---"}</Typography>
-      ),
-    },
-    {
-      header: () => "آدرس",
-      accessorKey: "address",
-      cell: (cell) => (
-        <Typography
-          title={cell.getValue()}
-          sx={{
-            width: 200,
-            display: "-webkit-box",
-            WebkitLineClamp: "2",
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-          variant="body1"
-          // textAlign={ cell.getValue() ? "center" : 'center'}
-          textAlign="center"
-        >
-          {cell.getValue() || "---"}
-        </Typography>
-      ),
-    },
-    {
-      header: () => "تاریخ ایجاد",
-      accessorKey: "createdAt",
-      cell: (cell) => (
-        <Typography variant={"body1"}>
-          {new Date(cell.getValue()).toLocaleDateString("fa-IR")}
-        </Typography>
-      ),
+      header: "وضعیت محصول",
+      accessorKey: "state",
+      cell: (cell) => cell.getValue(),
     },
   ];
 

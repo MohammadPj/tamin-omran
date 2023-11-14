@@ -7,7 +7,10 @@ interface IProductSpecifications {
 export interface IProduct {
   name: string,
   uniqueCode: string,
-  description: string;
+  description?: string;
   specifications?: IProductSpecifications[]
   images?: string[]
+  createDate?: Date
+  admin?: string
+  state?: string
 }

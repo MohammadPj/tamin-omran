@@ -1,16 +1,13 @@
-import React, { cloneElement, FC, Fragment, ReactElement } from "react";
+import React, { FC } from "react";
 import { flexRender, Row } from "@tanstack/react-table";
 import { TableCell, TableRow } from "@mui/material";
 import Box from "@mui/material/Box";
-import { Table as TableType } from "@tanstack/table-core/build/lib/types";
 
 interface Props {
   row: Row<any>;
-  table: TableType<any>;
   onClickRow?: (row: Row<any>) => void;
-  noBorder?: boolean;
 }
-const CustomTableRow: FC<Props> = ({ row, table, onClickRow, noBorder }) => {
+const CustomTableRow: FC<Props> = ({ row, onClickRow }) => {
   return (
     <TableRow
       key={row.id}
@@ -22,15 +19,8 @@ const CustomTableRow: FC<Props> = ({ row, table, onClickRow, noBorder }) => {
           ? (theme) => theme.palette.background["2"]
           : "unset",
         cursor: onClickRow ? "pointer" : "",
-        borderBottom: noBorder ? "" : "1px solid #EBEBEB",
-        "& td:first-of-type>div": { borderRadius: "10px 0 0 10px" },
-        "& td:last-child>div": { borderRadius: "0 10px 10px 0" },
-        "&:hover": {
-          borderBottom: noBorder ? "" : "1px solid transparent",
-          "& td > div": {
-            background: (theme) => theme.palette.background["2"],
-          },
-        },
+        "& td:first-of-type>div": { borderRadius: "8px 0 0 8px" },
+        "& td:last-child>div": { borderRadius: "0 8px 8px 0" },
       }}
     >
       {row?.getVisibleCells()?.map((cell, index) => {
@@ -40,26 +30,35 @@ const CustomTableRow: FC<Props> = ({ row, table, onClickRow, noBorder }) => {
             id={`c-${index}`}
             sx={{
               px: 0,
-              pt: 2,
-              pb: 1,
-              width: cell?.getContext()?.column?.id === "select" ? 50 : 150,
+              py: 1,
+              pl: index === 0 ? 4 : 0,
+              pr: index === row?.getVisibleCells()?.length - 1 ? 4 : 0,
+              width: index === 0 ? 50 : 150,
               border: "none",
               height: "inherit",
             }}
           >
             <Box
               sx={{
-                justifyContent:
-                  cell?.getContext()?.column?.id === "select"
-                    ? "left"
-                    : "center",
+                justifyContent: index === 0 ? "left" : index === row?.getVisibleCells()?.length - 1 ? 'right' : "center",
                 height: "100%",
-                fontSize: 10,
-                fontWeight: 500,
+                fontSize: 14,
+                fontWeight: 700,
                 display: "flex",
                 alignItems: "center",
-                py: 2,
-                px: cell?.getContext()?.column?.id === "select" ? 0 : 4,
+                py: 4,
+                borderTop: "1px solid",
+                borderBottom: "1px solid",
+                borderLeft: index === 0 ? "1px solid" : "unset",
+                borderRight:
+                  index === row?.getVisibleCells()?.length - 1
+                    ? "1px solid"
+                    : "unset",
+                border: cell.row.index % 2 === 0 ? "unset" : "",
+                borderColor: "n.1",
+                px: 4,
+                bgcolor: cell.row.index % 2 === 0 ? "background.main" : "unset",
+                color: 'n.3'
               }}
             >
               {flexRender(cell?.column?.columnDef?.cell, cell?.getContext())}

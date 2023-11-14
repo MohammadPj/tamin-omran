@@ -52,62 +52,43 @@ const CustomTableHead: FC<Props> = ({ table }) => {
     >
       {table?.getHeaderGroups()?.map((headerGroup) => (
         <TableRow key={headerGroup.id}>
-          {headerGroup?.headers?.map((header) => {
-            return header.id === "select" ? (
-              <TableCell
-                key={header.id}
-                colSpan={header.colSpan}
-                sx={{ border: "none" }}
-              >
-                {header.isPlaceholder ? null : (
-                  <Box
-                    display={"flex"}
-                    minWidth="max-content"
-                    px={1}
-                    {...{
-                      className: header?.column?.getCanSort()
-                        ? "cursor-pointer select-none"
-                        : "",
-                      onClick: header?.column?.getToggleSortingHandler(),
-                    }}
-                  >
+          {headerGroup?.headers?.map((header, i) => (
+            <TableCell
+              key={header?.id}
+              colSpan={header?.colSpan}
+
+              sx={{
+                border: "none",
+                p: 'unset',
+                px: 4,
+                py: 1,
+                pl: i === 0 ? 4 : 0,
+                pr: i === headerGroup?.headers?.length - 1 ? 4 : 0,
+              }}
+            >
+              {header?.isPlaceholder ? null : (
+                <Box
+                  display={"flex"}
+                  minWidth="max-content"
+                  textAlign={"center"}
+                  justifyContent={
+                    i === 0
+                      ? "left"
+                      : i === headerGroup?.headers?.length - 1
+                      ? "right"
+                      : "center"
+                  }
+                >
+                  <Typography fontWeight={700} fontSize={14}>
                     {flexRender(
                       header?.column?.columnDef?.header,
                       header?.getContext()
                     )}
-                  </Box>
-                )}
-              </TableCell>
-            ) : (
-              <TableCell
-                key={header?.id}
-                colSpan={header?.colSpan}
-                sx={{ border: "none" }}
-              >
-                {header?.isPlaceholder ? null : (
-                  <Box
-                    display={"flex"}
-                    minWidth="max-content"
-                    textAlign={"center"}
-                    justifyContent="center"
-                    {...{
-                      className: header?.column?.getCanSort()
-                        ? "cursor-pointer select-none"
-                        : "",
-                      onClick: header?.column?.getToggleSortingHandler(),
-                    }}
-                  >
-                    <Typography>
-                      {flexRender(
-                        header?.column?.columnDef?.header,
-                        header?.getContext()
-                      )}
-                    </Typography>
-                  </Box>
-                )}
-              </TableCell>
-            );
-          })}
+                  </Typography>
+                </Box>
+              )}
+            </TableCell>
+          ))}
         </TableRow>
       ))}
     </TableHead>

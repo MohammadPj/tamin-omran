@@ -65,9 +65,10 @@ function CustomTable<T>({
         height: "100%",
         width: "100%",
         borderRadius: 2,
-        p: 5,
-        pb: 3,
-        boxShadow: "0px 0px 10px rgba(94, 129, 233, 0.2)",
+        p: 4,
+        border: '1px solid',
+        borderColor: 'n.1',
+        bgcolor: 'background.1',
         ...sx,
       }}
     >
@@ -76,21 +77,9 @@ function CustomTable<T>({
           display={"flex"}
           justifyContent={"space-between"}
           alignItems={"center"}
-          minHeight={63}
           zIndex={20}
         >
-          <Box display={"flex"} gap={4}>
-            <Button
-              disableElevation
-              variant="contained"
-              size="medium"
-              sx={{ display: "flex", gap: 2, height: 32, minWidth: "auto" }}
-            >
-              <Typography variant="h4" fontWeight={500} color={"white"}>
-                جدید
-              </Typography>
-            </Button>
-
+          <Box width={'100%'} display={"flex"} justifyContent={'space-between'} alignItems={'center'} gap={4}>
             <SearchAndFilter
               handleSearchTable={(e) =>
                 onSearch ? onSearch(e.target.value) : null
@@ -102,7 +91,6 @@ function CustomTable<T>({
           </Box>
         </Box>
 
-        <Divider sx={{ mb: 5 }} />
       </>
 
       <Box width={"100%"} display={"flex"} gap={2} mb={6}>
@@ -112,7 +100,7 @@ function CustomTable<T>({
       </Box>
 
       <TableContainer
-        sx={{ flexGrow: "1", height: 0, overflowX: "unset", overflowY: "auto" }}
+        sx={{ flexGrow: "1", height: 0, overflowX: "unset", overflowY: "auto", border: '1px solid', borderColor: 'n.1', borderRadius: 2 }}
       >
         <Table sx={{ position: "relative" }}>
           <CustomTableHead table={table} />

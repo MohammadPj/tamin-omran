@@ -66,9 +66,9 @@ const SearchAndFilter: FC<ISearchAndFilterProps> = ({
         variant={'filled'}
       />
 
-      {/*<IconButton sx={{ minWidth: "30px", p: 1, background: "background.2" }}>*/}
-      {/*  <FilterIcon />*/}
-      {/*</IconButton>*/}
+      <IconButton sx={{ minWidth: "30px", p: 1, background: "background.2" }}>
+        <SvgFilter />
+      </IconButton>
 
       {filterItems && filterItems.length > 0 && (
         <CustomMenu
@@ -132,13 +132,6 @@ const SearchAndFilter: FC<ISearchAndFilterProps> = ({
               >
                 <Stack
                   minWidth={236}
-                  // py={4.5}
-                  // sx={{
-                  //   "& :hover": {
-                  //     borderRadius: 1,
-                  //     backgroundColor: "background.2",
-                  //   },
-                  // }}
                 >
                   {item.component}
                 </Stack>
