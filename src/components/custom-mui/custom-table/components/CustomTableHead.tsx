@@ -21,11 +21,6 @@ const CustomTableHead: FC<Props> = ({ table }) => {
   return (
     <TableHead
       sx={{
-        position: "sticky",
-        zIndex: 10,
-        top: 0,
-        // borderRadius: 1,
-        mb: 2,
         "& th:first-of-type": {
           borderRadius: "1em 0 0 1em",
         },
@@ -56,14 +51,11 @@ const CustomTableHead: FC<Props> = ({ table }) => {
             <TableCell
               key={header?.id}
               colSpan={header?.colSpan}
-
               sx={{
-                border: "none",
-                p: 'unset',
-                px: 4,
-                py: 1,
-                pl: i === 0 ? 4 : 0,
-                pr: i === headerGroup?.headers?.length - 1 ? 4 : 0,
+                '&.MuiTableCell-head': {
+                  border: "none",
+                  pb: 2,
+                }
               }}
             >
               {header?.isPlaceholder ? null : (

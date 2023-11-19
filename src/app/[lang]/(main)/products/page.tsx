@@ -22,7 +22,7 @@ const ProductsPage = async () => {
         height={350}
         display={{ xs: "none", sm: "block" }}
       >
-        <Suspense fallback={"loading filter"}>
+        <Suspense fallback={"loading filter-produts"}>
           <ProductsFilter />
         </Suspense>
       </Box>

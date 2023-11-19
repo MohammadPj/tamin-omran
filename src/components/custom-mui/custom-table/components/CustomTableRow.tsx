@@ -31,8 +31,6 @@ const CustomTableRow: FC<Props> = ({ row, onClickRow }) => {
             sx={{
               px: 0,
               py: 1,
-              pl: index === 0 ? 4 : 0,
-              pr: index === row?.getVisibleCells()?.length - 1 ? 4 : 0,
               width: index === 0 ? 50 : 150,
               border: "none",
               height: "inherit",
@@ -40,7 +38,12 @@ const CustomTableRow: FC<Props> = ({ row, onClickRow }) => {
           >
             <Box
               sx={{
-                justifyContent: index === 0 ? "left" : index === row?.getVisibleCells()?.length - 1 ? 'right' : "center",
+                justifyContent:
+                  index === 0
+                    ? "left"
+                    : index === row?.getVisibleCells()?.length - 1
+                    ? "right"
+                    : "center",
                 height: "100%",
                 fontSize: 14,
                 fontWeight: 700,
@@ -58,7 +61,7 @@ const CustomTableRow: FC<Props> = ({ row, onClickRow }) => {
                 borderColor: "n.1",
                 px: 4,
                 bgcolor: cell.row.index % 2 === 0 ? "background.main" : "unset",
-                color: 'n.3'
+                color: "n.3",
               }}
             >
               {flexRender(cell?.column?.columnDef?.cell, cell?.getContext())}

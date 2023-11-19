@@ -13,15 +13,14 @@ import CustomTableRow from "~/components/custom-mui/custom-table/components/Cust
 interface Props {
   table: TableType<any>;
   onClickRow?: (row: Row<any>) => void;
-  pageSize:number;
 }
 
-const CustomTableBody: FC<Props> = ({ table, onClickRow, pageSize }) => {
+const CustomTableBody: FC<Props> = ({ table, onClickRow }) => {
   return (
     <TableBody>
       {table
         ?.getRowModel()
-        ?.rows.slice(0, pageSize)
+        ?.rows
         ?.map((row) => {
           return (
             <CustomTableRow
