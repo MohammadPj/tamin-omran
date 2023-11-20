@@ -7,30 +7,30 @@ import { Theme } from "@mui/material/styles";
 
 type TMuiFilledInput =
   | {
-    defaultProps?: Partial<FilledInputProps> | undefined;
-    styleOverrides?:
-    | Partial<
-      OverridesStyleRules<
-        keyof FilledInputClasses,
-        "MuiFilledInput",
-        Omit<Theme, "components">
-      >
-    >
-    | undefined;
-    variants?: [] | undefined;
-  }
+      defaultProps?: Partial<FilledInputProps> | undefined;
+      styleOverrides?:
+        | Partial<
+            OverridesStyleRules<
+              keyof FilledInputClasses,
+              "MuiFilledInput",
+              Omit<Theme, "components">
+            >
+          >
+        | undefined;
+      variants?: [] | undefined;
+    }
   | undefined;
 
 export const MuiFilledInput: TMuiFilledInput = {
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
-      backgroundColor: 'grey.1',
-      '&:hover': {
-        backgroundColor: "grey.1"
-
+      padding: 0,
+      '& textarea': {padding: '12px !important'},
+      backgroundColor: "grey.1",
+      "&:hover": {
+        backgroundColor: "grey.1",
       },
-      '&.Mui-focused': { background: 'grey.1', },
-
+      "&.Mui-focused": { background: "grey.1" },
     }),
   },
 };

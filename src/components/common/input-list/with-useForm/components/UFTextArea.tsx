@@ -32,6 +32,7 @@ const UFTextArea: FC<Props> = ({
           {...form?.register(name, {
             ...rules,
           })}
+          variant={'filled'}
           type={type}
           fullWidth
           multiline

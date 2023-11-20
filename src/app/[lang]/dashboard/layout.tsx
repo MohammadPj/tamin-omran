@@ -12,6 +12,7 @@ import CustomLink from "~/components/common/custom-link/CustomLink";
 import { usePathname } from "next/navigation";
 import SvgLogo from "~/components/icons/final/Logo";
 import LanguageMenu from "~/app/[lang]/_components/header/components/LanguageMenu";
+import Stack from "@mui/material/Stack";
 
 interface Props {
   children: React.ReactNode;
@@ -64,22 +65,29 @@ const DashboardLayout: FC<Props> = ({ children }) => {
         </List>
       </Drawer>
 
-      <Box component={"main"} flexGrow={1} minHeight={"100vh"} pr={20} pl={10}>
+      <Stack
+        component={"main"}
+        flexGrow={1}
+        minHeight={"100vh"}
+        pr={20}
+        pl={10}
+      >
         <Box
           display={"flex"}
           justifyContent={"space-between"}
           width={"100%"}
           py={3}
         >
-          <Box display={"flex"} alignItems={'center'} gap={2}>
+          <Box display={"flex"} alignItems={"center"} gap={2}>
             <Avatar />
-            <Typography color={'text.secondary'}>ادمین شماره یک</Typography>
+            <Typography color={"text.secondary"}>ادمین شماره یک</Typography>
           </Box>
 
           <LanguageMenu />
         </Box>
-        {children}
-      </Box>
+
+        <Box flexGrow={1} pb={4}>{children}</Box>
+      </Stack>
     </Box>
   );
 };

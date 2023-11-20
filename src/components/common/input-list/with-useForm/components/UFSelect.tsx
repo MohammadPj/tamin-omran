@@ -42,7 +42,7 @@ const UFSelect: FC<Props> = ({
             id={name}
             disabled={disabled}
             defaultValue={defaultValue}
-            variant="outlined"
+            variant={"filled"}
             inputProps={{ readOnly: readonly }}
             MenuProps={{
               PaperProps: {

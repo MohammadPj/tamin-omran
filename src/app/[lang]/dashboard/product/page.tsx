@@ -25,8 +25,12 @@ const Product: FC = () => {
     { id: "filter-products", title: "فیلتر" },
   ];
 
+  const handleCreateProduct = () => {
+    setModal(null)
+  }
+
   return (
-    <div>
+    <>
       <CustomTable
         leftContent={
           <Box display={"flex"} gap={4}>
@@ -53,16 +57,16 @@ const Product: FC = () => {
         onClose={() => setModal(null)}
       >
         {modal === "create-product" ? (
-          <CreateProduct />
+          <CreateProduct onSubmit={handleCreateProduct} onCancel={() => setModal(null)} />
         ) : modal === "create-brand" ? (
-          <CreateBrand />
+          <CreateBrand onCancel={() => setModal(null)} onSubmit={() => setModal(null)} />
         ) : modal === "filter-products" ? (
-          <FilterProducts />
+          <FilterProducts onCancel={() => setModal(null)} onSubmit={() => setModal(null)} />
         ) : (
           <Box />
         )}
       </CustomModal>
-    </div>
+    </>
   );
 };
 

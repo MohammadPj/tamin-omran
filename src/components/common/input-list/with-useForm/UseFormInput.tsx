@@ -1,16 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC } from "react";
 
 //@3rd Party
-import { Controller } from 'react-hook-form'
-import { UseFormReturn } from 'react-hook-form'
+import { Controller } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 //----------------------------------------------------------------------------------------------
 
 // @Mui
-import FormControl from '@mui/material/FormControl'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Radio from '@mui/material/Radio'
-import RadioGroup from '@mui/material/RadioGroup'
-import {IUseFormInput} from "~/components/common/input-list/with-useForm/types";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
 import Typography from "@mui/material/Typography";
 import UFSelect from "~/components/common/input-list/with-useForm/components/UFSelect";
 import UFMultiSelect from "~/components/common/input-list/with-useForm/components/UFMultiSelect";
@@ -24,13 +24,12 @@ import UFTextField from "~/components/common/input-list/with-useForm/components/
 
 // @Components
 
-
 //---------------------------------------------------------------------------------------------------------
 
 export interface IUseFormInputProps extends IUseFormInput {
-  form: UseFormReturn<any>
-  error: any
-  itemProps?: any
+  form: UseFormReturn<any>;
+  error: any;
+  itemProps?: any;
 }
 
 const UseFormInput: FC<IUseFormInputProps> = ({
@@ -50,7 +49,7 @@ const UseFormInput: FC<IUseFormInputProps> = ({
   itemProps,
 }) => {
   switch (type) {
-    case 'radio':
+    case "radio":
       return (
         <Controller
           control={form?.control}
@@ -58,31 +57,39 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           rules={{ ...rules }}
           defaultValue={defaultValue}
           render={({ field: { onChange, name, value } }) => (
-            <FormControl sx={{ display: 'block' }}>
+            <FormControl sx={{ display: "block" }}>
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
                 onChange={onChange}
                 value={value}
-                sx={{gap: 5}}
+                sx={{ gap: 5 }}
                 {...props}
               >
-                {options?.map(option => (
+                {options?.map((option) => (
                   <FormControlLabel
                     key={option.value}
                     disabled={disabled}
                     value={option.value}
                     control={<Radio />}
-                    label={<Typography fontWeight={400} fontSize={12}>{option.label}</Typography>}
+                    label={
+                      <Typography
+                        fontWeight={400}
+                        fontSize={14}
+                        color={option.value === value ? "primary.main" : "n.3"}
+                      >
+                        {option.label}
+                      </Typography>
+                    }
                   />
                 ))}
               </RadioGroup>
             </FormControl>
           )}
         />
-      )
-    case 'select':
+      );
+    case "select":
       return (
         <UFSelect
           form={form}
@@ -98,8 +105,8 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           options={options}
           props={props}
         />
-      )
-    case 'multi-select':
+      );
+    case "multi-select":
       return (
         <UFMultiSelect
           form={form}
@@ -115,7 +122,7 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           options={options}
           props={props}
         />
-      )
+      );
     case "auto-complete":
       return (
         <UFAutoComplete
@@ -132,7 +139,7 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           options={options}
         />
       );
-    case 'checkbox':
+    case "checkbox":
       return (
         <UFCheckbox
           form={form}
@@ -143,8 +150,8 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           sx={sx}
           props={props}
         />
-      )
-    case 'date-picker':
+      );
+    case "date-picker":
       return (
         <UFDatePicker
           form={form}
@@ -157,8 +164,8 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           defaultValue={defaultValue}
           props={props}
         />
-      )
-    case 'text-area':
+      );
+    case "text-area":
       return (
         <UFTextArea
           form={form}
@@ -174,8 +181,8 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           placeholder={placeholder}
           props={props}
         />
-      )
-    case 'currency':
+      );
+    case "currency":
       return (
         <UfCurrency
           form={form}
@@ -192,7 +199,7 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           itemProps={itemProps}
           props={props}
         />
-      )
+      );
     default:
       return (
         <UFTextField
@@ -210,8 +217,8 @@ const UseFormInput: FC<IUseFormInputProps> = ({
           itemProps={itemProps}
           props={props}
         />
-      )
+      );
   }
-}
+};
 
-export default UseFormInput
+export default UseFormInput;
