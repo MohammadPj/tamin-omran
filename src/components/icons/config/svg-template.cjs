@@ -1,4 +1,4 @@
-// src/components/icons/svg-template.js
+// src/_components/icons/svg-template.js
 
 const comments = `
 // Auto-generated file created by svgr-cli source svg-template.js

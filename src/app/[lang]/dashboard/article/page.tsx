@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import CustomTable from "~/components/custom-mui/custom-table/CustomTable";
 import useArticle from "~/app/[lang]/dashboard/article/useArticle";
 import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
-import CreateArticle from "~/app/[lang]/dashboard/article/components/create-article/CreateArticle";
+import CreateArticle from "~/app/[lang]/dashboard/article/_components/create-article/CreateArticle";
 
 type TProductModals = "create-article" | null;
 

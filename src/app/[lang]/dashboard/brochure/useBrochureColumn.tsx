@@ -1,28 +1,29 @@
+import React from 'react';
 import {ColumnDef} from "@tanstack/react-table";
-import {IArticle} from "~/types/article";
 import SvgPlus from "~/components/icons/final/Plus";
+import {IBrochure} from "~/types/brochure";
 
-const useArticleColumn = () => {
-  const columns: ColumnDef<IArticle, any>[] = [
+const useBrochureColumn = () => {
+  const columns: ColumnDef<IBrochure, any>[] = [
     {
       header: "شماره",
       accessorKey: 'id',
       cell: (cell) => cell.row.index + 1,
     },
     {
-      header: "نام مقاله",
+      header: "نام بروشور",
       accessorKey: "title",
       cell: (cell) => cell.getValue(),
     },
     {
       header: "تاریخ بارگذاری",
-      accessorKey: "lastUpdate",
+      accessorKey: "createDate",
       cell: (cell) => cell.getValue()?.toLocaleDateString('fa-IR'),
     },
     {
       header: "ادمین",
       accessorKey: "admin",
-      cell: (cell) => cell.getValue(),
+      cell: (cell) => `${cell.getValue().firstName} ${cell.getValue().lastName}`,
     },
     {
       header: "عملیات",
@@ -34,4 +35,4 @@ const useArticleColumn = () => {
   return {columns};
 };
 
-export default useArticleColumn;
+export default useBrochureColumn;
