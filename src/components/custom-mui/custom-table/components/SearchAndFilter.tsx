@@ -1,20 +1,17 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC } from "react";
 
 //@Mui
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useSearchParams } from "next/navigation";
-import SvgSearch from "~/components/icons/final/Search";
-import SvgFilter from "~/components/icons/final/Filter";
-import CustomMenu from "~/components/custom-mui/custom-menu/CustomMenu";
 //------------------------------------------------------------
 
 //@Icons
+import SvgSearch from "~/components/icons/final/Search";
+import SvgFilter from "~/components/icons/final/Filter";
+import {useTheme} from "@mui/material";
 
 interface ISearchAndFilterProps {
   handleSearchTable: React.ChangeEventHandler<
@@ -27,9 +24,7 @@ const SearchAndFilter: FC<ISearchAndFilterProps> = ({
   handleSearchTable,
   onClickFilter,
 }) => {
-  //Dependencies
-
-  let searchParams = useSearchParams();
+  const theme = useTheme()
 
   //Handlers
   const debouncedChangeHandler = handleSearchTable;
@@ -44,8 +39,8 @@ const SearchAndFilter: FC<ISearchAndFilterProps> = ({
         onChange={debouncedChangeHandler}
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
-              <SvgSearch width={17} height={17} />
+            <InputAdornment position="end">
+              <SvgSearch width={17} height={17} primarycolor={theme.palette.grey["3"]} />
             </InputAdornment>
           ),
         }}
