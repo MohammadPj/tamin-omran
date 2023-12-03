@@ -1,17 +1,23 @@
 "use client";
+import { Button } from "@mui/material";
+import Box from "@mui/material/Box";
 import React, { FC, useState } from "react";
 import CustomTable from "~/components/custom-mui/custom-table/CustomTable";
-import { Button } from "@mui/material";
 import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
-import Box from "@mui/material/Box";
 import useBrochure from "~/app/[lang]/dashboard/brochure/useBrochure";
 import CreateBrochure from "~/app/[lang]/dashboard/brochure/_components/CreateBrochure";
-import CreateCategory from "~/app/[lang]/dashboard/brochure/_components/CreateCategory";
+import CreateCategory, {
+  IBrochureTypeForm,
+} from "~/app/[lang]/dashboard/brochure/_components/CreateCategory";
+import { useCreateBrochureType } from "~/services/api/hooks";
+import { useSnackbar } from "notistack";
 
 type TProductModals = "create-brochure" | "create-category" | null;
 
 const Brochure: FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [modal, setModal] = useState<TProductModals>();
+  const { mutateAsync: mutateCreateBrochureType } = useCreateBrochureType();
 
   const { table } = useBrochure();
 
@@ -20,9 +26,24 @@ const Brochure: FC = () => {
     { id: "create-category", title: "تعریف دسته بندی" },
   ];
 
-  const handleCreateArticle = () => {
-    setModal(null);
+  const handleCreateCategory = async (data: IBrochureTypeForm) => {
+    try {
+      await mutateCreateBrochureType({
+        title: data.categoryNameEn,
+        lang: "en",
+      });
+      await mutateCreateBrochureType({
+        title: data.categoryNameFa,
+        lang: "fa",
+      });
+      enqueueSnackbar("دسته بندی با موفقیت ایجاد شد", {variant: 'success'});
+      setModal(null);
+    } catch (e) {
+      enqueueSnackbar("عملیات با مشکل مواجه شد", {variant: 'error'});
+    }
   };
+
+  const handleCreateBrochure = () => {};
 
   return (
     <>
@@ -53,12 +74,12 @@ const Brochure: FC = () => {
       >
         {modal === "create-brochure" ? (
           <CreateBrochure
-            onSubmit={handleCreateArticle}
+            onSubmit={handleCreateBrochure}
             onCancel={() => setModal(null)}
           />
         ) : modal === "create-category" ? (
           <CreateCategory
-            onSubmit={handleCreateArticle}
+            onSubmit={handleCreateCategory}
             onCancel={() => setModal(null)}
           />
         ) : (

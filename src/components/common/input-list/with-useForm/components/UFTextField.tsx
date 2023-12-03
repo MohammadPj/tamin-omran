@@ -24,26 +24,20 @@ const UFTextField: FC<Props> = ({
   itemProps,
   props,
 }) => {
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     onChange: any
   ) => {
-    const value = e.target.value;
+    const value = e.target.value
     if (
-      (type === "number" && !checkIfNumber(e)) ||
+      (type === 'number' && !checkIfNumber(e)) ||
       (rules?.maxLength && value.length > rules?.maxLength)
     )
-      return;
+      return
 
-    onChange(p2e(value.trimStart()));
-  };
-
-  //This can be used when you want to show white space error
-  // const trapSpacesForRequiredFields = (value: any) => {
-  //   if (rules?.required) {
-  //     return !!value.trim()
-  //   } else return
-  // }
+    onChange(value)
+  }
 
   return (
     <Controller
