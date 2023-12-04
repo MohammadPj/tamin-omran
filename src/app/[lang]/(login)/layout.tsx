@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import {Box} from "@mui/material";
 
 interface Props {
   children: React.ReactNode
@@ -7,10 +8,9 @@ interface Props {
 const LoginLayout: FC<Props> = ({children}) => {
 
   return (
-    <div>
-      LoginLayout
+    <Box minHeight={"100vh"} bgcolor={"white"}>
       {children}
-    </div>
+    </Box>
   );
 };
 

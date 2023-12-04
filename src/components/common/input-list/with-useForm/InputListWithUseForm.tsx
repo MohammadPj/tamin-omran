@@ -1,3 +1,4 @@
+"use client"
 import React, { FC } from 'react'
 import { Box, Grid, Typography } from '@mui/material'
 import { GridProps } from '@mui/material/Grid'

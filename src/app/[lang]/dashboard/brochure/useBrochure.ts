@@ -1,8 +1,14 @@
 import useTable from "~/components/custom-mui/custom-table/components/useTable";
 import { IBrochure } from "~/types/brochure";
 import useBrochureColumn from "~/app/[lang]/dashboard/brochure/useBrochureColumn";
+import {useGetBrochureTypes} from "~/services/api/hooks";
+import {useCommon} from "~/store/common/commonSlice";
 
 const useBrochure = () => {
+  const {lang} = useCommon()
+  console.log('lang', lang)
+  const {data: brochureTypes} = useGetBrochureTypes({lang})
+
   const { columns } = useBrochureColumn();
 
   const data: IBrochure[] = [
@@ -36,7 +42,7 @@ const useBrochure = () => {
     },
   ];
 
-  const { table } = useTable({ data, columns });
+  const { table } = useTable({ data: [], columns });
   return { table };
 };
 

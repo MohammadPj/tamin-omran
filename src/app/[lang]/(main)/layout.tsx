@@ -12,7 +12,7 @@ interface Props {
 const MainLayout: FC<Props> = ({ children, params }) => {
 
   return (
-    <Stack minHeight={"100vh"}>
+    <Stack minHeight={"100vh"} bgcolor={'#F0F0F0'}>
       <Header lang={params.lang} />
 
       <Stack flexGrow={1}>{children}</Stack>

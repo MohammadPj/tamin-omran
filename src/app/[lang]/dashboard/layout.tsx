@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import SvgLogo from "~/components/icons/final/Logo";
 import LanguageMenu from "~/app/[lang]/_components/header/components/LanguageMenu";
 import Stack from "@mui/material/Stack";
+import {handleLogout} from "~/helpers/methods";
 
 interface Props {
   children: React.ReactNode;
@@ -51,18 +52,31 @@ const DashboardLayout: FC<Props> = ({ children }) => {
         variant="permanent"
         anchor="left"
       >
-        <Box display={"flex"} justifyContent={"center"} py={5}>
-          <SvgLogo />
-        </Box>
-        <List>
-          {tabs.map((tab, i) => (
-            <CustomLink key={i} href={tab.link}>
-              <ListItemButton selected={pathname.startsWith(tab.link)}>
-                {tab.title}
-              </ListItemButton>
-            </CustomLink>
-          ))}
-        </List>
+        <Stack height={"100%"}>
+          <Box display={"flex"} justifyContent={"center"} py={5}>
+            <SvgLogo />
+          </Box>
+
+          <List>
+            <Stack>
+              {tabs.map((tab, i) => (
+                <CustomLink key={i} href={tab.link}>
+                  <ListItemButton selected={pathname.startsWith(tab.link)}>
+                    {tab.title}
+                  </ListItemButton>
+                </CustomLink>
+              ))}
+            </Stack>
+          </List>
+
+          <Box flexGrow={1} />
+
+          <List>
+            <ListItemButton onClick={handleLogout}>
+              <Typography fontWeight={500} color={"red"}>خروج</Typography>
+            </ListItemButton>
+          </List>
+        </Stack>
       </Drawer>
 
       <Stack
@@ -86,7 +100,9 @@ const DashboardLayout: FC<Props> = ({ children }) => {
           <LanguageMenu />
         </Box>
 
-        <Box flexGrow={1} pb={4}>{children}</Box>
+        <Box flexGrow={1} pb={4}>
+          {children}
+        </Box>
       </Stack>
     </Box>
   );

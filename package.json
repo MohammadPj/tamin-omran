@@ -9,6 +9,7 @@
     "lint": "next lint",
     "icons:create": "npx @svgr/cli --typescript -d ./src/components/icons/output ./src/components/icons/source --config-file ./src/components/icons/config/svgr-config.json --template src/components/icons/config/svg-template.cjs"
   },
+
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
