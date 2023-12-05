@@ -85,6 +85,7 @@ const DashboardLayout: FC<Props> = ({ children }) => {
         minHeight={"100vh"}
         pr={20}
         pl={10}
+        bgcolor={'#F0F0F0'}
       >
         <Box
           display={"flex"}

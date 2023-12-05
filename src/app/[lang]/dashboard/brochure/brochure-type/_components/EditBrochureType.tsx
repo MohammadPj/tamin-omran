@@ -4,32 +4,33 @@ import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
+import { IBrochureType } from "~/types/brochure";
 
-export interface IBrochureTypeForm {
-  categoryNameFa: string;
-  categoryNameEn: string;
-}
-
-interface CreateCategoryProps {
+interface EditBrochureTypeProps {
   onSubmit?: (data: IBrochureTypeForm) => void;
   onCancel?: () => void;
+  selectedBrochureType: IBrochureType;
 }
 
-const CreateCategory: FC<CreateCategoryProps> = ({ onCancel, onSubmit }) => {
-  const form = useForm<IBrochureTypeForm>();
+interface IBrochureTypeForm {
+  title: string;
+}
+
+const EditBrochureType: FC<EditBrochureTypeProps> = ({
+  onCancel,
+  onSubmit,
+  selectedBrochureType,
+}) => {
+  const form = useForm<IBrochureTypeForm>({
+    defaultValues: { title: selectedBrochureType.title },
+  });
 
   const inputList: IUseFormInput[] = [
     {
-      rules: { required: 'این فیلد اجباری است' },
-      name: "categoryNameFa",
-      label: "نام دسته بندی (فارسی)",
+      name: "title",
+      label: "نام دسته بندی",
       placeholder: "نام دسته بندی را وارد کنید",
-    },
-    {
-      rules: { required: 'این فیلد اجباری است' },
-      name: "categoryNameEn",
-      label: "نام دسته بندی (انگلیسی)",
-      placeholder: "نام دسته بندی را وارد کنید",
+      rules: { required: "این فیلد اجباری است" },
     },
   ];
 
@@ -68,4 +69,4 @@ const CreateCategory: FC<CreateCategoryProps> = ({ onCancel, onSubmit }) => {
   );
 };
 
-export default CreateCategory;
+export default EditBrochureType;

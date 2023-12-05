@@ -5,8 +5,8 @@ export interface ICommonFilterParams {
   limit?: number;
   sort?: string;
 
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 
@@ -17,6 +17,10 @@ export interface IBrochureTypeParams extends ICommonFilterParams {
 
 export interface IBrochureTypeBody
   extends Omit<IBrochureTypeParams, keyof ICommonFilterParams> {}
+
+export interface IEditBrochureTypeBody extends IBrochureTypeBody {
+  id: string
+}
 
 export interface IBrochureParams extends ICommonFilterParams {
   title?: string;

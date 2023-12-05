@@ -6,7 +6,6 @@ import {useCommon} from "~/store/common/commonSlice";
 
 const useBrochure = () => {
   const {lang} = useCommon()
-  console.log('lang', lang)
   const {data: brochureTypes} = useGetBrochureTypes({lang})
 
   const { columns } = useBrochureColumn();

@@ -6,7 +6,7 @@ import {
   IBrochureBody,
   IBrochureParams,
   IBrochureTypeBody,
-  IBrochureTypeParams, ICategoryBody, ICategoryParams,
+  IBrochureTypeParams, ICategoryBody, ICategoryParams, IEditBrochureTypeBody,
   ILoginBody, IProductBody, IProductParams,
 } from "~/services/api/type";
 
@@ -21,8 +21,8 @@ export const getSingleBrochureType = (brochureTypeId: string) =>
 export const createBrochureType = (body: IBrochureTypeBody) =>
   http.post(routes.brochureType, body);
 
-export const editeBrochureType = (body: IBrochureTypeBody) =>
-  http.put(routes.brochureType, body);
+export const editeBrochureType = ({id, ...body}: IEditBrochureTypeBody) =>
+  http.put(routes.singleBrochureType(id), body);
 
 export const deleteBrochureType = (brochureTypeId: string) =>
   http.delete(routes.singleBrochureType(brochureTypeId));
