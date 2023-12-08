@@ -6,13 +6,14 @@ import {
   IBrochureBody,
   IBrochureParams,
   IBrochureTypeBody,
-  IBrochureTypeParams, ICategoryBody, ICategoryParams, IEditBrochureTypeBody,
+  IBrochureTypeParams, ICategoryBody, ICategoryParams, IEditBrochureBody, IEditBrochureTypeBody, IEditCategoryBody,
   ILoginBody, IProductBody, IProductParams,
 } from "~/services/api/type";
+import {IBrochure, IBrochureType} from "~/types/brochure";
 
 
 // ---------------------------  BrochureTypes  ------------------------------
-export const getBrochureTypes = (params: IBrochureTypeParams) =>
+export const getBrochureTypes = (params: IBrochureTypeParams): Promise<IBrochureType[]> =>
   http.get(routes.brochureType, { params });
 
 export const getSingleBrochureType = (brochureTypeId: string) =>
@@ -35,11 +36,11 @@ export const getBrochures = (params: IBrochureParams) =>
 export const getSingleBrochure = (brochureId: string) =>
   http.get(routes.singleBrochure(brochureId));
 
-export const createBrochure = (body: IBrochureBody) =>
+export const createBrochure = (body: IBrochureBody): Promise<IBrochure> =>
   http.post(routes.brochure, body);
 
-export const editeBrochure = (body: IBrochureBody) =>
-  http.put(routes.brochure, body);
+export const editeBrochure = ({id, ...body}: IEditBrochureBody) =>
+  http.put(routes.singleBrochure(id), body);
 
 export const deleteBrochure = (brochureId: string) =>
   http.delete(routes.singleBrochure(brochureId));
@@ -81,16 +82,16 @@ export const deleteBrand = (brochureId: string) =>
 
 // ---------------------------  Category ------------------------------
 export const getCategories = (params: ICategoryParams) =>
-  http.get(routes.brochure, { params });
+  http.get(routes.category, { params });
 
 export const getSingleCategory = (brochureId: string) =>
   http.get(routes.singleCategory(brochureId));
 
 export const createCategory = (body: ICategoryBody) =>
-  http.post(routes.brochure, body);
+  http.post(routes.category, body);
 
-export const editeCategory = (body: ICategoryBody) =>
-  http.put(routes.brochure, body);
+export const editeCategory = ({id, ...body}: IEditCategoryBody) =>
+  http.put(routes.singleCategory(id), body);
 
 export const deleteCategory = (brochureId: string) =>
   http.delete(routes.singleCategory(brochureId));

@@ -118,7 +118,7 @@ const CustomModal: FC<Props> = ({
           </>
         )}
 
-        <Stack height={"100%"} maxHeight={maxHeight || "73vh"} p={4}>
+        <Stack height={"100%"} maxHeight={maxHeight || "73vh"} p={4} overflow={'auto'}>
           {children}
         </Stack>
       </Stack>

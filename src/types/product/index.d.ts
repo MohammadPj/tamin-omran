@@ -1,3 +1,4 @@
+import {TLang} from "~/services/api/type";
 
 interface IProductSpecifications {
   title: string;
@@ -13,4 +14,12 @@ export interface IProduct {
   createDate?: Date
   admin?: string
   state?: string
+}
+
+export interface ICategory {
+  _id: string
+  title: string;
+  lang: TLang;
+  createdAt: Date;
+  updatedAt: Date;
 }

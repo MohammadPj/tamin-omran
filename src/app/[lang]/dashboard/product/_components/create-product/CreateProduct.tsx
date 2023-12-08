@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import CustomTab, { ITab } from "~/components/custom-mui/custom-tab/CustomTab";
 import Box from "@mui/material/Box";
 import InputListWithUseForm from "~/components/common/input-list/with-useForm/InputListWithUseForm";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
@@ -10,23 +9,39 @@ import {
   Button,
   FormControlLabel,
   Grid,
-  InputLabel,
   Switch,
   Typography,
 } from "@mui/material";
 import UploadProductSection from "~/app/[lang]/dashboard/product/_components/create-product/UploadProductSection";
 
+import LanguageTab from "~/components/common/tabs/LanguageTab";
+import {TLang} from "~/services/api/type";
+import CustomCKEditor from "~/components/common/custom-ckeditor/CustomCKEditor";
+
+
 interface CreateProductProps {
-  onSubmit?: () => void;
+  onSubmit?: (data: ICreateProductForm) => void;
   onCancel?: () => void;
 }
 
+export interface ICreateProductForm {
+  title: string;
+  lang: TLang;
+  categoryId: string
+  brandId: string
+  images: string[]
+  isAvailable: boolean
+  engineNumber: string;
+  technicalNumber: string
+  description: string
+  review: string
+}
+
 const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
-  const tabs: ITab[] = [{ label: "فارسی" }, { label: "انگلیسی" }];
 
-  const handleChange = (value: any) => {};
-
-  const form = useForm();
+  const form = useForm<ICreateProductForm>(
+    {defaultValues: {lang: 'fa'}}
+  );
 
   const inputList: IUseFormInput[] = [
     {
@@ -36,12 +51,12 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
       type: "select",
     },
     {
-      name: "specNumber",
+      name: "technicalNumber",
       label: "شماره فنی",
       placeholder: "شماره فنی محصول را وارد کنید",
     },
     {
-      name: "motor",
+      name: "engineNumber",
       label: "موتور",
       placeholder: "شماره فنی محصول را وارد کنید",
     },
@@ -60,13 +75,17 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
     },
   ];
 
+  const handleChangeLanguage = (lang: TLang) => {
+    form.setValue('lang', lang)
+  }
+
+  const handleChangeReview = (value: string) => {
+    form.setValue('review', value)
+  }
+
   return (
     <Stack width={800}>
-      <CustomTab
-        tabs={tabs}
-        onChange={handleChange}
-        tabsProps={{ sx: { mb: 4 } }}
-      />
+      <LanguageTab onChange={handleChangeLanguage} defaultValue={form.getValues("lang")} />
 
       <Grid container spacing={4}>
         <Grid item xs={7}>
@@ -93,7 +112,7 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
           >
             <Box flexGrow={1}>
               <TextField
-                {...form.register("productName")}
+                {...form.register("title")}
                 id={"product-name"}
                 variant={"filled"}
                 fullWidth
@@ -103,7 +122,7 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
 
             <FormControlLabel
               value="start"
-              control={<Switch color="primary" {...form.register("status")} />}
+              control={<Switch color="primary" {...form.register("isAvailable")} />}
               label={
                 <Typography fontWeight={500} fontSize={16}>
                   موجود
@@ -126,11 +145,33 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
         </Grid>
       </Grid>
 
-      <Box display={"flex"} gap={4} mt={4}>
-        {onSubmit && <Button onClick={onSubmit} sx={{height: 41}}>ذخیره</Button>}
+      <Box mt={4}>
+        <Box display={'flex'}>
+          <Typography
+            mb={2}
+            fontWeight={500}
+            fontSize={14}
+            color={"primary.main"}
+            borderBottom={"1px solid"}
+            borderColor={"primary.main"}
+          >
+            نقد و بررسی
+          </Typography>
+        </Box>
+
+        <CustomCKEditor onChange={handleChangeReview} />
+
+      </Box>
+
+      <Box display={"flex"} gap={4} mt={4} >
+        {onSubmit && (
+          <Button onClick={form.handleSubmit(onSubmit)} sx={{ height: 41 }}>
+            ذخیره
+          </Button>
+        )}
 
         {onCancel && (
-          <Button onClick={onCancel} variant={"outlined"} sx={{height: 41}}>
+          <Button onClick={onCancel} variant={"outlined"} sx={{ height: 41 }}>
             انصراف
           </Button>
         )}

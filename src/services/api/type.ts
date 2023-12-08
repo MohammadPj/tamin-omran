@@ -32,6 +32,10 @@ export interface IBrochureParams extends ICommonFilterParams {
 export interface IBrochureBody
   extends Omit<IBrochureParams, keyof ICommonFilterParams> {}
 
+export interface IEditBrochureBody extends IBrochureBody {
+  id: string
+}
+
 export interface IArticleParams extends ICommonFilterParams {
   title: string;
   lang: TLang;
@@ -50,12 +54,16 @@ export interface IBrandBody
   extends Omit<IBrandParams, keyof ICommonFilterParams> {}
 
 export interface ICategoryParams extends ICommonFilterParams {
-  title: string;
+  title?: string;
   lang: TLang;
 }
 
 export interface ICategoryBody
   extends Omit<ICategoryParams, keyof ICommonFilterParams> {}
+
+export interface IEditCategoryBody extends ICategoryBody{
+  id: string
+}
 
 export interface IProductParams extends ICommonFilterParams {
   title: string;

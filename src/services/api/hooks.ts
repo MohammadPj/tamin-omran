@@ -33,27 +33,20 @@ import {
   login,
 } from "~/services/api/services";
 import {
-  IArticleBody,
   IArticleParams,
-  IBrandBody,
   IBrandParams,
-  IBrochureBody,
   IBrochureParams,
-  IBrochureTypeBody,
   IBrochureTypeParams,
-  ICategoryBody,
   ICategoryParams,
-  IProductBody,
   IProductParams,
 } from "~/services/api/type";
-import { http } from "~/services/core/http";
-import { routes } from "~/services/api/routes";
 
 // ---------------------------  BrochureTypes  ------------------------------
 export const useGetBrochureTypes = (params: IBrochureTypeParams) =>
   useQuery({
-    queryKey: ["BrochureTypes"],
+    queryKey: ["BrochureTypes", params],
     queryFn: () => getBrochureTypes(params),
+    enabled: !!params.lang
   });
 
 export const useGetSingleBrochureType = (brochureTypeId: string) =>
@@ -91,13 +84,13 @@ export const useGetSingleBrochure = (brochureId: string) =>
   });
 
 export const useCreateBrochure = () =>
-  useMutation({ mutationKey: ["Brochure"], mutationFn: createBrochure });
+  useMutation({ mutationKey: ["Brochures"], mutationFn: createBrochure });
 
 export const useEditeBrochure = () =>
-  useMutation({ mutationKey: ["Brochure"], mutationFn: editeBrochure });
+  useMutation({ mutationKey: ["Brochures"], mutationFn: editeBrochure });
 
 export const useDeleteBrochure = () =>
-  useMutation({ mutationKey: ["Brochure"], mutationFn: deleteBrochure });
+  useMutation({ mutationKey: ["Brochures"], mutationFn: deleteBrochure });
 
 // ---------------------------  Article ------------------------------
 export const useGetArticles = (params: IArticleParams) =>

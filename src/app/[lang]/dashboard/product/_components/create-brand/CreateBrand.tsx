@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
 import InputListWithUseForm from "~/components/common/input-list/with-useForm/InputListWithUseForm";
 import Box from "@mui/material/Box";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 
 interface CreateBrandProps {
   onSubmit?: () => void;
   onCancel?: () => void;
 }
 
-const CreateBrand: FC<CreateBrandProps> = ({onCancel, onSubmit}) => {
+const CreateBrand: FC<CreateBrandProps> = ({ onCancel, onSubmit }) => {
   const form = useForm();
 
   const inputList: IUseFormInput[] = [
@@ -23,7 +23,7 @@ const CreateBrand: FC<CreateBrandProps> = ({onCancel, onSubmit}) => {
         { label: "دسته بندی", value: "category" },
         { label: "برند", value: "brand" },
       ],
-      props: {sx: {flexDirection: 'column', gap: 4, pl: 2}}
+      props: { sx: { flexDirection: "column", gap: 4, pl: 2 } },
     },
     {
       name: "categoryNameFa",
@@ -46,9 +46,21 @@ const CreateBrand: FC<CreateBrandProps> = ({onCancel, onSubmit}) => {
       />
 
       <Box display={"flex"} gap={4} mt={8}>
-        {onSubmit && <Button onClick={onSubmit} sx={{width: '100%', height: 41}}>ذخیره</Button>}
+        {onSubmit && (
+          <Button onClick={onSubmit} sx={{ width: "100%", height: 41 }}>
+            ذخیره
+          </Button>
+        )}
 
-        {onCancel && <Button onClick={onCancel} variant={"outlined"} sx={{width: '100%', height: 41}}>انصراف</Button>}
+        {onCancel && (
+          <Button
+            onClick={onCancel}
+            variant={"outlined"}
+            sx={{ width: "100%", height: 41 }}
+          >
+            انصراف
+          </Button>
+        )}
       </Box>
     </div>
   );

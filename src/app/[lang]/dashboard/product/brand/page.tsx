@@ -5,9 +5,7 @@ import CustomTable from "~/components/custom-mui/custom-table/CustomTable";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
-import CreateProduct, {
-  ICreateProductForm
-} from "~/app/[lang]/dashboard/product/_components/create-product/CreateProduct";
+import CreateProduct from "~/app/[lang]/dashboard/product/_components/create-product/CreateProduct";
 import CreateBrand from "~/app/[lang]/dashboard/product/_components/create-brand/CreateBrand";
 import FilterProducts from "~/app/[lang]/dashboard/product/_components/filter-produts/FilterProducts";
 
@@ -18,7 +16,7 @@ type TProductModals =
   | null;
 
 const Product: FC = () => {
-  const { table, handleCreateProduct } = useProduct();
+  const { table } = useProduct();
   const [modal, setModal] = useState<TProductModals>();
 
   const modals: { id: TProductModals; title: string }[] = [
@@ -27,7 +25,9 @@ const Product: FC = () => {
     { id: "filter-products", title: "فیلتر" },
   ];
 
-
+  const handleCreateProduct = () => {
+    setModal(null)
+  }
 
   return (
     <>
@@ -35,11 +35,11 @@ const Product: FC = () => {
         leftContent={
           <Box display={"flex"} gap={4}>
             <Button onClick={() => setModal("create-product")}>
-              تعریف محصول
+              تعریف برند
             </Button>
           </Box>
         }
-        onClickFilter={() => setModal("filter-products")}
+        onClickFilter={() => setModal('filter-products')}
         table={table}
         pageCount={4}
       />
@@ -50,20 +50,11 @@ const Product: FC = () => {
         onClose={() => setModal(null)}
       >
         {modal === "create-product" ? (
-          <CreateProduct
-            onSubmit={handleCreateProduct}
-            onCancel={() => setModal(null)}
-          />
+          <CreateProduct onSubmit={handleCreateProduct} onCancel={() => setModal(null)} />
         ) : modal === "create-brand" ? (
-          <CreateBrand
-            onCancel={() => setModal(null)}
-            onSubmit={() => setModal(null)}
-          />
+          <CreateBrand onCancel={() => setModal(null)} onSubmit={() => setModal(null)} />
         ) : modal === "filter-products" ? (
-          <FilterProducts
-            onCancel={() => setModal(null)}
-            onSubmit={() => setModal(null)}
-          />
+          <FilterProducts onCancel={() => setModal(null)} onSubmit={() => setModal(null)} />
         ) : (
           <Box />
         )}

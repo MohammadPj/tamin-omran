@@ -93,8 +93,8 @@ const useBrochureType = () => {
       await QC.refetchQueries(['BrochureType'])
 
       setModal(null);
-    } catch (e) {
-      enqueueSnackbar("عملیات با مشکل مواجه شد", { variant: "error" });
+    } catch (e: any) {
+      enqueueSnackbar(e?.response?.data, { variant: "error" });
     }
   }
 

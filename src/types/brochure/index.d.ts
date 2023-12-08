@@ -1,12 +1,14 @@
-import { IAdminUser } from "~/types/admin";
 import {TLang} from "~/services/api/type";
 
 export interface IBrochure {
-  id: number;
+  _id: string;
+
   title: string;
-  createDate?: Date;
-  admin: IAdminUser;
-  category: string;
+  lang: TLang;
+  brochureType: IBrochureType
+  file: string
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IBrochureType {

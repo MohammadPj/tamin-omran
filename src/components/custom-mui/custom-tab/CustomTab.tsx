@@ -10,6 +10,7 @@ import { getUrlWithoutLang } from "~/utils/methods";
 export interface ITab {
   label: string;
   href?: string;
+  value?: string;
 }
 
 interface Props {
@@ -17,13 +18,21 @@ interface Props {
   onChange?: (value: number) => void;
   tabsProps?: TabsProps;
   tabProps?: TabProps;
+  defaultValue?: number;
 }
 
-const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps, tabProps }) => {
+const CustomTab: FC<Props> = ({
+  onChange,
+  tabs,
+  tabsProps,
+  tabProps,
+  defaultValue,
+}) => {
   const pathname = usePathname();
 
   const [value, setValue] = useState(
-    tabs.findIndex((tab) => tab?.href === getUrlWithoutLang(pathname))
+    defaultValue ||
+      tabs.findIndex((tab) => tab?.href === getUrlWithoutLang(pathname))
   );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

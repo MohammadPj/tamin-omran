@@ -9,8 +9,11 @@
     "lint": "next lint",
     "icons:create": "npx @svgr/cli --typescript -d ./src/components/icons/output ./src/components/icons/source --config-file ./src/components/icons/config/svgr-config.json --template src/components/icons/config/svg-template.cjs"
   },
-
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^40.1.0",
+    "@ckeditor/ckeditor5-image": "^40.1.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@ckeditor/ckeditor5-upload": "^40.1.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.14",
