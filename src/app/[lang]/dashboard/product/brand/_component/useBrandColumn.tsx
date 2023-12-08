@@ -1,36 +1,26 @@
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import {IProduct} from "~/types/product";
-import {Box} from "@mui/material";
+import { Box } from "@mui/material";
 import SvgDelete from "~/components/icons/output/Delete";
 import SvgEdit from "~/components/icons/output/Edit";
+import { ICategory } from "~/types/product";
 
-interface useProductColumnProps {
-  onDelete: (category: IProduct) => void;
-  onEdite: (category: IProduct) => void;
+interface useCategoryColumnProps {
+  onDelete: (category: ICategory) => void;
+  onEdite: (category: ICategory) => void;
 }
 
-const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
-  const columns: ColumnDef<IProduct, any>[] = [
+const useBrandColumn = ({ onEdite, onDelete }: useCategoryColumnProps) => {
+  const columns: ColumnDef<ICategory, any>[] = [
     {
       header: "شماره",
-      id: "number",
+      accessorKey: "id",
       cell: (cell) => cell.row.index + 1,
     },
     {
-      header: "نام محصول",
+      header: "نام دسته بندی",
       accessorKey: "title",
-      cell: (cell) => cell.getValue(),
-    },
-    {
-      header: "دسته بندی",
-      accessorKey: "category",
-      cell: (cell) => cell.getValue()?.title || "---",
-    },
-    {
-      header: "برند",
-      accessorKey: "brand",
-      cell: (cell) => cell.getValue()?.title || "---",
+      cell: (cell) => cell.getValue() || "---",
     },
     {
       header: "تاریخ بارگذاری",
@@ -39,11 +29,6 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
         cell.getValue()
           ? new Date(cell.getValue())?.toLocaleDateString("fa-IR")
           : "---",
-    },
-    {
-      header: "وضعیت محصول",
-      accessorKey: "isAvailable",
-      cell: (cell) => cell.getValue() ? 'موجود' : "نا موجود",
     },
     {
       header: "عملیات",
@@ -70,7 +55,7 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
     },
   ];
 
-  return {columns};
+  return { columns };
 };
 
-export default useProductColumn;
+export default useBrandColumn;

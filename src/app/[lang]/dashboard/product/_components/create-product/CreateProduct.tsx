@@ -15,33 +15,52 @@ import {
 import UploadProductSection from "~/app/[lang]/dashboard/product/_components/create-product/UploadProductSection";
 
 import LanguageTab from "~/components/common/tabs/LanguageTab";
-import {TLang} from "~/services/api/type";
+import { TLang } from "~/services/api/type";
 import CustomCKEditor from "~/components/common/custom-ckeditor/CustomCKEditor";
-
+import { IProduct } from "~/types/product";
+import { useGetBrands, useGetCategories } from "~/services/api/hooks";
 
 interface CreateProductProps {
   onSubmit?: (data: ICreateProductForm) => void;
   onCancel?: () => void;
+  defaultValue?: IProduct;
 }
 
 export interface ICreateProductForm {
   title: string;
   lang: TLang;
-  categoryId: string
-  brandId: string
-  images: string[]
-  isAvailable: boolean
+  categoryId: string;
+  brandId: string;
+  images: string[];
+  isAvailable: boolean;
   engineNumber: string;
-  technicalNumber: string
-  description: string
-  review: string
+  technicalNumber: string;
+  description: string;
+  review: string;
 }
 
-const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
+const CreateProduct: FC<CreateProductProps> = ({
+  onSubmit,
+  onCancel,
+  defaultValue,
+}) => {
+  const form = useForm<ICreateProductForm>({
+    defaultValues: {
+      lang: defaultValue?.lang || "fa",
+      title: defaultValue?.title!,
+      brandId: defaultValue?.brand._id!,
+      categoryId: defaultValue?.category._id,
+      description: defaultValue?.description,
+      engineNumber: defaultValue?.engineNumber,
+      // images: defaultValue?.images,
+      isAvailable: defaultValue?.isAvailable,
+      review: defaultValue?.review,
+      technicalNumber: defaultValue?.technicalNumber,
+    },
+  });
 
-  const form = useForm<ICreateProductForm>(
-    {defaultValues: {lang: 'fa'}}
-  );
+  const { data: categories } = useGetCategories({ lang: form.watch("lang") });
+  const { data: brands } = useGetBrands({ lang: form.watch("lang") });
 
   const inputList: IUseFormInput[] = [
     {
@@ -49,6 +68,10 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
       label: "دسته بندی محصول",
       placeholder: "انتخاب دسته بندی",
       type: "select",
+      options: categories?.map((category) => ({
+        label: category.title,
+        value: category._id,
+      })),
     },
     {
       name: "technicalNumber",
@@ -65,6 +88,10 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
       label: "برند محصول",
       placeholder: "انتخاب برند",
       type: "select",
+      options: brands?.map((brand) => ({
+        label: brand.title,
+        value: brand._id,
+      })),
     },
     {
       name: "description",
@@ -76,16 +103,19 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
   ];
 
   const handleChangeLanguage = (lang: TLang) => {
-    form.setValue('lang', lang)
-  }
+    form.setValue("lang", lang);
+  };
 
   const handleChangeReview = (value: string) => {
-    form.setValue('review', value)
-  }
+    form.setValue("review", value);
+  };
 
   return (
     <Stack width={800}>
-      <LanguageTab onChange={handleChangeLanguage} defaultValue={form.getValues("lang")} />
+      <LanguageTab
+        onChange={handleChangeLanguage}
+        defaultValue={form.getValues("lang")}
+      />
 
       <Grid container spacing={4}>
         <Grid item xs={7}>
@@ -115,14 +145,16 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
                 {...form.register("title")}
                 id={"product-name"}
                 variant={"filled"}
-                fullWidth
                 placeholder={"نام محصول را وارد کنید"}
+                fullWidth
               />
             </Box>
 
             <FormControlLabel
-              value="start"
-              control={<Switch color="primary" {...form.register("isAvailable")} />}
+              checked={form.watch('isAvailable')}
+              control={
+                <Switch color="primary" {...form.register("isAvailable")} />
+              }
               label={
                 <Typography fontWeight={500} fontSize={16}>
                   موجود
@@ -146,7 +178,7 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
       </Grid>
 
       <Box mt={4}>
-        <Box display={'flex'}>
+        <Box display={"flex"}>
           <Typography
             mb={2}
             fontWeight={500}
@@ -159,11 +191,10 @@ const CreateProduct: FC<CreateProductProps> = ({ onSubmit, onCancel }) => {
           </Typography>
         </Box>
 
-        <CustomCKEditor onChange={handleChangeReview} />
-
+        <CustomCKEditor onChange={handleChangeReview} defaultValue={defaultValue?.review} />
       </Box>
 
-      <Box display={"flex"} gap={4} mt={4} >
+      <Box display={"flex"} gap={4} mt={4}>
         {onSubmit && (
           <Button onClick={form.handleSubmit(onSubmit)} sx={{ height: 41 }}>
             ذخیره

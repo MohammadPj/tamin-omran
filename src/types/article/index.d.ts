@@ -1,8 +1,8 @@
 export interface IArticle {
-  id: number
+  _id: string
   title: string;
-  description?: string;
-  image?: string;
-  lastUpdate: Date
-  admin: any
+  lang: ELanguage;
+  content: string
+  createdAt: Date;
+  updatedAt: Date;
 }

@@ -1,8 +1,16 @@
 import {ColumnDef} from "@tanstack/react-table";
 import {IArticle} from "~/types/article";
-import SvgPlus from "~/components/icons/final/Plus";
+import {Box} from "@mui/material";
+import SvgDelete from "~/components/icons/output/Delete";
+import SvgEdit from "~/components/icons/output/Edit";
+import React from "react";
 
-const useArticleColumn = () => {
+interface useArticleColumnProps {
+  onDelete: (article: IArticle) => void;
+  onEdite: (article: IArticle) => void;
+}
+
+const useArticleColumn = ({ onEdite, onDelete }: useArticleColumnProps) => {
   const columns: ColumnDef<IArticle, any>[] = [
     {
       header: "شماره",
@@ -16,18 +24,33 @@ const useArticleColumn = () => {
     },
     {
       header: "تاریخ بارگذاری",
-      accessorKey: "lastUpdate",
-      cell: (cell) => cell.getValue()?.toLocaleDateString('fa-IR'),
-    },
-    {
-      header: "ادمین",
-      accessorKey: "admin",
-      cell: (cell) => cell.getValue(),
+      accessorKey: "createdAt",
+      cell: (cell) => cell.getValue()
+        ? new Date(cell.getValue())?.toLocaleDateString("fa-IR")
+        : "---",
     },
     {
       header: "عملیات",
       id: "action",
-      cell: (cell) => <SvgPlus width={14} />,
+      cell: (cell) => (
+        <Box display={"flex"} gap={2}>
+          <Box
+            sx={{ cursor: "pointer" }}
+            display={"flex"}
+            onClick={() => onDelete(cell.row.original)}
+          >
+            <SvgDelete primarycolor={"red"} width={18} />
+          </Box>
+
+          <Box
+            sx={{ cursor: "pointer" }}
+            display={"flex"}
+            onClick={() => onEdite(cell.row.original)}
+          >
+            <SvgEdit primarycolor={"grey"} width={18} />
+          </Box>
+        </Box>
+      ),
     },
   ];
 

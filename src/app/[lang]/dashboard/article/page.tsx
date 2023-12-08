@@ -6,21 +6,21 @@ import CustomTable from "~/components/custom-mui/custom-table/CustomTable";
 import useArticle from "~/app/[lang]/dashboard/article/useArticle";
 import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
 import CreateArticle from "~/app/[lang]/dashboard/article/_components/create-article/CreateArticle";
-
-type TProductModals = "create-article" | null;
+import ConfirmDelete from "~/components/common/modals/ConfirmDelete";
 
 const Article: FC = () => {
-  const [modal, setModal] = useState<TProductModals>();
 
-  const { table } = useArticle();
+  const {
+    table,
+    selectedArticle,
+    handleDeleteArticle,
+    handleEditArticle,
+    handleCreateArticle,
+    setModal,
+    modals,
+    modal,
+  } = useArticle();
 
-  const modals: { id: TProductModals; title: string }[] = [
-    { id: "create-article", title: "تعریف مقاله" },
-  ];
-
-  const handleCreateArticle = () => {
-    setModal(null);
-  };
 
   return (
     <>
@@ -38,12 +38,23 @@ const Article: FC = () => {
         open={!!modal}
         title={modals.find((m) => m.id === modal)?.title}
         onClose={() => setModal(null)}
-        boxProps={{maxWidth: 900, width: '90%'}}
+        boxProps={{width: '90%', maxWidth: 900}}
       >
         {modal === "create-article" ? (
           <CreateArticle
             onSubmit={handleCreateArticle}
+            onCancel={() => setModal(undefined)}
+          />
+        ) : modal === "edit-article" ? (
+          <CreateArticle
+            defaultValue={selectedArticle}
             onCancel={() => setModal(null)}
+            onSubmit={handleEditArticle}
+          />
+        ) : modal === "delete-article" ? (
+          <ConfirmDelete
+            onConfirm={handleDeleteArticle}
+            onCancel={() => setModal(undefined)}
           />
         ) : (
           <Box />

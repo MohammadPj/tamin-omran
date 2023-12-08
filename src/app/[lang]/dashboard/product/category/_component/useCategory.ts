@@ -3,7 +3,7 @@ import useCategoryColumn from "~/app/[lang]/dashboard/product/category/_componen
 import {useCreateCategory, useDeleteCategory, useEditeCategory, useGetCategories} from "~/services/api/hooks";
 import { useState } from "react";
 import { ICategory } from "~/types/product";
-import { ICreateCategoryForm } from "~/app/[lang]/dashboard/product/_components/create-category/CreateCategory";
+import { ICreateCategoryForm } from "~/app/[lang]/dashboard/product/category/_component/CreateCategory";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
 import {useCommon} from "~/store/common/commonSlice";
@@ -42,7 +42,7 @@ const useCategory = () => {
       enqueueSnackbar('دسته بندی با موفقیت ایجاد شد', { variant: "success" });
       setModal(undefined)
     } catch (e: any) {
-      enqueueSnackbar(e?.response?.message, { variant: "error" });
+      enqueueSnackbar(e?.response?.data, { variant: "error" });
     }
   };
 
@@ -52,10 +52,10 @@ const useCategory = () => {
 
       // @ts-ignore
       await QC.refetchQueries(['Category'])
-      enqueueSnackbar('دسته بندی با موفقیت ایجاد شد', { variant: "success" });
+      enqueueSnackbar('دسته بندی با موفقیت ویرایش شد', { variant: "success" });
       setModal(undefined)
     } catch (e: any) {
-      enqueueSnackbar(e?.response?.message, { variant: "error" });
+      enqueueSnackbar(e?.response?.data, { variant: "error" });
     }
 
   };
@@ -66,10 +66,10 @@ const useCategory = () => {
 
       // @ts-ignore
       await QC.refetchQueries(['Category'])
-      enqueueSnackbar('دسته بندی با موفقیت ایجاد شد', { variant: "success" });
+      enqueueSnackbar('دسته بندی با موفقیت حذف شد', { variant: "success" });
       setModal(undefined)
     } catch (e: any) {
-      enqueueSnackbar(e?.response?.message, { variant: "error" });
+      enqueueSnackbar(e?.response?.data, { variant: "error" });
     }
   };
 

@@ -37,21 +37,29 @@ export interface IEditBrochureBody extends IBrochureBody {
 }
 
 export interface IArticleParams extends ICommonFilterParams {
-  title: string;
   lang: TLang;
-  content: string
+  title?: string;
+  content?: string
 }
 
 export interface IArticleBody
   extends Omit<IArticleParams, keyof ICommonFilterParams> {}
 
+export interface IEditArticleBody extends IArticleBody {
+  id: string
+}
+
 export interface IBrandParams extends ICommonFilterParams {
-  title: string;
+  title?: string;
   lang: TLang;
 }
 
 export interface IBrandBody
   extends Omit<IBrandParams, keyof ICommonFilterParams> {}
+
+export interface IEditBrandBody extends IBrandBody{
+  id: string
+}
 
 export interface ICategoryParams extends ICommonFilterParams {
   title?: string;
@@ -66,20 +74,24 @@ export interface IEditCategoryBody extends ICategoryBody{
 }
 
 export interface IProductParams extends ICommonFilterParams {
-  title: string;
+  title?: string;
   lang: TLang;
-  categoryId: string
-  brandId: string
-  images: string[]
-  isAvailable: boolean
-  engineNumber: string;
-  technicalNumber: string
-  description: string
-  review: string
+  categoryId?: string
+  brandId?: string
+  images?: string[]
+  isAvailable?: boolean
+  engineNumber?: string;
+  technicalNumber?: string
+  description?: string
+  review?: string
 }
 
 export interface IProductBody
   extends Omit<IProductParams, keyof ICommonFilterParams> {}
+
+export interface IEditProductBody extends IProductBody {
+  id: string
+}
 
 export interface ILoginBody {
   email: string;

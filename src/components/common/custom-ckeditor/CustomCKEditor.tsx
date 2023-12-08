@@ -6,16 +6,17 @@ import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 
 interface CustomCKEditorProps {
   onChange: (data: string) => void
+  defaultValue?: string
 }
 
-const CustomCKEditor: FC<CustomCKEditorProps> = ({onChange}) => {
+const CustomCKEditor: FC<CustomCKEditorProps> = ({onChange, defaultValue}) => {
   const editorRef = useRef<any>();
 
   return (
-    <div>
       <CKEditor
         ref={editorRef}
         editor={ClassicEditor}
+        data={defaultValue}
         config={{
           toolbar: {
             items: [
@@ -95,7 +96,6 @@ const CustomCKEditor: FC<CustomCKEditorProps> = ({onChange}) => {
           // console.log( 'Focus.', editor );
         }}
       />
-    </div>
   );
 };
 

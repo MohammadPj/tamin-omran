@@ -37,3 +37,7 @@ a {
 /*input:-webkit-autofill{*/
 /*  -webkit-text-fill-color: unset  !important;*/
 /*}*/
+
+.ck-editor__editable_inline {
+  height: 200px;
+}

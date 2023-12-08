@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
 import useCategory from "~/app/[lang]/dashboard/product/category/_component/useCategory";
-import CreateCategory from "~/app/[lang]/dashboard/product/_components/create-category/CreateCategory";
+import CreateCategory from "~/app/[lang]/dashboard/product/category/_component/CreateCategory";
 import ConfirmDelete from "~/components/common/modals/ConfirmDelete";
 
 const Product: FC = () => {

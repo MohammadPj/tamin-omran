@@ -2,14 +2,25 @@ import { http } from "~/services/core/http";
 import { routes } from "~/services/api/routes";
 import {
   IArticleBody,
-  IArticleParams, IBrandBody, IBrandParams,
+  IArticleParams,
+  IBrandBody,
+  IBrandParams,
   IBrochureBody,
   IBrochureParams,
   IBrochureTypeBody,
-  IBrochureTypeParams, ICategoryBody, ICategoryParams, IEditBrochureBody, IEditBrochureTypeBody, IEditCategoryBody,
-  ILoginBody, IProductBody, IProductParams,
+  IBrochureTypeParams,
+  ICategoryBody,
+  ICategoryParams, IEditArticleBody,
+  IEditBrandBody,
+  IEditBrochureBody,
+  IEditBrochureTypeBody,
+  IEditCategoryBody, IEditProductBody,
+  ILoginBody,
+  IProductBody,
+  IProductParams,
 } from "~/services/api/type";
 import {IBrochure, IBrochureType} from "~/types/brochure";
+import {IBrand, ICategory} from "~/types/product";
 
 
 // ---------------------------  BrochureTypes  ------------------------------
@@ -48,40 +59,40 @@ export const deleteBrochure = (brochureId: string) =>
 
 // ---------------------------  Article ------------------------------
 export const getArticles = (params: IArticleParams) =>
-  http.get(routes.brochure, { params });
+  http.get(routes.article, { params });
 
-export const getSingleArticle = (brochureId: string) =>
-  http.get(routes.singleArticle(brochureId));
+export const getSingleArticle = (articleId: string) =>
+  http.get(routes.singleArticle(articleId));
 
 export const createArticle = (body: IArticleBody) =>
-  http.post(routes.brochure, body);
+  http.post(routes.article, body);
 
-export const editeArticle = (body: IArticleBody) =>
-  http.put(routes.brochure, body);
+export const editeArticle = ({id, ...body}: IEditArticleBody): Promise<any> =>
+  http.put(routes.singleArticle(id), body);
 
-export const deleteArticle = (brochureId: string) =>
-  http.delete(routes.singleArticle(brochureId));
+export const deleteArticle = (articleId: string) =>
+  http.delete(routes.singleArticle(articleId));
 
 
 // ---------------------------  Brand ------------------------------
-export const getBrands = (params: IBrandParams) =>
-  http.get(routes.brochure, { params });
+export const getBrands = (params: IBrandParams): Promise<IBrand[]> =>
+  http.get(routes.brand, { params });
 
-export const getSingleBrand = (brochureId: string) =>
-  http.get(routes.singleBrand(brochureId));
+export const getSingleBrand = (brandId: string) =>
+  http.get(routes.singleBrand(brandId));
 
 export const createBrand = (body: IBrandBody) =>
-  http.post(routes.brochure, body);
+  http.post(routes.brand, body);
 
-export const editeBrand = (body: IBrandBody) =>
-  http.put(routes.brochure, body);
+export const editeBrand = ({id, ...body}: IEditBrandBody) =>
+  http.put(routes.singleBrand(id), body);
 
-export const deleteBrand = (brochureId: string) =>
-  http.delete(routes.singleBrand(brochureId));
+export const deleteBrand = (brandId: string) =>
+  http.delete(routes.singleBrand(brandId));
 
 
 // ---------------------------  Category ------------------------------
-export const getCategories = (params: ICategoryParams) =>
+export const getCategories = (params: ICategoryParams): Promise<ICategory[]> =>
   http.get(routes.category, { params });
 
 export const getSingleCategory = (brochureId: string) =>
@@ -99,19 +110,19 @@ export const deleteCategory = (brochureId: string) =>
 
 // ---------------------------  Product ------------------------------
 export const getProducts = (params: IProductParams) =>
-  http.get(routes.brochure, { params });
+  http.get(routes.product, { params });
 
-export const getSingleProduct = (brochureId: string) =>
-  http.get(routes.singleProduct(brochureId));
+export const getSingleProduct = (productId: string) =>
+  http.get(routes.singleProduct(productId));
 
 export const createProduct = (body: IProductBody) =>
-  http.post(routes.brochure, body);
+  http.post(routes.product, body);
 
-export const editeProduct = (body: IProductBody) =>
-  http.put(routes.brochure, body);
+export const editeProduct = ({id, ...body}: IEditProductBody) =>
+  http.put(routes.singleProduct(id), body);
 
-export const deleteProduct = (brochureId: string) =>
-  http.delete(routes.singleProduct(brochureId));
+export const deleteProduct = (productId: string) =>
+  http.delete(routes.singleProduct(productId));
 
 
 // ---------------------------  Login ------------------------------
