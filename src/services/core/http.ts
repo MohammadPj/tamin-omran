@@ -15,7 +15,7 @@ http.interceptors.request.use(
       ...config.headers,
       "x-auth-token": store.getState().user.token,
       Accept: "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": config?.headers?.["Content-Type"] || "application/json",
     },
   }),
 

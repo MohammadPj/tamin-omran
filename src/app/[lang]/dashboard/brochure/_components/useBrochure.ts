@@ -57,8 +57,16 @@ const useBrochure = () => {
   };
 
   const handleCreateBrochure = async (values: ICreateBrochureForm) => {
+    console.log('values', values)
+
+    const formData = new FormData()
+    formData.append("file", values.file!)
+    formData.append("title", values.title!)
+    formData.append("brochureTypeId", values.brochureTypeId!)
+    formData.append("lang", values.lang!)
+
     try {
-      await mutateCreateBrochure({ ...values });
+      await mutateCreateBrochure(formData);
     } catch (ex: any) {
       enqueueSnackbar(ex?.message, { variant: "error" });
     }

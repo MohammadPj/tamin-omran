@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, {ChangeEvent, FC} from "react";
 import CustomTab, { ITab } from "~/components/custom-mui/custom-tab/CustomTab";
 import InputListWithUseForm from "~/components/common/input-list/with-useForm/InputListWithUseForm";
 import Box from "@mui/material/Box";
@@ -18,6 +18,7 @@ interface CreateBrochureProps {
 }
 
 export interface ICreateBrochureForm {
+  file?: File
   title: string;
   brochureTypeId: string;
   lang: TLang;
@@ -63,6 +64,11 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
     }
   };
 
+  const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e?.target?.files?.[0];
+
+    form.setValue('file', file)
+  }
   return (
     <Box component={"form"} onSubmit={form.handleSubmit(handleSubmit)}>
       <LanguageTab
@@ -77,7 +83,11 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
         gridContainerProps={{ mb: 4 }}
       />
 
+      <input type={'file'} id={'uploader'} style={{display: 'none'}} onChange={handleChangeFile}/>
+
       <Stack
+        component={'label'}
+        htmlFor={'uploader'}
         width={"100%"}
         height={300}
         borderRadius={2}

@@ -1,4 +1,4 @@
-import { http } from "~/services/core/http";
+import {baseURL, http} from "~/services/core/http";
 import { routes } from "~/services/api/routes";
 import {
   IArticleBody,
@@ -21,6 +21,7 @@ import {
 } from "~/services/api/type";
 import {IBrochure, IBrochureType} from "~/types/brochure";
 import {IBrand, ICategory, IProduct} from "~/types/product";
+import axios from "axios";
 
 
 // ---------------------------  BrochureTypes  ------------------------------
@@ -47,8 +48,8 @@ export const getBrochures = (params: IBrochureParams) =>
 export const getSingleBrochure = (brochureId: string) =>
   http.get(routes.singleBrochure(brochureId));
 
-export const createBrochure = (body: IBrochureBody): Promise<IBrochure> =>
-  http.post(routes.brochure, body);
+export const createBrochure = (body: FormData): Promise<IBrochure> =>
+  http.post(routes.brochure, body, {headers: {"Content-Type": "multipart/form-data"}});
 
 export const editeBrochure = ({id, ...body}: IEditBrochureBody) =>
   http.put(routes.singleBrochure(id), body);
