@@ -76,8 +76,8 @@ export interface IEditCategoryBody extends ICategoryBody{
 export interface IProductParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;
-  categoryId?: string
-  brandId?: string
+  category?: string
+  brand?: string
   images?: string[]
   isAvailable?: boolean
   engineNumber?: string;
@@ -87,7 +87,10 @@ export interface IProductParams extends ICommonFilterParams {
 }
 
 export interface IProductBody
-  extends Omit<IProductParams, keyof ICommonFilterParams> {}
+  extends Omit<IProductParams, keyof ICommonFilterParams | 'category' | 'brand'> {
+  categoryId: string;
+  brandId: string
+}
 
 export interface IEditProductBody extends IProductBody {
   id: string

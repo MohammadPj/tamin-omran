@@ -1,8 +1,10 @@
 import axios from "axios";
 import {store} from "~/store/store";
 
+export const baseURL = "http://localhost:4000/api/"
+
 export const http = axios.create({
-  baseURL: "http://localhost:4000/api/",
+  baseURL,
 });
 
 http.interceptors.request.use(

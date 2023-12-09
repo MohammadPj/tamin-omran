@@ -8,6 +8,12 @@ interface ProductInfoProps {
 }
 
 const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
+
+  const specifications = [
+    {title: 'شماره فنی', value: product.technicalNumber},
+    {title: 'شماره موتور', value: product.engineNumber},
+  ]
+
   return (
     <Stack
       bgcolor={'background.1'}
@@ -18,15 +24,15 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
     >
       <Box mb={12}>
         <Typography fontWeight={700} fontSize={18} mb={2}>
-          {product?.name}
+          {product?.title}
         </Typography>
         <Typography fontWeight={400} fontSize={14} color={'text.secondary'}>
-          کد کالا:{product.uniqueCode}
+          کد کالا:{product._id}
         </Typography>
       </Box>
 
       <Stack mb={6} gap={4}>
-        {product.specifications?.map((spec, i) => (
+        {specifications?.map((spec, i) => (
           <Box display={'flex'} key={i} gap={2}>
             <Typography fontWeight={500} fontSize={16}>
               {spec.title}:
@@ -62,7 +68,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
           <Typography fontWeight={400} fontSize={14} color={'text.secondary'}>۸۸۲۴۵۶۷۸-۸۸۳۴۶۷۸</Typography>
         </Box>
 
-        <Button size={'small'} sx={{display: 'flex', gap: 2}}>
+        <Button size={'small'} sx={{display: 'flex', gap: 2}} disabled={true}>
           گفتگو با پشتیبانی
           <SvgArrowLeft primarycolor={'white'} width={24} height={24}  />
         </Button>

@@ -6,51 +6,27 @@ import {getDictionary} from "~/i18n";
 import CustomLink from "~/components/common/custom-link/CustomLink";
 import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
 import {useCommon} from "~/store/common/commonSlice";
+import {useGetProducts} from "~/services/api/hooks";
 
 const NewProducts: FC = () => {
 
   const dictionary = getDictionary();
   const {isRtl} = useCommon()
-
-  const products = [
-    {
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (1).jpg",
-    },
-    {
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (2).jpg",
-    },
-    {
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (3).jpg",
-    },
-    {
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (4).jpg",
-    },
-    {
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (5).jpg",
-    },
-  ];
+  const {data: products} = useGetProducts({lang: 'fa', limit: 5, page: 1})
 
   return (
     <Box mt={11}>
       <CustomDivider title={dictionary("home.newProducts") as string} showMoreHref={"/products"} />
 
       <Grid container spacing={4} mt={6} mb={{xs: 2, sm: 0}}>
-        {products.map((product, i) => (
+        {products?.map((product, i) => (
           <Grid key={i} item xs={12} sm={2.4}>
           <ProductCard
-            title={product.title}
-            subtitle={product.subtitle}
-            image={product.image}
+            title={product?.title}
+            subtitle={product?.description}
+            image={product?.images[0]}
+            isAvailable={product.isAvailable}
+            id={product._id}
           />
           </Grid>
         ))}

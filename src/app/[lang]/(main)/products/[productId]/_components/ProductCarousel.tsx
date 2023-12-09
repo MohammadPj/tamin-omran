@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from 'swiper/modules';
 
-import ProductCarouselSkeleton from "~/app/[lang]/(main)/products/[product]/_components/ProductCarouselSkeleton";
+import ProductCarouselSkeleton from "~/app/[lang]/(main)/products/[productId]/_components/ProductCarouselSkeleton";
 
 interface ProductCarouselProps {
   images?: string[] | undefined;

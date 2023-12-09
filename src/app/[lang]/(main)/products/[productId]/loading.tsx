@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Container, Grid, Skeleton} from "@mui/material";
-import ProductCarouselSkeleton from "~/app/[lang]/(main)/products/[product]/_components/ProductCarouselSkeleton";
+import ProductCarouselSkeleton from "~/app/[lang]/(main)/products/[productId]/_components/ProductCarouselSkeleton";
 
 const ProductsLoadingPage = () => {
   return (

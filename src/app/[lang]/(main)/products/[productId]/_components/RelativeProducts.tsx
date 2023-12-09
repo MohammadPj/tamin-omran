@@ -6,10 +6,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard from "~/components/common/product-card/ProductCard";
 import Link from "next/link";
 import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
+import {useGetProducts} from "~/services/api/hooks";
+import {IProduct} from "~/types/product";
 
-interface RelativeProductsProps {}
+interface RelativeProductsProps {
+  product: IProduct
+}
 
-const RelativeProducts: FC<RelativeProductsProps> = () => {
+const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
+
+  const {data: products} = useGetProducts({lang: 'fa', category: product.category._id})
+  console.log('products', products)
+
   const relativeProducts = [
     {
       id: 1,
@@ -105,21 +113,20 @@ const RelativeProducts: FC<RelativeProductsProps> = () => {
               slidesPerView={5}
               spaceBetween={8}
             >
-              {relativeProducts?.map((product, i) => (
+              {products?.map((product, i) => (
                 <SwiperSlide
                   key={i}
                   style={{ display: "flex", cursor: "pointer" }}
                 >
-                  <Link
-                    href={`/products/${product.id}` as any}
-                    style={{ width: "100%" }}
-                  >
+
                     <ProductCard
                       title={product.title}
-                      subtitle={product.subtitle}
-                      image={product.image}
+                      subtitle={product.description}
+                      image={''}
+                      id={product._id}
+                      isAvailable={product.isAvailable}
                     />
-                  </Link>
+
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -156,16 +163,18 @@ const RelativeProducts: FC<RelativeProductsProps> = () => {
           </Box>
 
           <Stack display={{ xs: "flex", sm: "none" }} gap={4}>
-            {relativeProducts?.map((product, i) => (
+            {products?.map((product, i) => (
               <Link
                 key={i}
-                href={`/products/${product.id}` as any}
+                href={`/products/${product._id}` as any}
                 style={{ width: "100%" }}
               >
                 <ProductCard
                   title={product.title}
-                  subtitle={product.subtitle}
-                  image={product.image}
+                  subtitle={product.description}
+                  image={''}
+                  id={product._id}
+                  isAvailable={product.isAvailable}
                 />
               </Link>
             ))}

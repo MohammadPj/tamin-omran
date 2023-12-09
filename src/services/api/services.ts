@@ -20,7 +20,7 @@ import {
   IProductParams,
 } from "~/services/api/type";
 import {IBrochure, IBrochureType} from "~/types/brochure";
-import {IBrand, ICategory} from "~/types/product";
+import {IBrand, ICategory, IProduct} from "~/types/product";
 
 
 // ---------------------------  BrochureTypes  ------------------------------
@@ -109,10 +109,10 @@ export const deleteCategory = (brochureId: string) =>
 
 
 // ---------------------------  Product ------------------------------
-export const getProducts = (params: IProductParams) =>
+export const getProducts = (params: IProductParams): Promise<IProduct[]> =>
   http.get(routes.product, { params });
 
-export const getSingleProduct = (productId: string) =>
+export const getSingleProduct = (productId: string): Promise<IProduct> =>
   http.get(routes.singleProduct(productId));
 
 export const createProduct = (body: IProductBody) =>
