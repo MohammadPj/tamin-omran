@@ -6,7 +6,7 @@ export interface IBrochure {
   title: string;
   lang: TLang;
   brochureType: IBrochureType
-  file: string
+  file: File
   createdAt: string;
   updatedAt: string;
 }

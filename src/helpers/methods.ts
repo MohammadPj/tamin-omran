@@ -50,3 +50,9 @@ export const handleDownload = async (link: string, nameOfDownload: string) => {
   document.body.removeChild(anchorElement);
   window.URL.revokeObjectURL(href);
 }
+
+export const handleAppendFormData = (formData: FormData, name: string, value: any) => {
+  if(value !== undefined) {
+    formData.append(name, value)
+  }
+}

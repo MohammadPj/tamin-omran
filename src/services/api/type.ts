@@ -26,7 +26,7 @@ export interface IBrochureParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;
   brochureType?: string;
-  file?: string;
+  file?: File;
 }
 
 export interface IBrochureBody
@@ -45,8 +45,9 @@ export interface IArticleParams extends ICommonFilterParams {
 export interface IArticleBody
   extends Omit<IArticleParams, keyof ICommonFilterParams> {}
 
-export interface IEditArticleBody extends IArticleBody {
-  id: string
+export interface IEditArticleBody {
+  id: string;
+  formData: FormData
 }
 
 export interface IBrandParams extends ICommonFilterParams {

@@ -57,7 +57,6 @@ const useBrochure = () => {
   };
 
   const handleCreateBrochure = async (values: ICreateBrochureForm) => {
-    console.log('values', values)
 
     const formData = new FormData()
     formData.append("file", values.file!)
@@ -77,7 +76,7 @@ const useBrochure = () => {
     enqueueSnackbar("عملیات با موفقیت انجام شد", { variant: "success" });
   };
 
-  const handleEditeBrochure = async (brochure: IBrochureBody) => {
+  const handleEditeBrochure = async (brochure: ICreateBrochureForm) => {
     console.log('edited')
     try {
       await mutateEditBrochure({id: selectedBrochure?._id!, ...brochure});

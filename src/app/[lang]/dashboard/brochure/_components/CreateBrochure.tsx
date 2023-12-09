@@ -1,5 +1,4 @@
-import React, {ChangeEvent, FC} from "react";
-import CustomTab, { ITab } from "~/components/custom-mui/custom-tab/CustomTab";
+import React, { ChangeEvent, FC, useState } from "react";
 import InputListWithUseForm from "~/components/common/input-list/with-useForm/InputListWithUseForm";
 import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
@@ -10,6 +9,7 @@ import SvgDownload from "~/components/icons/final/Download";
 import { TLang } from "~/services/api/type";
 import LanguageTab from "~/components/common/tabs/LanguageTab";
 import { useGetBrochureTypes } from "~/services/api/hooks";
+import BrochureUploader from "~/components/common/uploader/BrochureUploader";
 
 interface CreateBrochureProps {
   onSubmit?: (data: ICreateBrochureForm) => void;
@@ -18,7 +18,7 @@ interface CreateBrochureProps {
 }
 
 export interface ICreateBrochureForm {
-  file?: File
+  file?: File;
   title: string;
   brochureTypeId: string;
   lang: TLang;
@@ -64,11 +64,16 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
     }
   };
 
-  const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e?.target?.files?.[0];
+  const handleChangeFile = (file: File) => {
+    if (!file) return;
+    form.setValue("file", file);
+  };
 
-    form.setValue('file', file)
-  }
+  const handleDeleteFile = () => {
+    form.setValue("file", undefined);
+  };
+
+  console.log('defaultValue', defaultValue)
   return (
     <Box component={"form"} onSubmit={form.handleSubmit(handleSubmit)}>
       <LanguageTab
@@ -83,32 +88,11 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
         gridContainerProps={{ mb: 4 }}
       />
 
-      <input type={'file'} id={'uploader'} style={{display: 'none'}} onChange={handleChangeFile}/>
-
-      <Stack
-        component={'label'}
-        htmlFor={'uploader'}
-        width={"100%"}
-        height={300}
-        borderRadius={2}
-        border={"1px dotted"}
-        borderColor={"grey.3"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        gap={2}
-      >
-        <SvgDownload />
-
-        <Typography color={"grey.4"}>
-          فایل مورد نظر را بکشید و در این قسمت بیندازید
-        </Typography>
-
-        <Typography>یا</Typography>
-
-        <Button size={"small"} color={"secondary"}>
-          بارگذاری از فایل ها
-        </Button>
-      </Stack>
+      <BrochureUploader
+        onChange={handleChangeFile}
+        onDelete={handleDeleteFile}
+        defaultFile={defaultValue?.file}
+      />
 
       <Box display={"flex"} gap={4} mt={4}>
         {onSubmit && (

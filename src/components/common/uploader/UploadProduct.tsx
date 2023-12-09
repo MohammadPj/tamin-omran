@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from "react";
 import Box from "@mui/material/Box";
 import SvgPlus from "~/components/icons/final/Plus";
-import { Typography } from "@mui/material";
+import {Typography} from "@mui/material";
 
 interface UploadProductProps {
   id: string;
@@ -45,7 +45,10 @@ const UploadProduct: FC<UploadProductProps> = ({
         )}
       </Box>
     </div>
+
+
   );
 };
+
 
 export default UploadProduct;

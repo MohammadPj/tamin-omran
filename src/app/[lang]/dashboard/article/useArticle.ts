@@ -13,6 +13,7 @@ import {useCommon} from "~/store/common/commonSlice";
 import {IArticle} from "~/types/article";
 import useArticleColumn from "~/app/[lang]/dashboard/article/useArticleColumn";
 import {ICreateArticleForm} from "~/app/[lang]/dashboard/article/_components/create-article/CreateArticle";
+import {handleAppendFormData} from "~/helpers/methods";
 
 type TArticleModals =
   | "create-article"
@@ -40,8 +41,15 @@ const useArticle = () => {
   ];
 
   const handleCreateArticle = async (values: ICreateArticleForm) => {
+
+    const formData = new FormData()
+    formData.append("image", values.imageFile!)
+    formData.append("title", values.title!)
+    formData.append("content", values.content!)
+    formData.append("lang", values.lang!)
+
     try {
-      await mutateCreateArticle(values);
+      await mutateCreateArticle(formData);
 
       // @ts-ignore
       await QC.refetchQueries(['Article'])
@@ -53,8 +61,14 @@ const useArticle = () => {
   };
 
   const handleEditArticle = async (values: ICreateArticleForm) => {
+    const formData = new FormData()
+    handleAppendFormData(formData, "image", values.imageFile)
+    handleAppendFormData(formData, "title", values.title)
+    handleAppendFormData(formData, "content", values.content)
+    handleAppendFormData(formData, "lang", values.lang)
+
     try {
-      await mutateEditArticle({id: selectedArticle?._id!, ...values})
+      await mutateEditArticle({id: selectedArticle?._id!, formData})
 
       // @ts-ignore
       await QC.refetchQueries(['Article'])

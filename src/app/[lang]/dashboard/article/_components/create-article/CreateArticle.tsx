@@ -8,17 +8,20 @@ import { useForm } from "react-hook-form";
 import { TLang } from "~/services/api/type";
 import CustomCKEditor from "~/components/common/custom-ckeditor/CustomCKEditor";
 import LanguageTab from "~/components/common/tabs/LanguageTab";
+import UploadArticleImage from "~/app/[lang]/dashboard/article/_components/create-article/UploadArticleImage";
+import { IArticle } from "~/types/article";
 
 interface CreateArticleProps {
   onSubmit?: (data: ICreateArticleForm) => void;
   onCancel?: () => void;
-  defaultValue?: ICreateArticleForm;
+  defaultValue?: IArticle;
 }
 
 export interface ICreateArticleForm {
   title: string;
   lang: TLang;
   content: string;
+  imageFile?: File | null;
 }
 
 const CreateArticle: FC<CreateArticleProps> = ({
@@ -28,6 +31,7 @@ const CreateArticle: FC<CreateArticleProps> = ({
 }) => {
   const inputList: IUseFormInput[] = [
     {
+      rules: { required: "نام مقاله اجباری است" },
       name: "title",
       label: "نام مقاله",
     },
@@ -39,6 +43,14 @@ const CreateArticle: FC<CreateArticleProps> = ({
       title: defaultValue?.title,
     },
   });
+
+  const handleChangeImageFile = (file: File) => {
+    form.setValue("imageFile", file);
+  };
+
+  const handleDeleteImageFile = () => {
+    form.setValue("imageFile", null);
+  };
 
   return (
     <Stack minHeight={"60vh"}>
@@ -54,6 +66,14 @@ const CreateArticle: FC<CreateArticleProps> = ({
         gridContainerProps={{ mb: 4 }}
       />
 
+      <Box pb={4}>
+        <UploadArticleImage
+          defaultImage={defaultValue?.image}
+          onChange={handleChangeImageFile}
+          onDelete={handleDeleteImageFile}
+        />
+      </Box>
+
       <Box flexGrow={1}>
         <CustomCKEditor
           defaultValue={defaultValue?.content}
@@ -61,9 +81,16 @@ const CreateArticle: FC<CreateArticleProps> = ({
         />
       </Box>
 
-      <Box display={"flex"} gap={4} mt={4}>
+      <Box display={"flex"} gap={4} py={4}>
         {onSubmit && (
-          <Button onClick={form.handleSubmit(onSubmit)} sx={{ height: 41 }}>
+          <Button
+            onClick={form.handleSubmit(onSubmit)}
+            sx={{ height: 41 }}
+            disabled={
+              !form.formState.isValid ||
+              !form.watch("content")
+            }
+          >
             ذخیره
           </Button>
         )}

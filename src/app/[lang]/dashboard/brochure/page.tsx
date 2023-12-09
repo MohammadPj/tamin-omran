@@ -60,6 +60,7 @@ const Brochure: FC = () => {
               lang: selectedBrochure?.lang!,
               brochureTypeId: selectedBrochure?.brochureType?._id!,
               title: selectedBrochure?.title!,
+              file: selectedBrochure?.file!
             }}
           />
         ) : (
