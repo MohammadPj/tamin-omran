@@ -26,13 +26,13 @@ export interface IBrochureParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;
   brochureType?: string;
-  file?: File;
+  file?: string;
 }
 
-export interface IBrochureBody
+export interface ICreateBrochureBody
   extends Omit<IBrochureParams, keyof ICommonFilterParams> {}
 
-export interface IEditBrochureBody extends IBrochureBody {
+export interface IEditBrochureBody extends ICreateBrochureBody {
   id: string
 }
 
@@ -100,4 +100,10 @@ export interface IEditProductBody extends IProductBody {
 export interface ILoginBody {
   email: string;
   password: string;
+}
+
+export interface IRegisterBody {
+  name: string;
+  email: string;
+  password: string
 }

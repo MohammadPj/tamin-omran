@@ -2,7 +2,7 @@ import useTable from "~/components/custom-mui/custom-table/components/useTable";
 import { IBrochure } from "~/types/brochure";
 import useBrochureColumn from "~/app/[lang]/dashboard/brochure/_components/useBrochureColumn";
 import {
-  useCreateBrochure,
+  useCreateBrochure, useCreateFile,
   useDeleteBrochure,
   useEditeBrochure,
   useGetBrochures,
@@ -12,7 +12,6 @@ import { useSnackbar } from "notistack";
 import { ICreateBrochureForm } from "~/app/[lang]/dashboard/brochure/_components/CreateBrochure";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import {IBrochureBody} from "~/services/api/type";
 
 type TProductModals =
   | "create-brochure"
@@ -28,6 +27,8 @@ const useBrochure = () => {
   const { mutateAsync: mutateCreateBrochure } = useCreateBrochure();
   const { mutateAsync: mutateEditBrochure } = useEditeBrochure();
   const { mutateAsync: mutateDeleteBrochure } = useDeleteBrochure();
+
+  const {mutateAsync: mutateCreateFile} = useCreateFile()
 
   const { data: brochures } = useGetBrochures({ lang });
 
@@ -60,12 +61,13 @@ const useBrochure = () => {
 
     const formData = new FormData()
     formData.append("file", values.file!)
-    formData.append("title", values.title!)
-    formData.append("brochureTypeId", values.brochureTypeId!)
-    formData.append("lang", values.lang!)
+
+    const fileRes = await mutateCreateFile(formData)
+
+    const {file, ...body} = {...values}
 
     try {
-      await mutateCreateBrochure(formData);
+      await mutateCreateBrochure({file: fileRes.link, ...body});
     } catch (ex: any) {
       enqueueSnackbar(ex?.message, { variant: "error" });
     }

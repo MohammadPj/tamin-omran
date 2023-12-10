@@ -1,16 +1,14 @@
-import { baseURL, http } from "~/services/core/http";
+import {  http } from "~/services/core/http";
 import { routes } from "~/services/api/routes";
 import {
-  IArticleBody,
   IArticleParams,
   IBrandBody,
   IBrandParams,
-  IBrochureBody,
   IBrochureParams,
   IBrochureTypeBody,
   IBrochureTypeParams,
   ICategoryBody,
-  ICategoryParams,
+  ICategoryParams, ICreateBrochureBody,
   IEditArticleBody,
   IEditBrandBody,
   IEditBrochureBody,
@@ -20,6 +18,7 @@ import {
   ILoginBody,
   IProductBody,
   IProductParams,
+  IRegisterBody,
 } from "~/services/api/type";
 import { IBrochure, IBrochureType } from "~/types/brochure";
 import { IBrand, ICategory, IProduct } from "~/types/product";
@@ -42,14 +41,14 @@ export const editeBrochureType = ({ id, ...body }: IEditBrochureTypeBody) =>
 export const deleteBrochureType = (brochureTypeId: string) =>
   http.delete(routes.singleBrochureType(brochureTypeId));
 
-// ---------------------------  Brochure ------------------------------
+// ---------------------------  Brochure  ------------------------------
 export const getBrochures = (params: IBrochureParams) =>
   http.get(routes.brochure, { params });
 
 export const getSingleBrochure = (brochureId: string) =>
   http.get(routes.singleBrochure(brochureId));
 
-export const createBrochure = (body: FormData): Promise<IBrochure> =>
+export const createBrochure = (body: ICreateBrochureBody): Promise<IBrochure> =>
   http.post(routes.brochure, body, {
     headers: { "Content-Type": "multipart/form-data" },
   });
@@ -60,7 +59,7 @@ export const editeBrochure = ({ id, ...body }: IEditBrochureBody) =>
 export const deleteBrochure = (brochureId: string) =>
   http.delete(routes.singleBrochure(brochureId));
 
-// ---------------------------  Article ------------------------------
+// ---------------------------  Article  ------------------------------
 export const getArticles = (params: IArticleParams) =>
   http.get(routes.article, { params });
 
@@ -83,7 +82,7 @@ export const editeArticle = ({
 export const deleteArticle = (articleId: string) =>
   http.delete(routes.singleArticle(articleId));
 
-// ---------------------------  Brand ------------------------------
+// ---------------------------  Brand  ------------------------------
 export const getBrands = (params: IBrandParams): Promise<IBrand[]> =>
   http.get(routes.brand, { params });
 
@@ -98,7 +97,7 @@ export const editeBrand = ({ id, ...body }: IEditBrandBody) =>
 export const deleteBrand = (brandId: string) =>
   http.delete(routes.singleBrand(brandId));
 
-// ---------------------------  Category ------------------------------
+// ---------------------------  Category  ------------------------------
 export const getCategories = (params: ICategoryParams): Promise<ICategory[]> =>
   http.get(routes.category, { params });
 
@@ -114,7 +113,7 @@ export const editeCategory = ({ id, ...body }: IEditCategoryBody) =>
 export const deleteCategory = (brochureId: string) =>
   http.delete(routes.singleCategory(brochureId));
 
-// ---------------------------  Product ------------------------------
+// ---------------------------  Product  ------------------------------
 export const getProducts = (params: IProductParams): Promise<IProduct[]> =>
   http.get(routes.product, { params });
 
@@ -130,6 +129,34 @@ export const editeProduct = ({ id, ...body }: IEditProductBody) =>
 export const deleteProduct = (productId: string) =>
   http.delete(routes.singleProduct(productId));
 
+// ---------------------------  File  ------------------------------
+export const getFiles = (): Promise<any> => http.get(routes.file);
+
+export const getSingleFile = (fileId: string) =>
+  http.get(routes.singleFile(fileId));
+
+export const createFile = (body: FormData): Promise<{link: string}> =>
+  http.post(routes.file, body, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const editeFile = ({
+  id,
+  formData,
+}: {
+  id: string;
+  formData: FormData;
+}) =>
+  http.put(routes.singleFile(id), formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const deleteFile = (fileId: string) =>
+  http.delete(routes.singleFile(fileId));
+
 // ---------------------------  Login ------------------------------
 export const login = (body: ILoginBody): Promise<{ token: string }> =>
   http.post(routes.login, body);
+
+export const register = (body: IRegisterBody): Promise<{ token: string }> =>
+  http.post(routes.register, body);

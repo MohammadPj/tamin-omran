@@ -4,33 +4,33 @@ import {
   createBrand,
   createBrochure,
   createBrochureType,
-  createCategory,
+  createCategory, createFile,
   createProduct,
   deleteArticle,
   deleteBrand,
   deleteBrochure,
   deleteBrochureType,
-  deleteCategory,
+  deleteCategory, deleteFile,
   deleteProduct,
   editeArticle,
   editeBrand,
   editeBrochure,
   editeBrochureType,
-  editeCategory,
+  editeCategory, editeFile,
   editeProduct,
   getArticles,
   getBrands,
   getBrochures,
   getBrochureTypes,
-  getCategories,
+  getCategories, getFiles,
   getProducts,
   getSingleArticle,
   getSingleBrand,
   getSingleBrochure,
   getSingleBrochureType,
-  getSingleCategory,
+  getSingleCategory, getSingleFile,
   getSingleProduct,
-  login,
+  login, register,
 } from "~/services/api/services";
 import {
   IArticleParams,
@@ -177,5 +177,30 @@ export const useEditeProduct = () =>
 export const useDeleteProduct = () =>
   useMutation({ mutationKey: ["Product"], mutationFn: deleteProduct });
 
+
+// ---------------------------  File  ------------------------------
+export const useGetFiles = () =>
+  useQuery({
+    queryKey: ["Files"],
+    queryFn: () => getFiles(),
+  });
+
+export const useGetSingleFile = (fileId: string) =>
+  useQuery({
+    queryKey: ["SingleFile", fileId],
+    queryFn: () => getSingleFile(fileId),
+  });
+
+export const useCreateFile = () =>
+  useMutation({ mutationKey: ["File"], mutationFn: createFile });
+
+export const useEditeFile = () =>
+  useMutation({ mutationKey: ["File"], mutationFn: editeFile });
+
+export const useDeleteFile = () =>
+  useMutation({ mutationKey: ["File"], mutationFn: deleteFile });
+
 export const useLogin = () =>
   useMutation({ mutationKey: ["login"], mutationFn: login });
+
+export const useRegisterMutation = () => useMutation({mutationKey: ['register'], mutationFn: register})

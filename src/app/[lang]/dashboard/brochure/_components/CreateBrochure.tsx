@@ -66,7 +66,7 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
 
   const handleChangeFile = (file: File) => {
     if (!file) return;
-    form.setValue("file", file);
+    // form.setValue("file", file);
   };
 
   const handleDeleteFile = () => {
@@ -91,7 +91,7 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
       <BrochureUploader
         onChange={handleChangeFile}
         onDelete={handleDeleteFile}
-        defaultFile={defaultValue?.file}
+        // defaultFile={defaultValue?.file}
       />
 
       <Box display={"flex"} gap={4} mt={4}>

@@ -11,5 +11,8 @@ export const routes = {
   singleCategory: (singleCategoryId: string) => `/category/${singleCategoryId}`,
   product: "/product",
   singleProduct: (singleProductId: string) => `/product/${singleProductId}`,
-  login: "/auth"
+  file: "/file",
+  singleFile:(fileId: string) => `/file/${fileId}`,
+  login: "/auth",
+  register: "/register",
 }
