@@ -6,7 +6,7 @@ import { Button, Typography } from "@mui/material";
 
 interface BrochureUploaderProps {
   onChange: (file: File) => void;
-  defaultFile?: File;
+  defaultFile?: string;
   onDelete: () => void;
 }
 
@@ -15,7 +15,7 @@ const BrochureUploader: FC<BrochureUploaderProps> = ({
   onChange,
   onDelete,
 }) => {
-  const [file, setFile] = useState<File | undefined>(defaultFile);
+  const [file, setFile] = useState<File | undefined>();
 
   const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e?.target?.files?.[0];
@@ -33,6 +33,9 @@ const BrochureUploader: FC<BrochureUploaderProps> = ({
 
   return (
     <div>
+      {defaultFile && <iframe src={defaultFile}>
+
+      </iframe>}
       <input
         type={"file"}
         id={"uploader"}

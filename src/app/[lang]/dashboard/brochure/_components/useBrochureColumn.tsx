@@ -1,7 +1,7 @@
-import React from 'react';
-import {ColumnDef} from "@tanstack/react-table";
-import {IBrochure} from "~/types/brochure";
-import {Box} from "@mui/material";
+import React from "react";
+import { ColumnDef } from "@tanstack/react-table";
+import { IBrochure } from "~/types/brochure";
+import { Box, Button, Typography } from "@mui/material";
 import SvgDelete from "~/components/icons/output/Delete";
 import SvgEdit from "~/components/icons/output/Edit";
 
@@ -10,11 +10,11 @@ interface Props {
   onDelete: (brochure: IBrochure) => void;
 }
 
-const useBrochureColumn = ({onEdit, onDelete}: Props) => {
+const useBrochureColumn = ({ onEdit, onDelete }: Props) => {
   const columns: ColumnDef<IBrochure, any>[] = [
     {
       header: "شماره",
-      accessorKey: 'id',
+      accessorKey: "id",
       cell: (cell) => cell.row.index + 1,
     },
     {
@@ -30,7 +30,23 @@ const useBrochureColumn = ({onEdit, onDelete}: Props) => {
     {
       header: "تاریخ بارگذاری",
       accessorKey: "createdAt",
-      cell: (cell) => cell.getValue() ? new Date(cell.getValue())?.toLocaleDateString('fa-IR'): '---',
+      cell: (cell) =>
+        cell.getValue()
+          ? new Date(cell.getValue())?.toLocaleDateString("fa-IR")
+          : "---",
+    },
+    {
+      header: "فایل",
+      accessorKey: "file",
+      cell: (cell) => (
+        <Button
+          size={"small"}
+          sx={{ p: 2, height: "auto", borderRadius: 1, fontSize: 10 }}
+          onClick={() => window.open(cell.getValue())}
+        >
+          مشاهده
+        </Button>
+      ),
     },
     {
       header: "عملیات",
@@ -40,9 +56,7 @@ const useBrochureColumn = ({onEdit, onDelete}: Props) => {
           <Box
             sx={{ cursor: "pointer" }}
             display={"flex"}
-            onClick={() =>
-              onDelete(cell.row.original)
-            }
+            onClick={() => onDelete(cell.row.original)}
           >
             <SvgDelete primarycolor={"red"} width={18} />
           </Box>
@@ -50,9 +64,7 @@ const useBrochureColumn = ({onEdit, onDelete}: Props) => {
           <Box
             sx={{ cursor: "pointer" }}
             display={"flex"}
-            onClick={() =>
-              onEdit(cell.row.original)
-            }
+            onClick={() => onEdit(cell.row.original)}
           >
             <SvgEdit primarycolor={"grey"} width={18} />
           </Box>
@@ -61,7 +73,7 @@ const useBrochureColumn = ({onEdit, onDelete}: Props) => {
     },
   ];
 
-  return {columns};
+  return { columns };
 };
 
 export default useBrochureColumn;

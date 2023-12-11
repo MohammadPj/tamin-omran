@@ -49,9 +49,7 @@ export const getSingleBrochure = (brochureId: string) =>
   http.get(routes.singleBrochure(brochureId));
 
 export const createBrochure = (body: ICreateBrochureBody): Promise<IBrochure> =>
-  http.post(routes.brochure, body, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  http.post(routes.brochure, body);
 
 export const editeBrochure = ({ id, ...body }: IEditBrochureBody) =>
   http.put(routes.singleBrochure(id), body);
@@ -67,17 +65,13 @@ export const getSingleArticle = (articleId: string) =>
   http.get(routes.singleArticle(articleId));
 
 export const createArticle = (body: FormData) =>
-  http.post(routes.article, body, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  http.post(routes.article, body);
 
 export const editeArticle = ({
   id,
   formData,
 }: IEditArticleBody): Promise<any> =>
-  http.put(routes.singleArticle(id), formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  http.put(routes.singleArticle(id), formData);
 
 export const deleteArticle = (articleId: string) =>
   http.delete(routes.singleArticle(articleId));

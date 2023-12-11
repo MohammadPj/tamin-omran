@@ -2,7 +2,8 @@ import useTable from "~/components/custom-mui/custom-table/components/useTable";
 import { IBrochure } from "~/types/brochure";
 import useBrochureColumn from "~/app/[lang]/dashboard/brochure/_components/useBrochureColumn";
 import {
-  useCreateBrochure, useCreateFile,
+  useCreateBrochure,
+  useCreateFile,
   useDeleteBrochure,
   useEditeBrochure,
   useGetBrochures,
@@ -28,7 +29,7 @@ const useBrochure = () => {
   const { mutateAsync: mutateEditBrochure } = useEditeBrochure();
   const { mutateAsync: mutateDeleteBrochure } = useDeleteBrochure();
 
-  const {mutateAsync: mutateCreateFile} = useCreateFile()
+  const { mutateAsync: mutateCreateFile } = useCreateFile();
 
   const { data: brochures } = useGetBrochures({ lang });
 
@@ -58,37 +59,34 @@ const useBrochure = () => {
   };
 
   const handleCreateBrochure = async (values: ICreateBrochureForm) => {
-
-    const formData = new FormData()
-    formData.append("file", values.file!)
-
-    const fileRes = await mutateCreateFile(formData)
-
-    const {file, ...body} = {...values}
+    const formData = new FormData();
+    formData.append("file", values.file!);
 
     try {
-      await mutateCreateBrochure({file: fileRes.link, ...body});
+      const fileRes = await mutateCreateFile(formData);
+
+      const { file, ...body } = { ...values };
+      await mutateCreateBrochure({ file: fileRes.link, ...body });
     } catch (ex: any) {
       enqueueSnackbar(ex?.message, { variant: "error" });
     }
 
     // @ts-ignore
     await QC.refetchQueries(["Brochures"]);
-    handleCloseModal()
+    handleCloseModal();
     enqueueSnackbar("عملیات با موفقیت انجام شد", { variant: "success" });
   };
 
   const handleEditeBrochure = async (brochure: ICreateBrochureForm) => {
-    console.log('edited')
     try {
-      await mutateEditBrochure({id: selectedBrochure?._id!, ...brochure});
+      await mutateEditBrochure({ id: selectedBrochure?._id! });
     } catch (ex: any) {
       enqueueSnackbar(ex?.message, { variant: "error" });
     }
 
     // @ts-ignore
     // await QC.refetchQueries(["Brochures"]);
-    handleCloseModal()
+    handleCloseModal();
     enqueueSnackbar("عملیات با موفقیت انجام شد", { variant: "success" });
   };
 
@@ -101,7 +99,7 @@ const useBrochure = () => {
 
     // @ts-ignore
     await QC.refetchQueries(["Brochures"]);
-    handleCloseModal()
+    handleCloseModal();
     enqueueSnackbar("عملیات با موفقیت انجام شد", { variant: "success" });
   };
 

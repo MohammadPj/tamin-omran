@@ -10,11 +10,12 @@ import { TLang } from "~/services/api/type";
 import LanguageTab from "~/components/common/tabs/LanguageTab";
 import { useGetBrochureTypes } from "~/services/api/hooks";
 import BrochureUploader from "~/components/common/uploader/BrochureUploader";
+import { IBrochure } from "~/types/brochure";
 
 interface CreateBrochureProps {
   onSubmit?: (data: ICreateBrochureForm) => void;
   onCancel?: () => void;
-  defaultValue?: ICreateBrochureForm;
+  defaultValue?: IBrochure;
 }
 
 export interface ICreateBrochureForm {
@@ -34,7 +35,11 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
   };
 
   const form = useForm<ICreateBrochureForm>({
-    defaultValues: { ...defaultValue, lang: defaultValue?.lang || "fa" },
+    defaultValues: {
+      lang: defaultValue?.lang || "fa",
+      title: defaultValue?.title,
+      brochureTypeId: defaultValue?.brochureType?._id,
+    },
   });
 
   const { data: brochureTypes } = useGetBrochureTypes({
@@ -66,14 +71,14 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
 
   const handleChangeFile = (file: File) => {
     if (!file) return;
-    // form.setValue("file", file);
+    form.setValue("file", file);
   };
 
   const handleDeleteFile = () => {
     form.setValue("file", undefined);
   };
 
-  console.log('defaultValue', defaultValue)
+  console.log("defaultValue", defaultValue);
   return (
     <Box component={"form"} onSubmit={form.handleSubmit(handleSubmit)}>
       <LanguageTab
@@ -91,7 +96,7 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
       <BrochureUploader
         onChange={handleChangeFile}
         onDelete={handleDeleteFile}
-        // defaultFile={defaultValue?.file}
+        defaultFile={defaultValue?.file}
       />
 
       <Box display={"flex"} gap={4} mt={4}>
