@@ -10,6 +10,7 @@ export interface ICommonFilterParams {
 }
 
 
+// ---------------------------  BrochureType  ------------------------------
 export interface IBrochureTypeParams extends ICommonFilterParams {
   title?: string;
   lang?: TLang;
@@ -22,6 +23,7 @@ export interface IEditBrochureTypeBody extends IBrochureTypeBody {
   id: string
 }
 
+// ---------------------------  Brochure  ------------------------------
 export interface IBrochureParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;
@@ -29,27 +31,34 @@ export interface IBrochureParams extends ICommonFilterParams {
   file?: string;
 }
 
-export interface ICreateBrochureBody
-  extends Omit<IBrochureParams, keyof ICommonFilterParams> {}
+export interface ICreateBrochureBody {
+  title?: string;
+  lang: TLang;
+  brochureTypeId?: string;
+}
 
 export interface IEditBrochureBody extends ICreateBrochureBody {
   id: string
 }
 
+// ---------------------------  Article  ------------------------------
 export interface IArticleParams extends ICommonFilterParams {
   lang: TLang;
   title?: string;
   content?: string
 }
 
-export interface IArticleBody
-  extends Omit<IArticleParams, keyof ICommonFilterParams> {}
-
-export interface IEditArticleBody {
-  id: string;
-  formData: FormData
+export interface ICreateArticleBody {
+  lang: TLang;
+  title: string;
+  content: string
 }
 
+export interface IEditArticleBody extends Partial<ICreateArticleBody>{
+  id: string;
+}
+
+// ---------------------------  Brand  ------------------------------
 export interface IBrandParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;
@@ -62,6 +71,7 @@ export interface IEditBrandBody extends IBrandBody{
   id: string
 }
 
+// ---------------------------  Category  ------------------------------
 export interface ICategoryParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;
@@ -74,6 +84,7 @@ export interface IEditCategoryBody extends ICategoryBody{
   id: string
 }
 
+// ---------------------------  Product  ------------------------------
 export interface IProductParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;

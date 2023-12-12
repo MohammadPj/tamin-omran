@@ -8,7 +8,7 @@ import {
   IBrochureTypeBody,
   IBrochureTypeParams,
   ICategoryBody,
-  ICategoryParams,
+  ICategoryParams, ICreateArticleBody,
   ICreateBrochureBody,
   IEditArticleBody,
   IEditBrandBody,
@@ -61,7 +61,10 @@ export const brochureFile = ({
 }: {
   id: string;
   formData: FormData;
-}) => http.patch(routes.brochureFile(id), formData, {headers: {"Content-Type": "multipart/form-data"}});
+}) =>
+  http.patch(routes.brochureFile(id), formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
 export const deleteBrochure = (brochureId: string) =>
   http.delete(routes.singleBrochure(brochureId));
@@ -73,14 +76,22 @@ export const getArticles = (params: IArticleParams) =>
 export const getSingleArticle = (articleId: string) =>
   http.get(routes.singleArticle(articleId));
 
-export const createArticle = (body: FormData) =>
+export const createArticle = (body: ICreateArticleBody): Promise<any> =>
   http.post(routes.article, body);
 
-export const editeArticle = ({
+export const editeArticle = ({ id, ...body }: IEditArticleBody): Promise<any> =>
+  http.put(routes.singleArticle(id), body);
+
+export const articleImage = ({
   id,
   formData,
-}: IEditArticleBody): Promise<any> =>
-  http.put(routes.singleArticle(id), formData);
+}: {
+  id: string;
+  formData: FormData;
+}) =>
+  http.patch(routes.articleImage(id), formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
 export const deleteArticle = (articleId: string) =>
   http.delete(routes.singleArticle(articleId));

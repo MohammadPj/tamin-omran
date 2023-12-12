@@ -1,19 +1,18 @@
 import useTable from "~/components/custom-mui/custom-table/components/useTable";
 import {
+  useAssignArticleImage,
   useCreateArticle,
   useDeleteArticle,
   useEditeArticle,
   useGetArticles,
-  useGetCategories
 } from "~/services/api/hooks";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
-import {useCommon} from "~/store/common/commonSlice";
-import {IArticle} from "~/types/article";
+import { useCommon } from "~/store/common/commonSlice";
+import { IArticle } from "~/types/article";
 import useArticleColumn from "~/app/[lang]/dashboard/article/useArticleColumn";
-import {ICreateArticleForm} from "~/app/[lang]/dashboard/article/_components/create-article/CreateArticle";
-import {handleAppendFormData} from "~/helpers/methods";
+import { ICreateArticleForm } from "~/app/[lang]/dashboard/article/_components/create-article/CreateArticle";
 
 type TArticleModals =
   | "create-article"
@@ -24,12 +23,13 @@ type TArticleModals =
 const useArticle = () => {
   const QC = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
-  const {lang} = useCommon()
+  const { lang } = useCommon();
 
   const [selectedArticle, setSelectedArticle] = useState<IArticle>();
   const { data: categories } = useGetArticles({ lang });
   const { mutateAsync: mutateCreateArticle } = useCreateArticle();
   const { mutateAsync: mutateEditArticle } = useEditeArticle();
+  const { mutateAsync: mutateAssignArticleImage } = useAssignArticleImage();
   const { mutateAsync: mutateDeleteArticle } = useDeleteArticle();
 
   const [modal, setModal] = useState<TArticleModals>();
@@ -41,53 +41,74 @@ const useArticle = () => {
   ];
 
   const handleCreateArticle = async (values: ICreateArticleForm) => {
-
-    const formData = new FormData()
-    formData.append("image", values.imageFile!)
-    formData.append("title", values.title!)
-    formData.append("content", values.content!)
-    formData.append("lang", values.lang!)
-
+    const { imageFile, ...body } = values;
     try {
-      await mutateCreateArticle(formData);
+      const res = await mutateCreateArticle(body);
+
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append("image", imageFile);
+
+        try {
+          await mutateAssignArticleImage({
+            id: res?._id!,
+            formData,
+          });
+        } catch (e) {
+          enqueueSnackbar("بارگذاری عکس با خطا مواجه شد", { variant: "error" });
+        }
+      }
 
       // @ts-ignore
-      await QC.refetchQueries(['Article'])
-      enqueueSnackbar('دسته بندی با موفقیت ایجاد شد', { variant: "success" });
-      setModal(undefined)
+      await QC.refetchQueries(["Article"]);
+      enqueueSnackbar("دسته بندی با موفقیت ایجاد شد", { variant: "success" });
+      setModal(undefined);
     } catch (e: any) {
       enqueueSnackbar(e?.response?.data, { variant: "error" });
     }
   };
 
-  const handleEditArticle = async (values: ICreateArticleForm) => {
-    const formData = new FormData()
-    handleAppendFormData(formData, "image", values.imageFile)
-    handleAppendFormData(formData, "title", values.title)
-    handleAppendFormData(formData, "content", values.content)
-    handleAppendFormData(formData, "lang", values.lang)
-
+  const handleEditArticle = async (article: ICreateArticleForm) => {
     try {
-      await mutateEditArticle({id: selectedArticle?._id!, formData})
+      const { imageFile } = { ...article };
+      const formData = new FormData();
+      formData.append("image", imageFile!);
+
+      await mutateEditArticle({
+        id: selectedArticle?._id!,
+        lang: article.lang,
+        title: article.title,
+        content: article.content,
+      });
+
+      if (article.blobImage !== selectedArticle?.image || !!imageFile) {
+        console.log('run')
+        try {
+          await mutateAssignArticleImage({
+            id: selectedArticle?._id!,
+            formData,
+          });
+        } catch (e) {
+          enqueueSnackbar("بارگذاری عکس با خطا مواجه شد", { variant: "error" });
+        }
+      }
 
       // @ts-ignore
-      await QC.refetchQueries(['Article'])
-      enqueueSnackbar('دسته بندی با موفقیت ویرایش شد', { variant: "success" });
-      setModal(undefined)
-    } catch (e: any) {
-      enqueueSnackbar(e?.response?.data, { variant: "error" });
+      await QC.refetchQueries(["Articles"]);
+      setModal(undefined);
+    } catch (ex: any) {
+      enqueueSnackbar(ex?.message, { variant: "error" });
     }
-
   };
 
   const handleDeleteArticle = async () => {
     try {
-      await mutateDeleteArticle(selectedArticle?._id!)
+      await mutateDeleteArticle(selectedArticle?._id!);
 
       // @ts-ignore
-      await QC.refetchQueries(['Article'])
-      enqueueSnackbar('دسته بندی با موفقیت حذف شد', { variant: "success" });
-      setModal(undefined)
+      await QC.refetchQueries(["Article"]);
+      enqueueSnackbar("دسته بندی با موفقیت حذف شد", { variant: "success" });
+      setModal(undefined);
     } catch (e: any) {
       enqueueSnackbar(e?.response?.data, { variant: "error" });
     }

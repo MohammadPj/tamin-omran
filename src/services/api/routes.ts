@@ -1,6 +1,7 @@
 export const routes = {
   article: "/article",
   singleArticle: (singleArticleId: string) => `/article/${singleArticleId}`,
+  articleImage: (singleArticleId: string) => `/article/${singleArticleId}/image`,
   brand: "/brand",
   singleBrand: (singleBrandId: string) => `/brand/${singleBrandId}`,
   brochure: "/brochure",

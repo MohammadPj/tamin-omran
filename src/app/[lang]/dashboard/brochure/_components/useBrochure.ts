@@ -84,9 +84,6 @@ const useBrochure = () => {
       const formData = new FormData();
       formData.append("file", file!);
 
-      console.log("selectedB", selectedBrochure);
-      console.log("brochure", brochure);
-
       await mutateEditBrochure({
         id: selectedBrochure?._id!,
         lang: brochure.lang,

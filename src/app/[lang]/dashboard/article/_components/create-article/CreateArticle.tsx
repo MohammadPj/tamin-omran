@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { Button, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
-import CustomTab, { ITab } from "~/components/custom-mui/custom-tab/CustomTab";
 import InputListWithUseForm from "~/components/common/input-list/with-useForm/InputListWithUseForm";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
 import { useForm } from "react-hook-form";
@@ -22,6 +21,7 @@ export interface ICreateArticleForm {
   lang: TLang;
   content: string;
   imageFile?: File | null;
+  blobImage?: string;
 }
 
 const CreateArticle: FC<CreateArticleProps> = ({
@@ -41,6 +41,7 @@ const CreateArticle: FC<CreateArticleProps> = ({
       lang: defaultValue?.lang || "fa",
       content: defaultValue?.content,
       title: defaultValue?.title,
+      blobImage: defaultValue?.image
     },
   });
 
@@ -49,7 +50,8 @@ const CreateArticle: FC<CreateArticleProps> = ({
   };
 
   const handleDeleteImageFile = () => {
-    form.setValue("imageFile", null);
+    form.setValue("imageFile", undefined);
+    form.setValue("blobImage", undefined);
   };
 
   return (
@@ -67,6 +69,7 @@ const CreateArticle: FC<CreateArticleProps> = ({
       />
 
       <Box pb={4}>
+
         <UploadArticleImage
           defaultImage={defaultValue?.image}
           onChange={handleChangeImageFile}
@@ -86,10 +89,7 @@ const CreateArticle: FC<CreateArticleProps> = ({
           <Button
             onClick={form.handleSubmit(onSubmit)}
             sx={{ height: 41 }}
-            disabled={
-              !form.formState.isValid ||
-              !form.watch("content")
-            }
+            disabled={!form.formState.isValid || !form.watch("content")}
           >
             ذخیره
           </Button>

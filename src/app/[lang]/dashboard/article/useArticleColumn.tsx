@@ -1,6 +1,6 @@
 import {ColumnDef} from "@tanstack/react-table";
 import {IArticle} from "~/types/article";
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import SvgDelete from "~/components/icons/output/Delete";
 import SvgEdit from "~/components/icons/output/Edit";
 import React from "react";
@@ -28,6 +28,20 @@ const useArticleColumn = ({ onEdite, onDelete }: useArticleColumnProps) => {
       cell: (cell) => cell.getValue()
         ? new Date(cell.getValue())?.toLocaleDateString("fa-IR")
         : "---",
+    },
+    {
+      header: "فایل",
+      accessorKey: "image",
+      cell: (cell) => (
+        <Button
+          size={"small"}
+          sx={{ p: 2, height: "auto", borderRadius: 1, fontSize: 10 }}
+          onClick={() => window.open(cell.getValue())}
+          disabled={!cell.getValue()}
+        >
+          مشاهده
+        </Button>
+      ),
     },
     {
       header: "عملیات",

@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
+  articleImage,
   brochureFile,
   createArticle,
   createBrand,
@@ -113,6 +114,8 @@ export const useCreateArticle = () =>
 
 export const useEditeArticle = () =>
   useMutation({ mutationKey: ["Article"], mutationFn: editeArticle });
+
+export const useAssignArticleImage = () => useMutation({ mutationKey: ["article-image"], mutationFn: articleImage})
 
 export const useDeleteArticle = () =>
   useMutation({ mutationKey: ["Article"], mutationFn: deleteArticle });
