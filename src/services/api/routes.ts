@@ -5,6 +5,7 @@ export const routes = {
   singleBrand: (singleBrandId: string) => `/brand/${singleBrandId}`,
   brochure: "/brochure",
   singleBrochure: (singleBrochureId: string) => `/brochure/${singleBrochureId}`,
+  brochureFile: (singleBrochureId: string) => `/brochure/${singleBrochureId}/file`,
   brochureType: "/brochure-type",
   singleBrochureType: (singleBrochureTypeId: string) => `/brochure-type/${singleBrochureTypeId}`,
   category: "/category",

@@ -3,19 +3,26 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import SvgDownload from "~/components/icons/final/Download";
 import { Button, Typography } from "@mui/material";
+import SvgFile from "~/components/icons/output/File";
+import SvgEdit from "~/components/icons/output/Edit";
+import SvgDelete from "~/components/icons/output/Delete";
+import SvgEye from "~/components/icons/final/Eye";
 
 interface BrochureUploaderProps {
   onChange: (file: File) => void;
   defaultFile?: string;
   onDelete: () => void;
+  onPreview?: () => void;
 }
 
 const BrochureUploader: FC<BrochureUploaderProps> = ({
   defaultFile,
   onChange,
   onDelete,
+  onPreview,
 }) => {
   const [file, setFile] = useState<File | undefined>();
+  const [blobFile, setBlobFile] = useState(defaultFile);
 
   const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e?.target?.files?.[0];
@@ -23,19 +30,18 @@ const BrochureUploader: FC<BrochureUploaderProps> = ({
     if (!file) return;
 
     setFile(file);
+    setBlobFile(undefined)
     onChange(file);
   };
 
   const handleDeleteFile = () => {
     setFile(undefined);
+    setBlobFile(undefined);
     onDelete();
   };
 
   return (
     <div>
-      {defaultFile && <iframe src={defaultFile}>
-
-      </iframe>}
       <input
         type={"file"}
         id={"uploader"}
@@ -45,8 +51,6 @@ const BrochureUploader: FC<BrochureUploaderProps> = ({
       />
 
       <Stack
-        component={"label"}
-        htmlFor={"uploader"}
         width={"100%"}
         height={300}
         borderRadius={2}
@@ -56,19 +60,43 @@ const BrochureUploader: FC<BrochureUploaderProps> = ({
         alignItems={"center"}
         gap={2}
       >
-        <SvgDownload />
+        {file || blobFile ? (
+          <Stack alignItems={"center"} gap={2}>
+            <SvgFile />
 
-        {file ? (
-          <Box>
-            {file.name}
-          </Box>
+            <Box display={"flex"} gap={2}>
+              <Box
+                display={"flex"}
+                sx={{ cursor: "pointer" }}
+                component={"label"}
+                htmlFor={"uploader"}
+              >
+                <SvgEdit />
+              </Box>
+
+              <Box
+                display={"flex"}
+                sx={{ cursor: "pointer" }}
+                onClick={handleDeleteFile}
+              >
+                <SvgDelete />
+              </Box>
+
+              {blobFile && (
+                <Box
+                  display={"flex"}
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => window.open(blobFile)}
+                >
+                  <SvgEye />
+                </Box>
+              )}
+            </Box>
+            <Typography>{file?.name || blobFile}</Typography>
+          </Stack>
         ) : (
           <>
-            <Typography color={"grey.4"}>
-              فایل مورد نظر را بکشید و در این قسمت بیندازید
-            </Typography>
-
-            <Typography>یا</Typography>
+            <SvgDownload />
 
             <Button
               component={"label"}

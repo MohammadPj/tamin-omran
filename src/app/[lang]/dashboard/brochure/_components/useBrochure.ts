@@ -2,6 +2,7 @@ import useTable from "~/components/custom-mui/custom-table/components/useTable";
 import { IBrochure } from "~/types/brochure";
 import useBrochureColumn from "~/app/[lang]/dashboard/brochure/_components/useBrochureColumn";
 import {
+  useAssignBrochureFile,
   useCreateBrochure,
   useCreateFile,
   useDeleteBrochure,
@@ -28,6 +29,7 @@ const useBrochure = () => {
   const { mutateAsync: mutateCreateBrochure } = useCreateBrochure();
   const { mutateAsync: mutateEditBrochure } = useEditeBrochure();
   const { mutateAsync: mutateDeleteBrochure } = useDeleteBrochure();
+  const { mutateAsync: mutateAssignBrochureFile } = useAssignBrochureFile();
 
   const { mutateAsync: mutateCreateFile } = useCreateFile();
 
@@ -63,29 +65,48 @@ const useBrochure = () => {
     formData.append("file", values.file!);
 
     try {
-      const fileRes = await mutateCreateFile(formData);
-
       const { file, ...body } = { ...values };
-      await mutateCreateBrochure({ file: fileRes.link, ...body });
+      const res = await mutateCreateBrochure({ ...body });
+      await mutateAssignBrochureFile({ id: res._id!, formData });
+
+      // @ts-ignore
+      await QC.refetchQueries(["Brochures"]);
+      handleCloseModal();
+      enqueueSnackbar("عملیات با موفقیت انجام شد", { variant: "success" });
     } catch (ex: any) {
       enqueueSnackbar(ex?.message, { variant: "error" });
     }
-
-    // @ts-ignore
-    await QC.refetchQueries(["Brochures"]);
-    handleCloseModal();
-    enqueueSnackbar("عملیات با موفقیت انجام شد", { variant: "success" });
   };
 
   const handleEditeBrochure = async (brochure: ICreateBrochureForm) => {
     try {
-      await mutateEditBrochure({ id: selectedBrochure?._id! });
+      const { file } = { ...brochure };
+      const formData = new FormData();
+      formData.append("file", file!);
+
+      console.log("selectedB", selectedBrochure);
+      console.log("brochure", brochure);
+
+      await mutateEditBrochure({
+        id: selectedBrochure?._id!,
+        lang: brochure.lang,
+        title: brochure.title,
+        brochureTypeId: brochure.brochureTypeId,
+      });
+
+      if (brochure.blobFile !== selectedBrochure?.file || !!file) {
+        await mutateAssignBrochureFile({
+          id: selectedBrochure?._id!,
+          formData,
+        });
+      }
+
+      // @ts-ignore
+      await QC.refetchQueries(["Brochures"]);
     } catch (ex: any) {
       enqueueSnackbar(ex?.message, { variant: "error" });
     }
 
-    // @ts-ignore
-    // await QC.refetchQueries(["Brochures"]);
     handleCloseModal();
     enqueueSnackbar("عملیات با موفقیت انجام شد", { variant: "success" });
   };

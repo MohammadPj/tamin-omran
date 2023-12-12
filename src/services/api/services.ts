@@ -1,4 +1,4 @@
-import {  http } from "~/services/core/http";
+import { http } from "~/services/core/http";
 import { routes } from "~/services/api/routes";
 import {
   IArticleParams,
@@ -8,7 +8,8 @@ import {
   IBrochureTypeBody,
   IBrochureTypeParams,
   ICategoryBody,
-  ICategoryParams, ICreateBrochureBody,
+  ICategoryParams,
+  ICreateBrochureBody,
   IEditArticleBody,
   IEditBrandBody,
   IEditBrochureBody,
@@ -53,6 +54,14 @@ export const createBrochure = (body: ICreateBrochureBody): Promise<IBrochure> =>
 
 export const editeBrochure = ({ id, ...body }: IEditBrochureBody) =>
   http.put(routes.singleBrochure(id), body);
+
+export const brochureFile = ({
+  id,
+  formData,
+}: {
+  id: string;
+  formData: FormData;
+}) => http.patch(routes.brochureFile(id), formData, {headers: {"Content-Type": "multipart/form-data"}});
 
 export const deleteBrochure = (brochureId: string) =>
   http.delete(routes.singleBrochure(brochureId));
@@ -129,7 +138,7 @@ export const getFiles = (): Promise<any> => http.get(routes.file);
 export const getSingleFile = (fileId: string) =>
   http.get(routes.singleFile(fileId));
 
-export const createFile = (body: FormData): Promise<{link: string}> =>
+export const createFile = (body: FormData): Promise<{ link: string }> =>
   http.post(routes.file, body, {
     headers: { "Content-Type": "multipart/form-data" },
   });

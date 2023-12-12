@@ -43,6 +43,7 @@ const useBrochureColumn = ({ onEdit, onDelete }: Props) => {
           size={"small"}
           sx={{ p: 2, height: "auto", borderRadius: 1, fontSize: 10 }}
           onClick={() => window.open(cell.getValue())}
+          disabled={!cell.getValue()}
         >
           مشاهده
         </Button>

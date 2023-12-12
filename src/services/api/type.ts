@@ -25,7 +25,7 @@ export interface IEditBrochureTypeBody extends IBrochureTypeBody {
 export interface IBrochureParams extends ICommonFilterParams {
   title?: string;
   lang: TLang;
-  brochureType?: string;
+  brochureTypeId?: string;
   file?: string;
 }
 

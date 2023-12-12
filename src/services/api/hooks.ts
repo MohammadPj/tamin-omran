@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
+  brochureFile,
   createArticle,
   createBrand,
   createBrochure,
@@ -88,6 +89,8 @@ export const useCreateBrochure = () =>
 
 export const useEditeBrochure = () =>
   useMutation({ mutationKey: ["Brochures"], mutationFn: editeBrochure });
+
+export const useAssignBrochureFile = () => useMutation({ mutationKey: ["brochure-file"], mutationFn: brochureFile})
 
 export const useDeleteBrochure = () =>
   useMutation({ mutationKey: ["Brochures"], mutationFn: deleteBrochure });

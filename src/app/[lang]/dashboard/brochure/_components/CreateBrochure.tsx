@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
 import { useForm } from "react-hook-form";
-import Stack from "@mui/material/Stack";
-import SvgDownload from "~/components/icons/final/Download";
 import { TLang } from "~/services/api/type";
 import LanguageTab from "~/components/common/tabs/LanguageTab";
 import { useGetBrochureTypes } from "~/services/api/hooks";
@@ -23,6 +21,7 @@ export interface ICreateBrochureForm {
   title: string;
   brochureTypeId: string;
   lang: TLang;
+  blobFile?: string
 }
 
 const CreateBrochure: FC<CreateBrochureProps> = ({
@@ -39,6 +38,7 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
       lang: defaultValue?.lang || "fa",
       title: defaultValue?.title,
       brochureTypeId: defaultValue?.brochureType?._id,
+      blobFile: defaultValue?.file
     },
   });
 
@@ -76,9 +76,9 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
 
   const handleDeleteFile = () => {
     form.setValue("file", undefined);
+    form.setValue("blobFile", undefined);
   };
 
-  console.log("defaultValue", defaultValue);
   return (
     <Box component={"form"} onSubmit={form.handleSubmit(handleSubmit)}>
       <LanguageTab

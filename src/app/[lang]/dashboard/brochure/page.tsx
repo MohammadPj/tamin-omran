@@ -58,7 +58,7 @@ const Brochure: FC = () => {
             onCancel={handleCloseModal}
             defaultValue={{
               lang: selectedBrochure?.lang!,
-              brochureTypeId: selectedBrochure?.brochureType?._id!,
+              brochureType: selectedBrochure?.brochureType!,
               title: selectedBrochure?.title!,
               file: selectedBrochure?.file!
             }}

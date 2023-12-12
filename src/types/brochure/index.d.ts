@@ -1,14 +1,14 @@
 import {TLang} from "~/services/api/type";
 
 export interface IBrochure {
-  _id: string;
+  _id?: string;
 
   title: string;
   lang: TLang;
   brochureType: IBrochureType
   file: string
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface IBrochureType {
