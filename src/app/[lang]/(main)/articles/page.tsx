@@ -46,15 +46,16 @@ async function getArticles({lang, page}: {lang: TLang, page: number}) {
   return await response.data;
 }
 
-const ArticlesPage = async ({params}: any) => {
+const ArticlesPage = async (props: any) => {
 
-  const latestArticles: IArticle[] = await getLatestArticles({lang: params.lang})
-  const articles: IArticle[] = await getArticles({lang: params.lang, page: 1})
+  console.log('props', props)
+  const latestArticles: IArticle[] = await getLatestArticles({lang: props?.params?.lang})
+  const articles: IArticle[] = await getArticles({lang: props?.params?.lang, page: 1})
 
   return (
     <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-
-      <LastArticlesList lang={params.lang} articles={latestArticles} />
+      <h1>{props?.searchParams?.page || "Hello!"}</h1>
+      <LastArticlesList lang={props?.params?.lang} articles={latestArticles} />
 
       <Box
         mb={20}
@@ -69,7 +70,7 @@ const ArticlesPage = async ({params}: any) => {
         </Box>
       </Box>
 
-      <ArticlesList lang={params.lang} articles={articles} />
+      <ArticlesList lang={props?.params?.lang} articles={articles} />
     </Container>
   )
 }

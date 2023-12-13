@@ -1,107 +1,141 @@
-import React from 'react'
+import React from "react";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
   Button,
-  Container, Divider,
+  Container,
+  Divider,
   Pagination,
   Stack,
   Typography,
-} from '@mui/material'
-import SvgArrowDown from '~/components/icons/final/ArrowDown'
-import SvgDownload from '~/components/icons/final/Download'
-import {Metadata} from "next";
-import {getDictionary} from "~/i18n";
+} from "@mui/material";
+import SvgArrowDown from "~/components/icons/final/ArrowDown";
+import SvgDownload from "~/components/icons/final/Download";
+import { Metadata } from "next";
+import { getDictionary } from "~/i18n";
+import { useGetBrochures, useGetBrochureTypes } from "~/services/api/hooks";
+import { TLang } from "~/services/api/type";
+import { baseURL } from "~/services/core/http";
+import queryString from "querystring";
+import axios from "axios";
+import { IBrochure, IBrochureType } from "~/types/brochure";
+import { handleDownload } from "~/helpers/methods";
 
 export const metadata: Metadata = {
-  title: 'بروشور ها',
+  title: "بروشور ها",
+};
+
+async function getBrochures({ lang }: { lang: TLang }) {
+  // Call the fetch method and passing
+  // the pokeAPI link
+  const url = new URL(`${baseURL}brochure`);
+  const query = {
+    lang,
+  };
+  const normalizeQuery = queryString.stringify(query);
+
+  const response = await axios.get(`${url}?${normalizeQuery}`);
+
+  return await response.data;
 }
 
-const BrochuresPage = ({params}: any) => {
-  const dictionary = getDictionary(params.lang)
+async function getBrochureTypes({ lang }: { lang: TLang }) {
+  // Call the fetch method and passing
+  // the pokeAPI link
+  const url = new URL(`${baseURL}brochure-type`);
+  const query = {
+    lang,
+  };
+  const normalizeQuery = queryString.stringify(query);
 
-  const categories = [
-    {
-      title: 'Category 1',
-      brochures: [
-        { title: 'Brochure 1', link: 'link1' },
-        { title: 'Brochure 2', link: 'link2' },
-        { title: 'Brochure 3', link: 'link3' },
-        { title: 'Brochure 4', link: 'link4' },
-      ],
-    },
-    {
-      title: 'Category 2',
-      brochures: [
-        { title: 'Brochure A', link: 'linkA' },
-        { title: 'Brochure B', link: 'linkB' },
-        { title: 'Brochure C', link: 'linkC' },
-        { title: 'Brochure D', link: 'linkD' },
-      ],
-    },
-    {
-      title: 'Category 3',
-      brochures: [
-        { title: 'Brochure X', link: 'linkX' },
-        { title: 'Brochure Y', link: 'linkY' },
-        { title: 'Brochure Z', link: 'linkZ' },
-        { title: 'Brochure W', link: 'linkW' },
-      ],
-    },
-  ]
+  const response = await axios.get(`${url}?${normalizeQuery}`);
+
+  return await response.data;
+}
+const BrochuresPage = async ({ params }: any) => {
+  const dictionary = getDictionary(params.lang);
+
+  const brochureTypes: IBrochureType[] = await getBrochureTypes({
+    lang: params.lang,
+  });
+  const brochures: IBrochure[] = await getBrochures({ lang: params.lang });
+
+  console.log("brochureTypes", brochureTypes);
+
+  console.log("brochures", brochures);
+
+  const renderBrochureTypes = brochureTypes.map((brochureType) => ({
+    title: brochureType.title,
+    brochures: brochures.filter(
+      (brochure) => brochure.brochureType._id === brochureType._id
+    ),
+  }));
 
   return (
-    <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+    <Container
+      sx={{
+        mt: 7,
+        mb: 20,
+        flexGrow: 1,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Stack gap={5} flexGrow={1} mb={10}>
-        {categories.map((cat, i) => (
-          <Accordion key={i} >
+        {renderBrochureTypes.map((brochureType, i) => (
+          <Accordion key={i}>
             <AccordionSummary
               expandIcon={<SvgArrowDown width={24} height={24} />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              sx={{background: 'inherit'}}
+              sx={{ background: "inherit" }}
             >
-              <Typography fontWeight={700} fontSize={20}>{cat.title}</Typography>
+              <Typography fontWeight={700} fontSize={20}>
+                {brochureType.title}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
-
               <Stack gap={4}>
-                {cat.brochures?.map((brochure, j) => (
+                {brochureType.brochures?.map((brochure, j) => (
                   <>
                     <Divider />
 
                     <Box
                       key={j}
-                      display={'flex'}
-                      justifyContent={'space-between'}
-                      alignItems={'center'}
+                      display={"flex"}
+                      justifyContent={"space-between"}
+                      alignItems={"center"}
                     >
-                      <Typography fontSize={20} color={'text.secondary'}>{brochure.title}</Typography>
+                      <Typography fontSize={20} color={"text.secondary"}>
+                        {brochure.title}
+                      </Typography>
 
-                      <Button sx={{ display: 'flex', gap: 2 }} size={'small'}>
-                        {dictionary('common.download')}
+                      <Button
+                        sx={{ display: "flex", gap: 2 }}
+                        size={"small"}
+                        component={'a'}
+                        href={brochure.file}
+                      >
+                        {dictionary("common.download")}
                         <SvgDownload
                           width={18}
                           height={18}
-                          primarycolor={'white'}
+                          primarycolor={"white"}
                         />
                       </Button>
                     </Box>
                   </>
-
                 ))}
               </Stack>
-
             </AccordionDetails>
           </Accordion>
         ))}
-
       </Stack>
-        <Pagination count={10} variant={'outlined'} shape={'rounded'} />
+      {/*<Pagination count={10} variant={'outlined'} shape={'rounded'} />*/}
     </Container>
-  )
-}
+  );
+};
 
-export default BrochuresPage
+export default BrochuresPage;

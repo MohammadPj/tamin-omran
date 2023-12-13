@@ -1,22 +1,33 @@
-'use client'
-import React, {FC} from 'react';
-import {Divider, Pagination, Stack} from "@mui/material";
-import {IArticle} from "~/types/article";
+"use client";
+import React, { FC } from "react";
+import { Divider, Pagination, Stack } from "@mui/material";
+import { IArticle } from "~/types/article";
 import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider";
 import ArticleCard from "~/components/common/article-card/ArticleCard";
-import {getDictionary, TLanguages} from "~/i18n";
+import { getDictionary, TLanguages } from "~/i18n";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import queryString from "querystring";
 
 interface Props {
-  lang: TLanguages
-  articles: IArticle[]
+  lang: TLanguages;
+  articles: IArticle[];
 }
 
-const ArticlesList: FC<Props> = ({lang, articles}) => {
-  const dictionary = getDictionary(lang)
+const ArticlesList: FC<Props> = ({ lang, articles }) => {
+  const dictionary = getDictionary(lang);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname()
 
   const handleChangePage = (e: any, page: any) => {
-    console.log('page', page)
-  }
+
+    const queries = queryString.stringify({
+      ...queryString.parse(searchParams.toString()),
+      page: page,
+    });
+
+    router.push(pathname + "?" + queries)
+  };
 
   return (
     <Stack flexGrow={1}>
@@ -31,7 +42,12 @@ const ArticlesList: FC<Props> = ({lang, articles}) => {
         ))}
       </Stack>
 
-      <Pagination count={10} variant={'outlined'} shape={'rounded'} onChange={handleChangePage} />
+      <Pagination
+        count={10}
+        variant={"outlined"}
+        shape={"rounded"}
+        onChange={handleChangePage}
+      />
     </Stack>
   );
 };
