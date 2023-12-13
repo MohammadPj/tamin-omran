@@ -5,11 +5,11 @@ import ProductsFilter from "~/app/[lang]/(main)/products/_components/products-fi
 import ProductsList from "~/app/[lang]/(main)/products/_components/ProductsList";
 import { Metadata } from "next";
 import ProductsBar from "~/app/[lang]/(main)/products/_components/ProductsBar";
-import { getDeviceType } from "~/helpers/methods";
 import {baseURL} from "~/services/core/http";
 import queryString from "querystring";
 import {IProduct} from "~/types/product";
 import {TLang} from "~/services/api/type";
+import axios from "axios";
 
 export const metadata: Metadata = {
   title: "محصولات",
@@ -24,10 +24,10 @@ async function getData(props: {lang: TLang}) {
   };
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await fetch(`${url}?${normalizeQuery}`);
-  console.log('response', response)
+  const response = await axios.get(`${url}?${normalizeQuery}`);
 
-  return await response.json();
+  console.log('response', response)
+  return await response.data;
 }
 
 export default async function ProductPage(props: {

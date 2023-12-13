@@ -13,6 +13,7 @@ export interface IProduct {
   brand: IBrand
   createdAt: Date;
   updatedAt: Date;
+  image: string;
   images: string[]
   isAvailable: boolean
   engineNumber: string;

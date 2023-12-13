@@ -1,18 +1,20 @@
 import React, { ChangeEvent, FC } from "react";
 import Box from "@mui/material/Box";
 import SvgPlus from "~/components/icons/final/Plus";
-import {Typography} from "@mui/material";
+import { Typography } from "@mui/material";
 
 interface UploadProductProps {
   id: string;
-  handleImageUpload?: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleImageUpload?: (files: FileList) => void;
   title?: string;
+  multiple?: boolean
 }
 
 const UploadProduct: FC<UploadProductProps> = ({
   id,
   handleImageUpload,
   title,
+  multiple
 }) => {
   return (
     <div>
@@ -21,7 +23,10 @@ const UploadProduct: FC<UploadProductProps> = ({
         accept="image/jpeg, image/png, image/jpg"
         id={id}
         style={{ display: "none" }}
-        onChange={(e) => (handleImageUpload ? handleImageUpload(e) : {})}
+        multiple={multiple !== false}
+        onChange={(e) =>
+          handleImageUpload ? handleImageUpload(e?.target?.files!) : {}
+        }
       />
 
       <Box
@@ -45,10 +50,7 @@ const UploadProduct: FC<UploadProductProps> = ({
         )}
       </Box>
     </div>
-
-
   );
 };
-
 
 export default UploadProduct;

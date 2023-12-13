@@ -13,8 +13,6 @@ const ProductAnalysis: FC<ProductAnalysisProps> = ({review}) => {
       <CustomDivider title={'نقد و بررسی'} mb={6} />
 
       <Typography
-        fontWeight={400}
-        fontSize={14}
         lineHeight={'32px'}
         color={'text.secondary'}
         textAlign={'justify'}

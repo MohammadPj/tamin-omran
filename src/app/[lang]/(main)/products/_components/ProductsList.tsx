@@ -10,6 +10,7 @@ interface ProductsListProps {
 
 const ProductsList: FC<ProductsListProps> = ({products}) => {
 
+  console.log('products', products)
   return (
     <Grid container spacing={4}>
       {products.map((product, i) => (
@@ -18,7 +19,7 @@ const ProductsList: FC<ProductsListProps> = ({products}) => {
               key={i}
               title={product.title}
               subtitle={product.description}
-              image={''}
+              image={product?.image}
               id={product._id}
               isAvailable={product.isAvailable}
             />

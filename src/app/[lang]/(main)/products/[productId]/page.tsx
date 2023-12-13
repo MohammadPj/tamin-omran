@@ -30,11 +30,12 @@ async function getData(productId: string) {
 export default async function SingleProductPage(props: {params: {productId: string}}) {
   const product: IProduct = await getData(props.params.productId);
 
+  const images = [product?.image, ...product.images]
   return (
     <Container sx={{ mt: 10 }}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>
-          <ProductCarousel images={[]} />
+          <ProductCarousel images={images} />
         </Grid>
 
         <Grid item xs={12} sm={6} md={8}>

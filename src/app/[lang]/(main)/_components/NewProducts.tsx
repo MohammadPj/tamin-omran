@@ -5,14 +5,17 @@ import ProductCard from "~/components/common/product-card/ProductCard";
 import {getDictionary} from "~/i18n";
 import CustomLink from "~/components/common/custom-link/CustomLink";
 import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
-import {useCommon} from "~/store/common/commonSlice";
-import {useGetProducts} from "~/services/api/hooks";
+import {TLang} from "~/services/api/type";
+import {IProduct} from "~/types/product";
 
-const NewProducts: FC = () => {
+interface NewProductsProps {
+  lang: TLang
+  products: IProduct[]
+}
+
+const NewProducts: FC<NewProductsProps> = ({lang, products}) => {
 
   const dictionary = getDictionary();
-  const {isRtl} = useCommon()
-  const {data: products} = useGetProducts({lang: 'fa', limit: 5, page: 1})
 
   return (
     <Box mt={11}>
@@ -24,7 +27,7 @@ const NewProducts: FC = () => {
           <ProductCard
             title={product?.title}
             subtitle={product?.description}
-            image={product?.images[0]}
+            image={product?.image}
             isAvailable={product.isAvailable}
             id={product._id}
           />
@@ -44,7 +47,7 @@ const NewProducts: FC = () => {
             {dictionary("common.showMore")}
           </Typography>
         </CustomLink>
-        <SvgArrowCircleLeft width={24} isRtl={isRtl} />
+        <SvgArrowCircleLeft width={24} isRtl={lang === 'fa'} />
       </Box>
     </Box>
   );

@@ -5,17 +5,56 @@ import LastArticlesList from "~/app/[lang]/(main)/articles/_components/LastArtic
 import ArticlesList from "~/app/[lang]/(main)/articles/_components/ArticlesList";
 import SvgLogo from "~/components/icons/final/Logo";
 import {Metadata} from "next";
+import {baseURL} from "~/services/core/http";
+import queryString from "querystring";
+import axios from "axios";
+import {TLang} from "~/services/api/type";
+import {IArticle} from "~/types/article";
 
 export const metadata: Metadata = {
   title: 'مقالات',
 }
 
-const ArticlesPage = ({params}: any) => {
+async function getLatestArticles({lang}: {lang: TLang}) {
+  // Call the fetch method and passing
+  // the pokeAPI link
+  const url = new URL(`${baseURL}article`);
+  const query = {
+    lang,
+    limit: 3
+  };
+  const normalizeQuery = queryString.stringify(query);
+
+  const response = await axios.get(`${url}?${normalizeQuery}`);
+
+  return await response.data;
+}
+
+async function getArticles({lang, page}: {lang: TLang, page: number}) {
+  // Call the fetch method and passing
+  // the pokeAPI link
+  const url = new URL(`${baseURL}article`);
+  const query = {
+    lang,
+    page,
+    limit: 10,
+  };
+  const normalizeQuery = queryString.stringify(query);
+
+  const response = await axios.get(`${url}?${normalizeQuery}`);
+
+  return await response.data;
+}
+
+const ArticlesPage = async ({params}: any) => {
+
+  const latestArticles: IArticle[] = await getLatestArticles({lang: params.lang})
+  const articles: IArticle[] = await getArticles({lang: params.lang, page: 1})
 
   return (
     <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
 
-      <LastArticlesList lang={params.lang} />
+      <LastArticlesList lang={params.lang} articles={latestArticles} />
 
       <Box
         mb={20}
@@ -30,7 +69,7 @@ const ArticlesPage = ({params}: any) => {
         </Box>
       </Box>
 
-      <ArticlesList lang={params.lang} />
+      <ArticlesList lang={params.lang} articles={articles} />
     </Container>
   )
 }

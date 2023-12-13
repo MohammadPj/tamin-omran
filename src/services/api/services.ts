@@ -8,7 +8,8 @@ import {
   IBrochureTypeBody,
   IBrochureTypeParams,
   ICategoryBody,
-  ICategoryParams, ICreateArticleBody,
+  ICategoryParams,
+  ICreateArticleBody,
   ICreateBrochureBody,
   IEditArticleBody,
   IEditBrandBody,
@@ -134,11 +135,22 @@ export const getProducts = (params: IProductParams): Promise<IProduct[]> =>
 export const getSingleProduct = (productId: string): Promise<IProduct> =>
   http.get(routes.singleProduct(productId));
 
-export const createProduct = (body: IProductBody) =>
+export const createProduct = (body: IProductBody): Promise<IProduct> =>
   http.post(routes.product, body);
 
-export const editeProduct = ({ id, ...body }: IEditProductBody) =>
+export const editeProduct = ({ id, ...body }: IEditProductBody): Promise<IProduct> =>
   http.put(routes.singleProduct(id), body);
+
+export const productImages = ({
+  id,
+  formData,
+}: {
+  id: string;
+  formData: FormData;
+}) =>
+  http.patch(routes.productImages(id), formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
 export const deleteProduct = (productId: string) =>
   http.delete(routes.singleProduct(productId));

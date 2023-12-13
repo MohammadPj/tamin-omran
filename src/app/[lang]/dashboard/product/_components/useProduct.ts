@@ -1,5 +1,7 @@
 import useTable from "~/components/custom-mui/custom-table/components/useTable";
+
 import {
+  useAssignProductImage,
   useCreateProduct,
   useDeleteProduct,
   useEditeProduct,
@@ -13,6 +15,7 @@ import { useCommon } from "~/store/common/commonSlice";
 import { IProduct } from "~/types/product";
 import { ICreateProductForm } from "~/app/[lang]/dashboard/product/_components/create-product/CreateProduct";
 import useProductColumn from "~/app/[lang]/dashboard/product/_components/useProductColumn";
+import {handleAppendFormData} from "~/helpers/methods";
 
 type TProductModals =
   | "create-product"
@@ -32,6 +35,7 @@ const useProduct = () => {
   const { mutateAsync: mutateCreateProduct } = useCreateProduct();
   const { mutateAsync: mutateEditProduct } = useEditeProduct();
   const { mutateAsync: mutateDeleteProduct } = useDeleteProduct();
+  const { mutateAsync: mutateAssignProductImage } = useAssignProductImage();
 
   const [modal, setModal] = useState<TProductModals>();
 
@@ -42,15 +46,32 @@ const useProduct = () => {
   ];
 
   const handleFilterProduct = (e: any) => {
-    console.log('e', e)
-  }
+    console.log("e", e);
+  };
 
   const handleCreateProduct = async (values: ICreateProductForm) => {
+    const { image, images, imageFiles, imageFile, ...body } = values;
 
     try {
-      await mutateCreateProduct({
-        ...values,
-      });
+      const res = await mutateCreateProduct(body);
+
+      if (imageFile || Number(imageFiles?.length) > 0) {
+        const formData = new FormData();
+        handleAppendFormData(formData, 'images', imageFile)
+
+        for (let i = 0; i < Number(imageFiles?.length); i++) {
+          const file = imageFiles?.[i];
+          handleAppendFormData(formData, 'images', file)
+        }
+
+        try {
+          await mutateAssignProductImage({ id: res._id, formData });
+        } catch (e) {
+          enqueueSnackbar("بارگذاری عکس با مشکل مواجه شد", {
+            variant: "error",
+          });
+        }
+      }
 
       // @ts-ignore
       await QC.refetchQueries(["Product"]);
@@ -62,19 +83,63 @@ const useProduct = () => {
   };
 
   const handleEditProduct = async (values: ICreateProductForm) => {
+    const { image, images, imageFiles, imageFile, ...body } = values;
+
     try {
-      await mutateEditProduct({
+      const res = await mutateEditProduct({
         id: selectedProduct?._id!,
-        ...values,
+        ...body,
       });
+
+      if (imageFile || Number(imageFiles?.length) > 0) {
+        const formData = new FormData();
+        handleAppendFormData(formData, 'images', imageFile)
+
+        for (let i = 0; i < Number(imageFiles?.length); i++) {
+          const file = imageFiles?.[i];
+          handleAppendFormData(formData, 'images', file)
+        }
+
+        try {
+          await mutateAssignProductImage({ id: res._id, formData });
+        } catch (e) {
+          enqueueSnackbar("بارگذاری عکس با مشکل مواجه شد", {
+            variant: "error",
+          });
+        }
+      }
 
       // @ts-ignore
       await QC.refetchQueries(["Product"]);
-      enqueueSnackbar("محصول با موفقیت ویرایش شد", { variant: "success" });
+      enqueueSnackbar("محصول با موفقیت ایجاد شد", { variant: "success" });
       setModal(undefined);
     } catch (e: any) {
-      enqueueSnackbar(e?.response?.data, { variant: "error" });
+      enqueueSnackbar(e?.response?.data || "عملیات با خطا مواجه شد", {
+        variant: "error",
+      });
     }
+
+    //   // @ts-ignore
+    //   await QC.refetchQueries(["Product"]);
+    //   enqueueSnackbar("محصول با موفقیت ایجاد شد", { variant: "success" });
+    //   setModal(undefined);
+    // } catch (e: any) {
+    //   enqueueSnackbar(e?.response?.data, { variant: "error" });
+    // }
+    //
+    //
+    // try {
+    //   await mutateEditProduct({
+    //     id: selectedProduct?._id!,
+    //     ...values,
+    //   });
+    //
+    //   // @ts-ignore
+    //   await QC.refetchQueries(["Product"]);
+    //   enqueueSnackbar("محصول با موفقیت ویرایش شد", { variant: "success" });
+    //   setModal(undefined);
+    // } catch (e: any) {
+    //   enqueueSnackbar(e?.response?.data, { variant: "error" });
   };
 
   const handleDeleteProduct = async () => {

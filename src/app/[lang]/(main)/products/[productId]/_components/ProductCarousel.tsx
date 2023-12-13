@@ -24,7 +24,6 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
   }, []);
 
   const handleChangeThumb = (index: number) => {
-    console.log("mainSwiper", mainSwiper);
     mainSwiper.slideTo(index);
   };
 
@@ -64,11 +63,10 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          {/*<Image src={image} alt={'product'} fill />*/}
         </Box>
 
         <Box display={{ xs: "none", sm: "block" }}>
-          <Swiper className="mySwiper" slidesPerView={4} spaceBetween={8}>
+          <Swiper className="mySwiper" slidesPerView={4} spaceBetween={8} style={{height: 100}}>
             {images?.map((image, i) => (
               <SwiperSlide
                 key={i}
@@ -81,6 +79,7 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
                   height={110}
                   layout={"responsive"}
                   alt={"product"}
+                  loading={'lazy'}
                 />
               </SwiperSlide>
             ))}

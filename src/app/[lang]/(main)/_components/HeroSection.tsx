@@ -4,12 +4,14 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import HeroSectionImage from "../../../../../public/images/home/hero-image.webp";
 import { getDictionary } from "~/i18n";
 import { useCommon } from "~/store/common/commonSlice";
+import {TLang} from "~/services/api/type";
 
-interface HeroSectionProps {}
+interface HeroSectionProps {
+  lang: TLang
+}
 
-const HeroSection: FC<HeroSectionProps> = () => {
+const HeroSection: FC<HeroSectionProps> = ({lang}) => {
   const dictionary = getDictionary();
-  const { isRtl } = useCommon();
 
   return (
     <Stack
@@ -54,7 +56,7 @@ const HeroSection: FC<HeroSectionProps> = () => {
           >
             {dictionary("home.showProducts")}
             <Box width={{ xs: 20, sm: 32 }} height={{ xs: 20, sm: 32 }}>
-              <SvgArrowLeft isRtl={isRtl} width={"auto"} height={"auto"} />
+              <SvgArrowLeft isRtl={lang === 'fa'} width={"auto"} height={"auto"} />
             </Box>
           </Button>
         </Box>

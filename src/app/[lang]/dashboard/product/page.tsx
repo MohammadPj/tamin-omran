@@ -41,6 +41,11 @@ const Product: FC = () => {
         open={!!modal}
         title={modals.find((m) => m.id === modal)?.title}
         onClose={() => setModal(null)}
+        boxProps={{
+          width: "90%",
+          maxWidth:
+            modal === "create-product" || modal === "edit-product" ? 1000 : 400,
+        }}
       >
         {modal === "create-product" ? (
           <CreateProduct

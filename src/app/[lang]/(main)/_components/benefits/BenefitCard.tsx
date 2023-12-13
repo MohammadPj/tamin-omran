@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import SvgGear2 from "~/components/icons/final/Gear2";

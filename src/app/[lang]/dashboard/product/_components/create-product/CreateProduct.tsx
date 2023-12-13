@@ -31,7 +31,10 @@ export interface ICreateProductForm {
   lang: TLang;
   categoryId: string;
   brandId: string;
-  images: string[];
+  image?: string;
+  imageFile?: File;
+  images?: string[];
+  imageFiles?: File[];
   isAvailable: boolean;
   engineNumber: string;
   technicalNumber: string;
@@ -48,11 +51,12 @@ const CreateProduct: FC<CreateProductProps> = ({
     defaultValues: {
       lang: defaultValue?.lang || "fa",
       title: defaultValue?.title!,
-      brandId: defaultValue?.brand._id!,
-      categoryId: defaultValue?.category._id,
+      brandId: defaultValue?.brand?._id!,
+      categoryId: defaultValue?.category?._id,
       description: defaultValue?.description,
       engineNumber: defaultValue?.engineNumber,
-      // images: defaultValue?.images,
+      image: defaultValue?.image,
+      images: defaultValue?.images,
       isAvailable: defaultValue?.isAvailable,
       review: defaultValue?.review,
       technicalNumber: defaultValue?.technicalNumber,
@@ -110,8 +114,31 @@ const CreateProduct: FC<CreateProductProps> = ({
     form.setValue("review", value);
   };
 
+  const handleChangeMainImage = (files: FileList) => {
+    const file = files[0];
+
+    form.setValue("image", URL.createObjectURL(file));
+    form.setValue("imageFile", file);
+  };
+
+  const handleChangeImages = (files: FileList) => {
+    const imageFiles = form.getValues("imageFiles") || [];
+    const images = form.getValues("images") || [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      console.log("file", file);
+      if (!file) return;
+      imageFiles?.push(file);
+      images?.push(URL.createObjectURL(file));
+    }
+
+    form.setValue("imageFiles", imageFiles);
+    form.setValue("images", images);
+  };
+
   return (
-    <Stack width={800}>
+    <Stack>
       <LanguageTab
         onChange={handleChangeLanguage}
         defaultValue={form.getValues("lang")}
@@ -151,7 +178,7 @@ const CreateProduct: FC<CreateProductProps> = ({
             </Box>
 
             <FormControlLabel
-              checked={form.watch('isAvailable')}
+              checked={form.watch("isAvailable")}
               control={
                 <Switch color="primary" {...form.register("isAvailable")} />
               }
@@ -173,7 +200,12 @@ const CreateProduct: FC<CreateProductProps> = ({
         </Grid>
 
         <Grid item xs={5}>
-          <UploadProductSection />
+          <UploadProductSection
+            images={form.watch("images")}
+            mainImage={form.watch("image")}
+            onChangeImages={handleChangeImages}
+            onChangeMainImage={handleChangeMainImage}
+          />
         </Grid>
       </Grid>
 
@@ -191,7 +223,10 @@ const CreateProduct: FC<CreateProductProps> = ({
           </Typography>
         </Box>
 
-        <CustomCKEditor onChange={handleChangeReview} defaultValue={defaultValue?.review} />
+        <CustomCKEditor
+          onChange={handleChangeReview}
+          defaultValue={defaultValue?.review}
+        />
       </Box>
 
       <Box display={"flex"} gap={4} mt={4}>

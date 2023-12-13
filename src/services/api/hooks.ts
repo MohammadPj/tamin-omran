@@ -32,7 +32,7 @@ import {
   getSingleBrochureType,
   getSingleCategory, getSingleFile,
   getSingleProduct,
-  login, register,
+  login, productImages, register,
 } from "~/services/api/services";
 import {
   IArticleParams,
@@ -179,6 +179,9 @@ export const useCreateProduct = () =>
 
 export const useEditeProduct = () =>
   useMutation({ mutationKey: ["Product"], mutationFn: editeProduct });
+
+export const useAssignProductImage = () =>
+  useMutation({ mutationKey: ["Product-image"], mutationFn: productImages });
 
 export const useDeleteProduct = () =>
   useMutation({ mutationKey: ["Product"], mutationFn: deleteProduct });

@@ -16,52 +16,6 @@ interface RelativeProductsProps {
 const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
 
   const {data: products} = useGetProducts({lang: 'fa', category: product.category._id})
-  console.log('products', products)
-
-  const relativeProducts = [
-    {
-      id: 1,
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (1).jpg",
-    },
-    {
-      id: 2,
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (2).jpg",
-    },
-    {
-      id: 3,
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (3).jpg",
-    },
-    {
-      id: 4,
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (4).jpg",
-    },
-    {
-      id: 5,
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (5).jpg",
-    },
-    {
-      id: 4,
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (4).jpg",
-    },
-    {
-      id: 5,
-      title: "این نام محصول است",
-      subtitle: "این برند است",
-      image: "/images/products/product (5).jpg",
-    },
-  ];
 
   const [swiper, setSwiper] = useState<any>();
   const [swiperProgress, setSwiperProgress] = useState(0);
@@ -122,7 +76,7 @@ const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
                     <ProductCard
                       title={product.title}
                       subtitle={product.description}
-                      image={''}
+                      image={product?.image}
                       id={product._id}
                       isAvailable={product.isAvailable}
                     />
