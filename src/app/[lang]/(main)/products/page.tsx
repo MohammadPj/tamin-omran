@@ -5,28 +5,27 @@ import ProductsFilter from "~/app/[lang]/(main)/products/_components/products-fi
 import ProductsList from "~/app/[lang]/(main)/products/_components/ProductsList";
 import { Metadata } from "next";
 import ProductsBar from "~/app/[lang]/(main)/products/_components/ProductsBar";
-import {baseURL} from "~/services/core/http";
+import { baseURL } from "~/services/core/http";
 import queryString from "querystring";
-import {IProduct} from "~/types/product";
-import {TLang} from "~/services/api/type";
+import { IProduct } from "~/types/product";
+import { TLang } from "~/services/api/type";
 import axios from "axios";
 
 export const metadata: Metadata = {
   title: "محصولات",
 };
 
-async function getData(props: {lang: TLang}) {
+async function getData(props: { lang: TLang }) {
   // Call the fetch method and passing
   // the pokeAPI link
   const url = new URL(`${baseURL}product`);
   const query = {
-    lang: props.lang
+    lang: props.lang,
   };
   const normalizeQuery = queryString.stringify(query);
 
   const response = await axios.get(`${url}?${normalizeQuery}`);
 
-  console.log('response', response)
   return await response.data;
 }
 
@@ -34,8 +33,10 @@ export default async function ProductPage(props: {
   params: { lang: TLang };
   searchParams: {};
 }) {
-
-  const products: IProduct[] = await getData({lang: props.params.lang});
+  let products: IProduct[] = [];
+  try {
+    products = await getData({ lang: props.params.lang });
+  } catch (e) {}
 
   return (
     <Container sx={{ mt: 7, mb: 15, display: "flex", gap: 7, flexGrow: 1 }}>
@@ -64,5 +65,4 @@ export default async function ProductPage(props: {
       </Stack>
     </Container>
   );
-};
-
+}

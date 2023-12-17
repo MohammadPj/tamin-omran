@@ -10,7 +10,7 @@ import {IProduct} from "~/types/product";
 
 interface NewProductsProps {
   lang: TLang
-  products: IProduct[]
+  products?: IProduct[]
 }
 
 const NewProducts: FC<NewProductsProps> = ({lang, products}) => {

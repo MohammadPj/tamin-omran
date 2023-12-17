@@ -4,18 +4,18 @@ import TruckImage from '../../../../../public/images/trucks/truck-5.webp'
 import LastArticlesList from "~/app/[lang]/(main)/articles/_components/LastArticlesList";
 import ArticlesList from "~/app/[lang]/(main)/articles/_components/ArticlesList";
 import SvgLogo from "~/components/icons/final/Logo";
-import {Metadata} from "next";
-import {baseURL} from "~/services/core/http";
+import { Metadata } from "next";
+import { baseURL } from "~/services/core/http";
 import queryString from "querystring";
 import axios from "axios";
-import {TLang} from "~/services/api/type";
-import {IArticle} from "~/types/article";
+import { TLang } from "~/services/api/type";
+import { IArticle } from "~/types/article";
 
 export const metadata: Metadata = {
   title: 'مقالات',
 }
 
-async function getLatestArticles({lang}: {lang: TLang}) {
+async function getLatestArticles({ lang }: { lang: TLang }) {
   // Call the fetch method and passing
   // the pokeAPI link
   const url = new URL(`${baseURL}article`);
@@ -30,7 +30,7 @@ async function getLatestArticles({lang}: {lang: TLang}) {
   return await response.data;
 }
 
-async function getArticles({lang, page}: {lang: TLang, page: number}) {
+async function getArticles({ lang, page }: { lang: TLang, page: number }) {
   // Call the fetch method and passing
   // the pokeAPI link
   const url = new URL(`${baseURL}article`);
@@ -49,12 +49,20 @@ async function getArticles({lang, page}: {lang: TLang, page: number}) {
 const ArticlesPage = async (props: any) => {
 
   console.log('props', props)
-  const latestArticles: IArticle[] = await getLatestArticles({lang: props?.params?.lang})
-  const articles: IArticle[] = await getArticles({lang: props?.params?.lang, page: 1})
+
+  let latestArticles: IArticle[] = []
+  let articles: IArticle[] = []
+
+  try {
+    latestArticles = await getLatestArticles({ lang: props?.params?.lang })
+    articles = await getArticles({ lang: props?.params?.lang, page: 1 })
+  } catch (e) {
+
+  }
 
   return (
     <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-      <h1>{props?.searchParams?.page || "Hello!"}</h1>
+      <h1>{props?.searchParams?.page}</h1>
       <LastArticlesList lang={props?.params?.lang} articles={latestArticles} />
 
       <Box
@@ -65,7 +73,7 @@ const ArticlesPage = async (props: any) => {
           background: `linear-gradient(0deg, rgba(0, 0, 43, 0.5) -5.37%, rgba(0, 0, 43, 0.5) 100%), url(${TruckImage.src})`,
         }}
       >
-        <Box position={'absolute'} bottom={0} right={'50%'} sx={{transform: 'translateX(50%)'}}>
+        <Box position={'absolute'} bottom={0} right={'50%'} sx={{ transform: 'translateX(50%)' }}>
           <SvgLogo color1={'grey'} color3={'grey'} />
         </Box>
       </Box>

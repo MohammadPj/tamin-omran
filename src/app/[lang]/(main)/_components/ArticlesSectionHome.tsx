@@ -9,7 +9,7 @@ import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
 import {TLang} from "~/services/api/type";
 
 interface ArticlesSectionHomeProps {
-  articles: IArticle[]
+  articles?: IArticle[]
   lang: TLang
 }
 
@@ -22,7 +22,7 @@ const ArticlesSectionHome: FC<ArticlesSectionHomeProps> = ({articles, lang}) => 
       <CustomDivider mb={5} title={dictionary("common.articlesAndNews")} showMoreHref={'/articles'} />
 
       <Stack gap={4}>
-        {articles.map((article, i) => (
+        {articles?.map((article, i) => (
           <React.Fragment key={article._id}>
             <ArticleCard article={article} />
             {i < articles.length - 1 && <Divider />}
