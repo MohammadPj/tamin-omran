@@ -48,21 +48,20 @@ async function getArticles({ lang, page }: { lang: TLang, page: number }) {
 
 const ArticlesPage = async (props: any) => {
 
-  console.log('props', props)
+  console.log('props', props.searchParams.page)
 
   let latestArticles: IArticle[] = []
   let articles: IArticle[] = []
 
   try {
     latestArticles = await getLatestArticles({ lang: props?.params?.lang })
-    articles = await getArticles({ lang: props?.params?.lang, page: 1 })
+    articles = await getArticles({ lang: props?.params?.lang, page: props.searchParams.page })
   } catch (e) {
 
   }
 
   return (
     <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-      <h1>{props?.searchParams?.page}</h1>
       <LastArticlesList lang={props?.params?.lang} articles={latestArticles} />
 
       <Box
