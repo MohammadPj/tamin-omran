@@ -6,11 +6,14 @@ import TruckImage from "@/public/images/home/image-1.png";
 import Benefits from "~/app/[lang]/(main)/_components/benefits/Benefits";
 import HomeGallery from "~/app/[lang]/(main)/_components/HomeGallery";
 import { getDictionary } from "~/i18n";
+import {TLang} from "~/services/api/type";
 
-interface Props {}
+interface InformationSection1Props {
+  lang: TLang
+}
 
-const InformationSection1: FC<Props> = () => {
-  const dictionary = getDictionary();
+const InformationSection1: FC<InformationSection1Props> = ({lang}) => {
+  const dictionary = getDictionary(lang);
 
   return (
     <Box position={"relative"}>
@@ -33,7 +36,7 @@ const InformationSection1: FC<Props> = () => {
       </Box>
 
       <Box mt={6} mb={{xs: 20, sm: 24}}>
-        <Benefits />
+        <Benefits lang={lang} />
       </Box>
 
       <Box>

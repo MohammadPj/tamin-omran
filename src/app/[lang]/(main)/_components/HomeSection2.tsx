@@ -4,8 +4,13 @@ import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider"
 import Image from "next/image";
 import { getDictionary } from "~/i18n";
 import CustomDivider2 from "~/components/custom-mui/custom-divider/CustomDivider2";
+import {TLang} from "~/services/api/type";
 
-const HomeSection2: FC = () => {
+interface HomeSection2Props {
+  lang: TLang
+}
+
+const HomeSection2: FC<HomeSection2Props> = ({lang}) => {
   const customers = [
     "/images/customers/customer (1).png",
     "/images/customers/customer (2).png",
@@ -18,7 +23,7 @@ const HomeSection2: FC = () => {
     "/images/customers/customer (4).png",
   ];
 
-  const dictionary = getDictionary();
+  const dictionary = getDictionary(lang);
 
   return (
     <Box>

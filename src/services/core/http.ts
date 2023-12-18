@@ -1,14 +1,13 @@
 import axios from "axios";
-import {store} from "~/store/store";
+import { store } from "~/store/store";
 
-export const baseURL = "http://localhost:4000/api/"
+export const baseURL = "http://localhost:4000/api/";
 
 export const http = axios.create({
   baseURL,
 });
 
 http.interceptors.request.use(
-
   (config: any) => ({
     ...config,
     headers: {
@@ -25,12 +24,9 @@ http.interceptors.request.use(
 );
 
 http.interceptors.response.use(
-
   (res: any) => res.data,
 
   (error) => {
     return Promise.reject(error);
   }
 );
-
-

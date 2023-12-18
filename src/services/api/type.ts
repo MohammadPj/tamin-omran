@@ -1,3 +1,5 @@
+import {IUser} from "~/types/user";
+
 export type TLang = "fa" | "en";
 
 export interface ICommonFilterParams {
@@ -108,13 +110,24 @@ export interface IEditProductBody extends IProductBody {
   id: string
 }
 
+// ---------------------------  Product  ------------------------------
 export interface ILoginBody {
   email: string;
   password: string;
 }
 
 export interface IRegisterBody {
-  name: string;
+  firstName: string;
+  lastName: string
   email: string;
   password: string
 }
+
+export interface ILoginResponse extends IUser {
+  token: string
+}
+
+export interface IRegisterResponse extends IUser {
+  token: string
+}
+

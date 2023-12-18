@@ -70,11 +70,11 @@ const HomePage = async (props: HomePageProps) => {
         </Box>
 
         <Box mb={{ xs: 20, sm: 30 }}>
-          <InformationSection1 />
+          <InformationSection1 lang={props.params.lang} />
         </Box>
 
         <Box mb={{ xs: 16, sm: 40 }}>
-          <HomeSection2 />
+          <HomeSection2 lang={props.params.lang} />
         </Box>
 
         <Box mb={{ xs: 16, sm: 40 }}>

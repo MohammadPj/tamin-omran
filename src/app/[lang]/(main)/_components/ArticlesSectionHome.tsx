@@ -15,7 +15,7 @@ interface ArticlesSectionHomeProps {
 
 const ArticlesSectionHome: FC<ArticlesSectionHomeProps> = ({articles, lang}) => {
 
-  const dictionary = getDictionary()
+  const dictionary = getDictionary(lang)
 
   return (
     <Box>

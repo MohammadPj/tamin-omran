@@ -17,10 +17,10 @@ import {
   IEditBrochureTypeBody,
   IEditCategoryBody,
   IEditProductBody,
-  ILoginBody,
+  ILoginBody, ILoginResponse,
   IProductBody,
   IProductParams,
-  IRegisterBody,
+  IRegisterBody, IRegisterResponse,
 } from "~/services/api/type";
 import { IBrochure, IBrochureType } from "~/types/brochure";
 import { IBrand, ICategory, IProduct } from "~/types/product";
@@ -181,8 +181,8 @@ export const deleteFile = (fileId: string) =>
   http.delete(routes.singleFile(fileId));
 
 // ---------------------------  Login ------------------------------
-export const login = (body: ILoginBody): Promise<{ token: string }> =>
+export const login = (body: ILoginBody): Promise<ILoginResponse> =>
   http.post(routes.login, body);
 
-export const register = (body: IRegisterBody): Promise<{ token: string }> =>
+export const register = (body: IRegisterBody): Promise<IRegisterResponse> =>
   http.post(routes.register, body);

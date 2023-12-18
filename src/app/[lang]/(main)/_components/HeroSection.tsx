@@ -11,7 +11,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: FC<HeroSectionProps> = ({lang}) => {
-  const dictionary = getDictionary();
+  const dictionary = getDictionary(lang);
 
   return (
     <Stack

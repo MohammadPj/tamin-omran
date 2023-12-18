@@ -30,7 +30,7 @@ export const checkIfNumber = (e: any) => {
 export const handleLogout = () => {
   localStorage.clear()
   store.dispatch({ type: 'logout' })
-  window.open('/login', '_self')
+  window.open('/', '_self')
 }
 
 export const handleDownload = async (link: string, nameOfDownload: string) => {

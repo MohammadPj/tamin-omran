@@ -8,8 +8,10 @@ import { useForm } from "react-hook-form";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
 import { Box, Button, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import {useLogin, useRegisterMutation} from "~/services/api/hooks";
-import {useSnackbar} from "notistack";
+import { useLogin, useRegisterMutation } from "~/services/api/hooks";
+import { useSnackbar } from "notistack";
+import { useDispatch } from "react-redux";
+import { setToken, setUserInfo } from "~/store/user/userSlice";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -20,7 +22,8 @@ interface LoginModalProps {
 interface IForm {
   email: string;
   password: string;
-  phoneNumber?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 type TLoginMode = "login" | "register";
@@ -30,13 +33,14 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
   lang,
   onClose,
 }) => {
-  const {enqueueSnackbar} = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar();
   const dictionary = getDictionary(lang);
+  const dispatch = useDispatch();
 
   const [mode, setMode] = useState<TLoginMode>("login");
 
-  const {mutateAsync: mutateLogin} = useLogin()
-  const {mutateAsync: mutateRegister} = useRegisterMutation()
+  const { mutateAsync: mutateLogin } = useLogin();
+  const { mutateAsync: mutateRegister } = useRegisterMutation();
 
   const form = useForm<IForm>();
 
@@ -45,7 +49,7 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
       name: "email",
       label: dictionary("common.email"),
       rules: { required: dictionary("common.fieldIsRequired") },
-      type: 'email'
+      type: "email",
     },
     {
       name: "password",
@@ -60,11 +64,18 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
       name: "email",
       label: dictionary("common.email"),
       rules: { required: dictionary("common.fieldIsRequired") },
-      type: 'email'
+      type: "email",
     },
     {
-      name: "phoneNumber",
-      label: dictionary("common.phoneNumber"),
+      name: "firstName",
+      label: dictionary("common.firstName"),
+      gridItemProp: { xs: 6 },
+      rules: { required: dictionary("common.fieldIsRequired") },
+    },
+    {
+      name: "lastName",
+      label: dictionary("common.lastName"),
+      gridItemProp: { xs: 6 },
       rules: { required: dictionary("common.fieldIsRequired") },
     },
     {
@@ -75,10 +86,14 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
     },
     {
       name: "repeatPassword",
-      label: dictionary("common.repeatPassword"),
+      label: dictionary("common.loginAndRegister.repeatPassword"),
       rules: {
         required: dictionary("common.fieldIsRequired"),
-        validate: {}
+        validate: (value: any) => {
+          return value === form.getValues().password
+            ? true
+            : dictionary("common.loginAndRegister.passwordNotMatch");
+        },
       },
       type: "password",
     },
@@ -90,28 +105,80 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
   };
 
   const handleLogin = async (values: IForm) => {
-    console.log('handle login')
+    const res = await mutateLogin(
+      { email: values.email, password: values.password },
+      {
+        onError: (e: any) => {
+          enqueueSnackbar(e?.response?.data || "we have an error", {
+            variant: "error",
+          });
+        },
+        onSuccess: (data) => {
+          enqueueSnackbar(
+            dictionary("common.loginAndRegister.successLoginMessage", {
+              username: data.firstName + " " + data.lastName,
+            }),
+            { variant: "success" }
+          );
 
-    const res = await mutateLogin({email: values.email, password: values.password}, {
-      onError: (e: any) => {
-        enqueueSnackbar(e?.response?.data || "we have an error", {variant: 'error'})
-      },
-      onSuccess: () => {
-        // enqueueSnackbar('')
+          onClose();
+        },
       }
-    })
+    );
 
-    console.log('res', res)
+    dispatch(
+      setUserInfo({
+        firstName: res.firstName,
+        lastName: res.lastName,
+        email: res.email,
+        isAdmin: res?.isAdmin
+      })
+    );
+    dispatch(setToken(res.token));
   };
 
-  const handleRegister = (values: IForm) => {
-    console.log('handle Register')
+  const handleRegister = async (values: IForm) => {
+
+    const res = await mutateRegister(
+      {
+        email: values.email,
+        password: values.password,
+        firstName: values.firstName!,
+        lastName: values.lastName!,
+      },
+      {
+        onError: (e: any) => {
+          enqueueSnackbar(e?.response?.data || "we have an error", {
+            variant: "error",
+          });
+        },
+        onSuccess: (data) => {
+          enqueueSnackbar(
+            dictionary("common.loginAndRegister.successRegisterMessage", {
+              username: data.firstName + " " + data.lastName,
+            }),
+            { variant: "success" }
+          );
+
+          onClose();
+        },
+      }
+    );
+
+    dispatch(
+      setUserInfo({
+        firstName: res.firstName,
+        lastName: res.lastName,
+        email: res.email,
+      })
+    );
+    dispatch(setToken(res.token));
   };
 
   const handleToggleMode = () => {
-    form.reset()
-    setMode(mode === 'login' ? "register" : 'login')
-  }
+    form.reset();
+    setMode(mode === "login" ? "register" : "login");
+  };
 
   const handleClose = () => {
     setMode("login");
@@ -132,7 +199,7 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
     >
       <Box component={"form"} onSubmit={form.handleSubmit(handleSubmitForm)}>
         {mode === "login" ? (
-          <Stack gap={4}>
+          <Stack gap={8}>
             <InputListWithUseForm
               inputList={loginList}
               form={form}
@@ -143,7 +210,7 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
 
             <Box display={"flex"} gap={2}>
               <Typography fontWeight={500} fontSize={14}>
-                {dictionary("common.notRegisterYet")}
+                {dictionary("common.loginAndRegister.notRegisterYet")}
               </Typography>
 
               <Typography
@@ -158,7 +225,7 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
             </Box>
           </Stack>
         ) : (
-          <Stack gap={4}>
+          <Stack gap={8}>
             <InputListWithUseForm
               inputList={registerList}
               form={form}
@@ -171,7 +238,7 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
 
             <Box display={"flex"} gap={2}>
               <Typography fontWeight={500} fontSize={14}>
-                {dictionary("common.doYouHaveAccount")}
+                {dictionary("common.loginAndRegister.doYouHaveAccount")}
               </Typography>
 
               <Typography

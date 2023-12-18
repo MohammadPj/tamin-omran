@@ -15,7 +15,7 @@ interface NewProductsProps {
 
 const NewProducts: FC<NewProductsProps> = ({lang, products}) => {
 
-  const dictionary = getDictionary();
+  const dictionary = getDictionary(lang);
 
   return (
     <Box mt={11}>
