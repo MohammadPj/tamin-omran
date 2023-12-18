@@ -10,7 +10,9 @@ export const commonDictionary: ICommonDictionary = {
     title: "Follow us on social networks to get the latest news and useful articles",
   },
   header: {
-    login: "Login/Register",
+    loginAndRegister: "Login/Register",
+    login: "Login",
+    register: 'Register',
     search: "search your product",
   },
   home: "Home",
@@ -25,4 +27,14 @@ export const commonDictionary: ICommonDictionary = {
   category: 'Category',
   download: 'Download',
   newestArticles: 'Newest Articles',
+
+  email: "Email",
+  password: "Password",
+  phoneNumber: "Phone number",
+
+  doYouHaveAccount: "Have an account?",
+  notRegisterYet: "Not register yet?",
+  repeatPassword: "Repeat password",
+
+  fieldIsRequired: "This field is required"
 };

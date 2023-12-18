@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Box,
   Button,
@@ -19,6 +19,7 @@ import SideBar from "~/app/[lang]/_components/sidebar/SideBar";
 import { useCommon } from "~/store/common/commonSlice";
 import { getDeviceType } from "~/helpers/methods";
 import { usePathname } from "next/navigation";
+import LoginAndRegisterModal from "~/app/[lang]/_components/header/components/LoginAndRegisterModal";
 
 interface HeaderProps {
   lang: TLanguages;
@@ -26,6 +27,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ lang }) => {
   const dictionary = getDictionary();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const tabs: ITab[] = [
     { label: dictionary("common.home"), href: "/" },
@@ -49,7 +51,9 @@ const Header: FC<HeaderProps> = ({ lang }) => {
           justifyContent={"space-between"}
         >
           <SvgLogo />
-          <Button>{dictionary("common.header.login")}</Button>
+          <Button onClick={() => setIsLoginModalOpen(true)}>
+            {dictionary("common.header.loginAndRegister")}
+          </Button>
         </Box>
 
         <Box
@@ -94,6 +98,12 @@ const Header: FC<HeaderProps> = ({ lang }) => {
           </Box>
         </Box>
       </Container>
+
+      <LoginAndRegisterModal
+        isOpen={isLoginModalOpen}
+        lang={lang}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
     </Box>
   );
 };

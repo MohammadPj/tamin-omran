@@ -15,9 +15,6 @@ export function middleware(request: any) {
     return NextResponse.redirect(new URL("/dashboard/product", request.url));
   }
 
-  console.log("request", request);
-  console.log("request?.search", request.nextUrl.search);
-
   if (!pathnameIsValid) {
     // rewrite it so next.js will render `/` as if it was `/fa`
     return NextResponse.rewrite(
@@ -31,8 +28,6 @@ export function middleware(request: any) {
       request.url.replace(`/${defaultLang}`, ""),
       request.url
     );
-
-    console.log("newUrl", newUrl);
 
     return NextResponse.redirect(newUrl);
   }

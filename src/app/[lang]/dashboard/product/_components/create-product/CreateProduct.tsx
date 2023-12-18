@@ -66,11 +66,21 @@ const CreateProduct: FC<CreateProductProps> = ({
   const { data: categories } = useGetCategories({ lang: form.watch("lang") });
   const { data: brands } = useGetBrands({ lang: form.watch("lang") });
 
-  const inputList: IUseFormInput[] = [
+  const inputList1: IUseFormInput[] = [
+    {
+      name: "title",
+      label: "نام محصول",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
+      placeholder: "لطفا نام محصول را وارد کنید"
+    }
+  ]
+
+  const inputList2: IUseFormInput[] = [
     {
       name: "categoryId",
       label: "دسته بندی محصول",
       placeholder: "انتخاب دسته بندی",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       type: "select",
       options: categories?.map((category) => ({
         label: category.title,
@@ -81,15 +91,18 @@ const CreateProduct: FC<CreateProductProps> = ({
       name: "technicalNumber",
       label: "شماره فنی",
       placeholder: "شماره فنی محصول را وارد کنید",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
     },
     {
       name: "engineNumber",
       label: "موتور",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       placeholder: "شماره فنی محصول را وارد کنید",
     },
     {
       name: "brandId",
       label: "برند محصول",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       placeholder: "انتخاب برند",
       type: "select",
       options: brands?.map((brand) => ({
@@ -100,6 +113,7 @@ const CreateProduct: FC<CreateProductProps> = ({
     {
       name: "description",
       label: "توضیحات",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       placeholder: "انتخاب برند",
       gridItemProp: { xs: 12 },
       type: "text-area",
@@ -146,34 +160,18 @@ const CreateProduct: FC<CreateProductProps> = ({
 
       <Grid container spacing={4}>
         <Grid item xs={7}>
-          <Typography
-            component={"label"}
-            display={"block"}
-            fontWeight={400}
-            fontSize={14}
-            mb={2}
-            htmlFor={"product-name"}
-            noWrap
-            title={"نام محصول"}
-            color={"n.3"}
-          >
-            نام محصول
-          </Typography>
-
           <Box
             display={"flex"}
             gap={2}
             width={"100%"}
-            alignItems={"center"}
+            alignItems={"end"}
             mb={4}
           >
             <Box flexGrow={1}>
-              <TextField
-                {...form.register("title")}
-                id={"product-name"}
-                variant={"filled"}
-                placeholder={"نام محصول را وارد کنید"}
-                fullWidth
+              <InputListWithUseForm
+                inputList={inputList1}
+                form={form}
+                gridItemProps={{ xs: 12 }}
               />
             </Box>
 
@@ -193,7 +191,7 @@ const CreateProduct: FC<CreateProductProps> = ({
           </Box>
 
           <InputListWithUseForm
-            inputList={inputList}
+            inputList={inputList2}
             form={form}
             gridItemProps={{ xs: 6 }}
           />

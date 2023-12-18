@@ -9,7 +9,9 @@ export const commonDictionary: ICommonDictionary = {
     title: 'برای دریافت آخرین اخبار و مقالات مفید ما را درشبکه های اجتماعی دنبال کنید'
   },
   header: {
-    login: 'ورود/ثبت نام',
+    loginAndRegister: 'ورود/ثبت نام',
+    login: "ورود",
+    register: "ثبت نام",
     search: 'محصول مورد نظر را جست و جو کنید'
   },
   home: 'خانه',
@@ -24,4 +26,14 @@ export const commonDictionary: ICommonDictionary = {
   category: 'دسته بندی',
   download: 'دانلود',
   newestArticles: 'جدیدترین مقالات',
+
+  email: "ایمیل",
+  password: "پسورد",
+  phoneNumber: "شماره تماس",
+
+  doYouHaveAccount: "قبلا ثبت نام کرده اید",
+  notRegisterYet: "هنوز ثبت نام نکرده اید!",
+  repeatPassword: "تکرار پسورد",
+
+  fieldIsRequired: "این فیلد اجباری است"
 }

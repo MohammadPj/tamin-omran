@@ -1,7 +1,9 @@
 export interface ICommonDictionary {
   header: {
     search: string
-    login: string
+    loginAndRegister: string
+    login: string;
+    register: string
   },
   footer: {
     usefulLinks: string;
@@ -22,4 +24,14 @@ export interface ICommonDictionary {
   brand: string;
   download: string;
   newestArticles: string
+
+  email: string;
+  phoneNumber: string;
+  password: string
+
+  notRegisterYet: string;
+  doYouHaveAccount: string;
+  repeatPassword: string;
+
+  fieldIsRequired: string
 }

@@ -35,6 +35,7 @@ const CreateCategory: FC<CreateCategoryProps> = ({
       name: "title",
       label: "نام دسته بندی",
       placeholder: "نام دسته بندی را وارد کنید",
+      rules: {required: 'وارد کردن این فیلد اجباری می باشد'}
     },
   ];
 
