@@ -46,12 +46,18 @@ async function getArticles({ lang, page }: { lang: TLang, page: number }) {
   return await response.data;
 }
 
+export interface IMeta {
+  count: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 const ArticlesPage = async (props: any) => {
 
-  console.log('props', props.searchParams.page)
+  let latestArticles: {data: IArticle[], meta: IMeta } | undefined = undefined
 
-  let latestArticles: IArticle[] = []
-  let articles: IArticle[] = []
+  let articles: {data: IArticle[], meta: IMeta } | undefined = undefined
 
   try {
     latestArticles = await getLatestArticles({ lang: props?.params?.lang })
@@ -62,7 +68,7 @@ const ArticlesPage = async (props: any) => {
 
   return (
     <Container sx={{ mt: 7, mb: 20, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-      <LastArticlesList lang={props?.params?.lang} articles={latestArticles} />
+      <LastArticlesList lang={props?.params?.lang} articles={latestArticles?.data} />
 
       <Box
         mb={20}
@@ -77,7 +83,7 @@ const ArticlesPage = async (props: any) => {
         </Box>
       </Box>
 
-      <ArticlesList lang={props?.params?.lang} articles={articles} />
+      <ArticlesList lang={props?.params?.lang} articles={articles?.data} totalPages={articles?.meta?.totalPages!} />
     </Container>
   )
 }

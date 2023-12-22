@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import CustomLink from "~/components/common/custom-link/CustomLink";
-import { usePathname } from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import SvgLogo from "~/components/icons/final/Logo";
 import LanguageMenu from "~/app/[lang]/_components/header/components/LanguageMenu";
 import Stack from "@mui/material/Stack";
@@ -22,6 +22,7 @@ interface Props {
 const DashboardLayout: FC<Props> = ({ children }) => {
   const drawerWidth = 200;
   const pathname = usePathname();
+  const router = useRouter()
 
   const tabs = [
     {
@@ -37,6 +38,10 @@ const DashboardLayout: FC<Props> = ({ children }) => {
       link: "/dashboard/article",
     },
   ];
+
+  const handleNavigateWebsite = () => {
+    router.push("/" as any)
+  }
 
   return (
     <Box display={"flex"}>
@@ -72,6 +77,10 @@ const DashboardLayout: FC<Props> = ({ children }) => {
           <Box flexGrow={1} />
 
           <List>
+            <ListItemButton onClick={handleNavigateWebsite}>
+              <Typography fontWeight={500}>وب سایت</Typography>
+            </ListItemButton>
+
             <ListItemButton onClick={handleLogout}>
               <Typography fontWeight={500} color={"red"}>خروج</Typography>
             </ListItemButton>

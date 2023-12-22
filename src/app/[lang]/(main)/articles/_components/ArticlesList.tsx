@@ -5,28 +5,31 @@ import { IArticle } from "~/types/article";
 import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider";
 import ArticleCard from "~/components/common/article-card/ArticleCard";
 import { getDictionary, TLanguages } from "~/i18n";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "querystring";
+import {useQueryObject} from "~/utils/methods";
 
 interface Props {
   lang: TLanguages;
-  articles: IArticle[];
+  articles?: IArticle[];
+  totalPages: number;
 }
 
-const ArticlesList: FC<Props> = ({ lang, articles }) => {
+const ArticlesList: FC<Props> = ({ lang, articles, totalPages }) => {
+  console.log('pageCount', totalPages)
   const dictionary = getDictionary(lang);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname()
+  const pathname = usePathname();
+
+  const {query} = useQueryObject()
 
   const handleChangePage = (e: any, page: any) => {
-
-    const queries = queryString.stringify({
-      ...queryString.parse(searchParams.toString()),
+    const newQuery = queryString.stringify({
+      ...query,
       page: page,
     });
 
-    router.push(pathname + "?" + queries)
+    router.push((pathname + "?" + newQuery) as any);
   };
 
   return (
@@ -43,7 +46,8 @@ const ArticlesList: FC<Props> = ({ lang, articles }) => {
       </Stack>
 
       <Pagination
-        count={10}
+        page={Number(query?.page) || 1}
+        count={totalPages}
         variant={"outlined"}
         shape={"rounded"}
         onChange={handleChangePage}

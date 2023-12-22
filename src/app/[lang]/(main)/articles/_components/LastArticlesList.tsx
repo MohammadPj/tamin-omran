@@ -7,7 +7,7 @@ import {getDictionary, TLanguages} from "~/i18n";
 
 interface Props {
   lang: TLanguages
-  articles: IArticle[]
+  articles?: IArticle[]
 }
 
 const LastArticlesList: FC<Props> = ({lang, articles}) => {
