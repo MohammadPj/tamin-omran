@@ -26,6 +26,10 @@ const useBrochure = () => {
   const { enqueueSnackbar } = useSnackbar();
   const QC = useQueryClient();
 
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [selectedBrochure, setSelectedBrochure] = useState<IBrochure>();
+
   const { mutateAsync: mutateCreateBrochure } = useCreateBrochure();
   const { mutateAsync: mutateEditBrochure } = useEditeBrochure();
   const { mutateAsync: mutateDeleteBrochure } = useDeleteBrochure();
@@ -33,9 +37,8 @@ const useBrochure = () => {
 
   const { mutateAsync: mutateCreateFile } = useCreateFile();
 
-  const { data: brochures } = useGetBrochures({ lang });
+  const { data: brochures } = useGetBrochures({ lang, page, limit });
 
-  const [selectedBrochure, setSelectedBrochure] = useState<IBrochure>();
 
   const [modal, setModal] = useState<TProductModals>();
 
@@ -126,7 +129,7 @@ const useBrochure = () => {
     onDelete: (brochure) => handleOpenModal("delete-brochure", brochure),
   });
 
-  const { table } = useTable({ data: brochures, columns });
+  const { table } = useTable({ data: brochures?.data, columns });
 
   return {
     table,
@@ -138,6 +141,11 @@ const useBrochure = () => {
     handleEditeBrochure,
     handleDeleteBrochure,
     handleCreateBrochure,
+    setPage,
+    page,
+    limit,
+    setLimit,
+    count: brochures?.meta?.totalPages
   };
 };
 

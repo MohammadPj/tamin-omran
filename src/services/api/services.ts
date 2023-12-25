@@ -17,19 +17,24 @@ import {
   IEditBrochureTypeBody,
   IEditCategoryBody,
   IEditProductBody,
-  ILoginBody, ILoginResponse,
+  ILoginBody,
+  ILoginResponse,
   IProductBody,
   IProductParams,
-  IRegisterBody, IRegisterResponse,
+  IRegisterBody,
+  IRegisterResponse,
 } from "~/services/api/type";
 import { IBrochure, IBrochureType } from "~/types/brochure";
 import { IBrand, ICategory, IProduct } from "~/types/product";
 import axios from "axios";
+import { IMeta } from "~/app/[lang]/(main)/articles/page";
+import { IArticle } from "~/types/article";
 
 // ---------------------------  BrochureTypes  ------------------------------
 export const getBrochureTypes = (
   params: IBrochureTypeParams
-): Promise<IBrochureType[]> => http.get(routes.brochureType, { params });
+): Promise<{ data: IBrochureType[]; meta: IMeta }> =>
+  http.get(routes.brochureType, { params });
 
 export const getSingleBrochureType = (brochureTypeId: string) =>
   http.get(routes.singleBrochureType(brochureTypeId));
@@ -44,7 +49,9 @@ export const deleteBrochureType = (brochureTypeId: string) =>
   http.delete(routes.singleBrochureType(brochureTypeId));
 
 // ---------------------------  Brochure  ------------------------------
-export const getBrochures = (params: IBrochureParams) =>
+export const getBrochures = (
+  params: IBrochureParams
+): Promise<{ data: IBrochure[]; meta: IMeta }> =>
   http.get(routes.brochure, { params });
 
 export const getSingleBrochure = (brochureId: string) =>
@@ -71,7 +78,9 @@ export const deleteBrochure = (brochureId: string) =>
   http.delete(routes.singleBrochure(brochureId));
 
 // ---------------------------  Article  ------------------------------
-export const getArticles = (params: IArticleParams) =>
+export const getArticles = (
+  params: IArticleParams
+): Promise<{ data: IArticle[]; meta: IMeta }> =>
   http.get(routes.article, { params });
 
 export const getSingleArticle = (articleId: string) =>
@@ -98,7 +107,9 @@ export const deleteArticle = (articleId: string) =>
   http.delete(routes.singleArticle(articleId));
 
 // ---------------------------  Brand  ------------------------------
-export const getBrands = (params: IBrandParams): Promise<IBrand[]> =>
+export const getBrands = (
+  params: IBrandParams
+): Promise<{ data: IBrand[]; meta: IMeta }> =>
   http.get(routes.brand, { params });
 
 export const getSingleBrand = (brandId: string) =>
@@ -113,7 +124,9 @@ export const deleteBrand = (brandId: string) =>
   http.delete(routes.singleBrand(brandId));
 
 // ---------------------------  Category  ------------------------------
-export const getCategories = (params: ICategoryParams): Promise<ICategory[]> =>
+export const getCategories = (
+  params: ICategoryParams
+): Promise<{ data: ICategory[]; meta: IMeta }> =>
   http.get(routes.category, { params });
 
 export const getSingleCategory = (brochureId: string) =>
@@ -129,7 +142,9 @@ export const deleteCategory = (brochureId: string) =>
   http.delete(routes.singleCategory(brochureId));
 
 // ---------------------------  Product  ------------------------------
-export const getProducts = (params: IProductParams): Promise<IProduct[]> =>
+export const getProducts = (
+  params: IProductParams
+): Promise<{ data: IProduct[]; meta: IMeta }> =>
   http.get(routes.product, { params });
 
 export const getSingleProduct = (productId: string): Promise<IProduct> =>
@@ -138,7 +153,10 @@ export const getSingleProduct = (productId: string): Promise<IProduct> =>
 export const createProduct = (body: IProductBody): Promise<IProduct> =>
   http.post(routes.product, body);
 
-export const editeProduct = ({ id, ...body }: IEditProductBody): Promise<IProduct> =>
+export const editeProduct = ({
+  id,
+  ...body
+}: IEditProductBody): Promise<IProduct> =>
   http.put(routes.singleProduct(id), body);
 
 export const productImages = ({

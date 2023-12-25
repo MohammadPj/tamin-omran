@@ -12,7 +12,7 @@ export const getDeviceType = (): "Desktop" | "Mobile" => {
 
 export const clearObject = <Type extends {}>(obj: Type): Type => {
   const res = Object.entries(obj).filter(
-    entry => !(entry[1] === undefined || entry[1] === '')
+    entry => !(entry[1] === undefined || entry[1] === null || entry[1] === '')
   )
   return Object.fromEntries(res) as Type
 }

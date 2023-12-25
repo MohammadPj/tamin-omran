@@ -19,8 +19,11 @@ const useCategory = () => {
   const { enqueueSnackbar } = useSnackbar();
   const {lang} = useCommon()
 
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const [selectedCategory, setSelectedCategory] = useState<ICategory>();
-  const { data: categories } = useGetCategories({ lang });
+
+  const { data: categories } = useGetCategories({ lang, page, limit });
   const { mutateAsync: mutateCreateCategory } = useCreateCategory();
   const { mutateAsync: mutateEditCategory } = useEditeCategory();
   const { mutateAsync: mutateDeleteCategory } = useDeleteCategory();
@@ -84,7 +87,7 @@ const useCategory = () => {
     onEdite: (category) => handleOpenModal("edit-category", category),
   });
 
-  const { table } = useTable({ data: categories, columns });
+  const { table } = useTable({ data: categories?.data, columns });
 
   return {
     table,
@@ -95,6 +98,11 @@ const useCategory = () => {
     handleEditCategory,
     handleDeleteCategory,
     handleCreateCategory,
+    setPage,
+    page,
+    limit,
+    setLimit,
+    count: categories?.meta?.totalPages
   };
 };
 

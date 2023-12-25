@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from "react";
 import {
   Box,
@@ -14,6 +15,7 @@ import SvgTelegram from "~/components/icons/final/Telegram";
 import SvgWhatsApp from "~/components/icons/final/WhatsApp";
 import SvgLogo from "~/components/icons/final/Logo";
 import {getDictionary, TLanguages} from "~/i18n";
+import {useGetCategories} from "~/services/api/hooks";
 
 interface Props {
   lang: TLanguages
@@ -22,11 +24,6 @@ interface Props {
 interface IContact {
   id: string;
   icon: React.ReactNode;
-  text: string;
-}
-
-interface ICategory {
-  id: string;
   text: string;
 }
 
@@ -39,6 +36,7 @@ interface ILink {
 const Footer: FC<Props> = ({lang}) => {
 
   const dictionary = getDictionary(lang)
+  const {data: categories} = useGetCategories({lang, limit: 3})
 
   const contactInfo: IContact[] = [
     {
@@ -58,20 +56,20 @@ const Footer: FC<Props> = ({lang}) => {
     },
   ];
 
-  const categories: ICategory[] = [
-    {
-      id: "1",
-      text: dictionary("common.category"),
-    },
-    {
-      id: "2",
-      text: dictionary("common.category"),
-    },
-    {
-      id: "3",
-      text: dictionary("common.category"),
-    },
-  ];
+  // const categories: ICategory[] = [
+  //   {
+  //     id: "1",
+  //     text: dictionary("common.category"),
+  //   },
+  //   {
+  //     id: "2",
+  //     text: dictionary("common.category"),
+  //   },
+  //   {
+  //     id: "3",
+  //     text: dictionary("common.category"),
+  //   },
+  // ];
 
   const links: ILink[] = [
     {
@@ -148,9 +146,9 @@ const Footer: FC<Props> = ({lang}) => {
                 {dictionary("common.products")}
               </Typography>
 
-              {categories.map((category) => (
-                <Typography key={category.id} mb={2} sx={{ cursor: "pointer" }}>
-                  {category.text}
+              {categories?.data?.map((category) => (
+                <Typography key={category._id} mb={2} sx={{ cursor: "pointer" }}>
+                  {category.title}
                 </Typography>
               ))}
             </Grid>

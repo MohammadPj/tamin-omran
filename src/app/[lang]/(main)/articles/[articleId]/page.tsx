@@ -1,22 +1,18 @@
 import React from "react";
 import {Box, Container, Typography} from "@mui/material";
-import { baseURL } from "~/services/core/http";
+import {http} from "~/services/core/http";
 import queryString from "querystring";
-import axios from "axios";
 import Image from "next/image";
 import parse from "html-react-parser";
 import {IArticle} from "~/types/article";
 
-async function getArticle(props: { articleId: string }) {
+async function getArticle(props: { articleId: string }): Promise<any> {
   // Call the fetch method and passing
   // the pokeAPI link
-  const url = new URL(`${baseURL}article/${props.articleId}`);
   const query = {};
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await axios.get(`${url}?${normalizeQuery}`);
-
-  return await response.data;
+  return await http.get(`article/${props.articleId}?${normalizeQuery}`);
 }
 
 const ArticlePage = async ({ params }: { params: { articleId: string } }) => {

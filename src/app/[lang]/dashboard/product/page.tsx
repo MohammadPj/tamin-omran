@@ -11,10 +11,15 @@ import FilterProducts from "~/app/[lang]/dashboard/product/_components/filter-pr
 
 const Product: FC = () => {
   const {
+    page,
     table,
     modal,
+    count,
+    limit,
     modals,
+    setPage,
     setModal,
+    setLimit,
     selectedProduct,
     handleEditProduct,
     handleFilterProduct,
@@ -32,9 +37,16 @@ const Product: FC = () => {
             </Button>
           </Box>
         }
-        onClickFilter={() => setModal("filter-product")}
+        // onClickFilter={() => setModal("filter-product")}
         table={table}
-        pageCount={4}
+        pageCount={count}
+        page={page}
+        onChangePage={(e, page) => setPage(page)}
+        onChangePageSize={(limit) => {
+          setPage(1);
+          setLimit(limit);
+        }}
+        pageSize={limit}
       />
 
       <CustomModal

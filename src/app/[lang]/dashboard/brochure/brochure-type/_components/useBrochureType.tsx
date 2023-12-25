@@ -24,16 +24,20 @@ type TModal =
 const useBrochureType = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { lang } = useCommon();
-  const { data } = useGetBrochureTypes({ lang });
   const QC = useQueryClient()
 
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [selectedBrochureType, setSelectedBrochureType] =
+    useState<IBrochureType>();
   const [modal, setModal] = useState<TModal>();
+
+  const { data: brochureType } = useGetBrochureTypes({ lang });
   const { mutateAsync: mutateCreateBrochureType } = useCreateBrochureType();
   const { mutateAsync: mutateEditBrochureType } = useEditeBrochureType();
   const { mutateAsync: mutateDeleteBrochureType } = useDeleteBrochureType();
 
-  const [selectedBrochureType, setSelectedBrochureType] =
-    useState<IBrochureType>();
+
 
   const modals: { id: TModal; title: string }[] = [
     { id: "create-brochure-type", title: "تعریف دسته بندی" },
@@ -150,7 +154,7 @@ const useBrochureType = () => {
     },
   ];
 
-  const { table } = useTable({ data, columns });
+  const { table } = useTable({ data: brochureType?.data, columns });
 
   return {
     table,
@@ -161,6 +165,11 @@ const useBrochureType = () => {
     handleCreateCategory,
     handleEditeBrochureType,
     handleDeleteBrochureType,
+    setPage,
+    page,
+    limit,
+    setLimit,
+    count: brochureType?.meta?.totalPages
   };
 };
 

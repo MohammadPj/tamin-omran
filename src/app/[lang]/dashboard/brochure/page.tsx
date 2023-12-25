@@ -20,6 +20,11 @@ const Brochure: FC = () => {
     handleEditeBrochure,
     handleDeleteBrochure,
     handleCreateBrochure,
+    setPage,
+    page,
+    limit,
+    setLimit,
+    count
   } = useBrochure();
 
   return (
@@ -33,7 +38,14 @@ const Brochure: FC = () => {
           </Box>
         }
         table={table}
-        pageCount={4}
+        pageCount={count}
+        page={page}
+        onChangePage={(e, page) => setPage(page)}
+        onChangePageSize={(limit) => {
+          setPage(1);
+          setLimit(limit);
+        }}
+        pageSize={limit}
       />
 
       <CustomModal

@@ -23,9 +23,11 @@ const useBrand = () => {
   const { enqueueSnackbar } = useSnackbar();
   const {lang} = useCommon()
 
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const [selectedBrand, setSelectedBrand] = useState<IBrand>();
 
-  const { data: categories } = useGetBrands({ lang });
+  const { data: brands } = useGetBrands({ lang, page, limit });
   const { mutateAsync: mutateCreateBrand } = useCreateBrand();
   const { mutateAsync: mutateEditBrand } = useEditeBrand();
   const { mutateAsync: mutateDeleteBrand } = useDeleteBrand();
@@ -90,7 +92,7 @@ const useBrand = () => {
     onEdite: (brand) => handleOpenModal("edit-brand", brand),
   });
 
-  const { table } = useTable({ data: categories, columns });
+  const { table } = useTable({ data: brands?.data, columns });
 
   return {
     table,
@@ -101,6 +103,11 @@ const useBrand = () => {
     handleEditBrand,
     handleDeleteBrand,
     handleCreateBrand,
+    page,
+    setPage,
+    limit,
+    setLimit,
+    count: brands?.meta?.totalPages
   };
 };
 

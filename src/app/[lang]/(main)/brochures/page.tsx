@@ -7,71 +7,76 @@ import {
   Button,
   Container,
   Divider,
-  Pagination,
   Stack,
   Typography,
 } from "@mui/material";
 import SvgArrowDown from "~/components/icons/final/ArrowDown";
 import SvgDownload from "~/components/icons/final/Download";
-import { Metadata } from "next";
-import { getDictionary } from "~/i18n";
-import { useGetBrochures, useGetBrochureTypes } from "~/services/api/hooks";
-import { TLang } from "~/services/api/type";
-import { baseURL } from "~/services/core/http";
+import {Metadata} from "next";
+import {getDictionary} from "~/i18n";
+import {TLang} from "~/services/api/type";
+import {http} from "~/services/core/http";
 import queryString from "querystring";
-import axios from "axios";
-import { IBrochure, IBrochureType } from "~/types/brochure";
-import { handleDownload } from "~/helpers/methods";
+import {IBrochure, IBrochureType} from "~/types/brochure";
+import {IMeta} from "~/app/[lang]/(main)/articles/page";
 
 export const metadata: Metadata = {
   title: "بروشور ها",
 };
 
-async function getBrochures({ lang }: { lang: TLang }) {
+async function getBrochures({ lang }: { lang: TLang }): Promise<any> {
   // Call the fetch method and passing
   // the pokeAPI link
-  const url = new URL(`${baseURL}brochure`);
   const query = {
     lang,
   };
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await axios.get(`${url}?${normalizeQuery}`);
-
-  return await response.data;
+  return await http.get(`brochure?${normalizeQuery}`);
 }
 
-async function getBrochureTypes({ lang }: { lang: TLang }) {
+async function getBrochureTypes({ lang }: { lang: TLang }): Promise<any> {
   // Call the fetch method and passing
   // the pokeAPI link
-  const url = new URL(`${baseURL}brochure-type`);
   const query = {
     lang,
   };
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await axios.get(`${url}?${normalizeQuery}`);
-
-  return await response.data;
+  return await http.get(`brochure-type?${normalizeQuery}`);
 }
+
 const BrochuresPage = async ({ params }: any) => {
   const dictionary = getDictionary(params.lang);
 
-  const brochureTypes: IBrochureType[] = await getBrochureTypes({
-    lang: params.lang,
-  });
-  const brochures: IBrochure[] = await getBrochures({ lang: params.lang });
+  // {data: IArticle[], meta: IMeta} | undefined
 
-  console.log("brochureTypes", brochureTypes);
+  let brochureTypes: {data: IBrochureType[], meta: IMeta} | undefined = undefined
+  let brochures: {data: IBrochure[], meta: IMeta} | undefined = undefined
 
-  console.log("brochures", brochures);
+  try {
+    brochureTypes = await getBrochureTypes({
+      lang: params.lang,
+    });
 
-  const renderBrochureTypes = brochureTypes.map((brochureType) => ({
+    brochures = await getBrochures({
+      lang: params.lang,
+    });
+
+  } catch (e) {
+    console.log('error', e)
+  }
+
+  const renderBrochureTypes = brochureTypes?.data?.map((brochureType) => ({
     title: brochureType.title,
-    brochures: brochures.filter(
+    brochures: brochures?.data.filter(
       (brochure) => brochure.brochureType._id === brochureType._id
     ),
   }));
+
+  console.log('brochures', brochures)
+  console.log('brochureTypes', brochureTypes)
+  console.log('renderBrochureTypes', renderBrochureTypes)
 
   return (
     <Container
@@ -84,7 +89,7 @@ const BrochuresPage = async ({ params }: any) => {
       }}
     >
       <Stack gap={5} flexGrow={1} mb={10}>
-        {renderBrochureTypes.map((brochureType, i) => (
+        {renderBrochureTypes?.map((brochureType, i) => (
           <Accordion key={i}>
             <AccordionSummary
               expandIcon={<SvgArrowDown width={24} height={24} />}

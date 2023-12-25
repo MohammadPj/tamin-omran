@@ -19,8 +19,12 @@ const Article: FC = () => {
     setModal,
     modals,
     modal,
+    setPage,
+    page,
+    limit,
+    setLimit,
+    count
   } = useArticle();
-
 
   return (
     <>
@@ -31,7 +35,14 @@ const Article: FC = () => {
           </Button>
         }
         table={table}
-        pageCount={4}
+        pageCount={count}
+        page={page}
+        onChangePage={(e, page) => setPage(page)}
+        onChangePageSize={(limit) => {
+          setPage(1);
+          setLimit(limit);
+        }}
+        pageSize={limit}
       />
 
       <CustomModal

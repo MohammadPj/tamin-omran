@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Box, Container } from "@mui/material";
 import HeroSection from "~/app/[lang]/(main)/_components/HeroSection";
 import NewProducts from "~/app/[lang]/(main)/_components/NewProducts";
@@ -7,57 +7,53 @@ import ArticlesSectionHome from "~/app/[lang]/(main)/_components/ArticlesSection
 import InformationSection1 from "~/app/[lang]/(main)/_components/InformationSection1";
 import { TLang } from "~/services/api/type";
 import { IProduct } from "~/types/product";
-import { baseURL } from "~/services/core/http";
+import { http } from "~/services/core/http";
 import queryString from "querystring";
-import axios from "axios";
 import { IArticle } from "~/types/article";
+import { IMeta } from "~/app/[lang]/(main)/articles/page";
 
 interface HomePageProps {
   params: {
-    lang: TLang
-  }
+    lang: TLang;
+  };
 }
 
-async function getData(props: { lang: TLang }) {
-  // Call the fetch method and passing
-  // the pokeAPI link
-  const url = new URL(`${baseURL}article`);
+async function getData(props: {
+  lang: TLang;
+}): Promise<{ data: IArticle[]; meta: IMeta }> {
+
   const query = {
     lang: props.lang,
-    limit: 3
+    limit: 3,
   };
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await axios.get(`${url}?${normalizeQuery}`);
-
-  return await response.data;
+  return await http.get(`article?${normalizeQuery}`);
 }
 
-async function getProducts(props: { lang: TLang }) {
-  // Call the fetch method and passing
-  // the pokeAPI link
-  const url = new URL(`${baseURL}product`);
+async function getProducts(props: {
+  lang: TLang;
+}): Promise<{ data: IProduct[]; meta: IMeta }> {
+
   const query = {
     lang: props.lang,
-    limit: 5
+    limit: 5,
   };
+
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await axios.get(`${url}?${normalizeQuery}`);
-
-  return await response.data;
+  return await http.get(`product?${normalizeQuery}`);
 }
 
 const HomePage = async (props: HomePageProps) => {
-
-  let articles: IArticle[] = []
-  let products: IProduct[] = []
+  let articles = undefined;
+  let products = undefined;
 
   try {
     articles = await getData({ lang: props.params.lang });
     products = await getProducts({ lang: props.params.lang });
-  } catch (e) {
-
+  } catch (e: any) {
+    console.log("error", e);
   }
 
   return (
@@ -66,7 +62,7 @@ const HomePage = async (props: HomePageProps) => {
 
       <Container>
         <Box mb={{ xs: 10, sm: 28 }}>
-          <NewProducts lang={props.params.lang} products={products} />
+          <NewProducts lang={props.params.lang} products={products?.data} />
         </Box>
 
         <Box mb={{ xs: 20, sm: 30 }}>
@@ -78,7 +74,10 @@ const HomePage = async (props: HomePageProps) => {
         </Box>
 
         <Box mb={{ xs: 16, sm: 40 }}>
-          <ArticlesSectionHome articles={articles} lang={props.params.lang} />
+          <ArticlesSectionHome
+            articles={articles?.data}
+            lang={props.params.lang}
+          />
         </Box>
       </Container>
     </Box>

@@ -17,7 +17,12 @@ const Product: FC = () => {
     handleEditBrand,
     handleDeleteBrand,
     handleCreateBrand,
-    selectedBrand
+    selectedBrand,
+    page,
+    setPage,
+    limit,
+    setLimit,
+    count
   } = useBrand();
 
   return (
@@ -31,7 +36,14 @@ const Product: FC = () => {
           </Box>
         }
         table={table}
-        pageCount={4}
+        pageCount={count}
+        page={page}
+        onChangePage={(e, page) => setPage(page)}
+        onChangePageSize={(limit) => {
+          setPage(1);
+          setLimit(limit);
+        }}
+        pageSize={limit}
       />
 
       <CustomModal

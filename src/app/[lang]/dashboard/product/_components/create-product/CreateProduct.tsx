@@ -82,7 +82,7 @@ const CreateProduct: FC<CreateProductProps> = ({
       placeholder: "انتخاب دسته بندی",
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       type: "select",
-      options: categories?.map((category) => ({
+      options: categories?.data?.map((category) => ({
         label: category.title,
         value: category._id,
       })),
@@ -105,7 +105,7 @@ const CreateProduct: FC<CreateProductProps> = ({
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       placeholder: "انتخاب برند",
       type: "select",
-      options: brands?.map((brand) => ({
+      options: brands?.data?.map((brand) => ({
         label: brand.title,
         value: brand._id,
       })),

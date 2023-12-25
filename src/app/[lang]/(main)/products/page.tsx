@@ -1,51 +1,59 @@
-import React from "react";
-import { Suspense } from "react";
-import { Box, Container, Pagination, Stack } from "@mui/material";
+import React, {Suspense} from "react";
+import {Box, Container, Stack} from "@mui/material";
 import ProductsFilter from "~/app/[lang]/(main)/products/_components/products-filter/ProductsFilter";
 import ProductsList from "~/app/[lang]/(main)/products/_components/ProductsList";
-import { Metadata } from "next";
+import {Metadata} from "next";
 import ProductsBar from "~/app/[lang]/(main)/products/_components/ProductsBar";
-import { baseURL } from "~/services/core/http";
+import {http} from "~/services/core/http";
 import queryString from "querystring";
-import { IProduct } from "~/types/product";
-import { TLang } from "~/services/api/type";
-import axios from "axios";
+import {IProduct} from "~/types/product";
+import {TLang} from "~/services/api/type";
+import {IMeta} from "~/app/[lang]/(main)/articles/page";
+import CustomPagination from "~/components/common/custom-pagination/CustomPagination";
+import {clearObject} from "~/helpers/methods";
 
 export const metadata: Metadata = {
   title: "محصولات",
 };
 
-async function getData(props: { lang: TLang }) {
+async function getData(props: { lang: TLang; page: number }): Promise<{ data: IProduct[]; meta: IMeta }> {
   // Call the fetch method and passing
   // the pokeAPI link
-  const url = new URL(`${baseURL}product`);
-  const query = {
+  const query = clearObject({
     lang: props.lang,
-  };
+    limit: 15,
+    page: props.page
+  }) ;
+
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await axios.get(`${url}?${normalizeQuery}`);
-
-  return await response.data;
+  return await http.get(`product?${normalizeQuery}`);
 }
 
 export default async function ProductPage(props: {
   params: { lang: TLang };
-  searchParams: {};
+  searchParams: {
+    page: number;
+  };
 }) {
-  let products: IProduct[] = [];
+  let products = undefined;
+
   try {
-    products = await getData({ lang: props.params.lang });
+    products = await getData({
+      lang: props.params.lang,
+      page: props?.searchParams?.page,
+    });
   } catch (e) {}
 
   return (
     <Container sx={{ mt: 7, mb: 15, display: "flex", gap: 7, flexGrow: 1 }}>
       <Box
         minWidth={{ sm: 200, md: 254 }}
-        height={350}
+        height={'fit-content'}
+        minHeight={350}
         display={{ xs: "none", sm: "block" }}
       >
-        <Suspense fallback={"loading filter-produts"}>
+        <Suspense fallback={"loading filter-products"}>
           <ProductsFilter />
         </Suspense>
       </Box>
@@ -57,11 +65,15 @@ export default async function ProductPage(props: {
 
         <Box mb={10} flexGrow={1}>
           <Suspense fallback={"loading product list"}>
-            <ProductsList products={products} />
+            <ProductsList products={products?.data!} />
           </Suspense>
         </Box>
 
-        <Pagination count={10} shape={"rounded"} variant="outlined" />
+        <CustomPagination
+          count={products?.meta?.totalPages}
+          shape={"rounded"}
+          variant="outlined"
+        />
       </Stack>
     </Container>
   );

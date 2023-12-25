@@ -1,13 +1,11 @@
 "use client";
 import React, { FC } from "react";
-import { Divider, Pagination, Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import { IArticle } from "~/types/article";
 import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider";
 import ArticleCard from "~/components/common/article-card/ArticleCard";
 import { getDictionary, TLanguages } from "~/i18n";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import queryString from "querystring";
-import {useQueryObject} from "~/utils/methods";
+import CustomPagination from "~/components/common/custom-pagination/CustomPagination";
 
 interface Props {
   lang: TLanguages;
@@ -16,21 +14,7 @@ interface Props {
 }
 
 const ArticlesList: FC<Props> = ({ lang, articles, totalPages }) => {
-  console.log('pageCount', totalPages)
   const dictionary = getDictionary(lang);
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const {query} = useQueryObject()
-
-  const handleChangePage = (e: any, page: any) => {
-    const newQuery = queryString.stringify({
-      ...query,
-      page: page,
-    });
-
-    router.push((pathname + "?" + newQuery) as any);
-  };
 
   return (
     <Stack flexGrow={1}>
@@ -45,13 +29,8 @@ const ArticlesList: FC<Props> = ({ lang, articles, totalPages }) => {
         ))}
       </Stack>
 
-      <Pagination
-        page={Number(query?.page) || 1}
-        count={totalPages}
-        variant={"outlined"}
-        shape={"rounded"}
-        onChange={handleChangePage}
-      />
+      <CustomPagination count={totalPages} />
+
     </Stack>
   );
 };

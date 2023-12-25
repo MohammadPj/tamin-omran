@@ -26,7 +26,10 @@ const useArticle = () => {
   const { lang } = useCommon();
 
   const [selectedArticle, setSelectedArticle] = useState<IArticle>();
-  const { data: categories } = useGetArticles({ lang });
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+
+  const { data: articles } = useGetArticles({ lang });
   const { mutateAsync: mutateCreateArticle } = useCreateArticle();
   const { mutateAsync: mutateEditArticle } = useEditeArticle();
   const { mutateAsync: mutateAssignArticleImage } = useAssignArticleImage();
@@ -125,7 +128,7 @@ const useArticle = () => {
     onEdite: (article) => handleOpenModal("edit-article", article),
   });
 
-  const { table } = useTable({ data: categories, columns });
+  const { table } = useTable({ data: articles?.data, columns });
 
   return {
     table,
@@ -136,6 +139,11 @@ const useArticle = () => {
     handleEditArticle,
     handleDeleteArticle,
     handleCreateArticle,
+    setPage,
+    page,
+    limit,
+    setLimit,
+    count: articles?.meta?.totalPages
   };
 };
 

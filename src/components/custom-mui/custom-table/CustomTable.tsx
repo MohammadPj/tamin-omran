@@ -15,6 +15,7 @@ import CustomTableHead from "~/components/custom-mui/custom-table/components/Cus
 import CustomTableBody from "~/components/custom-mui/custom-table/components/CustomTableBody";
 import TableLimitation from "~/components/custom-mui/custom-table/components/TablePageSize";
 import TableLoading from "~/components/custom-mui/custom-table/components/TableLoading";
+import CustomPagination from "~/components/common/custom-pagination/CustomPagination";
 
 //------------------------------------------------------------------------------------
 //@Icons
@@ -121,7 +122,8 @@ function CustomTable<T>({
         <Box flexGrow={1} />
 
         <Box display={"flex"} justifyContent={"space-between"}>
-          {pageCount && pageCount > 1 && (
+          {pageCount && pageCount > 1 ? (
+
             <Pagination
               variant={"outlined"}
               shape={"rounded"}
@@ -130,7 +132,7 @@ function CustomTable<T>({
               count={pageCount}
               size={"small"}
             />
-          )}
+          ) : <Box />}
 
           <TableLimitation
             onChangePageSize={onChangePageSize}

@@ -48,9 +48,8 @@ const CustomModal: FC<Props> = ({
       open={open}
       sx={{
         direction: "ltr",
-        backdropFilter: "blur(5px)",
         "& .MuiBackdrop-root ": {
-          backgroundColor: "rgba(27, 38, 44, 0.1)",
+          backgroundColor: "rgba(27, 38, 44, 0.3)",
         },
         ...sx,
       }}

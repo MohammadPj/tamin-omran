@@ -20,6 +20,11 @@ const BrochureType: FC<BrochureTypeProps> = () => {
     handleCreateCategory,
     handleEditeBrochureType,
     handleDeleteBrochureType,
+    setPage,
+    page,
+    limit,
+    setLimit,
+    count
   } = useBrochureType();
 
   return (
@@ -36,7 +41,14 @@ const BrochureType: FC<BrochureTypeProps> = () => {
           </Box>
         }
         table={table}
-        pageCount={4}
+        pageCount={count}
+        page={page}
+        onChangePage={(e, page) => setPage(page)}
+        onChangePageSize={(limit) => {
+          setPage(1);
+          setLimit(limit);
+        }}
+        pageSize={limit}
       />
 
       <CustomModal

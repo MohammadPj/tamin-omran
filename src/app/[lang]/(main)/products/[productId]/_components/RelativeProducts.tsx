@@ -67,7 +67,7 @@ const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
               slidesPerView={5}
               spaceBetween={8}
             >
-              {products?.map((product, i) => (
+              {products?.data?.map((product, i) => (
                 <SwiperSlide
                   key={i}
                   style={{ display: "flex", cursor: "pointer" }}
@@ -117,7 +117,7 @@ const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
           </Box>
 
           <Stack display={{ xs: "flex", sm: "none" }} gap={4}>
-            {products?.map((product, i) => (
+            {products?.data?.map((product, i) => (
               <Link
                 key={i}
                 href={`/products/${product._id}` as any}

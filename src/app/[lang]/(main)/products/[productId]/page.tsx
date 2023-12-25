@@ -1,13 +1,12 @@
-import React, { FC } from "react";
-import { Box, Container, Grid } from "@mui/material";
+import React from "react";
+import {Box, Container, Grid} from "@mui/material";
 import ProductCarousel from "~/app/[lang]/(main)/products/[productId]/_components/ProductCarousel";
 import ProductInfo from "~/app/[lang]/(main)/products/[productId]/_components/ProductInfo";
-import { IProduct } from "~/types/product";
+import {IProduct} from "~/types/product";
 import ProductAnalysis from "~/app/[lang]/(main)/products/[productId]/_components/ProductAnalysis";
 import RelativeProducts from "~/app/[lang]/(main)/products/[productId]/_components/RelativeProducts";
-import { useGetSingleProduct } from "~/services/api/hooks";
-import { TLang } from "~/services/api/type";
-import { baseURL } from "~/services/core/http";
+import {TLang} from "~/services/api/type";
+import {http} from "~/services/core/http";
 import * as queryString from "querystring";
 
 interface ProductsPageProps {
@@ -15,20 +14,18 @@ interface ProductsPageProps {
   searchParams: {};
 }
 
-async function getData(productId: string) {
+async function getData(productId: string): Promise<IProduct> {
   // Call the fetch method and passing
   // the pokeAPI link
-  const url = new URL(`${baseURL}product/${productId}`);
+
   const query = {};
   const normalizeQuery = queryString.stringify(query);
 
-  const response = await fetch(`${url}?${normalizeQuery}`);
-
-  return await response.json();
+  return await http.get(`product/${productId}?${normalizeQuery}`)
 }
 
 export default async function SingleProductPage(props: {params: {productId: string}}) {
-  const product: IProduct = await getData(props.params.productId);
+  const product = await getData(props.params.productId);
 
   const images = [product?.image, ...product.images]
   return (
