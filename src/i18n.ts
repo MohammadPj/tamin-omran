@@ -1,8 +1,8 @@
 import {IDictionary, NestedKeyOf} from "~/dictionaries";
-import { store } from "~/store/store";
 import {en} from "~/dictionaries/en/en";
 import {fa} from "~/dictionaries/fa/fa";
 import {get} from "~/utils/methods";
+import {store} from "~/store/store";
 
 export type TLanguages = "fa" | "en"
 export const defaultLang = "fa";
