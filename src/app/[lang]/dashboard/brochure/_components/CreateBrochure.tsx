@@ -56,7 +56,7 @@ const CreateBrochure: FC<CreateBrochureProps> = ({
       name: "brochureTypeId",
       label: "دسته بندی بروشور",
       type: "select",
-      options: brochureTypes?.map((brochureType) => ({
+      options: brochureTypes?.data?.map((brochureType) => ({
         label: brochureType.title,
         value: brochureType._id,
       })),
