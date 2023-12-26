@@ -2,10 +2,15 @@ import React, { FC } from "react";
 import { Box } from "@mui/material";
 import BenefitCard from "~/app/[lang]/(main)/_components/benefits/BenefitCard";
 import {getDictionary} from "~/i18n";
+import {TLang} from "~/services/api/type";
 
-const Benefits: FC = () => {
+interface BenefitsProps {
+  lang: TLang
+}
 
-  const dictionary = getDictionary();
+const Benefits: FC<BenefitsProps> = ({lang}) => {
+
+  const dictionary = getDictionary(lang);
   const benefits = dictionary("home.InformationSection1.benefits")
 
   return (

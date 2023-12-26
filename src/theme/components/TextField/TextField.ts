@@ -28,9 +28,7 @@ export const MuiTextField: TMuiTextField = {
       '& .MuiInputBase-input': {
         '&:-webkit-autofill': {
           WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'red',
-          transition: 'background-color 5000s ease-in-out 0s',
-          boxShadow: `0 0 0 1000px ${theme.palette.grey["4"]} inset !important`,
+          WebkitTextFillColor: 'unset',
         },
       },
       '& textarea': {paddingTop: '0 !important', paddingBottom: '0 !important'},

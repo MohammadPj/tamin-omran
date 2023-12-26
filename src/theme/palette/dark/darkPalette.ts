@@ -1,4 +1,6 @@
-export const darkPalette = {
+import {PaletteOptions} from "@mui/material/styles/createPalette";
+
+export const darkPalette: PaletteOptions = {
   // palette values for light mode
   primary: {
     main: "#262262",
@@ -9,6 +11,12 @@ export const darkPalette = {
 
   divider: "#EBEBEB",
 
+  n: {
+    main: '#D9D9D9',
+    1: '#D9D9D9',
+    2: '#B7B7B7',
+    3: '#6E6E6E'
+  },
   background: {
     main: "#4685df",
     default: "#F5F5F5",
@@ -21,22 +29,13 @@ export const darkPalette = {
   warning: {
     main: "#FFCF5C",
     100: "#FFCF5C",
-    75: "#FFDB85",
     50: "#FFE7AD",
   },
   error: {
     main: "#E74C3C",
     100: "#E74C3C",
-    75: "#ED796D",
     50: "#F3A59D",
     light: "#E74C3C"
-  },
-  gray: {
-    main: "#fff",
-    100: "#fff",
-    75: "rgb(211 211 211)",
-    50: "#8D9395",
-    25: "#C6C9CA",
   },
   action: {
     // hover: "rgba(0,0,0,0.2)"
@@ -44,14 +43,6 @@ export const darkPalette = {
   text: {
     primary: "#fff",
     secondary: "#f2f2f2",
-    100: "#fff",
-    75: "#fff",
-    50: "#fff",
-    25: "#fff",
   },
 
-  // text: {
-  //   primary: teal[50],
-  //   secondary: grey[300],
-  // },
 };

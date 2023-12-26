@@ -16,8 +16,6 @@ export default function RootLayout({
   params: {lang: string}
 }) {
 
-
-
   return (
     <html lang="en">
       <body style={{overflowX: 'hidden'}} suppressHydrationWarning={true}>

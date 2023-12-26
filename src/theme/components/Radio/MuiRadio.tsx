@@ -30,7 +30,7 @@ export const MuiRadio: TMuiRadio = {
       '& svg': {
         width: 18,
         height: 18,
-        fill: '#727CF4'
+        fill: theme.palette.secondary.main
       }
     }),
   }

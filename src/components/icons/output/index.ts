@@ -1,1 +1,1 @@
-export { default as Gear } from "../final/Gear2";
+export { default as Eye } from "./Eye";

@@ -9,7 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { persistStore } from "redux-persist";
 import { SnackbarProvider } from "notistack";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
-import { useTheme } from "@mui/material";
+import {Box, useTheme} from "@mui/material";
 import { setLang } from "~/store/common/commonSlice";
 
 interface Props {
@@ -35,16 +35,15 @@ const RootLayoutClient: FC<Props> = ({ children, lang }) => {
         >
           <AppTheme>
             <CssBaseline />
-            <div
+            <Box
               dir={lang === 'fa' ? 'rtl' : 'ltr'}
-              style={{
-                background: "#F0F0F0",
+              sx={{
                 minHeight: "100vh",
                 fontFamily: "vazirmatn",
               }}
             >
               {children}
-            </div>
+            </Box>
 
             <ProgressBar
               height="4px"
@@ -53,7 +52,7 @@ const RootLayoutClient: FC<Props> = ({ children, lang }) => {
               shallowRouting
             />
 
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/*<ReactQueryDevtools initialIsOpen={false} />*/}
           </AppTheme>
         </SnackbarProvider>
       </Provider>

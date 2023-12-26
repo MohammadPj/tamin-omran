@@ -1,17 +1,21 @@
 import "@mui/material/styles/createPalette";
 interface IColor {
-  main?: string;
-  1: string;
-  2: string;
-  3: string;
-  4: string;
+  main: string;
+  1?: string;
+  2?: string;
+  3?: string;
+  4?: string;
 }
 
 declare module "@mui/material/styles/createPalette" {
-  interface Palette {}
+  interface Palette {
+
+  }
 
   // allow configuration using `createTheme`
-  interface PaletteOptions {}
+  interface PaletteOptions {
+    n: IColor
+  }
 
   interface PaletteColor {
     100?: string;

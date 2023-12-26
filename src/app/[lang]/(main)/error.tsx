@@ -1,4 +1,4 @@
-"use client"; // Error components must be Client Components
+"use client"; // Error _components must be Client Components
 import { Button, Stack, Typography } from "@mui/material";
 
 export default function MainPageError({

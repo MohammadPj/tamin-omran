@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {PostsSlice} from "./posts/postsSlice";
 import {CommonSlice, CommonState} from "./common/commonSlice";
+import {UserSlice, UserState} from "~/store/user/userSlice";
 import storage from "./customStorage";
 
 import {
@@ -14,7 +15,12 @@ import {
 } from "redux-persist";
 
 const commonPersistConfig = {
-  key: "auth",
+  key: "common",
+  storage: storage,
+};
+
+const userPersistConfig = {
+  key: "user",
   storage: storage,
 };
 
@@ -27,6 +33,7 @@ export const store = configureStore({
   reducer: {
     posts: PostsSlice.reducer,
     common: persistReducer<CommonState>(commonPersistConfig, CommonSlice.reducer),
+    user: persistReducer<UserState>(userPersistConfig, UserSlice.reducer),
   },
   // devTools: process.env.NODE_ENV !== "production",
   devTools: true,

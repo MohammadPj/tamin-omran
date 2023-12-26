@@ -1,7 +1,9 @@
 export interface IArticle {
-  id: string
+  _id: string
   title: string;
-  description: string;
-  image: string;
-  lastUpdate: Date
+  lang: ELanguage;
+  content: string
+  createdAt: Date;
+  updatedAt: Date;
+  image: string
 }

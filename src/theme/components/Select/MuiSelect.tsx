@@ -27,42 +27,38 @@ export const MuiSelect: TMuiSelect = {
       transformOrigin: { horizontal: "center", vertical: "top" },
     },
   },
+
   styleOverrides: {
-    icon: ({ theme }) => ({
-      top: "43%",
-      right: 13,
-      // "&.Mui-disabled path": { stroke: theme.palette.primary.back },
-      stroke: '#524d4d'
-    }),
     outlined: {
       "&.Mui-disabled:hover ~ fieldset ": {
         borderColor: "#BDBDBD",
       },
     },
+    root: ({theme}) => ({
+      borderRadius: 4,
+      '&::before': { display: 'none' },
+      '&::after': { display: 'none' },
+    }),
     filled: ({ theme }) => ({
-      background: "#727CF4",
-      borderRadius: 8,
-      padding: "8px 12px 8px 16px",
+      overflow: 'hidden',
+      padding: "12px 12px 12px 16px",
       color: theme.palette.text.primary,
+      "~:before": {
+        border: "none",
+      },
       "& svg": {
         fill: "white",
       },
       "& ~ input": {
         padding: "8px 12px 8px 16px",
       },
-      "& .MuiSelect-root:before": {
-        display: "none",
-      },
+      "& .MuiSelect-root:before": {},
     }),
-    iconFilled: {
-      "& path": {
-        stroke: "white",
-      },
-    },
+
     select: ({ theme }) => ({
       backgroundColor: theme.palette.background["4"],
       height: 14,
-      minHeight: 14
+      minHeight: 14,
     }),
   },
 };

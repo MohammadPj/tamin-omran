@@ -1,83 +1,71 @@
 import React from "react";
-import { Typography } from "@mui/material";
 import { ColumnDef } from "@tanstack/react-table";
+import {IProduct} from "~/types/product";
+import {Box} from "@mui/material";
+import SvgDelete from "~/components/icons/output/Delete";
+import SvgEdit from "~/components/icons/output/Edit";
 
-const useProductColumn = () => {
-  const columns: ColumnDef<any, any>[] = [
+interface useProductColumnProps {
+  onDelete: (category: IProduct) => void;
+  onEdite: (category: IProduct) => void;
+}
+
+const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
+  const columns: ColumnDef<IProduct, any>[] = [
     {
-      header: () => "نام کامل",
-      accessorKey: "name",
-      cell: ({ row, getValue }) => (
-        <Typography variant="body1">
-          {row.original.type === "Juridical"
-            ? row.original.companyName
-            : row.original.name}
-        </Typography>
-      ),
+      header: "شماره",
+      id: "number",
+      cell: (cell) => cell.row.index + 1,
     },
     {
-      header: () => "نوع",
-      accessorKey: "type",
-      cell: (cell) => (
-        <Typography variant="body1">
-          {cell.getValue() === "Natural"
-            ? "حقیقی"
-            : cell.getValue() === "Juridical"
-            ? "حقوقی"
-            : "---"}
-        </Typography>
-      ),
+      header: "نام محصول",
+      accessorKey: "title",
+      cell: (cell) => cell.getValue(),
     },
     {
-      header: () => "حساب اصلی",
-      accessorKey: "parentAccount" || null,
-      cell: (cell) => (
-        // <Typography variant="body1">{cell.getValue() || "---"}</Typography>
-        <Typography variant="body1"></Typography>
-      ),
+      header: "دسته بندی",
+      accessorKey: "category",
+      cell: (cell) => cell.getValue()?.title || "---",
     },
     {
-      header: () => "وبسایت",
-      accessorKey: "website",
-      cell: (cell) => (
-        <Typography variant="body1">{cell.getValue() || "---"}</Typography>
-      ),
+      header: "برند",
+      accessorKey: "brand",
+      cell: (cell) => cell.getValue()?.title || "---",
     },
     {
-      header: () => "شماره تماس",
-      accessorKey: "phoneNumber",
-      cell: (cell) => (
-        <Typography variant="body1">{cell.getValue() || "---"}</Typography>
-      ),
-    },
-    {
-      header: () => "آدرس",
-      accessorKey: "address",
-      cell: (cell) => (
-        <Typography
-          title={cell.getValue()}
-          sx={{
-            width: 200,
-            display: "-webkit-box",
-            WebkitLineClamp: "2",
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-          variant="body1"
-          // textAlign={ cell.getValue() ? "center" : 'center'}
-          textAlign="center"
-        >
-          {cell.getValue() || "---"}
-        </Typography>
-      ),
-    },
-    {
-      header: () => "تاریخ ایجاد",
+      header: "تاریخ بارگذاری",
       accessorKey: "createdAt",
+      cell: (cell) =>
+        cell.getValue()
+          ? new Date(cell.getValue())?.toLocaleDateString("fa-IR")
+          : "---",
+    },
+    {
+      header: "وضعیت محصول",
+      accessorKey: "isAvailable",
+      cell: (cell) => cell.getValue() ? 'موجود' : "نا موجود",
+    },
+    {
+      header: "عملیات",
+      id: "action",
       cell: (cell) => (
-        <Typography variant={"body1"}>
-          {new Date(cell.getValue()).toLocaleDateString("fa-IR")}
-        </Typography>
+        <Box display={"flex"} gap={2}>
+          <Box
+            sx={{ cursor: "pointer" }}
+            display={"flex"}
+            onClick={() => onDelete(cell.row.original)}
+          >
+            <SvgDelete primarycolor={"red"} width={18} />
+          </Box>
+
+          <Box
+            sx={{ cursor: "pointer" }}
+            display={"flex"}
+            onClick={() => onEdite(cell.row.original)}
+          >
+            <SvgEdit primarycolor={"grey"} width={18} />
+          </Box>
+        </Box>
       ),
     },
   ];

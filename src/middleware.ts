@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { defaultLang, languages } from "~/i18n";
 
-export function middleware(request: NextRequest) {
+export function middleware(request: any) {
   const pathname = request.nextUrl.pathname;
 
   const currentLang = pathname!.toLowerCase().split("/")[1];
@@ -10,35 +10,32 @@ export function middleware(request: NextRequest) {
     return pathname.startsWith(`/${lang}`);
   });
 
-
   // redirect to /dashboard/products in /dashboard
   if (pathname === "/dashboard") {
-    return NextResponse.redirect(
-      new URL("/dashboard/product", request.url)
-    );
+    return NextResponse.redirect(new URL("/dashboard/product", request.url));
   }
 
-  if (pathnameIsValid) {
-  } else {
+  if (!pathnameIsValid) {
     // rewrite it so next.js will render `/` as if it was `/fa`
-    if (!pathname.startsWith("/images")) {
-      return NextResponse.rewrite(
-        new URL(`/${defaultLang}${pathname}`, request.url)
-      );
-    }
+    return NextResponse.rewrite(
+      new URL(`/${defaultLang}${pathname}` + request.nextUrl.search, request.url)
+    );
   }
 
   // redirect to / if route was /fa/ir
   if (currentLang === defaultLang) {
-  console.log('currentLang', currentLang)
-
-    return NextResponse.redirect(
-      new URL(pathname.replace(`/${defaultLang}`, "") + "/", request.url)
+    const newUrl = new URL(
+      request.url.replace(`/${defaultLang}`, ""),
+      request.url
     );
+
+    return NextResponse.redirect(newUrl);
   }
 }
 
 export const config = {
   // do not localize next.js paths
-  matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|images|assets|favicon.ico|sw.js).*)",
+  ],
 };

@@ -37,7 +37,6 @@ const LanguageMenu: FC = () => {
       splittedPathname.splice(1, 1, language.value).join("/");
     }
 
-    console.log("splittedPathname", splittedPathname.join("/"));
     router.push(splittedPathname.join("/") as any);
   };
 

@@ -13,6 +13,12 @@ export const lightPalette: PaletteOptions = {
     1: '#fff',
     2: '#EBE9EB'
   },
+  n: {
+    main: '#D9D9D9',
+    1: '#D9D9D9',
+    2: '#B7B7B7',
+    3: '#6E6E6E'
+  },
   grey: {
     main: '#F1F1F1',
     "1": "#F1F1F1",

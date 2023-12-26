@@ -7,12 +7,26 @@ export const commonDictionary: ICommonDictionary = {
     address: "IRAN, Tehran, Nelson-Mandela Blv, Shahid-Soltani St, No8",
     description:
       "Lorem Epsom is a fake text with the production of incomprehensible simplicity from the printing industry, and with the use of graphic designers, printers and texts but also newspapers and magazines in columns and rows as necessary.",
-    title: "Follow us on social networks to get the latest news and useful articles",
+    title:
+      "Follow us on social networks to get the latest news and useful articles",
   },
   header: {
-    login: "Login/Register",
+    loginAndRegister: "Login/Register",
+    login: "Login",
+    register: "Register",
     search: "search your product",
+    logout: "Logout"
   },
+  loginAndRegister: {
+    doYouHaveAccount: "Have an account?",
+    notRegisterYet: "Not register yet?",
+    repeatPassword: "Repeat password",
+    passwordNotMatch: "Passwords do not match. Please try again.",
+    successLoginMessage: "Login successful! Welcome back, {{ username }}!",
+    successRegisterMessage: "You're all set! Welcome aboard.",
+    adminPanel: "Admin panel"
+  },
+  fieldIsRequired: "This field is required",
   home: "Home",
   articles: "Articles",
   products: "Products",
@@ -21,8 +35,13 @@ export const commonDictionary: ICommonDictionary = {
   articlesAndNews: "Articles And News",
   contactUs: "Contact Us",
   showMore: "Show More",
-  brand: 'Brand',
-  category: 'Category',
-  download: 'Download',
-  newestArticles: 'Newest Articles',
+  brand: "Brand",
+  category: "Category",
+  download: "Download",
+  newestArticles: "Newest Articles",
+  firstName: 'First name',
+  lastName: "Last name",
+  email: "Email",
+  password: "Password",
+  phoneNumber: "Phone number",
 };

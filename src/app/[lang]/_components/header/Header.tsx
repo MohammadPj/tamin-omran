@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Box,
   Button,
@@ -17,8 +17,11 @@ import SvgSearch from "~/components/icons/final/Search";
 import SvgMenu from "~/components/icons/final/Menu";
 import SideBar from "~/app/[lang]/_components/sidebar/SideBar";
 import { useCommon } from "~/store/common/commonSlice";
-import { getDeviceType } from "~/helpers/methods";
+import {getDeviceType, handleLogout} from "~/helpers/methods";
 import { usePathname } from "next/navigation";
+import LoginAndRegisterModal from "~/app/[lang]/_components/header/components/LoginAndRegisterModal";
+import { useUser } from "~/store/user/userSlice";
+import Link from "next/link";
 
 interface HeaderProps {
   lang: TLanguages;
@@ -26,6 +29,8 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ lang }) => {
   const dictionary = getDictionary();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const { userInfo, token } = useUser();
 
   const tabs: ITab[] = [
     { label: dictionary("common.home"), href: "/" },
@@ -33,7 +38,7 @@ const Header: FC<HeaderProps> = ({ lang }) => {
     { label: dictionary("common.brochures"), href: "/brochures" },
     { label: dictionary("common.articles"), href: "/articles" },
     { label: dictionary("common.contactUs"), href: "/contact-us" },
-    { label: dictionary("common.aboutUs"), href: "/contact-us" },
+    // { label: dictionary("common.aboutUs"), href: "/contact-us" },
   ];
 
   const deviceType = getDeviceType();
@@ -49,7 +54,26 @@ const Header: FC<HeaderProps> = ({ lang }) => {
           justifyContent={"space-between"}
         >
           <SvgLogo />
-          <Button>{dictionary("common.header.login")}</Button>
+
+          <Box display={"flex"} gap={4}>
+            {userInfo?.isAdmin && (
+              <Link href={"/dashboard" as any}>
+                <Button>
+                  {dictionary("common.loginAndRegister.adminPanel")}
+                </Button>
+              </Link>
+            )}
+
+            {token ? (
+              <Button onClick={handleLogout} color={'error'}>
+                {dictionary("common.header.logout")}
+              </Button>
+            ) : (
+              <Button onClick={() => setIsLoginModalOpen(true)}>
+                {dictionary("common.header.loginAndRegister")}
+              </Button>
+            )}
+          </Box>
         </Box>
 
         <Box
@@ -94,6 +118,12 @@ const Header: FC<HeaderProps> = ({ lang }) => {
           </Box>
         </Box>
       </Container>
+
+      <LoginAndRegisterModal
+        isOpen={isLoginModalOpen}
+        lang={lang}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
     </Box>
   );
 };

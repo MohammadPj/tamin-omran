@@ -18,3 +18,4 @@ export const getUrlWithoutLang = (pathname: string): string => {
 
   return splitPathname.join('/')
 }
+

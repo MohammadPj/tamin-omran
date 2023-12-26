@@ -1,39 +1,47 @@
-'use client'
-import React, {FC, useState} from 'react'
+"use client";
+import React, { FC, useState } from "react";
 
-import Tabs, { TabsProps } from '@mui/material/Tabs'
-import Tab, { TabProps } from '@mui/material/Tab'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import Tabs, { TabsProps } from "@mui/material/Tabs";
+import Tab, { TabProps } from "@mui/material/Tab";
+import { usePathname } from "next/navigation";
 import CustomLink from "~/components/common/custom-link/CustomLink";
-import {getUrlWithoutLang} from "~/utils/methods";
+import { getUrlWithoutLang } from "~/utils/methods";
 
 export interface ITab {
-  label: string
-  href?: string
+  label: string;
+  href?: string;
+  value?: string;
 }
 
 interface Props {
-  tabs: ITab[]
-  onChange?: (value: number) => void
-  tabsProps?: TabsProps
-  tabProps?: TabProps
+  tabs: ITab[];
+  onChange?: (value: number) => void;
+  tabsProps?: TabsProps;
+  tabProps?: TabProps;
+  defaultValue?: number;
 }
 
-const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps, tabProps }) => {
-  const pathname = usePathname()
+const CustomTab: FC<Props> = ({
+  onChange,
+  tabs,
+  tabsProps,
+  tabProps,
+  defaultValue,
+}) => {
+  const pathname = usePathname();
 
   const [value, setValue] = useState(
-    tabs.findIndex((tab) => tab?.href === getUrlWithoutLang(pathname))
-  )
+    defaultValue ||
+      tabs.findIndex((tab) => tab?.href === getUrlWithoutLang(pathname))
+  );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
+    setValue(newValue);
 
     if (onChange) {
-      onChange(newValue)
+      onChange(newValue);
     }
-  }
+  };
 
   return (
     <Tabs
@@ -41,23 +49,31 @@ const CustomTab: FC<Props> = ({ onChange, tabs, tabsProps, tabProps }) => {
       onChange={handleChange}
       {...tabsProps}
       indicatorColor="secondary"
-      textColor={'primary'}
+      textColor={"primary"}
     >
-      {tabs.map((tab, i) => (
-
+      {tabs.map((tab, i) =>
+        tab.href ? (
           <Tab
             component={CustomLink}
-            href={tab.href || ''}
+            href={tab.href || ""}
             label={tab.label}
             sx={{ fontWeight: value === i ? 700 : 400 }}
             key={i}
             value={i}
             {...tabProps}
           />
-
-      ))}
+        ) : (
+          <Tab
+            label={tab.label}
+            sx={{ fontWeight: value === i ? 700 : 400 }}
+            key={i}
+            value={i}
+            {...tabProps}
+          />
+        )
+      )}
     </Tabs>
-  )
-}
+  );
+};
 
-export default CustomTab
+export default CustomTab;

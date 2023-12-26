@@ -21,32 +21,29 @@ type TMuiOutlinedInput =
 export const MuiOutlinedInput: TMuiOutlinedInput = {
   styleOverrides: {
     root: ({ ownerState, theme }) => ({
-      borderRadius: 8,
-      background: 'white',
+      borderRadius: 4,
+      overflow: "hidden",
 
       "& .MuiInputBase-root.Mui-disabled": {
-        color: "rgba(35,32,32,0.6)" // (default alpha is 0.38)
+        color: "rgba(35,32,32,0.6)", // (default alpha is 0.38)
       },
-      '& .MuiOutlinedInput-input': {
+      "& .MuiOutlinedInput-input": {
+        background: "white",
         paddingTop: 14,
         paddingBottom: 14,
         "&.Mui-disabled": {
           WebkitTextFillColor: theme.palette.grey.main,
-          "&:hover ~ fieldset": {
-            borderColor: "#BDBDBD",
-          }
         },
       },
       "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.grey.main,
+        borderColor: theme.palette.grey["3"],
       },
       "&:hover .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.grey.main,
+        borderColor: theme.palette.grey["3"],
       },
       "&.Mui-focused ": {
-        boxShadow: "0px 0px 10px rgba(94, 129, 233, 0.2)",
         "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: theme.palette.primary["100"],
+          borderColor: theme.palette.grey["3"],
           borderWidth: 1,
         },
       },

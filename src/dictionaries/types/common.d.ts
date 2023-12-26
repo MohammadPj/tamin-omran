@@ -1,25 +1,43 @@
 export interface ICommonDictionary {
   header: {
-    search: string
-    login: string
-  },
+    search: string;
+    loginAndRegister: string;
+    login: string;
+    register: string;
+    logout: string
+  };
   footer: {
     usefulLinks: string;
-    contactInformation: string,
+    contactInformation: string;
     address: string;
-    description: string
-    title: string
-  },
-  home: string
+    description: string;
+    title: string;
+  };
+  loginAndRegister: {
+    notRegisterYet: string;
+    doYouHaveAccount: string;
+    repeatPassword: string;
+    passwordNotMatch: string;
+    successLoginMessage: string
+    successRegisterMessage: string
+    adminPanel: string
+  };
+  fieldIsRequired: string;
+  home: string;
   articles: string;
   products: string;
   brochures: string;
-  showMore: string,
+  showMore: string;
   articlesAndNews: string;
   aboutUs: string;
   contactUs: string;
   category: string;
   brand: string;
   download: string;
-  newestArticles: string
+  newestArticles: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
 }
