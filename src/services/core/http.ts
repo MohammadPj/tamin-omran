@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from "~/store/store";
 
-export const baseURL = "http://localhost:4000/api";
+export const baseURL = process?.env?.NEXT_PUBLIC_BASE_URL || "http://localhost:4000/api";
 
 export const http = axios.create({
   baseURL,
