@@ -30,7 +30,7 @@ const BrochureUploader: FC<BrochureUploaderProps> = ({
     if (!file) return;
 
     setFile(file);
-    setBlobFile(undefined)
+    setBlobFile(undefined);
     onChange(file);
   };
 
@@ -47,7 +47,8 @@ const BrochureUploader: FC<BrochureUploaderProps> = ({
         id={"uploader"}
         style={{ display: "none" }}
         onChange={handleChangeFile}
-        accept="application/pdf"
+        // @ts-ignore
+        accept={["application/pdf", "application/zip", "image/*"]}
       />
 
       <Stack

@@ -46,7 +46,7 @@ const LanguageMenu: FC = () => {
 
   const menuLanguages: ILanguages[] = [
     {
-      title: "ایران",
+      title: "فارسی",
       icon: "/images/common/iran-flag.png",
       abbreviation: "IR",
       value: "fa",

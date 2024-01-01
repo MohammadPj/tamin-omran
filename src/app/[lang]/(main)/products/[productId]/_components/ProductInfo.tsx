@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import {Box, Button, Divider, Stack, Typography} from '@mui/material'
+import {Box, Button, Divider, Grid, Stack, Typography} from '@mui/material'
 import { IProduct } from '~/types/product'
 import SvgArrowLeft from "~/components/icons/final/ArrowLeft";
 
@@ -12,6 +12,8 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
   const specifications = [
     {title: 'شماره فنی', value: product.technicalNumber},
     {title: 'شماره موتور', value: product.engineNumber},
+    {title: 'برند', value: product.brand.title},
+    {title: 'دسته بندی', value: product.category.title},
   ]
 
   return (
@@ -31,18 +33,18 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
         </Typography>
       </Box>
 
-      <Stack mb={6} gap={4}>
+      <Grid container spacing={4} mb={6}>
         {specifications?.map((spec, i) => (
-          <Box display={'flex'} key={i} gap={2}>
+          <Grid item xs={12} md={6} display={'flex'} key={i} gap={2}>
             <Typography fontWeight={500} fontSize={16}>
               {spec.title}:
             </Typography>
             <Typography fontWeight={400} fontSize={16} color={'text.secondary'}>
               {spec.value}
             </Typography>
-          </Box>
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
 
       <Box mb={6}>
         <Typography fontWeight={500} fontSize={16}>
