@@ -27,7 +27,9 @@ async function getData(productId: string): Promise<IProduct> {
 export default async function SingleProductPage(props: {params: {productId: string}}) {
   const product = await getData(props.params.productId);
 
-  const images = [product?.image, ...product.images]
+  const images = [...product.images]
+  if (product.image) images.unshift(product.image)
+
   return (
     <Container sx={{ mt: 10 }}>
       <Grid container spacing={3}>

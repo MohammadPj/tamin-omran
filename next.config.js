@@ -35,6 +35,11 @@ const nextConfig = {
         port: "4000",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "taminomranqateh.com",
+        pathname: "**",
+      },
     ],
   },
 };

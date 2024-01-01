@@ -1,20 +1,29 @@
+"use client";
 import React, { FC } from "react";
 import { Box, Chip, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import theme from "~/theme/theme";
 import Link from "next/link";
+import { baseImageUrl } from "~/services/core/http";
 
 interface Props {
   title: string;
   subtitle: string;
   image: string;
-  isAvailable?: boolean
-  id: string
+  isAvailable?: boolean;
+  id: string;
 }
 
-const ProductCard: FC<Props> = ({ subtitle, title, image, isAvailable, id }) => {
+const ProductCard: FC<Props> = ({
+  subtitle,
+  title,
+  image,
+  isAvailable,
+  id,
+}) => {
+  console.log("image", image);
   return (
-    <Link href={`/products/${id}` as any} style={{width: '100%'}}>
+    <Link href={`/products/${id}` as any} style={{ width: "100%" }}>
       <Stack
         px={4}
         py={3.5}
@@ -32,7 +41,17 @@ const ProductCard: FC<Props> = ({ subtitle, title, image, isAvailable, id }) => 
           width={{ xs: 80, sm: "100%" }}
           sx={{ aspectRatio: 1 }}
         >
-          <Image src={image} alt={"product"} fill={true} />
+          {/*<img src={image || "/images/default/product-default.png"} />*/}
+          <Image
+            src={
+              image
+                ? baseImageUrl + image
+                : "/images/default/product-default.png"
+            }
+            onError={() => {}}
+            alt={"product"}
+            fill={true}
+          />
         </Box>
 
         <Stack gap={2}>
@@ -51,14 +70,17 @@ const ProductCard: FC<Props> = ({ subtitle, title, image, isAvailable, id }) => 
           </Typography>
 
           <Chip
-            label={isAvailable ? "موجود" : 'نا موجود'}
-            sx={{ display: { sm: "none", md: 'block' }, width: "fit-content", color: "white" }}
+            label={isAvailable ? "موجود" : "نا موجود"}
+            sx={{
+              display: { sm: "none", md: "block" },
+              width: "fit-content",
+              color: "white",
+            }}
             color={isAvailable ? "primary" : "secondary"}
           />
         </Stack>
       </Stack>
     </Link>
-
   );
 };
 

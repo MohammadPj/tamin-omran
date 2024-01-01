@@ -42,7 +42,7 @@ const NewProducts: FC<NewProductsProps> = ({lang, products}) => {
         alignItems={"center"}
         sx={{ cursor: "pointer" }}
       >
-        <CustomLink href={"/products"}>
+        <CustomLink href={"/products" as any}>
           <Typography color={"primary"} fontSize={14} fontWeight={700}>
             {dictionary("common.showMore")}
           </Typography>

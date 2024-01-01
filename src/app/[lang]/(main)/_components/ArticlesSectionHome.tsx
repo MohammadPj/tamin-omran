@@ -42,6 +42,7 @@ const ArticlesSectionHome: FC<ArticlesSectionHomeProps> = ({articles, lang}) => 
             {dictionary("common.showMore")}
           </Typography>
         </CustomLink>
+
         <SvgArrowCircleLeft width={24} isRtl={lang === 'fa'} />
       </Box>
     </Box>

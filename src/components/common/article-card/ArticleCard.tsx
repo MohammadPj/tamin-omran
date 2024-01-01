@@ -4,6 +4,7 @@ import Image from "next/image";
 import { IArticle } from "~/types/article";
 import Link from "next/link";
 import parse from "html-react-parser";
+import { baseImageUrl } from "~/services/core/http";
 
 interface Props {
   article: IArticle;
@@ -23,7 +24,15 @@ const ArticleCard: FC<Props> = ({ article }) => {
           position={"relative"}
           sx={{ aspectRatio: 250 / 160 }}
         >
-          <Image src={article.image} alt={""} fill />
+          <Image
+            src={
+              article.image
+                ? baseImageUrl + article.image
+                : "/images/default/article-default.jpg"
+            }
+            alt={""}
+            fill
+          />
         </Box>
 
         <Stack gap={4} mt={2}>
@@ -39,7 +48,7 @@ const ArticleCard: FC<Props> = ({ article }) => {
               display={{ xs: "none", sm: "block" }}
             >
               {article?.updatedAt
-                ? new Date(article?.updatedAt)?.toLocaleDateString('fa-IR')
+                ? new Date(article?.updatedAt)?.toLocaleDateString("fa-IR")
                 : "---"}
             </Typography>
           </Box>
@@ -68,7 +77,7 @@ const ArticleCard: FC<Props> = ({ article }) => {
             display={{ xs: "block", sm: "none" }}
           >
             {article?.updatedAt
-              ? new Date(article?.updatedAt)?.toLocaleDateString('fa-IR')
+              ? new Date(article?.updatedAt)?.toLocaleDateString("fa-IR")
               : "---"}
           </Typography>
         </Stack>

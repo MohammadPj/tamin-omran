@@ -5,11 +5,12 @@ import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
-import 'swiper/css/pagination';
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from 'swiper/modules';
+import { Pagination } from "swiper/modules";
 
 import ProductCarouselSkeleton from "~/app/[lang]/(main)/products/[productId]/_components/ProductCarouselSkeleton";
+import { baseImageUrl } from "~/services/core/http";
 
 interface ProductCarouselProps {
   images?: string[] | undefined;
@@ -18,6 +19,14 @@ interface ProductCarouselProps {
 const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [mainSwiper, setMainSwiper] = useState<any>();
+
+  console.log('images', images)
+  let swiperImages =
+    (images && images.length > 0)
+      ? images.map((image) => baseImageUrl + image)
+      : ["/images/default/product-default.png"];
+
+  console.log('swiperImages', swiperImages)
 
   useEffect(() => {
     setIsLoading(false);
@@ -38,7 +47,7 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
           sx={{ aspectRatio: 1 }}
         >
           <Swiper
-            style={{height: '100%'}}
+            style={{ height: "100%" }}
             className="mySwiper"
             slidesPerView={1}
             spaceBetween={8}
@@ -48,7 +57,7 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
             }}
             modules={[Pagination]}
           >
-            {images?.map((image, i) => (
+            {swiperImages?.map((image, i) => (
               <SwiperSlide
                 key={i}
                 style={{ display: "flex", cursor: "pointer" }}
@@ -66,8 +75,13 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
         </Box>
 
         <Box display={{ xs: "none", sm: "block" }}>
-          <Swiper className="mySwiper" slidesPerView={4} spaceBetween={8} style={{height: 100}}>
-            {images?.map((image, i) => (
+          <Swiper
+            className="mySwiper"
+            slidesPerView={4}
+            spaceBetween={8}
+            style={{ height: 100 }}
+          >
+            {swiperImages?.map((image, i) => (
               <SwiperSlide
                 key={i}
                 style={{ display: "flex", cursor: "pointer" }}
@@ -75,11 +89,12 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
               >
                 <Image
                   src={image}
+                  onError={() => "/images/default/product-default.png"}
                   width={110}
                   height={110}
                   layout={"responsive"}
                   alt={"product"}
-                  loading={'lazy'}
+                  loading={"lazy"}
                 />
               </SwiperSlide>
             ))}

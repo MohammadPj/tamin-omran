@@ -2,7 +2,9 @@ import React, {FC} from 'react';
 import Link, {LinkProps} from "next/link";
 import {store} from "~/store/store";
 
-interface Props extends LinkProps<any>{}
+interface Props extends LinkProps{
+  children: React.ReactNode
+}
 
 const CustomLink: FC<Props> = ({href, children, ...props}) => {
 
