@@ -22,6 +22,7 @@ import { usePathname } from "next/navigation";
 import LoginAndRegisterModal from "~/app/[lang]/_components/header/components/LoginAndRegisterModal";
 import { useUser } from "~/store/user/userSlice";
 import Link from "next/link";
+import ProfileButton from "~/app/[lang]/_components/header/components/ProfileButton";
 
 interface HeaderProps {
   lang: TLanguages;
@@ -65,9 +66,11 @@ const Header: FC<HeaderProps> = ({ lang }) => {
             )}
 
             {token ? (
-              <Button onClick={handleLogout} color={'error'}>
-                {dictionary("common.header.logout")}
-              </Button>
+              // <Button onClick={handleLogout} color={'error'}>
+              //   {dictionary("common.header.logout")}
+              // </Button>
+
+              <ProfileButton />
             ) : (
               <Button onClick={() => setIsLoginModalOpen(true)}>
                 {dictionary("common.header.loginAndRegister")}

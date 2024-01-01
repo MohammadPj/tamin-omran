@@ -27,7 +27,7 @@ const ProductsBar: FC = () => {
       justifyContent={"space-between"}
       gap={3}
     >
-      <Box display={"flex"}>
+      <Box display={{xs: "flex", sm: "none"}}>
         <SvgFilter width={24} onClick={() => setIsBottomSheetOpen(true)} />
       </Box>
 
