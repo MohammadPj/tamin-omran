@@ -4,7 +4,6 @@ import Image from "next/image";
 import { IArticle } from "~/types/article";
 import Link from "next/link";
 import parse from "html-react-parser";
-import { baseImageUrl } from "~/services/core/http";
 
 interface Props {
   article: IArticle;
@@ -25,11 +24,7 @@ const ArticleCard: FC<Props> = ({ article }) => {
           sx={{ aspectRatio: 250 / 160 }}
         >
           <Image
-            src={
-              article.image
-                ? baseImageUrl + article.image
-                : "/images/default/article-default.jpg"
-            }
+            src={article.image || "/images/default/article-default.jpg"}
             alt={""}
             fill
           />

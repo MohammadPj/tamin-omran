@@ -10,7 +10,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
 import ProductCarouselSkeleton from "~/app/[lang]/(main)/products/[productId]/_components/ProductCarouselSkeleton";
-import { baseImageUrl } from "~/services/core/http";
 
 interface ProductCarouselProps {
   images?: string[] | undefined;
@@ -23,7 +22,7 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
   console.log('images', images)
   let swiperImages =
     (images && images.length > 0)
-      ? images.map((image) => baseImageUrl + image)
+      ? images
       : ["/images/default/product-default.png"];
 
   console.log('swiperImages', swiperImages)

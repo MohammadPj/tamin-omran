@@ -4,7 +4,6 @@ import { Box, Chip, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import theme from "~/theme/theme";
 import Link from "next/link";
-import { baseImageUrl } from "~/services/core/http";
 
 interface Props {
   title: string;
@@ -43,11 +42,7 @@ const ProductCard: FC<Props> = ({
         >
           {/*<img src={image || "/images/default/product-default.png"} />*/}
           <Image
-            src={
-              image
-                ? baseImageUrl + image
-                : "/images/default/product-default.png"
-            }
+            src={image || "/images/default/product-default.png"}
             onError={() => {}}
             alt={"product"}
             fill={true}

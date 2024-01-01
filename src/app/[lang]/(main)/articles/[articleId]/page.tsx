@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Container, Typography } from "@mui/material";
-import { baseImageUrl, http } from "~/services/core/http";
+import { http } from "~/services/core/http";
 import queryString from "querystring";
 import Image from "next/image";
 import parse from "html-react-parser";
@@ -26,11 +26,7 @@ const ArticlePage = async ({ params }: { params: { articleId: string } }) => {
     <Container sx={{ mt: 7, mb: 20 }}>
       <Box position={"relative"} height={400}>
         <Image
-          src={
-            article?.image
-              ? baseImageUrl + article?.image
-              : "/images/default/article-default.jpg"
-          }
+          src={article?.image || "/images/default/article-default.jpg"}
           alt={"article-image"}
           fill
         />
