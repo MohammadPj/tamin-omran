@@ -9,7 +9,7 @@ interface CustomPaginationProps extends PaginationProps {}
 const CustomPagination: FC<CustomPaginationProps> = ({ page, ...rest }) => {
   const pathname = usePathname();
 
-  const { query, push } = useQueryObject();
+  const { query, setQuery } = useQueryObject();
 
   const handleChangePage = (e: any, page: any) => {
     const newQuery = {
@@ -17,7 +17,7 @@ const CustomPagination: FC<CustomPaginationProps> = ({ page, ...rest }) => {
       page: page,
     };
 
-    push(pathname, newQuery);
+    setQuery(newQuery);
   };
 
   return (

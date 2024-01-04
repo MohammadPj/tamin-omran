@@ -7,13 +7,18 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useGetCategories } from "~/services/api/hooks";
 import { useCommon } from "~/store/common/commonSlice";
+import { useQueryObject } from "~/hooks/useQueryObject";
 
 const Categories: FC = () => {
   const { lang } = useCommon();
   const dictionary = getDictionary();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const { data: brands } = useGetCategories({ lang });
+  const { query, addCheckboxToQuery } = useQueryObject();
+
+  const categoryIds = (query?.category as string[]) || [];
+
+  const [isOpen, setIsOpen] = useState(categoryIds.length > 0);
+  const { data: categories } = useGetCategories({ lang });
 
   return (
     <Box>
@@ -28,14 +33,32 @@ const Categories: FC = () => {
         <Typography fontWeight={500} fontSize={16}>
           {dictionary("common.category")}
         </Typography>
-        <SvgArrowDown width={24} height={24} />
+
+        <SvgArrowDown style={{ transform: isOpen ? "scaleY(-1)" : "scaleY(1)" }} width={24} height={24} />
       </Box>
 
       <Collapse in={isOpen}>
         <Box px={2}>
-          {brands?.data?.map((brand) => (
-            <Box key={brand?._id}>
-              <FormControlLabel control={<Checkbox />} label={brand?.title} />
+          {categories?.data?.map((category) => (
+            <Box key={category?._id}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={
+                      categoryIds?.findIndex((categoryId) => categoryId === category._id) >
+                      -1
+                    }
+                    onChange={(e) =>
+                      addCheckboxToQuery({
+                        queryName: "category",
+                        checked: e.target.checked,
+                        value: category._id,
+                      })
+                    }
+                  />
+                }
+                label={category?.title}
+              />
             </Box>
           ))}
         </Box>

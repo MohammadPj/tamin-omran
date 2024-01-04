@@ -1,29 +1,31 @@
-import React, {Suspense} from "react";
-import {Box, Container, Stack} from "@mui/material";
+import React, { Suspense } from "react";
+import { Box, Container, Stack } from "@mui/material";
 import ProductsFilter from "~/app/[lang]/(main)/products/_components/products-filter/ProductsFilter";
 import ProductsList from "~/app/[lang]/(main)/products/_components/ProductsList";
-import {Metadata} from "next";
+import { Metadata } from "next";
 import ProductsBar from "~/app/[lang]/(main)/products/_components/ProductsBar";
-import {http} from "~/services/core/http";
+import { http } from "~/services/core/http";
 import queryString from "querystring";
-import {IProduct} from "~/types/product";
-import {TLang} from "~/services/api/type";
-import {IMeta} from "~/app/[lang]/(main)/articles/page";
+import { IProduct } from "~/types/product";
+import { TLang } from "~/services/api/type";
+import { IMeta } from "~/app/[lang]/(main)/articles/page";
 import CustomPagination from "~/components/common/custom-pagination/CustomPagination";
-import {clearObject} from "~/helpers/methods";
+import { clearObject } from "~/helpers/methods";
 
 export const metadata: Metadata = {
   title: "محصولات",
 };
 
-async function getData(props: { lang: TLang; page: number }): Promise<{ data: IProduct[]; meta: IMeta }> {
+async function getData(props: {
+  lang: TLang;
+  page: number;
+}): Promise<{ data: IProduct[]; meta: IMeta }> {
   // Call the fetch method and passing
   // the pokeAPI link
   const query = clearObject({
-    lang: props.lang,
     limit: 15,
-    page: props.page
-  }) ;
+    ...props,
+  });
 
   const normalizeQuery = queryString.stringify(query);
 
@@ -41,15 +43,17 @@ export default async function ProductPage(props: {
   try {
     products = await getData({
       lang: props.params.lang,
-      page: props?.searchParams?.page,
+      ...props?.searchParams,
     });
   } catch (e) {}
+
+  console.log("props?.searchParams", props?.searchParams);
 
   return (
     <Container sx={{ mt: 7, mb: 15, display: "flex", gap: 7, flexGrow: 1 }}>
       <Box
         minWidth={{ sm: 200, md: 254 }}
-        height={'fit-content'}
+        height={"fit-content"}
         minHeight={350}
         display={{ xs: "none", sm: "block" }}
       >

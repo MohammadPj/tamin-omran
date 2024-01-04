@@ -20,7 +20,7 @@ const ProductCard: FC<Props> = ({
   isAvailable,
   id,
 }) => {
-  console.log("image", image);
+
   return (
     <Link href={`/products/${id}` as any} style={{ width: "100%" }}>
       <Stack

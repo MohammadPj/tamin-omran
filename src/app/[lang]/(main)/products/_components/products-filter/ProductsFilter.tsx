@@ -1,16 +1,25 @@
-'use client'
+"use client";
 import React, { FC } from "react";
-import { Divider, FormControlLabel, Stack, Switch, TextField, Typography} from "@mui/material";
+import {
+  Divider,
+  FormControlLabel,
+  Stack,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
 import SvgSearch from "~/components/icons/final/Search";
 import Categories from "~/app/[lang]/(main)/products/_components/products-filter/_components/Categories";
 import Brands from "~/app/[lang]/(main)/products/_components/products-filter/_components/Brands";
-import {getDictionary} from "~/i18n";
+import { getDictionary } from "~/i18n";
+import IsAvailable from "~/app/[lang]/(main)/products/_components/products-filter/_components/IsAvailable";
+import EnginNumber from "~/app/[lang]/(main)/products/_components/products-filter/_components/EnginNumber";
+import ProductTitle from "~/app/[lang]/(main)/products/_components/products-filter/_components/ProductTitle";
 
 interface Props {}
 
 const ProductsFilter: FC<Props> = () => {
 
-  const dictionary = getDictionary()
 
   return (
     <Stack
@@ -22,17 +31,7 @@ const ProductsFilter: FC<Props> = () => {
       gap={3}
       height={"100%"}
     >
-      <TextField
-        variant={"filled"}
-        size={"small"}
-        placeholder={dictionary("common.header.search")}
-        InputProps={{
-          startAdornment: (
-            <SvgSearch width={24} height={24} primarycolor={"#6E6E6E"} />
-          ),
-        }}
-        fullWidth
-      />
+      <ProductTitle />
 
       <Categories />
 
@@ -42,16 +41,11 @@ const ProductsFilter: FC<Props> = () => {
 
       <Divider />
 
+      <EnginNumber />
 
+      <Divider />
 
-        <FormControlLabel
-          value="start"
-          control={<Switch color="primary" />}
-          label={<Typography fontWeight={500} fontSize={16}>{dictionary("products.showAvailableProducts")}</Typography>}
-          labelPlacement="start"
-          sx={{justifyContent: "space-between", ml: 0, px: 2}}
-        />
-
+      <IsAvailable />
     </Stack>
   );
 };

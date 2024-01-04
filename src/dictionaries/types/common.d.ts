@@ -40,4 +40,6 @@ export interface ICommonDictionary {
   email: string;
   phoneNumber: string;
   password: string;
+  enginNumber: string
+  enginNumberPlaceholder: string
 }

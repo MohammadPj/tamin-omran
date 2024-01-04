@@ -8,22 +8,20 @@ import { useCommon } from "~/store/common/commonSlice";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { IBrand } from "~/types/product";
+import { useQueryObject } from "~/hooks/useQueryObject";
 
 interface Props {}
 
 const Brands: FC<Props> = () => {
   const { lang } = useCommon();
   const dictionary = getDictionary();
+  const { query, addCheckboxToQuery } = useQueryObject();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const brandIds = query?.brand as string[] || []
+
+  const [isOpen, setIsOpen] = useState(brandIds.length > 0);
   const { data: brands } = useGetBrands({ lang });
 
-  const handleCheckBrand = (
-    e: ChangeEvent<HTMLInputElement>,
-    brand: IBrand
-  ) => {
-    console.log();
-  };
 
   return (
     <Box>
@@ -51,7 +49,16 @@ const Brands: FC<Props> = () => {
             <Box key={brand?._id}>
               <FormControlLabel
                 control={
-                  <Checkbox onChange={(e) => handleCheckBrand(e, brand)} />
+                  <Checkbox
+                    checked={brandIds?.findIndex(brandId => brandId === brand._id) > -1}
+                    onChange={(e) =>
+                      addCheckboxToQuery({
+                        queryName: "brand",
+                        checked: e.target.checked,
+                        value: brand._id,
+                      })
+                    }
+                  />
                 }
                 label={brand?.title}
               />

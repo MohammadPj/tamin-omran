@@ -45,4 +45,6 @@ export const commonDictionary: ICommonDictionary = {
   email: "ایمیل",
   password: "پسورد",
   phoneNumber: "شماره تماس",
+  enginNumber: 'شماره موتور',
+  enginNumberPlaceholder: 'لطفا شماره موتور را وارد کنید'
 };

@@ -9,7 +9,7 @@ interface ProductsListProps {
 }
 
 const ProductsList: FC<ProductsListProps> = ({products}) => {
-  console.log('products', products)
+
   return (
     <Grid container spacing={4}>
       {products?.map((product, i) => (
