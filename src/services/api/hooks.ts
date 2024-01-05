@@ -6,33 +6,41 @@ import {
   createBrand,
   createBrochure,
   createBrochureType,
-  createCategory, createFile,
+  createCategory,
+  createFile,
   createProduct,
   deleteArticle,
   deleteBrand,
   deleteBrochure,
   deleteBrochureType,
-  deleteCategory, deleteFile,
-  deleteProduct,
+  deleteCategory,
+  deleteFile,
+  deleteProduct, deleteUser,
   editeArticle,
   editeBrand,
   editeBrochure,
   editeBrochureType,
-  editeCategory, editeFile,
+  editeCategory,
+  editeFile,
   editeProduct,
   getArticles,
   getBrands,
   getBrochures,
   getBrochureTypes,
-  getCategories, getFiles,
+  getCategories,
+  getFiles,
   getProducts,
   getSingleArticle,
   getSingleBrand,
   getSingleBrochure,
   getSingleBrochureType,
-  getSingleCategory, getSingleFile,
+  getSingleCategory,
+  getSingleFile,
   getSingleProduct,
-  login, productImages, register,
+  getUsers,
+  login,
+  productImages,
+  register,
 } from "~/services/api/services";
 import {
   IArticleParams,
@@ -41,6 +49,7 @@ import {
   IBrochureTypeParams,
   ICategoryParams,
   IProductParams,
+  IUserParams,
 } from "~/services/api/type";
 
 // ---------------------------  BrochureTypes  ------------------------------
@@ -48,7 +57,8 @@ export const useGetBrochureTypes = (params: IBrochureTypeParams) =>
   useQuery({
     queryKey: ["BrochureTypes", params],
     queryFn: () => getBrochureTypes(params),
-    enabled: !!params.lang
+    enabled: !!params.lang,
+    staleTime: 15 * 60 * 1000,
   });
 
 export const useGetSingleBrochureType = (brochureTypeId: string) =>
@@ -77,6 +87,7 @@ export const useGetBrochures = (params: IBrochureParams) =>
   useQuery({
     queryKey: ["Brochures", params],
     queryFn: () => getBrochures(params),
+    staleTime: 15 * 60 * 1000,
   });
 
 export const useGetSingleBrochure = (brochureId: string) =>
@@ -91,7 +102,8 @@ export const useCreateBrochure = () =>
 export const useEditeBrochure = () =>
   useMutation({ mutationKey: ["Brochures"], mutationFn: editeBrochure });
 
-export const useAssignBrochureFile = () => useMutation({ mutationKey: ["brochure-file"], mutationFn: brochureFile})
+export const useAssignBrochureFile = () =>
+  useMutation({ mutationKey: ["brochure-file"], mutationFn: brochureFile });
 
 export const useDeleteBrochure = () =>
   useMutation({ mutationKey: ["Brochures"], mutationFn: deleteBrochure });
@@ -101,6 +113,7 @@ export const useGetArticles = (params: IArticleParams) =>
   useQuery({
     queryKey: ["Articles", params],
     queryFn: () => getArticles(params),
+    staleTime: 15 * 60 * 1000,
   });
 
 export const useGetSingleArticle = (articleId: string) =>
@@ -115,14 +128,19 @@ export const useCreateArticle = () =>
 export const useEditeArticle = () =>
   useMutation({ mutationKey: ["Article"], mutationFn: editeArticle });
 
-export const useAssignArticleImage = () => useMutation({ mutationKey: ["article-image"], mutationFn: articleImage})
+export const useAssignArticleImage = () =>
+  useMutation({ mutationKey: ["article-image"], mutationFn: articleImage });
 
 export const useDeleteArticle = () =>
   useMutation({ mutationKey: ["Article"], mutationFn: deleteArticle });
 
 // ---------------------------  Brand ------------------------------
 export const useGetBrands = (params: IBrandParams) =>
-  useQuery({ queryKey: ["Brands", params], queryFn: () => getBrands(params) });
+  useQuery({
+    queryKey: ["Brands", params],
+    queryFn: () => getBrands(params),
+    staleTime: 15 * 60 * 1000,
+  });
 
 export const useGetSingleBrand = (brandId: string) =>
   useQuery({
@@ -144,6 +162,7 @@ export const useGetCategories = (params: ICategoryParams) =>
   useQuery({
     queryKey: ["Categories", params],
     queryFn: () => getCategories(params),
+    staleTime: 15 * 60 * 1000,
   });
 
 export const useGetSingleCategory = (categoryId: string) =>
@@ -166,6 +185,7 @@ export const useGetProducts = (params: IProductParams) =>
   useQuery({
     queryKey: ["Products", params],
     queryFn: () => getProducts(params),
+    staleTime: 15 * 60 * 1000,
   });
 
 export const useGetSingleProduct = (productId: string) =>
@@ -185,7 +205,6 @@ export const useAssignProductImage = () =>
 
 export const useDeleteProduct = () =>
   useMutation({ mutationKey: ["Product"], mutationFn: deleteProduct });
-
 
 // ---------------------------  File  ------------------------------
 export const useGetFiles = () =>
@@ -212,4 +231,10 @@ export const useDeleteFile = () =>
 export const useLogin = () =>
   useMutation({ mutationKey: ["login"], mutationFn: login });
 
-export const useRegisterMutation = () => useMutation({mutationKey: ['register'], mutationFn: register})
+export const useRegisterMutation = () =>
+  useMutation({ mutationKey: ["register"], mutationFn: register });
+
+export const useGetUsers = (params?: IUserParams) =>
+  useQuery({ queryKey: ["users"], queryFn: () => getUsers(params) });
+
+export const useDeleteUser = () => useMutation({mutationKey: ['users'], mutationFn: deleteUser})

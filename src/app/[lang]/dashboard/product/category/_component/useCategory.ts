@@ -7,6 +7,7 @@ import { ICreateCategoryForm } from "~/app/[lang]/dashboard/product/category/_co
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
 import {useCommon} from "~/store/common/commonSlice";
+import {useQueryObject} from "~/hooks/useQueryObject";
 
 type TCategoryModals =
   | "create-category"
@@ -18,12 +19,13 @@ const useCategory = () => {
   const QC = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const {lang} = useCommon()
+  const {query} = useQueryObject()
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [selectedCategory, setSelectedCategory] = useState<ICategory>();
 
-  const { data: categories } = useGetCategories({ lang, page, limit });
+  const { data: categories } = useGetCategories({ lang, page, limit, ...query });
   const { mutateAsync: mutateCreateCategory } = useCreateCategory();
   const { mutateAsync: mutateEditCategory } = useEditeCategory();
   const { mutateAsync: mutateDeleteCategory } = useDeleteCategory();

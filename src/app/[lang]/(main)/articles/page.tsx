@@ -16,9 +16,7 @@ export const metadata: Metadata = {
 };
 
 async function getLatestArticles({ lang }: { lang: TLang }): Promise<any> {
-  // Call the fetch method and passing
-  // the pokeAPI link
-  const url = new URL(`${baseURL}article`);
+
   const query = {
     lang,
     limit: 3,

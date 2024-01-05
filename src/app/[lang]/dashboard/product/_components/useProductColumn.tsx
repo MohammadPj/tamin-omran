@@ -19,12 +19,12 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
     },
     {
       header: "نام محصول",
-      accessorKey: "title",
+      accessorKey: "title.fa",
       cell: (cell) => <Box width={150}>{cell.getValue()}</Box>,
     },
     {
       header: "دسته بندی",
-      accessorKey: "category",
+      accessorKey: "category.fa",
       cell: (cell) => <Box width={100}>{cell.getValue()?.title || "---"}</Box>,
     },
     {

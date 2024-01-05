@@ -18,7 +18,7 @@ const useBrandColumn = ({ onEdite, onDelete }: useCategoryColumnProps) => {
       cell: (cell) => cell.row.index + 1,
     },
     {
-      header: "نام دسته بندی",
+      header: "نام برند",
       accessorKey: "title",
       cell: (cell) => cell.getValue() || "---",
     },

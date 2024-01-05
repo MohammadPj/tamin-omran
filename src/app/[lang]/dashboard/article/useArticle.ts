@@ -13,6 +13,7 @@ import { useCommon } from "~/store/common/commonSlice";
 import { IArticle } from "~/types/article";
 import useArticleColumn from "~/app/[lang]/dashboard/article/useArticleColumn";
 import { ICreateArticleForm } from "~/app/[lang]/dashboard/article/_components/create-article/CreateArticle";
+import {useQueryObject} from "~/hooks/useQueryObject";
 
 type TArticleModals =
   | "create-article"
@@ -24,12 +25,13 @@ const useArticle = () => {
   const QC = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const { lang } = useCommon();
+  const {query} = useQueryObject()
 
   const [selectedArticle, setSelectedArticle] = useState<IArticle>();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const { data: articles } = useGetArticles({ lang, limit, page });
+  const { data: articles } = useGetArticles({ lang, limit, page, ...query });
   const { mutateAsync: mutateCreateArticle } = useCreateArticle();
   const { mutateAsync: mutateEditArticle } = useEditeArticle();
   const { mutateAsync: mutateAssignArticleImage } = useAssignArticleImage();

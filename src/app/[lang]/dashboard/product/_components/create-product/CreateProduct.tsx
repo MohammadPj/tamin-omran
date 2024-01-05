@@ -27,9 +27,10 @@ interface CreateProductProps {
 }
 
 export interface ICreateProductForm {
-  title: string;
-  lang: TLang;
-  categoryId: string;
+  title: {fa: string, en: string};
+  categoryId: {fa: string, en: string};
+  description: {fa: string, en: string};
+  review: {fa: string, en: string};
   brandId: string;
   image?: string;
   imageFile?: File;
@@ -38,8 +39,6 @@ export interface ICreateProductForm {
   isAvailable: boolean;
   engineNumber: string;
   technicalNumber: string;
-  description: string;
-  review: string;
 }
 
 const CreateProduct: FC<CreateProductProps> = ({
@@ -49,40 +48,71 @@ const CreateProduct: FC<CreateProductProps> = ({
 }) => {
   const form = useForm<ICreateProductForm>({
     defaultValues: {
-      lang: defaultValue?.lang || "fa",
+      // lang: defaultValue?.lang || "fa",
       title: defaultValue?.title!,
-      brandId: defaultValue?.brand?._id!,
-      categoryId: defaultValue?.category?._id,
+      review: defaultValue?.review,
+      categoryId: {fa: defaultValue?.category.fa._id, en: defaultValue?.category.en._id},
       description: defaultValue?.description,
       engineNumber: defaultValue?.engineNumber,
+      brandId: defaultValue?.brand?._id!,
       image: defaultValue?.image,
       images: defaultValue?.images,
       isAvailable: defaultValue?.isAvailable,
-      review: defaultValue?.review,
       technicalNumber: defaultValue?.technicalNumber,
     },
   });
 
-  const { data: categories } = useGetCategories({ lang: form.watch("lang") });
-  const { data: brands } = useGetBrands({ lang: form.watch("lang") });
+  console.log('defa', defaultValue)
+
+  const { data: categoriesFa } = useGetCategories({ lang: 'fa' });
+  const { data: categoriesEn } = useGetCategories({ lang: 'en' });
+  const { data: brands } = useGetBrands({lang: 'fa'});
 
   const inputList1: IUseFormInput[] = [
     {
-      name: "title",
-      label: "نام محصول",
+      name: "brandId",
+      label: "برند محصول",
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
-      placeholder: "لطفا نام محصول را وارد کنید"
-    }
+      placeholder: "انتخاب برند",
+      type: "select",
+      options: brands?.data?.map((brand) => ({
+        label: brand.title,
+        value: brand._id,
+      })),
+    },
   ]
 
   const inputList2: IUseFormInput[] = [
     {
-      name: "categoryId",
-      label: "دسته بندی محصول",
+      name: "title.fa",
+      label: "نام محصول (فارسی)",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
+      placeholder: "لطفا نام محصول را وارد کنید"
+    },
+    {
+      name: "title.en",
+      label: "نام محصول (انگلیسی)",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
+      placeholder: "لطفا نام محصول را وارد کنید"
+    },
+    {
+      name: "categoryId.fa",
+      label: "دسته بندی محصول (فارسی)",
       placeholder: "انتخاب دسته بندی",
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       type: "select",
-      options: categories?.data?.map((category) => ({
+      options: categoriesFa?.data?.map((category) => ({
+        label: category.title,
+        value: category._id,
+      })),
+    },
+    {
+      name: "categoryId.en",
+      label: "دسته بندی محصول (انگلیسی)",
+      placeholder: "انتخاب دسته بندی",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
+      type: "select",
+      options: categoriesEn?.data?.map((category) => ({
         label: category.title,
         value: category._id,
       })),
@@ -99,33 +129,35 @@ const CreateProduct: FC<CreateProductProps> = ({
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       placeholder: "شماره فنی محصول را وارد کنید",
     },
-    {
-      name: "brandId",
-      label: "برند محصول",
-      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
-      placeholder: "انتخاب برند",
-      type: "select",
-      options: brands?.data?.map((brand) => ({
-        label: brand.title,
-        value: brand._id,
-      })),
-    },
-    {
-      name: "description",
-      label: "توضیحات",
-      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
-      placeholder: "انتخاب برند",
-      gridItemProp: { xs: 12 },
-      type: "text-area",
-    },
   ];
 
-  const handleChangeLanguage = (lang: TLang) => {
-    form.setValue("lang", lang);
+  const inputListDescription: IUseFormInput[] = [
+    {
+      name: "description.fa",
+      label: "توضیحات (فارسی)",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
+      placeholder: "انتخاب برند",
+      type: "text-area",
+    },
+    {
+      name: "description.en",
+      label: "توضیحات (انگلیسی)",
+      rules: { required: "وارد کردن این فیلد اجباری می باشد" },
+      placeholder: "انتخاب برند",
+      type: "text-area",
+    },
+  ]
+
+  // const handleChangeLanguage = (lang: TLang) => {
+  //   form.setValue("lang", lang);
+  // };
+
+  const handleChangeReviewFa = (value: string) => {
+    form.setValue("review.fa", value);
   };
 
-  const handleChangeReview = (value: string) => {
-    form.setValue("review", value);
+  const handleChangeReviewEn = (value: string) => {
+    form.setValue("review.en", value);
   };
 
   const handleChangeMainImage = (files: FileList) => {
@@ -153,25 +185,35 @@ const CreateProduct: FC<CreateProductProps> = ({
 
   return (
     <Stack>
-      <LanguageTab
-        onChange={handleChangeLanguage}
-        defaultValue={form.getValues("lang")}
-      />
+      {/*<LanguageTab*/}
+      {/*  onChange={handleChangeLanguage}*/}
+      {/*  defaultValue={form.getValues("lang")}*/}
+      {/*/>*/}
 
       <Grid container spacing={4}>
         <Grid item xs={7}>
+
+
+          <InputListWithUseForm
+            inputList={inputList2}
+            form={form}
+            gridItemProps={{ xs: 6 }}
+            gridContainerProps={{columnSpacing: 4}}
+          />
+
           <Box
             display={"flex"}
             gap={2}
             width={"100%"}
             alignItems={"end"}
-            mb={4}
+            mt={4}
           >
             <Box flexGrow={1}>
               <InputListWithUseForm
                 inputList={inputList1}
                 form={form}
                 gridItemProps={{ xs: 12 }}
+                gridContainerProps={{columnSpacing: 4}}
               />
             </Box>
 
@@ -191,9 +233,10 @@ const CreateProduct: FC<CreateProductProps> = ({
           </Box>
 
           <InputListWithUseForm
-            inputList={inputList2}
+            inputList={inputListDescription}
             form={form}
             gridItemProps={{ xs: 6 }}
+            gridContainerProps={{mt: 4, columnSpacing: 4}}
           />
         </Grid>
 
@@ -207,24 +250,46 @@ const CreateProduct: FC<CreateProductProps> = ({
         </Grid>
       </Grid>
 
-      <Box mt={4}>
-        <Box display={"flex"}>
-          <Typography
-            mb={2}
-            fontWeight={500}
-            fontSize={14}
-            color={"primary.main"}
-            borderBottom={"1px solid"}
-            borderColor={"primary.main"}
-          >
-            نقد و بررسی
-          </Typography>
+      <Box mt={4} display={'flex'} gap={4}>
+        <Box>
+          <Box display={"flex"}>
+            <Typography
+              mb={2}
+              fontWeight={500}
+              fontSize={14}
+              color={"primary.main"}
+              borderBottom={"1px solid"}
+              borderColor={"primary.main"}
+            >
+              نقد و بررسی فارسی
+            </Typography>
+          </Box>
+
+          <CustomCKEditor
+            onChange={handleChangeReviewFa}
+            defaultValue={defaultValue?.review?.fa}
+          />
         </Box>
 
-        <CustomCKEditor
-          onChange={handleChangeReview}
-          defaultValue={defaultValue?.review}
-        />
+        <Box>
+          <Box display={"flex"}>
+            <Typography
+              mb={2}
+              fontWeight={500}
+              fontSize={14}
+              color={"primary.main"}
+              borderBottom={"1px solid"}
+              borderColor={"primary.main"}
+            >
+              نقد و بررسی انگلیسی
+            </Typography>
+          </Box>
+
+          <CustomCKEditor
+            onChange={handleChangeReviewEn}
+            defaultValue={defaultValue?.review?.en}
+          />
+        </Box>
       </Box>
 
       <Box display={"flex"} gap={4} mt={4}>

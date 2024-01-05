@@ -1,4 +1,5 @@
 import {IUser} from "~/types/user";
+import {IMeta} from "~/app/[lang]/(main)/articles/page";
 
 export type TLang = "fa" | "en";
 
@@ -63,7 +64,7 @@ export interface IEditArticleBody extends Partial<ICreateArticleBody>{
 // ---------------------------  Brand  ------------------------------
 export interface IBrandParams extends ICommonFilterParams {
   title?: string;
-  lang: TLang;
+  lang?: TLang;
 }
 
 export interface IBrandBody
@@ -88,22 +89,21 @@ export interface IEditCategoryBody extends ICategoryBody{
 
 // ---------------------------  Product  ------------------------------
 export interface IProductParams extends ICommonFilterParams {
-  title?: string;
-  lang: TLang;
-  category?: string
-  brand?: string
+  title?: {fa: string; en: string};
+  category?: {fa: string; en: string};
+  brand?: {fa: string; en: string};
   images?: string[]
   isAvailable?: boolean
   engineNumber?: string;
   technicalNumber?: string
-  description?: string
-  review?: string
+  description?: {fa: string; en: string};
+  review?: {fa: string; en: string};
 }
 
 export interface IProductBody
   extends Omit<IProductParams, keyof ICommonFilterParams | 'category' | 'brand'> {
-  categoryId: string;
-  brandId: string
+  categoryId: {fa: string; en: string};
+  brandId: string;
 }
 
 export interface IEditProductBody extends IProductBody {
@@ -112,14 +112,14 @@ export interface IEditProductBody extends IProductBody {
 
 // ---------------------------  Product  ------------------------------
 export interface ILoginBody {
-  email: string;
+  username: string;
   password: string;
 }
 
 export interface IRegisterBody {
   firstName: string;
   lastName: string
-  email: string;
+  username: string;
   password: string
 }
 
@@ -131,3 +131,11 @@ export interface IRegisterResponse extends IUser {
   token: string
 }
 
+export interface IUserParams {
+  username: string
+}
+
+export interface IGetUsers {
+  data: IUser[],
+  meta: IMeta
+}

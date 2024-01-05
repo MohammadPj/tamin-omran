@@ -7,6 +7,8 @@ import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
 import useCategory from "~/app/[lang]/dashboard/product/category/_component/useCategory";
 import CreateCategory from "~/app/[lang]/dashboard/product/category/_component/CreateCategory";
 import ConfirmDelete from "~/components/common/modals/ConfirmDelete";
+import InputListWithQuery from "~/components/common/input-list/with-query/InputListWithQuery";
+import {IUseFormInput} from "~/components/common/input-list/with-useForm/types";
 
 const Product: FC = () => {
   const {
@@ -25,16 +27,25 @@ const Product: FC = () => {
     count
   } = useCategory();
 
+  const inputList: IUseFormInput[] = [
+    {
+      name: 'title',
+      label: '',
+      placeholder: 'دسته بندی'
+    }
+  ]
+
   return (
     <>
       <CustomTable
         leftContent={
-          <Box display={"flex"} gap={4}>
+          <Box sx={{width: 200}} display={"flex"} gap={4}>
             <Button onClick={() => setModal("create-category")}>
               تعریف دسته بندی
             </Button>
           </Box>
         }
+        rightContent={<InputListWithQuery inputList={inputList} />}
         table={table}
         pageCount={count}
         page={page}

@@ -35,7 +35,7 @@ const useProduct = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const { data: products } = useGetProducts({ lang, limit, page, ...query });
+  const { data: products } = useGetProducts({ limit, page, ...query });
   const { mutateAsync: mutateCreateProduct } = useCreateProduct();
   const { mutateAsync: mutateEditProduct } = useEditeProduct();
   const { mutateAsync: mutateDeleteProduct } = useDeleteProduct();

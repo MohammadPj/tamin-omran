@@ -7,6 +7,8 @@ import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
 import useBrand from "~/app/[lang]/dashboard/product/brand/_component/useBrand";
 import CreateBrand from "~/app/[lang]/dashboard/product/brand/_component/CreateBrand";
 import ConfirmDelete from "~/components/common/modals/ConfirmDelete";
+import InputListWithQuery from "~/components/common/input-list/with-query/InputListWithQuery";
+import {IUseFormInput} from "~/components/common/input-list/with-useForm/types";
 
 const Product: FC = () => {
   const {
@@ -25,16 +27,25 @@ const Product: FC = () => {
     count
   } = useBrand();
 
+  const inputList: IUseFormInput[] = [
+    {
+      name: 'title',
+      label: '',
+      placeholder: 'برند'
+    }
+  ]
+
   return (
     <>
       <CustomTable
         leftContent={
           <Box display={"flex"} gap={4}>
-            <Button onClick={() => setModal("create-brand")}>
+            <Button sx={{width: 'max-content'}} onClick={() => setModal("create-brand")}>
               تعریف برند
             </Button>
           </Box>
         }
+        rightContent={<InputListWithQuery inputList={inputList} />}
         table={table}
         pageCount={count}
         page={page}

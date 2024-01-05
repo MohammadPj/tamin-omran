@@ -40,11 +40,6 @@ const CreateBrand: FC<CreateBrandProps> = ({
 
   return (
     <Box>
-      <LanguageTab
-        defaultValue={form.watch("lang")}
-        onChange={(e: TLanguages) => form.setValue("lang", e)}
-      />
-
       <InputListWithUseForm
         inputList={inputList}
         form={form}

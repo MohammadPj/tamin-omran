@@ -13,11 +13,6 @@ interface Props {
 const useBrochureColumn = ({ onEdit, onDelete }: Props) => {
   const columns: ColumnDef<IBrochure, any>[] = [
     {
-      header: "شماره",
-      accessorKey: "id",
-      cell: (cell) => cell.row.index + 1,
-    },
-    {
       header: "نام بروشور",
       accessorKey: "title",
       cell: (cell) => cell.getValue(),

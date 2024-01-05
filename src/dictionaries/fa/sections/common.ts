@@ -25,7 +25,8 @@ export const commonDictionary: ICommonDictionary = {
     passwordNotMatch: "رمزعبورها مطابقت ندارند. لطفاً دوباره تلاش کنید.",
     successLoginMessage: "ورود با موفقیت انجام شد! خوش آمدید {{ username }}!",
     successRegisterMessage: "تبریک! حساب کاربری شما با موفقیت ایجاد شد.",
-    adminPanel: "پنل ادمین"
+    adminPanel: "پنل ادمین",
+    validateUsername: 'شماره موبایل یا ایمیل اشتباه است'
   },
   fieldIsRequired: "این فیلد اجباری است",
   home: "خانه",
@@ -46,5 +47,6 @@ export const commonDictionary: ICommonDictionary = {
   password: "پسورد",
   phoneNumber: "شماره تماس",
   enginNumber: 'شماره موتور',
-  enginNumberPlaceholder: 'لطفا شماره موتور را وارد کنید'
+  enginNumberPlaceholder: 'لطفا شماره موتور را وارد کنید',
+  username: 'شماره موبایل یا ایمیل'
 };
