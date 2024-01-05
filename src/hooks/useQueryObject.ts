@@ -45,7 +45,6 @@ export const useQueryObject = () => {
 
   const addTextQuery = ({queryName, value}: {queryName: string, value: string}) => {
 
-    console.log('v', value)
     if (value) {
       setQuery({ ...query, [queryName]: value });
     } else if (query?.[queryName]) {

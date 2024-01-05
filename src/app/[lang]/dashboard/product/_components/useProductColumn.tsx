@@ -1,7 +1,7 @@
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import {IProduct} from "~/types/product";
-import {Box} from "@mui/material";
+import { IProduct } from "~/types/product";
+import { Box } from "@mui/material";
 import SvgDelete from "~/components/icons/output/Delete";
 import SvgEdit from "~/components/icons/output/Edit";
 
@@ -13,24 +13,29 @@ interface useProductColumnProps {
 const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
   const columns: ColumnDef<IProduct, any>[] = [
     {
-      header: "شماره",
-      id: "number",
-      cell: (cell) => cell.row.index + 1,
+      header: "شماره فنی",
+      accessorKey: "technicalNumber",
+      cell: (cell) => cell.getValue() || "---",
     },
     {
       header: "نام محصول",
       accessorKey: "title",
-      cell: (cell) => cell.getValue(),
+      cell: (cell) => <Box width={150}>{cell.getValue()}</Box>,
     },
     {
       header: "دسته بندی",
       accessorKey: "category",
-      cell: (cell) => cell.getValue()?.title || "---",
+      cell: (cell) => <Box width={100}>{cell.getValue()?.title || "---"}</Box>,
     },
     {
       header: "برند",
       accessorKey: "brand",
       cell: (cell) => cell.getValue()?.title || "---",
+    },
+    {
+      header: "موتور",
+      accessorKey: "engineNumber",
+      cell: (cell) => cell.getValue() || "---",
     },
     {
       header: "تاریخ بارگذاری",
@@ -43,11 +48,16 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
     {
       header: "وضعیت محصول",
       accessorKey: "isAvailable",
-      cell: (cell) => cell.getValue() ? 'موجود' : "نا موجود",
+      cell: (cell) => (
+        <Box width={"fit-content"}>
+          {cell.getValue() ? "موجود" : "نا موجود"}
+        </Box>
+      ),
     },
     {
       header: "عملیات",
       id: "action",
+      meta: {},
       cell: (cell) => (
         <Box display={"flex"} gap={2}>
           <Box
@@ -70,7 +80,7 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
     },
   ];
 
-  return {columns};
+  return { columns };
 };
 
 export default useProductColumn;

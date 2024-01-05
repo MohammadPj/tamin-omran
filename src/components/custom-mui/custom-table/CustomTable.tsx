@@ -33,6 +33,7 @@ export interface ICustomTable<T> {
   pageCount?: number;
   onClickFilter?: () => void;
   leftContent?: React.ReactNode;
+  rightContent?: React.ReactNode
   onSearch?: (search: string) => void;
 }
 
@@ -45,6 +46,7 @@ function CustomTable<T>({
   sx,
   onClickFilter,
   leftContent,
+  rightContent,
   onSearch,
   page,
   pageCount,
@@ -83,12 +85,7 @@ function CustomTable<T>({
             alignItems={"center"}
             gap={4}
           >
-            <SearchAndFilter
-              handleSearchTable={(e) =>
-                onSearch ? onSearch(e.target.value) : null
-              }
-              onClickFilter={onClickFilter}
-            />
+            {rightContent || <Box />}
 
             {leftContent}
           </Box>

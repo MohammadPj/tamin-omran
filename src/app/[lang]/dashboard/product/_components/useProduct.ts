@@ -16,6 +16,7 @@ import { IProduct } from "~/types/product";
 import { ICreateProductForm } from "~/app/[lang]/dashboard/product/_components/create-product/CreateProduct";
 import useProductColumn from "~/app/[lang]/dashboard/product/_components/useProductColumn";
 import { handleAppendFormData } from "~/helpers/methods";
+import {useQueryObject} from "~/hooks/useQueryObject";
 
 type TProductModals =
   | "create-product"
@@ -28,12 +29,13 @@ const useProduct = () => {
   const QC = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const { lang } = useCommon();
+  const {query} = useQueryObject()
 
   const [selectedProduct, setSelectedProduct] = useState<IProduct>();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const { data: products } = useGetProducts({ lang, limit, page });
+  const { data: products } = useGetProducts({ lang, limit, page, ...query });
   const { mutateAsync: mutateCreateProduct } = useCreateProduct();
   const { mutateAsync: mutateEditProduct } = useEditeProduct();
   const { mutateAsync: mutateDeleteProduct } = useDeleteProduct();

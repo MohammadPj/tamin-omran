@@ -8,6 +8,7 @@ import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
 import CreateProduct from "~/app/[lang]/dashboard/product/_components/create-product/CreateProduct";
 import ConfirmDelete from "~/components/common/modals/ConfirmDelete";
 import FilterProducts from "~/app/[lang]/dashboard/product/_components/filter-produts/FilterProducts";
+import SearchProducts from "~/app/[lang]/dashboard/product/_components/search-products/SearchProducts";
 
 const Product: FC = () => {
   const {
@@ -32,12 +33,12 @@ const Product: FC = () => {
       <CustomTable
         leftContent={
           <Box display={"flex"} gap={4}>
-            <Button onClick={() => setModal("create-product")}>
+            <Button sx={{width: 'max-content'}} onClick={() => setModal("create-product")} >
               تعریف محصول
             </Button>
           </Box>
         }
-        // onClickFilter={() => setModal("filter-product")}
+        rightContent={<SearchProducts />}
         table={table}
         pageCount={count}
         page={page}
