@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Container,
+  InputAdornment,
   Menu,
   MenuItem,
   TextField,
@@ -17,12 +18,13 @@ import SvgSearch from "~/components/icons/final/Search";
 import SvgMenu from "~/components/icons/final/Menu";
 import SideBar from "~/app/[lang]/_components/sidebar/SideBar";
 import { useCommon } from "~/store/common/commonSlice";
-import {getDeviceType, handleLogout} from "~/helpers/methods";
-import { usePathname } from "next/navigation";
+import { getDeviceType, handleLogout } from "~/helpers/methods";
+import {usePathname, useRouter} from "next/navigation";
 import LoginAndRegisterModal from "~/app/[lang]/_components/header/components/LoginAndRegisterModal";
 import { useUser } from "~/store/user/userSlice";
 import Link from "next/link";
 import ProfileButton from "~/app/[lang]/_components/header/components/ProfileButton";
+import {debounce} from "~/utils/methods";
 
 interface HeaderProps {
   lang: TLanguages;
@@ -32,6 +34,9 @@ const Header: FC<HeaderProps> = ({ lang }) => {
   const dictionary = getDictionary();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const { userInfo, token } = useUser();
+  const deviceType = getDeviceType();
+  const pathname = usePathname();
+  const router = useRouter()
 
   const tabs: ITab[] = [
     { label: dictionary("common.home"), href: "/" },
@@ -42,8 +47,11 @@ const Header: FC<HeaderProps> = ({ lang }) => {
     // { label: dictionary("common.aboutUs"), href: "/contact-us" },
   ];
 
-  const deviceType = getDeviceType();
-  const pathname = usePathname();
+  const handleChange = (value: string) => {
+    router.push(`/products?title=${value}`)
+  }
+
+  const debouncedChange = debounce(handleChange, 2000)
 
   return (
     <Box bgcolor={"white"}>
@@ -105,13 +113,16 @@ const Header: FC<HeaderProps> = ({ lang }) => {
                 size={deviceType === "Mobile" ? "small" : "medium"}
                 placeholder={dictionary("common.header.search")}
                 sx={{ width: { xs: "100%", sm: 300 } }}
+                onChange={ e => debouncedChange(e.target.value)}
                 InputProps={{
                   startAdornment: (
-                    <SvgSearch
-                      width={24}
-                      height={24}
-                      primarycolor={"#6E6E6E"}
-                    />
+                    <InputAdornment position={'end'}>
+                      <SvgSearch
+                        width={24}
+                        height={24}
+                        primarycolor={"#6E6E6E"}
+                      />
+                    </InputAdornment>
                   ),
                 }}
               />
