@@ -4,23 +4,28 @@ import CustomDivider from "~/components/custom-mui/custom-divider/CustomDivider"
 import Image from "next/image";
 import { getDictionary } from "~/i18n";
 import CustomDivider2 from "~/components/custom-mui/custom-divider/CustomDivider2";
-import {TLang} from "~/services/api/type";
+import { TLang } from "~/services/api/type";
 
 interface HomeSection2Props {
-  lang: TLang
+  lang: TLang;
 }
 
-const HomeSection2: FC<HomeSection2Props> = ({lang}) => {
+const HomeSection2: FC<HomeSection2Props> = ({ lang }) => {
   const customers = [
-    "/images/customers/customer (1).png",
-    "/images/customers/customer (2).png",
-    "/images/customers/customer (3).png",
-    "/images/customers/customer (4).png",
-    "/images/customers/customer (5).png",
-    "/images/customers/customer (1).png",
-    "/images/customers/customer (2).png",
-    "/images/customers/customer (3).png",
-    "/images/customers/customer (4).png",
+    { type: "image", value: "/images/customers/dfm-logo.png" },
+    { type: "image", value: "/images/customers/customer (2).png" },
+    { type: "image", value: "/images/customers/customer (3).png" },
+    { type: "image", value: "/images/customers/customer (4).png" },
+    { type: "image", value: "/images/customers/customer (5).png" },
+    { type: "image", value: "/images/customers/logo-fuji.jpg" },
+    { type: "text", value: "FEDERAL GASKET" },
+    { type: "text", value: "NIPPON GASKET" },
+    { type: "image", value: "/images/customers/fp-diesel-logo.png" },
+    { type: "image", value: "/images/customers/tp-bolivia-logo.png" },
+    { type: "image", value: "/images/customers/rik-logo.png" },
+    { type: "image", value: "/images/customers/dcec-logo.webp" },
+    { type: "image", value: "/images/customers/dft-logo.jpg" },
+    { type: "image", value: "/images/customers/ndc-logo.jpg" },
   ];
 
   const dictionary = getDictionary(lang);
@@ -51,13 +56,30 @@ const HomeSection2: FC<HomeSection2Props> = ({lang}) => {
             display={"flex"}
             alignItems={"center"}
             justifyContent={"center"}
+            px={6}
+            py={4}
             bgcolor={"white"}
             alignSelf={i % 2 === 0 ? "end" : "start"}
             borderRadius={1}
-            border={'1px solid'}
-            borderColor={'grey.3'}
+            border={"1px solid"}
+            borderColor={"grey.3"}
           >
-            <Image src={customer} alt={"customer"} width={100} height={40} />
+            {customer.type === "image" ? (
+              <Box width={'100%'} height={'100%'} position={"relative"}>
+                <Image src={customer.value} alt={"customer"} fill />
+              </Box>
+            ) : (
+              <Typography
+                fontWeight={700}
+                fontSize={32}
+                color={"#2d4293"}
+                fontFamily={"fantasy"}
+                lineHeight={"normal"}
+                textAlign={"center"}
+              >
+                {customer.value}
+              </Typography>
+            )}
           </Box>
         ))}
       </Box>
