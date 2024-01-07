@@ -8,6 +8,8 @@ import SvgTelegram from '~/components/icons/final/Telegram'
 import SvgWhatsApp from '~/components/icons/final/WhatsApp'
 import {Metadata} from "next";
 import {getDictionary} from "~/i18n";
+import SvgInstagram from "~/components/icons/output/Instagram";
+import SocialMedias from "~/app/[lang]/_components/footer/_components/SocialMedias";
 
 export const metadata: Metadata = {
   title: 'ارتباط با ما',
@@ -43,7 +45,7 @@ const ContactUsPage = ({params}: any) => {
             <Box display={'flex'} gap={2} alignItems={'center'}>
               <SvgPhone primarycolor={'#F7941D'} />
               <Typography fontWeight={400} fontSize={16} color={'primary.1'}>
-                021-1241454 | 021-1235148
+                021-65611395-96
               </Typography>
             </Box>
           </Box>
@@ -56,7 +58,7 @@ const ContactUsPage = ({params}: any) => {
             <Box display={'flex'} gap={2} alignItems={'center'}>
               <SvgPhone primarycolor={'#F7941D'} />
               <Typography fontWeight={400} fontSize={16} color={'primary.1'}>
-                021-1241454 | 021-1235148
+                021-65611395-96
               </Typography>
             </Box>
           </Box>
@@ -69,7 +71,7 @@ const ContactUsPage = ({params}: any) => {
             <Box display={'flex'} gap={2} alignItems={'center'}>
               <SvgEmail primarycolor={'#F7941D'} />
               <Typography fontWeight={400} fontSize={16} color={'primary.1'}>
-                taminghate@gmail.com
+                tamin.omran.qateh@gmail.com | federalengine@rogers.com
               </Typography>
             </Box>
 
@@ -97,27 +99,7 @@ const ContactUsPage = ({params}: any) => {
           {dictionary("contactUs.title")}
         </Typography>
 
-        <Box display={'flex'} gap={4} mr={5}>
-          <Box
-            p={2}
-            borderRadius={3}
-            bgcolor={'primary.main'}
-            display={'flex'}
-            sx={{ cursor: 'pointer' }}
-          >
-            <SvgTelegram primarycolor={'white'} />
-          </Box>
-
-          <Box
-            p={2}
-            borderRadius={3}
-            bgcolor={'primary.main'}
-            display={'flex'}
-            sx={{ cursor: 'pointer' }}
-          >
-            <SvgWhatsApp primarycolor={'white'} />
-          </Box>
-        </Box>
+        <SocialMedias />
       </Box>
     </Container>
   )
