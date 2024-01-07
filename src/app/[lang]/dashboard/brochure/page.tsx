@@ -8,8 +8,6 @@ import useBrochure from "~/app/[lang]/dashboard/brochure/_components/useBrochure
 import CreateBrochure from "~/app/[lang]/dashboard/brochure/_components/CreateBrochure";
 import ConfirmDelete from "~/components/common/modals/ConfirmDelete";
 import EditBrochure from "~/app/[lang]/dashboard/brochure/_components/EditBrochure";
-import InputListWithQuery from "~/components/common/input-list/with-query/InputListWithQuery";
-import {IUseFormInput} from "~/components/common/input-list/with-useForm/types";
 
 const Brochure: FC = () => {
   const {
@@ -26,36 +24,19 @@ const Brochure: FC = () => {
     page,
     limit,
     setLimit,
-    count,
-    brochureTypes
+    count
   } = useBrochure();
-
-  const inputList: IUseFormInput[] = [
-    {
-      name: 'title',
-      label: '',
-      placeholder: 'بروشور'
-    },
-    {
-      name: 'brochureType',
-      label: '',
-      placeholder: 'دسته بندی',
-      type: 'select',
-      options: brochureTypes?.data?.map(brochureType => ({label: brochureType.title, value: brochureType._id}))
-    }
-  ]
 
   return (
     <Box flexGrow={1}>
       <CustomTable
         leftContent={
           <Box display={"flex"} gap={4}>
-            <Button sx={{width: 150}} onClick={() => handleOpenModal("create-brochure")}>
+            <Button onClick={() => handleOpenModal("create-brochure")}>
               تعریف بروشور
             </Button>
           </Box>
         }
-        rightContent={<InputListWithQuery inputList={inputList} />}
         table={table}
         pageCount={count}
         page={page}

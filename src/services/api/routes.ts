@@ -18,6 +18,4 @@ export const routes = {
   singleFile:(fileId: string) => `/file/${fileId}`,
   login: "/auth",
   register: "/register",
-  user: '/user',
-  singleUser: (userId: string) => `/user/${userId}`
 }

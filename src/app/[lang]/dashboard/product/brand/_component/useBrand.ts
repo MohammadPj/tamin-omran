@@ -11,7 +11,6 @@ import {useCommon} from "~/store/common/commonSlice";
 import {IBrand} from "~/types/product";
 import {ICreateBrandForm} from "~/app/[lang]/dashboard/product/brand/_component/CreateBrand";
 import useBrandColumn from "~/app/[lang]/dashboard/product/brand/_component/useBrandColumn";
-import {useQueryObject} from "~/hooks/useQueryObject";
 
 type TBrandModals =
   | "create-brand"
@@ -28,8 +27,7 @@ const useBrand = () => {
   const [limit, setLimit] = useState(10);
   const [selectedBrand, setSelectedBrand] = useState<IBrand>();
 
-  const {query} = useQueryObject()
-  const { data: brands } = useGetBrands({ lang, page, limit, ...query });
+  const { data: brands } = useGetBrands({ lang, page, limit });
   const { mutateAsync: mutateCreateBrand } = useCreateBrand();
   const { mutateAsync: mutateEditBrand } = useEditeBrand();
   const { mutateAsync: mutateDeleteBrand } = useDeleteBrand();

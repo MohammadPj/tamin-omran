@@ -7,14 +7,13 @@ import {
   useCreateFile,
   useDeleteBrochure,
   useEditeBrochure,
-  useGetBrochures, useGetBrochureTypes,
+  useGetBrochures,
 } from "~/services/api/hooks";
 import { useCommon } from "~/store/common/commonSlice";
 import { useSnackbar } from "notistack";
 import { ICreateBrochureForm } from "~/app/[lang]/dashboard/brochure/_components/CreateBrochure";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import {useQueryObject} from "~/hooks/useQueryObject";
 
 type TProductModals =
   | "create-brochure"
@@ -26,19 +25,19 @@ const useBrochure = () => {
   const { lang } = useCommon();
   const { enqueueSnackbar } = useSnackbar();
   const QC = useQueryClient();
-  const {query} = useQueryObject()
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [selectedBrochure, setSelectedBrochure] = useState<IBrochure>();
 
-  const {data: brochureTypes} = useGetBrochureTypes({lang})
   const { mutateAsync: mutateCreateBrochure } = useCreateBrochure();
   const { mutateAsync: mutateEditBrochure } = useEditeBrochure();
   const { mutateAsync: mutateDeleteBrochure } = useDeleteBrochure();
   const { mutateAsync: mutateAssignBrochureFile } = useAssignBrochureFile();
 
-  const { data: brochures } = useGetBrochures({ lang, page, limit, ...query });
+  const { mutateAsync: mutateCreateFile } = useCreateFile();
+
+  const { data: brochures } = useGetBrochures({ lang, page, limit });
 
 
   const [modal, setModal] = useState<TProductModals>();
@@ -146,8 +145,7 @@ const useBrochure = () => {
     page,
     limit,
     setLimit,
-    count: brochures?.meta?.totalPages,
-    brochureTypes
+    count: brochures?.meta?.totalPages
   };
 };
 

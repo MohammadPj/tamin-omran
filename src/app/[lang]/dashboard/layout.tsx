@@ -1,5 +1,5 @@
 "use client";
-import React, {FC, useEffect} from "react";
+import React, { FC } from "react";
 import {
   Avatar,
   Box,
@@ -14,7 +14,6 @@ import SvgLogo from "~/components/icons/final/Logo";
 import LanguageMenu from "~/app/[lang]/_components/header/components/LanguageMenu";
 import Stack from "@mui/material/Stack";
 import {handleLogout} from "~/helpers/methods";
-import {useUser} from "~/store/user/userSlice";
 
 interface Props {
   children: React.ReactNode;
@@ -24,18 +23,6 @@ const DashboardLayout: FC<Props> = ({ children }) => {
   const drawerWidth = 200;
   const pathname = usePathname();
   const router = useRouter()
-  const {userInfo} = useUser()
-
-  const handleNavigateWebsite = () => {
-    router.push("/" as any)
-  }
-
-  useEffect(() => {
-    console.log('run')
-    if(!userInfo?.isAdmin) {
-      handleNavigateWebsite()
-    }
-  })
 
   const tabs = [
     {
@@ -50,13 +37,11 @@ const DashboardLayout: FC<Props> = ({ children }) => {
       title: "تعریف مقاله",
       link: "/dashboard/article",
     },
-    {
-      title: "کاربران",
-      link: "/dashboard/users",
-    },
   ];
 
-
+  const handleNavigateWebsite = () => {
+    router.push("/" as any)
+  }
 
   return (
     <Box display={"flex"}>

@@ -18,23 +18,13 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
       cell: (cell) => cell.getValue() || "---",
     },
     {
-      header: "نام محصول (فارسی)",
-      accessorKey: "title.fa",
+      header: "نام محصول",
+      accessorKey: "title",
       cell: (cell) => <Box width={150}>{cell.getValue()}</Box>,
     },
     {
-      header: "نام محصول (انگلیسی)",
-      accessorKey: "title.en",
-      cell: (cell) => <Box width={150}>{cell.getValue()}</Box>,
-    },
-    {
-      header: "دسته بندی (فارسی)",
-      accessorKey: "category.fa",
-      cell: (cell) => <Box width={100}>{cell.getValue()?.title || "---"}</Box>,
-    },
-    {
-      header: "دسته بندی (انگلیسی)",
-      accessorKey: "category.en",
+      header: "دسته بندی",
+      accessorKey: "category",
       cell: (cell) => <Box width={100}>{cell.getValue()?.title || "---"}</Box>,
     },
     {

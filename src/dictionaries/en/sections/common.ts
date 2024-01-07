@@ -24,8 +24,7 @@ export const commonDictionary: ICommonDictionary = {
     passwordNotMatch: "Passwords do not match. Please try again.",
     successLoginMessage: "Login successful! Welcome back, {{ username }}!",
     successRegisterMessage: "You're all set! Welcome aboard.",
-    adminPanel: "Admin panel",
-    validateUsername: 'Email or phone number is not correct'
+    adminPanel: "Admin panel"
   },
   fieldIsRequired: "This field is required",
   home: "Home",
@@ -46,6 +45,5 @@ export const commonDictionary: ICommonDictionary = {
   password: "Password",
   phoneNumber: "Phone number",
   enginNumber: "Engine Number",
-  enginNumberPlaceholder: 'please enter the engine number',
-  username: 'phone number or email'
+  enginNumberPlaceholder: 'please enter the engine number'
 };

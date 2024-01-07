@@ -16,13 +16,13 @@ import {
   IEditBrochureBody,
   IEditBrochureTypeBody,
   IEditCategoryBody,
-  IEditProductBody, IGetUsers,
+  IEditProductBody,
   ILoginBody,
   ILoginResponse,
   IProductBody,
   IProductParams,
   IRegisterBody,
-  IRegisterResponse, IUserParams,
+  IRegisterResponse,
 } from "~/services/api/type";
 import { IBrochure, IBrochureType } from "~/types/brochure";
 import { IBrand, ICategory, IProduct } from "~/types/product";
@@ -204,7 +204,3 @@ export const login = (body: ILoginBody): Promise<ILoginResponse> =>
 
 export const register = (body: IRegisterBody): Promise<IRegisterResponse> =>
   http.post(routes.register, body);
-
-export const getUsers = (params?: IUserParams): Promise<IGetUsers> => http.get(routes.user, {params})
-
-export const deleteUser = (userId: string) => http.delete(routes.singleUser(userId))

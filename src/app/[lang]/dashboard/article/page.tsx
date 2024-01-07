@@ -7,8 +7,6 @@ import useArticle from "~/app/[lang]/dashboard/article/useArticle";
 import CustomModal from "~/components/custom-mui/custom-modal/CustomModal";
 import CreateArticle from "~/app/[lang]/dashboard/article/_components/create-article/CreateArticle";
 import ConfirmDelete from "~/components/common/modals/ConfirmDelete";
-import InputListWithQuery from "~/components/common/input-list/with-query/InputListWithQuery";
-import {IUseFormInput} from "~/components/common/input-list/with-useForm/types";
 
 const Article: FC = () => {
 
@@ -28,23 +26,14 @@ const Article: FC = () => {
     count
   } = useArticle();
 
-  const inputList: IUseFormInput[] = [
-    {
-      name: 'title',
-      label: '',
-      placeholder: 'مقاله'
-    }
-  ]
-
   return (
     <>
       <CustomTable
         leftContent={
-          <Button sx={{width: 150}} onClick={() => setModal("create-article")}>
+          <Button onClick={() => setModal("create-article")}>
             تعریف مقاله
           </Button>
         }
-        rightContent={<InputListWithQuery inputList={inputList} />}
         table={table}
         pageCount={count}
         page={page}

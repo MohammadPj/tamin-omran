@@ -20,7 +20,7 @@ interface LoginModalProps {
 }
 
 interface IForm {
-  username: string;
+  email: string;
   password: string;
   firstName?: string;
   lastName?: string;
@@ -46,15 +46,10 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
 
   const loginList: IUseFormInput[] = [
     {
-      name: "username",
-      label: dictionary("common.username"),
-      rules: {
-        required: dictionary("common.fieldIsRequired"),
-        pattern: {
-          value: /^(\+98|0)?9\d{9}$|^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-          message: dictionary('common.loginAndRegister.validateUsername'),
-        },
-      },
+      name: "email",
+      label: dictionary("common.email"),
+      rules: { required: dictionary("common.fieldIsRequired") },
+      type: "email",
     },
     {
       name: "password",
@@ -66,15 +61,10 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
 
   const registerList: IUseFormInput[] = [
     {
-      name: "username",
-      label: dictionary("common.username"),
-      rules: {
-        required: dictionary("common.fieldIsRequired"),
-        pattern: {
-          value: /^(\+98|0)?9\d{9}$|^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-          message: dictionary('common.loginAndRegister.validateUsername'),
-        },
-      },
+      name: "email",
+      label: dictionary("common.email"),
+      rules: { required: dictionary("common.fieldIsRequired") },
+      type: "email",
     },
     {
       name: "firstName",
@@ -116,7 +106,7 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
 
   const handleLogin = async (values: IForm) => {
     const res = await mutateLogin(
-      { username: values.username, password: values.password },
+      { email: values.email, password: values.password },
       {
         onError: (e: any) => {
           enqueueSnackbar(e?.response?.data || "we have an error", {
@@ -141,17 +131,17 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
         firstName: res.firstName,
         lastName: res.lastName,
         email: res.email,
-        isAdmin: res?.isAdmin,
+        isAdmin: res?.isAdmin
       })
     );
-
     dispatch(setToken(res.token));
   };
 
   const handleRegister = async (values: IForm) => {
+
     const res = await mutateRegister(
       {
-        username: values.username,
+        email: values.email,
         password: values.password,
         firstName: values.firstName!,
         lastName: values.lastName!,
@@ -175,7 +165,13 @@ const LoginAndRegisterModal: FC<LoginModalProps> = ({
       }
     );
 
-    dispatch(setUserInfo(res));
+    dispatch(
+      setUserInfo({
+        firstName: res.firstName,
+        lastName: res.lastName,
+        email: res.email,
+      })
+    );
     dispatch(setToken(res.token));
   };
 

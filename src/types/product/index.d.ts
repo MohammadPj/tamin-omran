@@ -7,8 +7,9 @@ interface IProductSpecifications {
 
 export interface IProduct {
   _id: string
-  title: {fa: string; en: string};
-  category: {fa: ICategory, en: ICategory}
+  title: string;
+  lang: TLang;
+  category: ICategory
   brand: IBrand
   createdAt: Date;
   updatedAt: Date;
@@ -17,8 +18,8 @@ export interface IProduct {
   isAvailable: boolean
   engineNumber: string;
   technicalNumber: string
-  description: {fa: string; en: string};
-  review: {fa: string; en: string};
+  description: string
+  review: string
 }
 
 export interface ICategory {

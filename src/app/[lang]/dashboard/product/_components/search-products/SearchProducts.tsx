@@ -9,7 +9,6 @@ import { useGetBrands, useGetCategories } from "~/services/api/hooks";
 import { useCommon } from "~/store/common/commonSlice";
 import { useForm } from "react-hook-form";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
-import InputListWithQuery from "~/components/common/input-list/with-query/InputListWithQuery";
 
 interface SearchProducts {}
 
@@ -22,9 +21,9 @@ interface IForm {
 
 const SearchProducts: FC<SearchProducts> = () => {
   const { lang } = useCommon();
+  const { debounceAddTextQuery, query } = useQueryObject();
   const { data: brands } = useGetBrands({ lang, limit: 20 });
-  const { data: categoriesFa } = useGetCategories({ lang: 'fa' });
-  const { data: categoriesEn } = useGetCategories({ lang: 'en' });
+  const { data: categories } = useGetCategories({ lang });
 
   const inputList: IUseFormInput[] = [
     {
@@ -33,31 +32,16 @@ const SearchProducts: FC<SearchProducts> = () => {
       placeholder: "شماره فنی",
     },
     {
-      name: "title.fa",
+      name: "title",
       label: "",
-      placeholder: "نام محصول (فارسی)",
+      placeholder: "نام محصول",
     },
     {
-      name: "title.en",
+      name: "category",
       label: "",
-      placeholder: "نام محصول (انگلیسی)",
-    },
-    {
-      name: "category.fa",
-      label: "",
-      placeholder: "دسته بندی (فارسی)",
+      placeholder: "دسته بندی",
       type: "select",
-      options: categoriesFa?.data?.map((category) => ({
-        label: category.title,
-        value: category._id,
-      })),
-    },
-    {
-      name: "category.en",
-      label: "",
-      placeholder: "دسته بندی (انگلیسی)",
-      type: "select",
-      options: categoriesEn?.data?.map((category) => ({
+      options: categories?.data?.map((category) => ({
         label: category.title,
         value: category._id,
       })),
@@ -82,7 +66,50 @@ const SearchProducts: FC<SearchProducts> = () => {
 
   return (
     <Box display={"flex"} gap={4}>
-      <InputListWithQuery inputList={inputList} />
+      {inputList.map((input) => (
+        <>
+          {input.type === "select" ? (
+            <FormControl sx={{ width: 200 }}>
+              <InputLabel id="demo-simple-select-label">
+                {input.placeholder}
+              </InputLabel>
+              <Select
+                variant={"filled"}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                multiple
+                value={query?.[input.name] || []}
+                onChange={(e) =>
+                  debounceAddTextQuery({
+                    queryName: input.name,
+                    value: e?.target?.value as string,
+                  })
+                }
+              >
+                {input?.options?.map((option, i) => (
+                  <MenuItem key={i} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ) : (
+            <TextField
+              key={input.name}
+              variant={"filled"}
+              placeholder={input.placeholder}
+              defaultValue={query?.[input.name]}
+              onChange={(e) =>
+                debounceAddTextQuery({
+                  queryName: input.name,
+                  value: e.target.value,
+                })
+              }
+            />
+          )}
+        </>
+      ))}
+
     </Box>
   );
 };
