@@ -16,6 +16,10 @@ import SvgWhatsApp from "~/components/icons/final/WhatsApp";
 import SvgLogo from "~/components/icons/final/Logo";
 import {getDictionary, TLanguages} from "~/i18n";
 import {useGetCategories} from "~/services/api/hooks";
+import Link from "next/link";
+import qs from "qs";
+import SvgInstagram from "~/components/icons/output/Instagram";
+import SocialMedias from "~/app/[lang]/_components/footer/_components/SocialMedias";
 
 interface Props {
   lang: TLanguages
@@ -36,18 +40,18 @@ interface ILink {
 const Footer: FC<Props> = ({lang}) => {
 
   const dictionary = getDictionary(lang)
-  const {data: categories} = useGetCategories({lang, limit: 3})
+  const {data: categories} = useGetCategories({lang, limit: 5})
 
   const contactInfo: IContact[] = [
     {
       id: "phone",
       icon: <SvgPhone width={24} height={24} primarycolor={"#F7941D"} />,
-      text: "021-1241454 | 021-1235148",
+      text: "09124891979 | 021-65611395-96",
     },
     {
       id: "email",
       icon: <SvgEmail width={24} height={24} primarycolor={"#F7941D"} />,
-      text: "taminghate@gmail.com",
+      text: "tamin.omran.qateh@gmail.com  federalengine@rogers.com",
     },
     {
       id: "address",
@@ -56,49 +60,35 @@ const Footer: FC<Props> = ({lang}) => {
     },
   ];
 
-  // const categories: ICategory[] = [
-  //   {
-  //     id: "1",
-  //     text: dictionary("common.category"),
-  //   },
-  //   {
-  //     id: "2",
-  //     text: dictionary("common.category"),
-  //   },
-  //   {
-  //     id: "3",
-  //     text: dictionary("common.category"),
-  //   },
-  // ];
-
   const links: ILink[] = [
     {
       id: "1",
       text: dictionary("common.articlesAndNews"),
-      link: "/article-and-news",
+      link: "/articles",
     },
-    {
-      id: "2",
-      text: dictionary("common.aboutUs"),
-      link: "about-us",
-    },
+    // {
+    //   id: "2",
+    //   text: dictionary("common.aboutUs"),
+    //   link: "/about-us",
+    // },
     {
       id: "3",
       text: dictionary("common.contactUs"),
-      link: "contact-us",
+      link: "/contact-us",
     },
   ];
 
   const socials = [
-    {
-      id: "1",
-      icon: <SvgTelegram primarycolor={"white"} />,
-      link: "",
-    },
+
     {
       id: "2",
+      icon: <SvgInstagram primarycolor={"white"} />,
+      link: "https://www.instagram.com/tamin.cummins",
+    },
+    {
+      id: "1",
       icon: <SvgWhatsApp primarycolor={"white"} />,
-      link: "",
+      link: "https://api.whatsapp.com/send?phone=09124891979",
     },
   ];
 
@@ -147,9 +137,11 @@ const Footer: FC<Props> = ({lang}) => {
               </Typography>
 
               {categories?.data?.map((category) => (
+                <Link key={category._id} href={`/products?${qs.stringify({category: [category._id]})}` as any}>
                 <Typography key={category._id} mb={2} sx={{ cursor: "pointer" }}>
                   {category.title}
                 </Typography>
+                </Link>
               ))}
             </Grid>
 
@@ -158,10 +150,12 @@ const Footer: FC<Props> = ({lang}) => {
                 {dictionary("common.footer.usefulLinks")}
               </Typography>
 
-              {links.map((link) => (
+              {links.map((link, i) => (
+                <Link key={i} href={link.link as any} >
                 <Typography key={link.id} mb={2} sx={{ cursor: "pointer" }}>
                   {link.text}
                 </Typography>
+                </Link>
               ))}
             </Grid>
           </Grid>
@@ -173,19 +167,7 @@ const Footer: FC<Props> = ({lang}) => {
               {dictionary("common.footer.title")}
             </Typography>
 
-            <Box display={"flex"} gap={5} sx={{cursor: 'pointer'}} alignSelf={'end'}>
-              {socials.map((s) => (
-                <Box
-                  key={s.id}
-                  p={2}
-                  borderRadius={2}
-                  display={"flex"}
-                  bgcolor={'#262262'}
-                >
-                  {s.icon}
-                </Box>
-              ))}
-            </Box>
+            <SocialMedias />
           </Box>
 
           <Divider />

@@ -5,7 +5,7 @@ export const commonDictionary: ICommonDictionary = {
     usefulLinks: "لینک های مفید",
     contactInformation: "اطلاعات تماس",
     address:
-      "تهران، بلوار نلسون ماندلا (جردن)، خیابان شهید سلطانی (سایه)، شماره 8",
+      "استان تهران، شهرستان شهریار، بخش مرکزی شهر باغستان گلگون خیابان فرعی خیابان 8 حنوبی پلاک 6 طبقه همکف ",
     description:
       "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است",
     title:
@@ -25,8 +25,7 @@ export const commonDictionary: ICommonDictionary = {
     passwordNotMatch: "رمزعبورها مطابقت ندارند. لطفاً دوباره تلاش کنید.",
     successLoginMessage: "ورود با موفقیت انجام شد! خوش آمدید {{ username }}!",
     successRegisterMessage: "تبریک! حساب کاربری شما با موفقیت ایجاد شد.",
-    adminPanel: "پنل ادمین",
-    validateUsername: 'شماره موبایل یا ایمیل اشتباه است'
+    adminPanel: "پنل ادمین"
   },
   fieldIsRequired: "این فیلد اجباری است",
   home: "خانه",
@@ -47,6 +46,5 @@ export const commonDictionary: ICommonDictionary = {
   password: "پسورد",
   phoneNumber: "شماره تماس",
   enginNumber: 'شماره موتور',
-  enginNumberPlaceholder: 'لطفا شماره موتور را وارد کنید',
-  username: 'شماره موبایل یا ایمیل'
+  enginNumberPlaceholder: 'لطفا شماره موتور را وارد کنید'
 };

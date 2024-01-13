@@ -4,7 +4,7 @@ export const commonDictionary: ICommonDictionary = {
   footer: {
     usefulLinks: "Useful Links",
     contactInformation: "Contact Information",
-    address: "IRAN, Tehran, Nelson-Mandela Blv, Shahid-Soltani St, No8",
+    address: "Tehran Province, Shahriar County, Central District of Baghestan Golgon City, Subsidiary Street, South Street 8, Building 6, Ground Floor.",
     description:
       "Lorem Epsom is a fake text with the production of incomprehensible simplicity from the printing industry, and with the use of graphic designers, printers and texts but also newspapers and magazines in columns and rows as necessary.",
     title:
@@ -24,8 +24,7 @@ export const commonDictionary: ICommonDictionary = {
     passwordNotMatch: "Passwords do not match. Please try again.",
     successLoginMessage: "Login successful! Welcome back, {{ username }}!",
     successRegisterMessage: "You're all set! Welcome aboard.",
-    adminPanel: "Admin panel",
-    validateUsername: 'Email or phone number is not correct'
+    adminPanel: "Admin panel"
   },
   fieldIsRequired: "This field is required",
   home: "Home",
@@ -46,6 +45,5 @@ export const commonDictionary: ICommonDictionary = {
   password: "Password",
   phoneNumber: "Phone number",
   enginNumber: "Engine Number",
-  enginNumberPlaceholder: 'please enter the engine number',
-  username: 'phone number or email'
+  enginNumberPlaceholder: 'please enter the engine number'
 };

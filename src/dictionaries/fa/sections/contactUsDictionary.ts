@@ -1,7 +1,7 @@
 import {IContactUsDictionary} from "~/dictionaries/types/contactUs";
 
 export const contactUsDictionary: IContactUsDictionary = {
-  title: 'برای دریافت آخرین اخبار و مقالات مفید ما را درشبکه های اجتماعی دنبال کنید',
+  title: 'لینک های مرتبط با تامین عمران قطعه در فضای مجازی',
   addressAndInformation: 'ادرس و اطلاعات',
   contactTheSaleOffice: 'تماس با دفتر فروش',
   contactTheWarehouse: 'تماس با انبار'
