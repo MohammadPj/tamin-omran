@@ -1,5 +1,6 @@
 import {IUser} from "~/types/user";
 import {IMeta} from "~/app/[lang]/(main)/articles/page";
+import {IBrand} from "~/types/product";
 
 export type TLang = "fa" | "en";
 
@@ -135,5 +136,15 @@ export interface IUserParams {
 
 export interface IGetUsers {
   data: IUser[],
+  meta: IMeta
+}
+
+export interface IEngineNumberParams {
+  page?: number;
+  limit?: number
+}
+
+export interface IGetEngineNumbers {
+  data: IBrand[],
   meta: IMeta
 }

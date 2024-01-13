@@ -10,6 +10,7 @@ const BrochureLayout: FC<BrochureLayoutProps>  = ({children}) => {
     {href: "/dashboard/product", label: "محصول"},
     {href: "/dashboard/product/category", label: "دسته بندی"},
     {href: "/dashboard/product/brand", label: "برند"},
+    {href: "/dashboard/product/engine", label: "موتور"},
   ]
 
   return (

@@ -15,7 +15,6 @@ interface CreateBrandProps {
 
 export interface ICreateBrandForm {
   title: string;
-  lang: TLanguages;
 }
 
 const CreateBrand: FC<CreateBrandProps> = ({

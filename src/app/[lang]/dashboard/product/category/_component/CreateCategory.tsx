@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { IUseFormInput } from "~/components/common/input-list/with-useForm/types";
-import LanguageTab from "~/components/common/tabs/LanguageTab";
-import { TLanguages } from "~/i18n";
 
 interface CreateCategoryProps {
   onSubmit: (data: ICreateCategoryForm) => void;
@@ -14,8 +12,7 @@ interface CreateCategoryProps {
 }
 
 export interface ICreateCategoryForm {
-  title: string;
-  lang: TLanguages;
+  title: {fa: string; en: string};
 }
 
 const CreateCategory: FC<CreateCategoryProps> = ({
@@ -25,7 +22,10 @@ const CreateCategory: FC<CreateCategoryProps> = ({
 }) => {
   const form = useForm<ICreateCategoryForm>({
     defaultValues: {
-      title: defaultValues?.title
+      title: {
+        fa: defaultValues?.title.fa,
+        en: defaultValues?.title.en,
+      }
     },
   });
 

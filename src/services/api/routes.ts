@@ -19,5 +19,6 @@ export const routes = {
   login: "/auth",
   register: "/register",
   user: '/user',
-  singleUser: (userId: string) => `/user/${userId}`
+  singleUser: (userId: string) => `/user/${userId}`,
+  engineNumber: "/engineNumber"
 }

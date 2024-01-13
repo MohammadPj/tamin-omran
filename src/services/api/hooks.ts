@@ -15,7 +15,8 @@ import {
   deleteBrochureType,
   deleteCategory,
   deleteFile,
-  deleteProduct, deleteUser,
+  deleteProduct,
+  deleteUser,
   editeArticle,
   editeBrand,
   editeBrochure,
@@ -28,6 +29,7 @@ import {
   getBrochures,
   getBrochureTypes,
   getCategories,
+  getEngineNumbers,
   getFiles,
   getProducts,
   getSingleArticle,
@@ -48,6 +50,7 @@ import {
   IBrochureParams,
   IBrochureTypeParams,
   ICategoryParams,
+  IEngineNumberParams,
   IProductParams,
   IUserParams,
 } from "~/services/api/type";
@@ -228,6 +231,7 @@ export const useEditeFile = () =>
 export const useDeleteFile = () =>
   useMutation({ mutationKey: ["File"], mutationFn: deleteFile });
 
+// ---------------------------  User  ------------------------------
 export const useLogin = () =>
   useMutation({ mutationKey: ["login"], mutationFn: login });
 
@@ -237,4 +241,13 @@ export const useRegisterMutation = () =>
 export const useGetUsers = (params?: IUserParams) =>
   useQuery({ queryKey: ["users"], queryFn: () => getUsers(params) });
 
-export const useDeleteUser = () => useMutation({mutationKey: ['users'], mutationFn: deleteUser})
+export const useDeleteUser = () =>
+  useMutation({ mutationKey: ["users"], mutationFn: deleteUser });
+
+// ---------------------------  Engine Number  ------------------------------
+
+export const useGetEngineNumber = (params?: IEngineNumberParams) =>
+  useQuery({
+    queryKey: ["engine-number"],
+    queryFn: () => getEngineNumbers(params),
+  });
