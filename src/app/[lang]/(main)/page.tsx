@@ -31,12 +31,9 @@ async function getData(props: {
   return await http.get(`article?${normalizeQuery}`);
 }
 
-async function getProducts(props: {
-  lang: TLang;
-}): Promise<{ data: IProduct[]; meta: IMeta }> {
+async function getProducts(): Promise<{ data: IProduct[]; meta: IMeta }> {
 
   const query = {
-    lang: props.lang,
     limit: 5,
   };
 
@@ -51,7 +48,7 @@ const HomePage = async (props: HomePageProps) => {
 
   try {
     articles = await getData({ lang: props.params.lang });
-    products = await getProducts({ lang: props.params.lang });
+    products = await getProducts();
   } catch (e: any) {
     console.log("error", e);
   }

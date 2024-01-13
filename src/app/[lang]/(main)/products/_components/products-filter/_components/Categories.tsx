@@ -18,7 +18,7 @@ const Categories: FC = () => {
   const categoryIds = (query?.category as string[]) || [];
 
   const [isOpen, setIsOpen] = useState(categoryIds.length > 0);
-  const { data: categories } = useGetCategories({ lang });
+  const { data: categories } = useGetCategories();
 
   return (
     <Box>
@@ -57,7 +57,7 @@ const Categories: FC = () => {
                     }
                   />
                 }
-                label={category?.title}
+                label={category?.title[lang]}
               />
             </Box>
           ))}

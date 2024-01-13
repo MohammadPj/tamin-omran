@@ -8,7 +8,7 @@ interface IProductSpecifications {
 export interface IProduct {
   _id: string
   title: {fa: string; en: string};
-  category: {fa: ICategory, en: ICategory}
+  category: ICategory
   brand: IBrand
   createdAt: Date;
   updatedAt: Date;
@@ -23,8 +23,10 @@ export interface IProduct {
 
 export interface ICategory {
   _id: string
-  title: string;
-  lang: TLang;
+  title: {
+    fa: string;
+    en: string
+  };
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,7 +34,6 @@ export interface ICategory {
 export interface IBrand {
   _id: string
   title: string;
-  lang: TLang;
   createdAt: Date;
   updatedAt: Date;
 }

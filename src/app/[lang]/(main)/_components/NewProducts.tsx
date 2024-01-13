@@ -25,8 +25,8 @@ const NewProducts: FC<NewProductsProps> = ({lang, products}) => {
         {products?.map((product, i) => (
           <Grid key={i} item xs={12} sm={2.4}>
           <ProductCard
-            title={product?.title}
-            subtitle={product?.description}
+            title={product?.title[lang]}
+            subtitle={product?.description[lang]}
             image={product?.image}
             isAvailable={product.isAvailable}
             id={product._id}

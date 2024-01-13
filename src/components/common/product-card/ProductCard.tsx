@@ -4,6 +4,7 @@ import { Box, Chip, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import theme from "~/theme/theme";
 import Link from "next/link";
+import CustomLink from "~/components/common/custom-link/CustomLink";
 
 interface Props {
   title: string;
@@ -22,7 +23,7 @@ const ProductCard: FC<Props> = ({
 }) => {
 
   return (
-    <Link href={`/products/${id}` as any} style={{ width: "100%" }}>
+    <CustomLink href={`/products/${id}` as any} style={{ width: "100%" }}>
       <Stack
         px={4}
         py={3.5}
@@ -75,7 +76,7 @@ const ProductCard: FC<Props> = ({
           />
         </Stack>
       </Stack>
-    </Link>
+    </CustomLink>
   );
 };
 

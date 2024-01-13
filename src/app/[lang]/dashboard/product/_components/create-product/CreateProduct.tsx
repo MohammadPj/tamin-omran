@@ -14,8 +14,6 @@ import {
 } from "@mui/material";
 import UploadProductSection from "~/app/[lang]/dashboard/product/_components/create-product/UploadProductSection";
 
-import LanguageTab from "~/components/common/tabs/LanguageTab";
-import { TLang } from "~/services/api/type";
 import CustomCKEditor from "~/components/common/custom-ckeditor/CustomCKEditor";
 import { IProduct } from "~/types/product";
 import { useGetBrands, useGetCategories } from "~/services/api/hooks";
@@ -27,10 +25,10 @@ interface CreateProductProps {
 }
 
 export interface ICreateProductForm {
-  title: {fa: string, en: string};
-  categoryId: {fa: string, en: string};
-  description: {fa: string, en: string};
-  review: {fa: string, en: string};
+  title: { fa: string; en: string };
+  categoryId: string;
+  description: { fa: string; en: string };
+  review: { fa: string; en: string };
   brandId: string;
   image?: string;
   imageFile?: File;
@@ -48,10 +46,9 @@ const CreateProduct: FC<CreateProductProps> = ({
 }) => {
   const form = useForm<ICreateProductForm>({
     defaultValues: {
-      // lang: defaultValue?.lang || "fa",
       title: defaultValue?.title!,
       review: defaultValue?.review,
-      categoryId: {fa: defaultValue?.category.fa._id, en: defaultValue?.category.en._id},
+      categoryId: defaultValue?.category._id,
       description: defaultValue?.description,
       engineNumber: defaultValue?.engineNumber,
       brandId: defaultValue?.brand?._id!,
@@ -62,11 +59,8 @@ const CreateProduct: FC<CreateProductProps> = ({
     },
   });
 
-  console.log('defa', defaultValue)
-
-  const { data: categoriesFa } = useGetCategories({ lang: 'fa' });
-  const { data: categoriesEn } = useGetCategories({ lang: 'en' });
-  const { data: brands } = useGetBrands({lang: 'fa'});
+  const { data: categories } = useGetCategories();
+  const { data: brands } = useGetBrands();
 
   const inputList1: IUseFormInput[] = [
     {
@@ -80,40 +74,42 @@ const CreateProduct: FC<CreateProductProps> = ({
         value: brand._id,
       })),
     },
-  ]
+  ];
 
   const inputList2: IUseFormInput[] = [
     {
       name: "title.fa",
       label: "نام محصول (فارسی)",
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
-      placeholder: "لطفا نام محصول را وارد کنید"
+      placeholder: "لطفا نام محصول را وارد کنید",
     },
     {
       name: "title.en",
       label: "نام محصول (انگلیسی)",
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
-      placeholder: "لطفا نام محصول را وارد کنید"
+      placeholder: "لطفا نام محصول را وارد کنید",
     },
     {
-      name: "categoryId.fa",
+      name: "categoryId",
       label: "دسته بندی محصول (فارسی)",
       placeholder: "انتخاب دسته بندی",
+      defaultValue: '',
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       type: "select",
-      options: categoriesFa?.data?.map((category) => ({
-        label: category.title,
+      options: categories?.data?.map((category) => ({
+        label: category.title.fa,
         value: category._id,
       })),
     },
     {
-      name: "categoryId.en",
+      name: "categoryId",
       label: "دسته بندی محصول (انگلیسی)",
       placeholder: "انتخاب دسته بندی",
+      defaultValue: '',
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       type: "select",
-      options: categoriesEn?.data?.map((category) => ({
-        label: category.title,
+      options: categories?.data?.map((category) => ({
+        label: category.title.en,
         value: category._id,
       })),
     },
@@ -146,11 +142,7 @@ const CreateProduct: FC<CreateProductProps> = ({
       placeholder: "انتخاب برند",
       type: "text-area",
     },
-  ]
-
-  // const handleChangeLanguage = (lang: TLang) => {
-  //   form.setValue("lang", lang);
-  // };
+  ];
 
   const handleChangeReviewFa = (value: string) => {
     form.setValue("review.fa", value);
@@ -173,7 +165,6 @@ const CreateProduct: FC<CreateProductProps> = ({
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      console.log("file", file);
       if (!file) return;
       imageFiles?.push(file);
       images?.push(URL.createObjectURL(file));
@@ -185,20 +176,13 @@ const CreateProduct: FC<CreateProductProps> = ({
 
   return (
     <Stack>
-      {/*<LanguageTab*/}
-      {/*  onChange={handleChangeLanguage}*/}
-      {/*  defaultValue={form.getValues("lang")}*/}
-      {/*/>*/}
-
       <Grid container spacing={4}>
         <Grid item xs={7}>
-
-
           <InputListWithUseForm
             inputList={inputList2}
             form={form}
             gridItemProps={{ xs: 6 }}
-            gridContainerProps={{columnSpacing: 4}}
+            gridContainerProps={{ columnSpacing: 4 }}
           />
 
           <Box
@@ -213,7 +197,7 @@ const CreateProduct: FC<CreateProductProps> = ({
                 inputList={inputList1}
                 form={form}
                 gridItemProps={{ xs: 12 }}
-                gridContainerProps={{columnSpacing: 4}}
+                gridContainerProps={{ columnSpacing: 4 }}
               />
             </Box>
 
@@ -236,7 +220,7 @@ const CreateProduct: FC<CreateProductProps> = ({
             inputList={inputListDescription}
             form={form}
             gridItemProps={{ xs: 6 }}
-            gridContainerProps={{mt: 4, columnSpacing: 4}}
+            gridContainerProps={{ mt: 4, columnSpacing: 4 }}
           />
         </Grid>
 
@@ -250,7 +234,7 @@ const CreateProduct: FC<CreateProductProps> = ({
         </Grid>
       </Grid>
 
-      <Box mt={4} display={'flex'} gap={4}>
+      <Box mt={4} display={"flex"} gap={4}>
         <Box>
           <Box display={"flex"}>
             <Typography

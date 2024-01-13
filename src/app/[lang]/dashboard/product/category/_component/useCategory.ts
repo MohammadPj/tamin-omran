@@ -18,14 +18,13 @@ type TCategoryModals =
 const useCategory = () => {
   const QC = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
-  const {lang} = useCommon()
   const {query} = useQueryObject()
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [selectedCategory, setSelectedCategory] = useState<ICategory>();
 
-  const { data: categories } = useGetCategories({ lang, page, limit, ...query });
+  const { data: categories } = useGetCategories({ page, limit, ...query });
   const { mutateAsync: mutateCreateCategory } = useCreateCategory();
   const { mutateAsync: mutateEditCategory } = useEditeCategory();
   const { mutateAsync: mutateDeleteCategory } = useDeleteCategory();

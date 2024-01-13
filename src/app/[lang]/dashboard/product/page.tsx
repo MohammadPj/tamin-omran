@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import useProduct from "~/app/[lang]/dashboard/product/_components/useProduct";
 import CustomTable from "~/components/custom-mui/custom-table/CustomTable";
 import Box from "@mui/material/Box";
@@ -33,7 +33,10 @@ const Product: FC = () => {
       <CustomTable
         leftContent={
           <Box display={"flex"} gap={4}>
-            <Button sx={{width: 'max-content'}} onClick={() => setModal("create-product")} >
+            <Button
+              sx={{ width: "max-content" }}
+              onClick={() => setModal("create-product")}
+            >
               تعریف محصول
             </Button>
           </Box>
@@ -51,6 +54,7 @@ const Product: FC = () => {
       />
 
       <CustomModal
+        preventClose
         open={!!modal}
         title={modals.find((m) => m.id === modal)?.title}
         onClose={() => setModal(null)}

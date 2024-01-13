@@ -21,10 +21,8 @@ interface IForm {
 }
 
 const SearchProducts: FC<SearchProducts> = () => {
-  const { lang } = useCommon();
-  const { data: brands } = useGetBrands({ lang, limit: 20 });
-  const { data: categoriesFa } = useGetCategories({ lang: 'fa' });
-  const { data: categoriesEn } = useGetCategories({ lang: 'en' });
+  const { data: brands } = useGetBrands({ limit: 20 });
+  const { data: categories } = useGetCategories();
 
   const inputList: IUseFormInput[] = [
     {
@@ -43,22 +41,22 @@ const SearchProducts: FC<SearchProducts> = () => {
       placeholder: "نام محصول (انگلیسی)",
     },
     {
-      name: "category.fa",
+      name: "category",
       label: "",
       placeholder: "دسته بندی (فارسی)",
       type: "select",
-      options: categoriesFa?.data?.map((category) => ({
-        label: category.title,
+      options: categories?.data?.map((category) => ({
+        label: category.title.fa,
         value: category._id,
       })),
     },
     {
-      name: "category.en",
+      name: "category",
       label: "",
       placeholder: "دسته بندی (انگلیسی)",
       type: "select",
-      options: categoriesEn?.data?.map((category) => ({
-        label: category.title,
+      options: categories?.data?.map((category) => ({
+        label: category.title.en,
         value: category._id,
       })),
     },

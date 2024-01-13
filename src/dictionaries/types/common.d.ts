@@ -42,4 +42,8 @@ export interface ICommonDictionary {
   password: string;
   enginNumber: string
   enginNumberPlaceholder: string
+  review: string;
+  technicalNumber: string
+  description: string;
+  productCode: string
 }

@@ -3,12 +3,14 @@ import ProductCard from '~/components/common/product-card/ProductCard'
 import {Grid} from '@mui/material'
 import Link from 'next/link'
 import {IProduct} from "~/types/product";
+import {TLang} from "~/services/api/type";
 
 interface ProductsListProps {
   products: IProduct[]
+  lang: TLang
 }
 
-const ProductsList: FC<ProductsListProps> = ({products}) => {
+const ProductsList: FC<ProductsListProps> = ({products, lang}) => {
 
   return (
     <Grid container spacing={4}>
@@ -16,8 +18,8 @@ const ProductsList: FC<ProductsListProps> = ({products}) => {
         <Grid key={i} item xs={12} sm={6} md={4} lg={3}>
             <ProductCard
               key={i}
-              title={product.title}
-              subtitle={product.description}
+              title={product.title[lang]}
+              subtitle={product.description[lang]}
               image={product?.image}
               id={product._id}
               isAvailable={product.isAvailable}

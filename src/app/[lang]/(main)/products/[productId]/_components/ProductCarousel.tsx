@@ -19,13 +19,11 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ images }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [mainSwiper, setMainSwiper] = useState<any>();
 
-  console.log('images', images)
   let swiperImages =
     (images && images.length > 0)
       ? images
       : ["/images/default/product-default.png"];
 
-  console.log('swiperImages', swiperImages)
 
   useEffect(() => {
     setIsLoading(false);

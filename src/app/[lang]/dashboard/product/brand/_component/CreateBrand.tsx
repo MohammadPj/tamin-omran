@@ -25,7 +25,6 @@ const CreateBrand: FC<CreateBrandProps> = ({
 }) => {
   const form = useForm<ICreateBrandForm>({
     defaultValues: {
-      lang: defaultValues?.lang || "fa",
       title: defaultValues?.title
     },
   });

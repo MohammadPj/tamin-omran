@@ -22,14 +22,13 @@ type TBrandModals =
 const useBrand = () => {
   const QC = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
-  const {lang} = useCommon()
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [selectedBrand, setSelectedBrand] = useState<IBrand>();
 
   const {query} = useQueryObject()
-  const { data: brands } = useGetBrands({ lang, page, limit, ...query });
+  const { data: brands } = useGetBrands({  page, limit, ...query });
   const { mutateAsync: mutateCreateBrand } = useCreateBrand();
   const { mutateAsync: mutateEditBrand } = useEditeBrand();
   const { mutateAsync: mutateDeleteBrand } = useDeleteBrand();

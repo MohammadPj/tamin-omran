@@ -108,7 +108,7 @@ export const deleteArticle = (articleId: string) =>
 
 // ---------------------------  Brand  ------------------------------
 export const getBrands = (
-  params: IBrandParams
+  params?: IBrandParams
 ): Promise<{ data: IBrand[]; meta: IMeta }> =>
   http.get(routes.brand, { params });
 
@@ -125,7 +125,7 @@ export const deleteBrand = (brandId: string) =>
 
 // ---------------------------  Category  ------------------------------
 export const getCategories = (
-  params: ICategoryParams
+  params?: ICategoryParams
 ): Promise<{ data: ICategory[]; meta: IMeta }> =>
   http.get(routes.category, { params });
 
@@ -143,7 +143,7 @@ export const deleteCategory = (brochureId: string) =>
 
 // ---------------------------  Product  ------------------------------
 export const getProducts = (
-  params: IProductParams
+  params?: IProductParams
 ): Promise<{ data: IProduct[]; meta: IMeta }> =>
   http.get(routes.product, { params });
 

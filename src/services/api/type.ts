@@ -64,7 +64,6 @@ export interface IEditArticleBody extends Partial<ICreateArticleBody>{
 // ---------------------------  Brand  ------------------------------
 export interface IBrandParams extends ICommonFilterParams {
   title?: string;
-  lang?: TLang;
 }
 
 export interface IBrandBody
@@ -77,7 +76,6 @@ export interface IEditBrandBody extends IBrandBody{
 // ---------------------------  Category  ------------------------------
 export interface ICategoryParams extends ICommonFilterParams {
   title?: string;
-  lang: TLang;
 }
 
 export interface ICategoryBody
@@ -90,7 +88,7 @@ export interface IEditCategoryBody extends ICategoryBody{
 // ---------------------------  Product  ------------------------------
 export interface IProductParams extends ICommonFilterParams {
   title?: {fa: string; en: string};
-  category?: {fa: string; en: string};
+  category?: string;
   brand?: {fa: string; en: string};
   images?: string[]
   isAvailable?: boolean
@@ -102,7 +100,7 @@ export interface IProductParams extends ICommonFilterParams {
 
 export interface IProductBody
   extends Omit<IProductParams, keyof ICommonFilterParams | 'category' | 'brand'> {
-  categoryId: {fa: string; en: string};
+  categoryId: string;
   brandId: string;
 }
 

@@ -106,6 +106,7 @@ const DashboardLayout: FC<Props> = ({ children }) => {
       <Stack
         component={"main"}
         flexGrow={1}
+        width={0}
         minHeight={"100vh"}
         pr={20}
         pl={10}

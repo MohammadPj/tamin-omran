@@ -20,7 +20,7 @@ const Brands: FC<Props> = () => {
   const brandIds = query?.brand as string[] || []
 
   const [isOpen, setIsOpen] = useState(brandIds.length > 0);
-  const { data: brands } = useGetBrands({ lang });
+  const { data: brands } = useGetBrands();
 
 
   return (

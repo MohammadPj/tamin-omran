@@ -29,13 +29,13 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
     },
     {
       header: "دسته بندی (فارسی)",
-      accessorKey: "category.fa",
-      cell: (cell) => <Box width={100}>{cell.getValue()?.title || "---"}</Box>,
+      accessorKey: "category",
+      cell: (cell) => <Box width={100}>{cell.getValue()?.title?.fa || "---"}</Box>,
     },
     {
       header: "دسته بندی (انگلیسی)",
-      accessorKey: "category.en",
-      cell: (cell) => <Box width={100}>{cell.getValue()?.title || "---"}</Box>,
+      accessorKey: "category",
+      cell: (cell) => <Box width={100}>{cell.getValue()?.title?.en || "---"}</Box>,
     },
     {
       header: "برند",

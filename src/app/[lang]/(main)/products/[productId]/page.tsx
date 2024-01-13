@@ -24,7 +24,7 @@ async function getData(productId: string): Promise<IProduct> {
   return await http.get(`product/${productId}?${normalizeQuery}`)
 }
 
-export default async function SingleProductPage(props: {params: {productId: string}}) {
+export default async function SingleProductPage(props: {params: {productId: string, lang: TLang}}) {
   const product = await getData(props.params.productId);
 
   const images = [...product.images]
@@ -38,16 +38,16 @@ export default async function SingleProductPage(props: {params: {productId: stri
         </Grid>
 
         <Grid item xs={12} sm={6} md={8}>
-          <ProductInfo product={product} />
+          <ProductInfo product={product} lang={props.params.lang} />
         </Grid>
       </Grid>
 
       <Box mt={6} mb={10}>
-        <ProductAnalysis review={product.review} />
+        <ProductAnalysis review={product.review[props.params.lang]} lang={props.params.lang} />
       </Box>
 
       <Box>
-        <RelativeProducts product={product} />
+        <RelativeProducts product={product} lang={props.params.lang} />
       </Box>
     </Container>
   );

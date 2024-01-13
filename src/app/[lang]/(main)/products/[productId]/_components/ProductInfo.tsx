@@ -2,18 +2,23 @@ import React, { FC } from 'react'
 import {Box, Button, Divider, Grid, Stack, Typography} from '@mui/material'
 import { IProduct } from '~/types/product'
 import SvgArrowLeft from "~/components/icons/final/ArrowLeft";
+import {TLang} from "~/services/api/type";
+import {getDictionary} from "~/i18n";
 
 interface ProductInfoProps {
   product: IProduct
+  lang: TLang
 }
 
-const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
+const ProductInfo: FC<ProductInfoProps> = ({ product, lang }) => {
+
+  const dictionary = getDictionary(lang)
 
   const specifications = [
-    {title: 'شماره فنی', value: product.technicalNumber},
-    {title: 'شماره موتور', value: product.engineNumber},
-    {title: 'برند', value: product.brand.title},
-    {title: 'دسته بندی', value: product.category.title},
+    {title: dictionary("common.technicalNumber"), value: product.technicalNumber},
+    {title: dictionary("common.enginNumber"), value: product.engineNumber},
+    {title: dictionary("common.brand"), value: product.brand.title},
+    {title: dictionary("common.category"), value: product.category.title[lang]},
   ]
 
   return (
@@ -26,10 +31,10 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
     >
       <Box mb={12}>
         <Typography fontWeight={700} fontSize={18} mb={2}>
-          {product?.title}
+          {product?.title[lang]}
         </Typography>
         <Typography fontWeight={400} fontSize={14} color={'text.secondary'}>
-          کد کالا:{product._id}
+          {dictionary("common.productCode")}:{product._id}
         </Typography>
       </Box>
 
@@ -48,7 +53,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
 
       <Box mb={6}>
         <Typography fontWeight={500} fontSize={16}>
-          توضیحات:
+          {dictionary("common.description")}
         </Typography>
         <Typography
           fontWeight={400}
@@ -57,7 +62,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
           lineHeight={'32px'}
           textAlign={'justify'}
         >
-          {product.description}
+          {product.description[lang]}
         </Typography>
       </Box>
 
@@ -66,12 +71,12 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
 
       <Box display={'flex'} mt={4} justifyContent={'space-between'} flexDirection={{xs: 'column', sm: 'row'}} gap={4}>
         <Box>
-          <Typography fontWeight={500} fontSize={14}>تلفن تماس:</Typography>
+          <Typography fontWeight={500} fontSize={14}>{dictionary("common.phoneNumber")}</Typography>
           <Typography fontWeight={400} fontSize={14} color={'text.secondary'}>۸۸۲۴۵۶۷۸-۸۸۳۴۶۷۸</Typography>
         </Box>
 
         <Button size={'small'} sx={{display: 'flex', gap: 2}} disabled={true}>
-          گفتگو با پشتیبانی
+          {dictionary("products.chatWithSupport")}
           <SvgArrowLeft primarycolor={'white'} width={24} height={24}  />
         </Button>
       </Box>

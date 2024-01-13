@@ -18,9 +18,14 @@ const useCategoryColumn = ({ onEdite, onDelete }: useCategoryColumnProps) => {
       cell: (cell) => cell.row.index + 1,
     },
     {
-      header: "نام دسته بندی",
+      header: "نام دسته بندی (فارسی)",
       accessorKey: "title",
-      cell: (cell) => cell.getValue() || "---",
+      cell: (cell) => cell.getValue()?.fa || "---",
+    },
+    {
+      header: "نام دسته بندی (انگلیسی)",
+      accessorKey: "title",
+      cell: (cell) => cell.getValue()?.en || "---",
     },
     {
       header: "تاریخ بارگذاری",

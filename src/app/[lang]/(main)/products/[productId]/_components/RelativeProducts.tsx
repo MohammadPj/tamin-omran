@@ -8,14 +8,18 @@ import Link from "next/link";
 import SvgArrowCircleLeft from "~/components/icons/final/ArrowCircleLeft";
 import {useGetProducts} from "~/services/api/hooks";
 import {IProduct} from "~/types/product";
+import {TLang} from "~/services/api/type";
+import {getDictionary} from "~/i18n";
 
 interface RelativeProductsProps {
   product: IProduct
+  lang: TLang
 }
 
-const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
+const RelativeProducts: FC<RelativeProductsProps> = ({product, lang}) => {
+  const dictionary = getDictionary()
 
-  const {data: products} = useGetProducts({lang: 'fa', category: product.category._id})
+  const {data: products} = useGetProducts({ category: product.category._id})
 
   const [swiper, setSwiper] = useState<any>();
   const [swiperProgress, setSwiperProgress] = useState(0);
@@ -38,7 +42,7 @@ const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
 
   return (
     <Box mb={20}>
-      <CustomDivider title={"محصولات مشابه"} mb={7} />
+      <CustomDivider title={dictionary('products.relativeProducts')} mb={7} />
 
       {isLoading ? (
         <Box
@@ -74,8 +78,8 @@ const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
                 >
 
                     <ProductCard
-                      title={product.title}
-                      subtitle={product.description}
+                      title={product.title[lang]}
+                      subtitle={product.description[lang]}
                       image={product?.image}
                       id={product._id}
                       isAvailable={product.isAvailable}
@@ -124,8 +128,8 @@ const RelativeProducts: FC<RelativeProductsProps> = ({product}) => {
                 style={{ width: "100%" }}
               >
                 <ProductCard
-                  title={product.title}
-                  subtitle={product.description}
+                  title={product.title[lang]}
+                  subtitle={product.description[lang]}
                   image={''}
                   id={product._id}
                   isAvailable={product.isAvailable}

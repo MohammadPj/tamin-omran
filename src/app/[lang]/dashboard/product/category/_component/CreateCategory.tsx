@@ -25,15 +25,20 @@ const CreateCategory: FC<CreateCategoryProps> = ({
 }) => {
   const form = useForm<ICreateCategoryForm>({
     defaultValues: {
-      lang: defaultValues?.lang || "fa",
       title: defaultValues?.title
     },
   });
 
   const inputList: IUseFormInput[] = [
     {
-      name: "title",
-      label: "نام دسته بندی",
+      name: "title.fa",
+      label: "نام دسته بندی (فارسی)",
+      placeholder: "نام دسته بندی را وارد کنید",
+      rules: {required: 'وارد کردن این فیلد اجباری می باشد'}
+    },
+    {
+      name: "title.en",
+      label: "نام دسته بندی (انگلیسی)",
       placeholder: "نام دسته بندی را وارد کنید",
       rules: {required: 'وارد کردن این فیلد اجباری می باشد'}
     },
@@ -41,10 +46,6 @@ const CreateCategory: FC<CreateCategoryProps> = ({
 
   return (
     <Box>
-      <LanguageTab
-        defaultValue={form.watch("lang")}
-        onChange={(e: TLanguages) => form.setValue("lang", e)}
-      />
 
       <InputListWithUseForm
         inputList={inputList}

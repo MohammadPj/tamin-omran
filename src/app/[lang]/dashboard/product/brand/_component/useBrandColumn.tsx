@@ -3,15 +3,15 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Box } from "@mui/material";
 import SvgDelete from "~/components/icons/output/Delete";
 import SvgEdit from "~/components/icons/output/Edit";
-import { ICategory } from "~/types/product";
+import {IBrand, ICategory} from "~/types/product";
 
 interface useCategoryColumnProps {
-  onDelete: (category: ICategory) => void;
-  onEdite: (category: ICategory) => void;
+  onDelete: (brand: IBrand) => void;
+  onEdite: (brand: IBrand) => void;
 }
 
 const useBrandColumn = ({ onEdite, onDelete }: useCategoryColumnProps) => {
-  const columns: ColumnDef<ICategory, any>[] = [
+  const columns: ColumnDef<IBrand, any>[] = [
     {
       header: "شماره",
       accessorKey: "id",

@@ -17,7 +17,6 @@ export const metadata: Metadata = {
 };
 
 async function getData(props: {
-  lang: TLang;
   page: number;
 }): Promise<{ data: IProduct[]; meta: IMeta }> {
   // Call the fetch method and passing
@@ -28,6 +27,7 @@ async function getData(props: {
   });
 
   const normalizeQuery = queryString.stringify(query);
+  console.log('query', query)
 
   return await http.get(`product?${normalizeQuery}`);
 }
@@ -42,12 +42,11 @@ export default async function ProductPage(props: {
 
   try {
     products = await getData({
-      lang: props.params.lang,
       ...props?.searchParams,
     });
   } catch (e) {}
 
-  console.log("props?.searchParams", props?.searchParams);
+  console.log('products', products)
 
   return (
     <Container sx={{ mt: 7, mb: 15, display: "flex", gap: 7, flexGrow: 1 }}>
@@ -69,7 +68,7 @@ export default async function ProductPage(props: {
 
         <Box mb={10} flexGrow={1}>
           <Suspense fallback={"loading product list"}>
-            <ProductsList products={products?.data!} />
+            <ProductsList products={products?.data!} lang={props.params.lang} />
           </Suspense>
         </Box>
 

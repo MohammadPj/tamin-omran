@@ -135,7 +135,7 @@ export const useDeleteArticle = () =>
   useMutation({ mutationKey: ["Article"], mutationFn: deleteArticle });
 
 // ---------------------------  Brand ------------------------------
-export const useGetBrands = (params: IBrandParams) =>
+export const useGetBrands = (params?: IBrandParams) =>
   useQuery({
     queryKey: ["Brands", params],
     queryFn: () => getBrands(params),
@@ -158,7 +158,7 @@ export const useDeleteBrand = () =>
   useMutation({ mutationKey: ["Brand"], mutationFn: deleteBrand });
 
 // ---------------------------  Category ------------------------------
-export const useGetCategories = (params: ICategoryParams) =>
+export const useGetCategories = (params?: ICategoryParams) =>
   useQuery({
     queryKey: ["Categories", params],
     queryFn: () => getCategories(params),
@@ -181,7 +181,7 @@ export const useDeleteCategory = () =>
   useMutation({ mutationKey: ["Category"], mutationFn: deleteCategory });
 
 // ---------------------------  Product ------------------------------
-export const useGetProducts = (params: IProductParams) =>
+export const useGetProducts = (params?: IProductParams) =>
   useQuery({
     queryKey: ["Products", params],
     queryFn: () => getProducts(params),

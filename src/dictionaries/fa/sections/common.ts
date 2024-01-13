@@ -46,5 +46,9 @@ export const commonDictionary: ICommonDictionary = {
   password: "پسورد",
   phoneNumber: "شماره تماس",
   enginNumber: 'شماره موتور',
-  enginNumberPlaceholder: 'لطفا شماره موتور را وارد کنید'
+  enginNumberPlaceholder: 'لطفا شماره موتور را وارد کنید',
+  review: 'نقد و بررسی',
+  technicalNumber: 'شماره فنی',
+  description: 'توضیحات',
+  productCode: 'کد کالا'
 };

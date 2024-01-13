@@ -45,5 +45,9 @@ export const commonDictionary: ICommonDictionary = {
   password: "Password",
   phoneNumber: "Phone number",
   enginNumber: "Engine Number",
-  enginNumberPlaceholder: 'please enter the engine number'
+  enginNumberPlaceholder: 'please enter the engine number',
+  review: "Review",
+  technicalNumber: 'Technical number',
+  description: 'Description',
+  productCode: 'Product code'
 };

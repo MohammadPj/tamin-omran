@@ -1,4 +1,6 @@
 export interface IProductsDictionary {
   showAvailableProducts: string;
-  sortBy: string
+  sortBy: string;
+  relativeProducts: string
+  chatWithSupport: string
 }
