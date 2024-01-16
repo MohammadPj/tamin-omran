@@ -38,6 +38,15 @@ a {
 /*  -webkit-text-fill-color: unset  !important;*/
 /*}*/
 
+
+/*input:-webkit-autofill {*/
+/*  color: red !important*/
+/*}*/
+
+input:-webkit-autofill{
+  -webkit-text-fill-color: black !important;
+}
+
 .ck-editor__editable_inline {
   height: 200px;
 }

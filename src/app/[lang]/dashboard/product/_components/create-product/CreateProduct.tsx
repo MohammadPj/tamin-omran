@@ -16,7 +16,11 @@ import UploadProductSection from "~/app/[lang]/dashboard/product/_components/cre
 
 import CustomCKEditor from "~/components/common/custom-ckeditor/CustomCKEditor";
 import { IProduct } from "~/types/product";
-import { useGetBrands, useGetCategories } from "~/services/api/hooks";
+import {
+  useGetBrands,
+  useGetCategories,
+  useGetEngineNumber,
+} from "~/services/api/hooks";
 
 interface CreateProductProps {
   onSubmit?: (data: ICreateProductForm) => void;
@@ -35,7 +39,7 @@ export interface ICreateProductForm {
   images?: string[];
   imageFiles?: File[];
   isAvailable: boolean;
-  engineNumber: string;
+  engineNumber: ({label: string; value: string})
   technicalNumber: string;
 }
 
@@ -50,7 +54,7 @@ const CreateProduct: FC<CreateProductProps> = ({
       review: defaultValue?.review,
       categoryId: defaultValue?.category._id,
       description: defaultValue?.description,
-      engineNumber: defaultValue?.engineNumber,
+      // engineNumber: defaultValue?.engineNumber,
       brandId: defaultValue?.brand?._id!,
       image: defaultValue?.image,
       images: defaultValue?.images,
@@ -59,6 +63,7 @@ const CreateProduct: FC<CreateProductProps> = ({
     },
   });
 
+  const { data: engineNumbers } = useGetEngineNumber();
   const { data: categories } = useGetCategories();
   const { data: brands } = useGetBrands();
 
@@ -93,7 +98,7 @@ const CreateProduct: FC<CreateProductProps> = ({
       name: "categoryId",
       label: "دسته بندی محصول (فارسی)",
       placeholder: "انتخاب دسته بندی",
-      defaultValue: '',
+      defaultValue: "",
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       type: "select",
       options: categories?.data?.map((category) => ({
@@ -105,7 +110,7 @@ const CreateProduct: FC<CreateProductProps> = ({
       name: "categoryId",
       label: "دسته بندی محصول (انگلیسی)",
       placeholder: "انتخاب دسته بندی",
-      defaultValue: '',
+      defaultValue: "",
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       type: "select",
       options: categories?.data?.map((category) => ({
@@ -122,6 +127,11 @@ const CreateProduct: FC<CreateProductProps> = ({
     {
       name: "engineNumber",
       label: "موتور",
+      type: "auto-complete",
+      options: engineNumbers?.data?.map((engineNumber) => ({
+        label: engineNumber.title,
+        value: engineNumber._id,
+      })),
       rules: { required: "وارد کردن این فیلد اجباری می باشد" },
       placeholder: "شماره فنی محصول را وارد کنید",
     },

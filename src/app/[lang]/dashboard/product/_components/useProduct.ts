@@ -5,6 +5,7 @@ import {
   useCreateProduct,
   useDeleteProduct,
   useEditeProduct,
+  useGetEngineNumber,
   useGetProducts,
 } from "~/services/api/hooks";
 
@@ -16,7 +17,8 @@ import { IProduct } from "~/types/product";
 import { ICreateProductForm } from "~/app/[lang]/dashboard/product/_components/create-product/CreateProduct";
 import useProductColumn from "~/app/[lang]/dashboard/product/_components/useProductColumn";
 import { handleAppendFormData } from "~/helpers/methods";
-import {useQueryObject} from "~/hooks/useQueryObject";
+import { useQueryObject } from "~/hooks/useQueryObject";
+import { IProductBody } from "~/services/api/type";
 
 type TProductModals =
   | "create-product"
@@ -29,13 +31,14 @@ const useProduct = () => {
   const QC = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const { lang } = useCommon();
-  const {query} = useQueryObject()
+  const { query } = useQueryObject();
 
   const [selectedProduct, setSelectedProduct] = useState<IProduct>();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
   const { data: products } = useGetProducts({ limit, page, ...query });
+  const { data: enginNumbers } = useGetEngineNumber();
   const { mutateAsync: mutateCreateProduct } = useCreateProduct();
   const { mutateAsync: mutateEditProduct } = useEditeProduct();
   const { mutateAsync: mutateDeleteProduct } = useDeleteProduct();
@@ -54,7 +57,21 @@ const useProduct = () => {
   };
 
   const handleCreateProduct = async (values: ICreateProductForm) => {
-    const { image, images, imageFiles, imageFile, ...body } = values;
+    const { image, images, imageFiles, imageFile, engineNumber, ...newValues } =
+      values;
+
+    const body: IProductBody = { ...newValues };
+
+    if (!values.engineNumber?.value) {
+      const foundEngineNumber = enginNumbers?.data?.find(
+        (e) => e.title === values.engineNumber?.label
+      );
+      body.engineNumber = foundEngineNumber
+        ? foundEngineNumber?._id
+        : engineNumber.label;
+    } else {
+      body.engineNumber = engineNumber.value;
+    }
 
     try {
       const res = await mutateCreateProduct(body);
@@ -87,7 +104,21 @@ const useProduct = () => {
   };
 
   const handleEditProduct = async (values: ICreateProductForm) => {
-    const { image, images, imageFiles, imageFile, ...body } = values;
+    const { image, images, imageFiles, imageFile, engineNumber, ...newValues } =
+      values;
+
+    const body: IProductBody = { ...newValues };
+
+    if (!values.engineNumber?.value) {
+      const foundEngineNumber = enginNumbers?.data?.find(
+        (e) => e.title === values.engineNumber?.label
+      );
+      body.engineNumber = foundEngineNumber
+        ? foundEngineNumber?._id
+        : engineNumber.label;
+    } else {
+      body.engineNumber = engineNumber.value;
+    }
 
     try {
       const res = await mutateEditProduct({

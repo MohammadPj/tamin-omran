@@ -20,7 +20,8 @@ export interface ICommonDictionary {
     passwordNotMatch: string;
     successLoginMessage: string
     successRegisterMessage: string
-    adminPanel: string
+    adminPanel: string;
+    validateUsername: string
   };
   fieldIsRequired: string;
   home: string;
@@ -46,4 +47,5 @@ export interface ICommonDictionary {
   technicalNumber: string
   description: string;
   productCode: string
+  username: string
 }

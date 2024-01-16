@@ -20,7 +20,7 @@ const InputError: FC<Props> = ({ error, boxProps, ...rest }) => {
         primarycolor={"red"}
       />
 
-      <Typography fontWeight={500} fontSize={12} color={"error"} ml={3}>
+      <Typography fontWeight={500} fontSize={12} color={"error"} ml={1}>
         {error}
       </Typography>
     </Box>
