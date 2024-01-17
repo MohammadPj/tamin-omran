@@ -15,7 +15,7 @@ export interface IProduct {
   image: string;
   images: string[]
   isAvailable: boolean
-  engineNumber: string;
+  engineNumber: IEngineNumber;
   technicalNumber: string
   description: {fa: string; en: string};
   review: {fa: string; en: string};
@@ -32,6 +32,13 @@ export interface ICategory {
 }
 
 export interface IBrand {
+  _id: string
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IEngineNumber {
   _id: string
   title: string;
   createdAt: Date;

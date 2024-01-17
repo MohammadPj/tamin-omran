@@ -31,32 +31,19 @@ const SearchProducts: FC<SearchProducts> = () => {
       placeholder: "شماره فنی",
     },
     {
-      name: "title.fa",
+      name: "title",
       label: "",
-      placeholder: "نام محصول (فارسی)",
+      placeholder: "نام محصول (فارسی/انگلیسی)",
+      multiLang: true
     },
-    {
-      name: "title.en",
-      label: "",
-      placeholder: "نام محصول (انگلیسی)",
-    },
+
     {
       name: "category",
       label: "",
-      placeholder: "دسته بندی (فارسی)",
+      placeholder: "دسته بندی (فارسی/انگلیسی)",
       type: "select",
       options: categories?.data?.map((category) => ({
-        label: category.title.fa,
-        value: category._id,
-      })),
-    },
-    {
-      name: "category",
-      label: "",
-      placeholder: "دسته بندی (انگلیسی)",
-      type: "select",
-      options: categories?.data?.map((category) => ({
-        label: category.title.en,
+        label: category.title.fa + " / " + category.title.en,
         value: category._id,
       })),
     },

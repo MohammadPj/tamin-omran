@@ -15,10 +15,10 @@ const ProductInfo: FC<ProductInfoProps> = ({ product, lang }) => {
   const dictionary = getDictionary(lang)
 
   const specifications = [
-    {title: dictionary("common.technicalNumber"), value: product.technicalNumber},
-    {title: dictionary("common.enginNumber"), value: product.engineNumber},
-    {title: dictionary("common.brand"), value: product.brand.title},
-    {title: dictionary("common.category"), value: product.category.title[lang]},
+    {title: dictionary("common.technicalNumber"), value: product?.technicalNumber},
+    {title: dictionary("common.enginNumber"), value: product?.engineNumber?.title},
+    {title: dictionary("common.brand"), value: product?.brand?.title},
+    {title: dictionary("common.category"), value: product?.category?.title?.[lang]},
   ]
 
   return (

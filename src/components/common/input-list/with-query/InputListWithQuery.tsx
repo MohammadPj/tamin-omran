@@ -32,7 +32,7 @@ const InputListWithQuery: FC<InputListWithQueryProps> = ({inputList, gridItemPro
                 value={query?.[input.name] || []}
                 onChange={(e) =>
                   debounceAddTextQuery({
-                    queryName: input.name,
+                    queryName: input.multiLang ? "multi lang" : input.name,
                     value: e?.target?.value as string,
                   })
                 }
@@ -52,7 +52,7 @@ const InputListWithQuery: FC<InputListWithQueryProps> = ({inputList, gridItemPro
               defaultValue={query?.[input.name]}
               onChange={(e) =>
                 debounceAddTextQuery({
-                  queryName: input.name,
+                  queryName: input.multiLang ? input.name : input.name,
                   value: e.target.value,
                 })
               }

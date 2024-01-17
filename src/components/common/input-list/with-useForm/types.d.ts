@@ -49,6 +49,7 @@ export interface IUseFormInput {
   props?: any
   controlWidth?: boolean
   labelProps?: Partial<TypographyProps<'any', {}>> | undefined
+  multiLang?: boolean
 }
 
 export interface IWeekDays {

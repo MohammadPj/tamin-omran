@@ -52,9 +52,9 @@ const CreateProduct: FC<CreateProductProps> = ({
     defaultValues: {
       title: defaultValue?.title!,
       review: defaultValue?.review,
-      categoryId: defaultValue?.category._id,
+      categoryId: defaultValue?.category?._id,
       description: defaultValue?.description,
-      // engineNumber: defaultValue?.engineNumber,
+      engineNumber: defaultValue?.engineNumber ? {value: defaultValue?.engineNumber?._id, label: defaultValue?.engineNumber?.title} : undefined,
       brandId: defaultValue?.brand?._id!,
       image: defaultValue?.image,
       images: defaultValue?.images,

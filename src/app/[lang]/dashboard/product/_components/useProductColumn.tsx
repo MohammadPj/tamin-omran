@@ -18,24 +18,14 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
       cell: (cell) => cell.getValue() || "---",
     },
     {
-      header: "نام محصول (فارسی)",
-      accessorKey: "title.fa",
-      cell: (cell) => <Box width={150}>{cell.getValue()}</Box>,
+      header: "نام محصول (فارسی/انگلیسی)",
+      accessorKey: "title",
+      cell: (cell) => <Box width={150}>{cell.getValue()?.fa + " / " + cell.getValue()?.en}</Box>,
     },
     {
-      header: "نام محصول (انگلیسی)",
-      accessorKey: "title.en",
-      cell: (cell) => <Box width={150}>{cell.getValue()}</Box>,
-    },
-    {
-      header: "دسته بندی (فارسی)",
+      header: "دسته بندی (فارسی/انگلیسی)",
       accessorKey: "category",
-      cell: (cell) => <Box width={100}>{cell.getValue()?.title?.fa || "---"}</Box>,
-    },
-    {
-      header: "دسته بندی (انگلیسی)",
-      accessorKey: "category",
-      cell: (cell) => <Box width={100}>{cell.getValue()?.title?.en || "---"}</Box>,
+      cell: (cell) => <Box width={100}>{cell.getValue()?.title?.fa + " / " + cell.getValue()?.title?.en }</Box>,
     },
     {
       header: "برند",
@@ -45,7 +35,7 @@ const useProductColumn = ({ onEdite, onDelete }: useProductColumnProps) => {
     {
       header: "موتور",
       accessorKey: "engineNumber",
-      cell: (cell) => cell.getValue() || "---",
+      cell: (cell) => cell.getValue()?.title || "---",
     },
     {
       header: "تاریخ بارگذاری",

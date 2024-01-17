@@ -40,7 +40,7 @@ interface ILink {
 const Footer: FC<Props> = ({lang}) => {
 
   const dictionary = getDictionary(lang)
-  const {data: categories} = useGetCategories({lang, limit: 5})
+  const {data: categories} = useGetCategories({ limit: 5})
 
   const contactInfo: IContact[] = [
     {
@@ -139,7 +139,7 @@ const Footer: FC<Props> = ({lang}) => {
               {categories?.data?.map((category) => (
                 <Link key={category._id} href={`/products?${qs.stringify({category: [category._id]})}` as any}>
                 <Typography key={category._id} mb={2} sx={{ cursor: "pointer" }}>
-                  {category.title}
+                  {category?.title?.[lang]}
                 </Typography>
                 </Link>
               ))}
