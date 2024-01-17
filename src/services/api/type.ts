@@ -76,7 +76,7 @@ export interface IEditBrandBody extends IBrandBody{
 
 // ---------------------------  Category  ------------------------------
 export interface ICategoryParams extends ICommonFilterParams {
-  title?: string;
+  title?: {fa?: string, en?: string};
 }
 
 export interface ICategoryBody
