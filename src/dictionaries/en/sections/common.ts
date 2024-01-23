@@ -4,9 +4,9 @@ export const commonDictionary: ICommonDictionary = {
   footer: {
     usefulLinks: "Useful Links",
     contactInformation: "Contact Information",
-    address: "Tehran Province, Shahriar County, Central District of Baghestan Golgon City, Subsidiary Street, South Street 8, Building 6, Ground Floor.",
+    address: "Tehran Province, 12th kilometer of the old Karaj Road, Shahriar intersection, Baghestan Highway, Golgoon Industrial Town, South Street 8, No. 6.",
     description:
-      "Lorem Epsom is a fake text with the production of incomprehensible simplicity from the printing industry, and with the use of graphic designers, printers and texts but also newspapers and magazines in columns and rows as necessary.",
+      "TAKE QUALITY",
     title:
       "Follow us on social networks to get the latest news and useful articles",
   },

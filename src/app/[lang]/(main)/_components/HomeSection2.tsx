@@ -14,8 +14,9 @@ const HomeSection2: FC<HomeSection2Props> = ({ lang }) => {
   const customers = [
     { type: "image", value: "/images/customers/dfm-logo.png" },
     { type: "image", value: "/images/customers/customer (2).png" },
-    { type: "image", value: "/images/customers/customer (3).png" },
-    { type: "image", value: "/images/customers/customer (4).png" },
+    { type: "image", value: "/images/customers/hyundai.png" },
+    // { type: "image", value: "/images/customers/customer (3).png" },
+    // { type: "image", value: "/images/customers/customer (4).png" },
     { type: "image", value: "/images/customers/customer (5).png" },
     { type: "image", value: "/images/customers/logo-fuji.jpg" },
     { type: "text", value: "FEDERAL GASKET" },

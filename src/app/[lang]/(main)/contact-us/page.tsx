@@ -58,7 +58,7 @@ const ContactUsPage = ({params}: any) => {
             <Box display={'flex'} gap={2} alignItems={'center'}>
               <SvgPhone primarycolor={'#F7941D'} />
               <Typography fontWeight={400} fontSize={16} color={'primary.1'}>
-                021-65611395-96
+                09124891979
               </Typography>
             </Box>
           </Box>
@@ -71,7 +71,7 @@ const ContactUsPage = ({params}: any) => {
             <Box display={'flex'} gap={2} alignItems={'center'}>
               <SvgEmail primarycolor={'#F7941D'} />
               <Typography fontWeight={400} fontSize={16} color={'primary.1'}>
-                tamin.omran.qateh@gmail.com | federalengine@rogers.com
+                tamin.omran.qateh@gmail.com | federalengineparts@gmail.com
               </Typography>
             </Box>
 

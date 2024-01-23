@@ -102,7 +102,7 @@ const Footer: FC<Props> = ({lang}) => {
             <Grid item xs={12} sm={6} lg={4}>
               <SvgLogo />
 
-              <Typography fontWeight={400} fontSize={14}>
+              <Typography fontWeight={500} fontSize={24} mt={4}>
                 {dictionary("common.footer.description")}
               </Typography>
             </Grid>
