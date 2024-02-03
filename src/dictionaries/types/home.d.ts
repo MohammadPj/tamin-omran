@@ -15,7 +15,8 @@ export interface IHomeDictionary {
 
   homeSection2: {
     title: string;
-    description: string;
+    description1: string;
+    description2: string;
   },
 
 }

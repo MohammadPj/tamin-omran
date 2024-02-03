@@ -27,6 +27,7 @@ const InformationSection1: FC<InformationSection1Props> = ({lang}) => {
         fontSize={{ xs: 14, sm: 16 }}
         fontWeight={400}
         textAlign={"justify"}
+        sx={{mb: 8, mt: 4}}
       >
         {dictionary("home.InformationSection1.subtitle")}
       </Typography>

@@ -35,14 +35,23 @@ const HeroSection: FC<HeroSectionProps> = ({lang}) => {
           {dictionary("home.title")}
         </Typography>
 
-        <Box display={'flex'} flexDirection={{xs: 'column', sm: 'row'}} my={6} gap={{xs: 4, sm: 30}} alignItems={"end"}>
-          <Typography
-            fontSize={{ xs: 10, sm: 13, md: 16 }}
-            color={"white"}
-          >
-            {dictionary("home.subtitle")}
-          </Typography>
+        <Box display={'flex'} justifyContent={'space-between'} my={6} gap={{xs: 4, sm: 30}} alignItems={"end"}>
 
+
+            <Typography
+              fontSize={{ xs: 10, sm: 13, md: 16 }}
+              color={"white"}
+            >
+              {dictionary("home.subtitle")}
+            </Typography>
+
+            <Typography fontSize={24} fontWeight={700} color={"white"}>
+              KOMATSU, HYUNDAI, DONGFENG
+            </Typography>
+
+        </Box>
+
+        <Box display={'flex'} flexDirection={"row-reverse"}>
           <Button
             size={"large"}
             color={"secondary"}
@@ -52,6 +61,7 @@ const HeroSection: FC<HeroSectionProps> = ({lang}) => {
               fontWeight: 700,
               display: "flex",
               gap: 2,
+              mb: 4
             }}
           >
             {dictionary("home.showProducts")}
@@ -60,6 +70,8 @@ const HeroSection: FC<HeroSectionProps> = ({lang}) => {
             </Box>
           </Button>
         </Box>
+
+
       </Container>
     </Stack>
   );

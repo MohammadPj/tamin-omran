@@ -51,7 +51,7 @@ const Footer: FC<Props> = ({lang}) => {
     {
       id: "email",
       icon: <SvgEmail width={24} height={24} primarycolor={"#F7941D"} />,
-      text: "tamin.omran.qateh@gmail.com  federalengine@rogers.com",
+      text: "tamin.omran.qateh@gmail.com  federalengineparts@gmail.com",
     },
     {
       id: "address",
@@ -104,6 +104,10 @@ const Footer: FC<Props> = ({lang}) => {
 
               <Typography fontWeight={500} fontSize={24} mt={4}>
                 {dictionary("common.footer.description")}
+              </Typography>
+
+              <Typography fontWeight={500} fontSize={24} mt={4}>
+                TAKE QUALITY
               </Typography>
             </Grid>
 

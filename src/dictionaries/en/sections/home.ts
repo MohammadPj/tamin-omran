@@ -3,7 +3,7 @@ import {IHomeDictionary} from "~/dictionaries/types/home";
 export const homeDictionary: IHomeDictionary = {
   title: "We guarantee quality in the supply of construction parts",
   subtitle:
-    "Supplier of various spare parts for CUMMINS engines and equipment for construction, mining, KOMATSU, HYUNDAI, DONGFENG, and more.",
+    "Supplier of various spare parts for CUMMINS engines and equipment for construction, mining, and more.",
   showProducts: "Show Products",
   newProducts: "New Products",
 
@@ -37,7 +37,8 @@ export const homeDictionary: IHomeDictionary = {
 
   homeSection2: {
     title: 'Some of the brands available in Tamin omran qateh',
-    description: 'Any use of brand logos is solely for reference purposes and does not imply representation or agency for those brands.'
+    description1: "The product quality has all international standards",
+    description2: 'Any use of brand logos is solely for reference purposes and does not imply representation or agency for those brands.'
   },
 
 }

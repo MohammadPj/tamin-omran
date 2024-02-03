@@ -6,7 +6,7 @@ export const commonDictionary: ICommonDictionary = {
     contactInformation: "Contact Information",
     address: "Tehran Province, 12th kilometer of the old Karaj Road, Shahriar intersection, Baghestan Highway, Golgoon Industrial Town, South Street 8, No. 6.",
     description:
-      "TAKE QUALITY",
+      "",
     title:
       "Follow us on social networks to get the latest news and useful articles",
   },

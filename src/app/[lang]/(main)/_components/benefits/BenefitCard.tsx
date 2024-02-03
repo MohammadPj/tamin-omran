@@ -64,7 +64,6 @@ const BenefitCard: FC<Props> = ({ title, description, index }) => {
         <Typography
           flexGrow={1}
           width={0}
-          color={"text.secondary"}
           fontWeight={400}
           fontSize={16}
           textAlign={'justify'}
