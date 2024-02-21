@@ -46,9 +46,8 @@ const ProductsBar: FC = () => {
       </Box>
 
       <Box display={"flex"} justifySelf={"end"}>
-        <SvgSort width={24} height={24} />
         <Typography display={{ xs: "none", sm: "block" }}>
-          {dictionary("products.sortBy")}
+          {dictionary("products.products")}
         </Typography>
       </Box>
 
